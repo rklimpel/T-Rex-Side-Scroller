@@ -5,18 +5,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programming.projekt.trex.Controller">
+<GridPane alignment="center" hgap="10.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programming.projekt.trex.Controller">
 
    <children>
-      <Button mnemonicParsing="false" text="Start Game Desktop" GridPane.halignment="CENTER" />
-      <Button mnemonicParsing="false" text="Start Game Lighthouse" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Button fx:id="btn_startDesktop" focusTraversable="false" mnemonicParsing="false" onAction="#onClick_btn_startDeskop" text="Start Game Desktop" GridPane.halignment="CENTER" />
+      <Button fx:id="btn_startlighthouse" focusTraversable="false" mnemonicParsing="false" text="Start Game Lighthouse" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
    </children>
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
 
 </GridPane>
