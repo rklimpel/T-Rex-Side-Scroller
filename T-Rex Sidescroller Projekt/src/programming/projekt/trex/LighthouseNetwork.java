@@ -1,4 +1,4 @@
-package programming.project.sidescrollergame;
+package programming.projekt.trex;
 
 import java.io.IOException;
 import java.io.OutputStream;
