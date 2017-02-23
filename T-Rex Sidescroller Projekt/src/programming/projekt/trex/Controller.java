@@ -17,6 +17,8 @@ public class Controller{
             btn_startDesktop.setText("hallo");
         }
 
+        System.out.print("Ich bin ein Test");
+
     }
 
 }
