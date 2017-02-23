@@ -1,17 +1,13 @@
 package programming.projekt.trex;
 
-import javafx.event.EventHandler;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import java.io.IOException;
-import java.io.SyncFailedException;
-
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import programming.projekt.trex.GameModel.*;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 /**
  * Created by ricoklimpel on 23.02.17.
@@ -20,15 +16,21 @@ public class GameController{
 
     @FXML
     Button btn_backToMenu;
+    @FXML
+    Pane pane_game;
+
+    Rectangle rectangle;
 
     private GameModel gameModel;
-    private Scene gameScene;
+    private GameView gameView;
 
     public GameController(){
-        this.gameModel = new GameModel();
-        System.out.print("GameController");
+
+        this.gameModel = new GameModel(this);
 
         gameModel.createPlayer();
+
+
 
     }
 
@@ -42,10 +44,8 @@ public class GameController{
     }
 
     public void startMenu () throws IOException {
-
         //Stop Game Timer
         gameModel.stopGameTimer();
-
         //Start Menu Scene
         new MenuView();
     }
@@ -57,12 +57,32 @@ public class GameController{
     public void KeyEventHandler(KeyEvent event){
         if(event.getCode() == KeyCode.SPACE){
             if(!gameModel.gameTimerEnabled){
+                rectangle = new Rectangle(0,gameView.GameHeight-gameModel.player.rectanglePlayer.height,40,gameModel.player.rectanglePlayer.height);
+                pane_game.getChildren().addAll(rectangle);
                 gameModel.startGameTimer();
+
+
             }else{
                 System.out.println("JUMP ");
+                rectangle.setX(rectangle.getX()+10);
             }
         }
     }
 
+    public void Update(){
 
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                rectangle.setX(gameModel.player.rectanglePlayer.x);
+            }
+        });
+
+    }
+
+
+    public void setView(GameView gameView) {
+        this.gameView = gameView;
+    }
 }

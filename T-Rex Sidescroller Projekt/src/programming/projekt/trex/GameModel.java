@@ -1,5 +1,7 @@
 package programming.projekt.trex;
 
+import javafx.scene.layout.Pane;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -12,9 +14,15 @@ public class GameModel{
     Timer gameTimer = new Timer();
     Boolean gameTimerEnabled = false;
     int gameTimerOffset = 0;
-    int gameTimerDelay = 500;
+    int gameTimerDelay = 10;
 
     Player player;
+
+    GameController gameController;
+
+    public GameModel(GameController gameController){
+        this.gameController = gameController;
+    }
 
     public void createPlayer(){
         player = new Player();
@@ -38,9 +46,9 @@ public class GameModel{
     }
 
     public void GameTick(){
-        System.out.println(TimerTick+=1);
 
-        //Move Obstacles here
+        player.moveright();
 
+        gameController.Update();
     }
 }

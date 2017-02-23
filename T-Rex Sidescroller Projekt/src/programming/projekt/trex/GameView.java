@@ -11,7 +11,7 @@ import java.io.IOException;
 public class GameView {
 
     int GameWidth = 1080;
-    int GameHeight = 920;
+    int GameHeight = 720;
 
     GameController gameController;
 
@@ -20,9 +20,13 @@ public class GameView {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
         Parent root = fxmlLoader.load();
         gameController = fxmlLoader.getController();
-        Scene scene = new Scene(root,GameWidth,GameHeight);
+        gameController.setView(this);
+        Scene scene = new Scene(root, GameWidth, GameHeight);
         Main.stage.setScene(scene);
-        Main.stage.setFullScreen(true);
+
+        //Main.stage.setFullScreen(true);
+
+
 
         Main.stage.getScene().setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() {
             @Override
