@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import java.io.IOException;
+import java.io.SyncFailedException;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -25,6 +26,10 @@ public class GameController{
 
     public GameController(){
         this.gameModel = new GameModel();
+        System.out.print("GameController");
+
+        gameModel.createPlayer();
+
     }
 
     /**
@@ -39,7 +44,7 @@ public class GameController{
     public void startMenu () throws IOException {
 
         //Stop Game Timer
-        gameModel.gameTimer.cancel();
+        gameModel.stopGameTimer();
 
         //Start Menu Scene
         new MenuView();
@@ -51,8 +56,11 @@ public class GameController{
      */
     public void KeyEventHandler(KeyEvent event){
         if(event.getCode() == KeyCode.SPACE){
-            System.out.println("JUMP ");
-            gameModel.startGameTimer();
+            if(!gameModel.gameTimerEnabled){
+                gameModel.startGameTimer();
+            }else{
+                System.out.println("JUMP ");
+            }
         }
     }
 

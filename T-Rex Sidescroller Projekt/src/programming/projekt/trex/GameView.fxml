@@ -4,7 +4,8 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.112"
-            xmlns:fx="http://javafx.com/fxml/1">
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="programming.projekt.trex.GameController">
     <top>
         <Button fx:id="btn_backToMenu"
                 focusTraversable="false"

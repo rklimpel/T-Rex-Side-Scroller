@@ -13,17 +13,15 @@ public class GameView {
     int GameWidth = 1080;
     int GameHeight = 920;
 
-    GameController gameController = new GameController();
+    GameController gameController;
 
     public GameView() throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
-        fxmlLoader.setController(gameController);
-
         Parent root = fxmlLoader.load();
-
-        Main.stage.setTitle("T-Rex Sidescroller Game");
-        Main.stage.setScene(new Scene(root, GameWidth, GameHeight));
+        gameController = fxmlLoader.getController();
+        Scene scene = new Scene(root,GameWidth,GameHeight);
+        Main.stage.setScene(scene);
         Main.stage.setFullScreen(true);
 
         Main.stage.getScene().setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() {

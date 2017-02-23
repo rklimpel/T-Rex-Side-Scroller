@@ -8,9 +8,17 @@ import java.util.TimerTask;
  */
 public class GameModel{
 
+    int TimerTick = 0;
     Timer gameTimer = new Timer();
+    Boolean gameTimerEnabled = false;
     int gameTimerOffset = 0;
     int gameTimerDelay = 500;
+
+    Player player;
+
+    public void createPlayer(){
+        player = new Player();
+    }
 
     public void startGameTimer(){
 
@@ -20,10 +28,17 @@ public class GameModel{
             }
         };
         gameTimer.scheduleAtFixedRate(task, gameTimerOffset, gameTimerDelay);
+        gameTimerEnabled = true;
+    }
+
+    public void stopGameTimer(){
+        gameTimer.cancel();
+        gameTimer.purge();
+        gameTimerEnabled = false;
     }
 
     public void GameTick(){
-        System.out.println("Hallo");
+        System.out.println(TimerTick+=1);
 
         //Move Obstacles here
 
