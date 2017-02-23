@@ -4,11 +4,11 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.112"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="programming.projekt.trex.GameController">
-   <top>
-      <Button   text="Back to Menu"
-                fx:id="btn_backToMenu"
-                onAction="#OnClick_btn_backToMenu"/>
-   </top>
+            xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <Button fx:id="btn_backToMenu"
+                focusTraversable="false"
+                onAction="#OnClick_btn_backToMenu"
+                text="Back to Menu"/>
+    </top>
 </BorderPane>
