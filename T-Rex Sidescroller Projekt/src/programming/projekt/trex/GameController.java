@@ -27,23 +27,28 @@ public class GameController{
         this.gameModel = new GameModel();
     }
 
+    /**
+     * Leave Game, quit every running things and go back to Menu
+     *
+     * @throws IOException
+     */
     public void OnClick_btn_backToMenu() throws IOException {
-
         startMenu();
-
     }
 
     public void startMenu () throws IOException {
 
-        gameModel.timer.cancel();
+        //Stop Game Timer
+        gameModel.gameTimer.cancel();
 
-        Parent root = FXMLLoader.load(getClass().getResource("MenuView.fxml"));
-        Main.stage.setTitle("T-Rex Sidescroller Game");
-        Main.stage.setScene(new Scene(root, Main.MenuWidth,Main.MenuHeight));
-        Main.stage.setFullScreen(false);
-        Main.stage.show();
+        //Start Menu Scene
+        new MenuView();
     }
 
+    /**
+     * This Methods gets and handles the Key event from GameView
+     * @param event
+     */
     public void KeyEventHandler(KeyEvent event){
         if(event.getCode() == KeyCode.SPACE){
             System.out.println("JUMP ");

@@ -8,27 +8,24 @@ import java.util.TimerTask;
  */
 public class GameModel{
 
-    Timer timer = new Timer();
+    Timer gameTimer = new Timer();
+    int gameTimerOffset = 0;
+    int gameTimerDelay = 500;
 
     public void startGameTimer(){
-
-        //start offeset
-        int initialDelay = 0;
-        //repeat delay
-        int delay = 500;
 
         TimerTask task = new TimerTask() {
             public void run() {
                 GameTick();
             }
         };
-        timer.scheduleAtFixedRate(task, initialDelay, delay);
+        gameTimer.scheduleAtFixedRate(task, gameTimerOffset, gameTimerDelay);
     }
 
     public void GameTick(){
         System.out.println("Hallo");
 
-        //Move Obstacles
+        //Move Obstacles here
 
     }
 }
