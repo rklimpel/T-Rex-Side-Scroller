@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public static Stage stage;
+    static  int MenuWidth = 300;
+    static int MenuHeight = 275;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -17,7 +19,7 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("MenuView.fxml"));
         primaryStage.setTitle("T-Rex Sidescroller Game");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, MenuWidth, MenuHeight));
         primaryStage.show();
 
     }
