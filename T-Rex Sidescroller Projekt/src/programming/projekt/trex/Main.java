@@ -8,10 +8,14 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    public static Stage stage;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
+        stage = primaryStage;
+
+        Parent root = FXMLLoader.load(getClass().getResource("MenuView.fxml"));
         primaryStage.setTitle("T-Rex Sidescroller Game");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
