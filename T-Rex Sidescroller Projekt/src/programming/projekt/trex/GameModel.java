@@ -1,7 +1,5 @@
 package programming.projekt.trex;
 
-import javafx.scene.layout.Pane;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -10,26 +8,55 @@ import java.util.TimerTask;
  */
 public class GameModel{
 
-    int TimerTick = 0;
+    //Counts up how often the game timer has ticked,
+    //can be used to generate the complete gametime
+    int timerTick = 0;
+
+    //GameTimer von continoues moves
     Timer gameTimer = new Timer();
+
+    //is the Timer enabled?
     Boolean gameTimerEnabled = false;
+
+    //Delay, before the timer starts
     int gameTimerOffset = 0;
     int gameTimerDelay = 10;
 
+    //The Player Object that contains to the Game
     Player player;
 
+    Obstacle obstacle;
+
+    //Game Controller who called the GameModel, set on contsructor
     GameController gameController;
+
+    //Save Scene Size when constructor gets called:
+    int SceneWidth;
+    int SceneHeight;
+
+    //Save Pane Size here when constructor gets called:
+    int paneWidth;
+    int paneHeight;
 
     public GameModel(GameController gameController){
         this.gameController = gameController;
+    }
+
+    private void getPane() {
+        paneWidth = gameController.getPaneWidth();
+        paneHeight = gameController.getPaneHeight();
     }
 
     public void createPlayer(){
         player = new Player();
     }
 
-    public void startGameTimer(){
+    public void createObstacle(){
+        getPane();obstacle = new Obstacle(paneWidth,paneHeight);
+    }
 
+    public void startGameTimer(){
+        getPane();
         TimerTask task = new TimerTask() {
             public void run() {
                 GameTick();
@@ -47,8 +74,11 @@ public class GameModel{
 
     public void GameTick(){
 
-        player.moveright();
+        timerTick += 1;
 
+        obstacle.moveLeft();
+
+        //Notify the Gamecontroller about value changes
         gameController.Update();
     }
 }
