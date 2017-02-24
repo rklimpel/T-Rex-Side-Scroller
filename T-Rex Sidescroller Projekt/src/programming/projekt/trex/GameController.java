@@ -4,6 +4,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -65,16 +67,12 @@ public class GameController {
             if (!gameModel.gameTimerEnabled) {
 
                 gameModel.createPlayer();
-                gameModel.createObstacle();
-
-                rectangle = new Rectangle(gameModel.obstacle.x, gameModel.obstacle.y,
-                        gameModel.obstacle.width, gameModel.obstacle.height);
-                pane.getChildren().addAll(rectangle);
 
                 gameModel.startGameTimer();
 
             } else {
                 System.out.println("JUMP ");
+                gameModel.createObstacle();
             }
 
         //On Escape Pressed:
@@ -95,7 +93,22 @@ public class GameController {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                rectangle.setX(gameModel.obstacle.x);
+
+                for (int i = 0; i < pane.getChildren().size() ; i++) {
+                    pane.getChildren().remove(i);
+                }
+
+                for (int i = 0; i < gameModel.obstacles.size(); i++) {
+
+                    rectangle = new Rectangle(
+                            gameModel.obstacles.get(i).x,
+                            gameModel.obstacles.get(i).y,
+                            gameModel.obstacles.get(i).width,
+                            gameModel.obstacles.get(i).height);
+
+                    pane.getChildren().addAll(rectangle);
+                }
+
             }
         });
     }

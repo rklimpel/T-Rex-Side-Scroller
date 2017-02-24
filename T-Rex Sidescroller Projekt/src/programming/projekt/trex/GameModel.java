@@ -1,5 +1,6 @@
 package programming.projekt.trex;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,6 +39,9 @@ public class GameModel{
     int paneWidth;
     int paneHeight;
 
+    //List off all Obstacles that are in the Game
+    ArrayList<Obstacle> obstacles = new ArrayList<>();
+
     /**
      * Creates a new GameModel Instance (i think there should be just one...)
      * saves Controller to class variable
@@ -69,6 +73,7 @@ public class GameModel{
     public void createObstacle(){
         getPane();
         obstacle = new Obstacle(paneWidth,paneHeight);
+        obstacles.add(obstacle);
     }
 
     /**
@@ -103,7 +108,9 @@ public class GameModel{
 
         timerTick += 1;
 
-        obstacle.moveLeft();
+        for (int i = 0; i < obstacles.size(); i++) {
+            obstacles.get(i).moveLeft();
+        }
 
         //Notify the Gamecontroller about value changes
         gameController.Update();
