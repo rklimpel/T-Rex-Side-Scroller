@@ -67,6 +67,7 @@ public class GameModel{
      * Creates a new Obstacle instance from Obstacle class
      */
     public void createObstacle(){
+        getPane();
         obstacle = new Obstacle(paneWidth,paneHeight);
     }
 
@@ -74,7 +75,6 @@ public class GameModel{
      * Starts the continous ticking Game Timer
      */
     public void startGameTimer(){
-        getPane();
         TimerTask task = new TimerTask() {
             public void run() {
                 GameTick();
