@@ -11,6 +11,11 @@ import java.awt.*;
  */
 public class Obstacle extends GameObject {
 
+    final int movePerTick = 1;
+
+    final int defaultHeight = 100;
+    final int defaultWidth = 40;
+
     public Obstacle (int paneWidth, int paneHeight){
 
         this.paneWidth = paneWidth;
