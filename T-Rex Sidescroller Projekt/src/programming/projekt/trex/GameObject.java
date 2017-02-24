@@ -17,11 +17,6 @@ public class GameObject {
     int paneWidth;
     int paneHeight;
 
-    final int movePerTick = 1;
-
-    final int defaultHeight = 100;
-    final int defaultWidth = 40;
-
     public int getWidth(){
         return width;
     }
