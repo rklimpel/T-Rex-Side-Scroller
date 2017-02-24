@@ -94,10 +94,12 @@ public class GameController {
             @Override
             public void run() {
 
+                //Remove all Children from Pane
                 for (int i = 0; i < pane.getChildren().size() ; i++) {
                     pane.getChildren().remove(i);
                 }
 
+                //Add Obstacles to Pane
                 for (int i = 0; i < gameModel.obstacles.size(); i++) {
 
                     rectangle = new Rectangle(
@@ -108,6 +110,14 @@ public class GameController {
 
                     pane.getChildren().addAll(rectangle);
                 }
+
+                rectangle = new Rectangle(
+                        gameModel.player.getX(),
+                        gameModel.player.getY(),
+                        gameModel.player.getWidth(),
+                        gameModel.player.getHeight());
+
+                pane.getChildren().add(rectangle);
 
             }
         });

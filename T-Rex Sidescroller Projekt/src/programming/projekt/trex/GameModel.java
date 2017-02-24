@@ -58,20 +58,23 @@ public class GameModel{
     private void getPane() {
         paneWidth = gameController.getPaneWidth();
         paneHeight = gameController.getPaneHeight();
+
+        //System.out.println("paneWidth: " + paneWidth);
+        //System.out.println("paneHeight: " + paneHeight);
     }
 
     /**
      * Creates a new Player instace from Player class
      */
     public void createPlayer(){
-        player = new Player();
+        getPane();
+        player = new Player(paneWidth,paneHeight);
     }
 
     /**
      * Creates a new Obstacle instance from Obstacle class
      */
     public void createObstacle(){
-        getPane();
         obstacle = new Obstacle(paneWidth,paneHeight);
         obstacles.add(obstacle);
     }
@@ -87,6 +90,7 @@ public class GameModel{
         };
         gameTimer.scheduleAtFixedRate(task, gameTimerOffset, gameTimerDelay);
         gameTimerEnabled = true;
+        getPane();
     }
 
     /**
