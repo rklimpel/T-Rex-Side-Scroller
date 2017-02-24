@@ -38,23 +38,41 @@ public class GameModel{
     int paneWidth;
     int paneHeight;
 
+    /**
+     * Creates a new GameModel Instance (i think there should be just one...)
+     * saves Controller to class variable
+     *
+     * @param gameController
+     */
     public GameModel(GameController gameController){
         this.gameController = gameController;
     }
 
+    /**
+     * Gets Pane Size from GameController
+     */
     private void getPane() {
         paneWidth = gameController.getPaneWidth();
         paneHeight = gameController.getPaneHeight();
     }
 
+    /**
+     * Creates a new Player instace from Player class
+     */
     public void createPlayer(){
         player = new Player();
     }
 
+    /**
+     * Creates a new Obstacle instance from Obstacle class
+     */
     public void createObstacle(){
-        getPane();obstacle = new Obstacle(paneWidth,paneHeight);
+        obstacle = new Obstacle(paneWidth,paneHeight);
     }
 
+    /**
+     * Starts the continous ticking Game Timer
+     */
     public void startGameTimer(){
         getPane();
         TimerTask task = new TimerTask() {
@@ -66,12 +84,21 @@ public class GameModel{
         gameTimerEnabled = true;
     }
 
+    /**
+     * Stops the continous ticking Game Timer
+     */
     public void stopGameTimer(){
         gameTimer.cancel();
         gameTimer.purge();
         gameTimerEnabled = false;
     }
 
+    /**
+     * Fires on every GameTimer tick
+     * object and other movements should be done here
+     *
+     * sends update notification to controller
+     */
     public void GameTick(){
 
         timerTick += 1;

@@ -14,6 +14,7 @@ import javafx.scene.shape.Rectangle;
  */
 public class GameController {
 
+    //objects from FXML configuration
     @FXML
     Button btn_backToMenu;
     @FXML
@@ -21,7 +22,7 @@ public class GameController {
 
     Rectangle rectangle;
 
-
+    //Remember related mvc classes
     private GameModel gameModel;
     private GameView gameView;
 
@@ -38,6 +39,13 @@ public class GameController {
         startMenu();
     }
 
+    /**
+     * Go Back the menu (exit Game)
+     *
+     * switches to Menu scene and stops the game Timer
+     *
+     * @throws IOException
+     */
     public void startMenu() throws IOException {
         //Stop Game Timer
         gameModel.stopGameTimer();
@@ -51,6 +59,8 @@ public class GameController {
      * @param event
      */
     public void KeyEventHandler(KeyEvent event) {
+
+        //On Space Pressed
         if (event.getCode() == KeyCode.SPACE) {
             if (!gameModel.gameTimerEnabled) {
 
@@ -66,6 +76,8 @@ public class GameController {
             } else {
                 System.out.println("JUMP ");
             }
+
+        //On Escape Pressed:
         }else if(event.getCode() == KeyCode.ESCAPE){
             try {
                 startMenu();
@@ -88,11 +100,21 @@ public class GameController {
         });
     }
 
-
+    /**
+     * Tells the GameController about his relatted gameView.
+     * Could'nt be set in constructor because constructor is called by fxml configuration
+     *
+     * @param gameView
+     */
     public void setView(GameView gameView) {
         this.gameView = gameView;
     }
 
+    /**
+     * getter for Pane Size (called by Model)
+     *
+     * @return
+     */
     public int getPaneHeight(){
         if(pane!=null){
             return (int) pane.getHeight();
@@ -100,6 +122,11 @@ public class GameController {
         return 0;
     }
 
+    /**
+     * getter for Pane Size (called by Model)
+     *
+     * @return
+     */
     public int getPaneWidth(){
         if(pane!=null){
             return (int)pane.getWidth();

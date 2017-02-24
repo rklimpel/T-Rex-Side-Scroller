@@ -6,6 +6,9 @@ import java.awt.*;
  * Created by ricoklimpel on 23.02.17.
  */
 
+/**
+ * Obstacle Description
+ */
 public class Obstacle {
 
     int width;
