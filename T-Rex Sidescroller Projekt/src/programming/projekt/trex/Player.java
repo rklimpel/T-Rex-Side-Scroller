@@ -5,10 +5,10 @@ package programming.projekt.trex;
  */
 public class Player extends GameObject {
 
-
     public Player (){
 
     }
+
     public void jump(){
 
     }
