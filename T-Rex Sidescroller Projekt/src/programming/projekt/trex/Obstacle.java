@@ -13,8 +13,8 @@ public class Obstacle extends GameObject {
 
     final int movePerTick = 1;
 
-    final int defaultHeight = 100;
-    final int defaultWidth = 40;
+    final int defaultHeight = 80;
+    final int defaultWidth = 20;
 
     public Obstacle (int paneWidth, int paneHeight){
 

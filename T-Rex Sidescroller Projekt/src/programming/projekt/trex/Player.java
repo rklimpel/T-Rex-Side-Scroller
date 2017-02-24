@@ -8,15 +8,25 @@ import java.util.TimerTask;
  */
 public class Player extends GameObject {
 
+    //players messurements
     final int defaultHeight = 80;
     final int defaultWidth = 40;
+
+    //default y positon of the player
     int defaultY;
 
+    //jump timer tick delay in milliseconds
     int jumpTimerDelay = 10;
+    //counts up on jump, resets after jump
     double jumpTime = 0;
+    //check if the player is still jump
     Boolean isJumping = false;
-    final double gravitation = 8;
-    final double jumpStartSpeed = 60;
+
+
+    /**------------------------**/
+    //Jump Configuration: Formula Data
+    final double gravitation = 15;
+    final double jumpSpeed = 80;
 
 
     public Player(int paneWidth, int paneHeight) {
@@ -39,7 +49,7 @@ public class Player extends GameObject {
      */
     public void jump() {
 
-        Timer jumpTimer = new Timer();
+        Timer timer_jump = new Timer();
         TimerTask task = new TimerTask() {
             public void run() {
 
@@ -47,12 +57,13 @@ public class Player extends GameObject {
                 if(getY()>=defaultY && isJumping){
 
                     setY(defaultY);
-                    jumpTimer.cancel();
-                    jumpTimer.purge();
+                    timer_jump.cancel();
+                    timer_jump.purge();
                     isJumping = false;
                     jumpTime = 0;
                     System.out.println("jump's over");
 
+                //Else calculate the new Players y coordinate
                 }else{
 
                     jumpTime += 0.1;
@@ -60,17 +71,12 @@ public class Player extends GameObject {
                     isJumping = true;
 
                     //System.out.println("jump before y: " + getY());
-
-                    setY(paneHeight-(int)((jumpStartSpeed*jumpTime-(gravitation/2)*Math.pow(jumpTime,2))+height+1));
-
+                    setY(paneHeight-(int)((jumpSpeed *jumpTime-(gravitation/2)*Math.pow(jumpTime,2))+height+1));
                     //System.out.println("jump after y: " + getY());
                 }
             }
         };
-        jumpTimer.scheduleAtFixedRate(task, 0, jumpTimerDelay);
+        timer_jump.scheduleAtFixedRate(task, 0, jumpTimerDelay);
     }
 
-    public Boolean getJumping() {
-        return isJumping;
-    }
 }
