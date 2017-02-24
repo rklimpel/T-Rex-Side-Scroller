@@ -14,10 +14,9 @@ public class Player extends GameObject {
 
     int jumpTimerDelay = 10;
     double jumpTime = 0;
-
     Boolean isJumping = false;
-
-    final int jumpHeight = 150;
+    final double gravitation = 8;
+    final double jumpStartSpeed = 60;
 
 
     public Player(int paneWidth, int paneHeight) {
@@ -36,7 +35,7 @@ public class Player extends GameObject {
     }
 
     /**
-     *
+     * do the JUMP
      */
     public void jump() {
 
@@ -46,6 +45,7 @@ public class Player extends GameObject {
 
                 //If Player reaches Bottom again end the jump prozess
                 if(getY()>=defaultY && isJumping){
+
                     setY(defaultY);
                     jumpTimer.cancel();
                     jumpTimer.purge();
@@ -54,16 +54,16 @@ public class Player extends GameObject {
                     System.out.println("jump's over");
 
                 }else{
+
                     jumpTime += 0.1;
 
                     isJumping = true;
 
-                    System.out.println("jump before y: " + getY());
+                    //System.out.println("jump before y: " + getY());
 
-                    setY(((int)Math.pow(jumpTime-Math.sqrt(jumpHeight),2))+jumpHeight+paneHeight-(defaultY-height+jumpHeight));
+                    setY(paneHeight-(int)((jumpStartSpeed*jumpTime-(gravitation/2)*Math.pow(jumpTime,2))+height+1));
 
-                    System.out.println("jump after y: " + getY());
-
+                    //System.out.println("jump after y: " + getY());
                 }
             }
         };
