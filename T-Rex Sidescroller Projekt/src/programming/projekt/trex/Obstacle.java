@@ -24,15 +24,20 @@ public class Obstacle extends GameObject {
         width = defaultWidth;
         height = defaultHeight;
 
-        x = paneWidth - width;
+        x = paneWidth;
         y = paneHeight - height;
 
     }
 
     public void moveLeft() {
+
         x -= movePerTick;
 
         //System.out.println("obstacle x: " + x);
         //System.out.println("obstacle y: " + y);
+    }
+
+    public Boolean checkOutisde(){
+        return (x+width)<0;
     }
 }

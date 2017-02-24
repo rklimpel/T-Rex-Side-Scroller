@@ -17,8 +17,6 @@ public class GameObject {
     int paneWidth;
     int paneHeight;
 
-
-
     public int getWidth(){
         return width;
     }

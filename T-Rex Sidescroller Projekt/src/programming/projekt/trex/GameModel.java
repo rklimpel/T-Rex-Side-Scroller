@@ -109,7 +109,12 @@ public class GameModel{
         timerTick += 1;
 
         for (int i = 0; i < obstacles.size(); i++) {
-            obstacles.get(i).moveLeft();
+            if(!obstacles.get(i).checkOutisde()){
+                obstacles.get(i).moveLeft();
+            }else{
+                obstacles.remove(i);
+                System.out.println("removed obstacle");
+            }
         }
 
         //Notify the Gamecontroller about value changes
