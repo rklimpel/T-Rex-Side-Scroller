@@ -37,5 +37,5 @@ public class GameObject {
     public int getY() {
         return y;
     }
-    pu
+    
 }
