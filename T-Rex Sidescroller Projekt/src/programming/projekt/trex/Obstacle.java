@@ -9,21 +9,11 @@ import java.awt.*;
 /**
  * Obstacle Description
  */
-public class Obstacle {
+public class Obstacle extends GameObject {
 
-    int width;
-    int height;
-    int x;
-    int y;
-    Color color;
 
-    int paneWidth;
-    int paneHeight;
 
-    final int movePerTick = 1;
 
-    final int defaultHeight = 100;
-    final int defaultWidth = 40;
 
     public Obstacle (int paneWidth, int paneHeight){
 
