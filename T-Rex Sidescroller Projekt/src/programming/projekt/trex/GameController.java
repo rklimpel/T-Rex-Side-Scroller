@@ -72,7 +72,7 @@ public class GameController {
 
             } else {
                 System.out.println("JUMP ");
-                gameModel.createObstacle();
+                gameModel.jump();
             }
 
         //On Escape Pressed:
@@ -82,6 +82,10 @@ public class GameController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        //create Obstacles with o
+        else if (event.getCode() == KeyCode.O){
+            gameModel.createObstacle();
         }
     }
 

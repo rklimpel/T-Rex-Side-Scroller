@@ -72,6 +72,15 @@ public class GameModel{
     }
 
     /**
+     * Called by Space, makes the player jump
+     */
+    public void jump(){
+        if(!player.isJumping){
+            player.jump();
+        }
+    }
+
+    /**
      * Creates a new Obstacle instance from Obstacle class
      */
     public void createObstacle(){
