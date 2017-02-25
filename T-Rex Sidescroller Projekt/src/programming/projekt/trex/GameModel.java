@@ -21,7 +21,8 @@ public class GameModel{
 
     //Delay, before the timer starts
     int gameTimerOffset = 0;
-    int gameTimerDelay = 4;
+    int gameTimerDelay = 3;
+    //optimum:3
 
     //The Player Object that contains to the Game
     Player player;

@@ -25,7 +25,8 @@ public class Player extends GameObject {
 
     /**------------------------**/
     //Jump Configuration: Formula Data
-    final double gravitation = 15;
+    final double gravitation = 20;
+    //optium:20
     final double jumpSpeed = 80;
 
 
