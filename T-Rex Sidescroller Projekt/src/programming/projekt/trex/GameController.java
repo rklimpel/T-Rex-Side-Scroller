@@ -5,15 +5,14 @@ import com.sun.javafx.tk.Toolkit;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-
-import java.io.IOException;
-
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+
+import java.io.*;
 
 
 /**
@@ -33,8 +32,11 @@ public class GameController {
     private GameModel gameModel;
     private GameView gameView;
 
+    Font customScoreFont;
+
     public GameController() {
         this.gameModel = new GameModel(this);
+        loadCustomFont();
     }
 
     /**
@@ -130,6 +132,7 @@ public class GameController {
                 Label label = new Label();
                 label.setFont(new Font("Arial",50));
                 label.setText("Score: " + gameModel.score);
+                label.setFont(customScoreFont);
 
                 FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
                 float labelWidth = fontLoader.computeStringWidth(label.getText(), label.getFont());
@@ -175,5 +178,24 @@ public class GameController {
             return (int)pane.getWidth();
         }
         return 0;
+    }
+
+    public void loadCustomFont(){
+
+        try{
+            String currentFontFile = "game_over.ttf";
+            InputStream fontStream = GameController.class.getResourceAsStream(currentFontFile);
+            if (fontStream != null) {
+                customScoreFont = Font.loadFont(fontStream, 200);
+                fontStream.close();
+
+
+            } else {
+                throw new IOException("Could not create font: " + currentFontFile);
+            }
+        }catch(Exception e){
+
+        }
+
     }
 }
