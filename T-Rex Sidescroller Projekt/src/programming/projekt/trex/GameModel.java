@@ -13,6 +13,7 @@ public class GameModel {
     int[] lvl1 = {10, 300, 500, 10, 10, 800, 10, 700};
     int[] lvl2 = {10, 300, 500, 10, 10, 800, 10, 700};
 
+    static int score=0;
     int lvlIndex = 0;
     int obstacleTimer = 0;
     Boolean lvlPause = true;
@@ -152,6 +153,7 @@ public class GameModel {
 
             }else{
                 obstacles.remove(i);
+                score+=1;
                 //System.out.println("removed obstacle");
             }
         }
