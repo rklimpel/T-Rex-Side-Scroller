@@ -9,18 +9,19 @@ import java.util.TimerTask;
  */
 public class GameModel {
 
-    //Lvl Arrays
-    int[] lvl1 = {10, 300, 500, 10, 10, 800, 10, 700};
-    int[] lvl2 = {10, 300, 500, 10, 10, 800, 10, 700};
-
+    //LvL Index counts the positions in the lvl Array
+    //after every fired obstacle lvl index += 1
+    //to get the next obstacle waiting time for obstacle timer
     int lvlIndex = 0;
+    //Timer set to the numbers in lvlArrays and count down with game timer.
+    //On obstacle Timer 0 a object is fired
     int obstacleTimer = 0;
+    //toggled by new lvl load. Makes the first obstacle Timer countdown don't fire a obstacle
     Boolean lvlPause = true;
-
+    //create a lvls instance to load the lvls from
     Levels levels = new Levels();
-
+    //level array saves the lvl arrays loaded from lvls class locally
     int[] levelArray;
-
 
     //Counts up how often the game timer has ticked,
     //can be used to generate the complete gametime
@@ -215,7 +216,6 @@ public class GameModel {
             }else{
                 levels.setActiveLvl(-1);
             }
-
 
         }
 
