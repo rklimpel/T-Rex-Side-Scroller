@@ -26,8 +26,6 @@ public class GameModel{
     //The Player Object that contains to the Game
     Player player;
 
-    Obstacle obstacle;
-
     //Game Controller who called the GameModel, set on contsructor
     GameController gameController;
 
@@ -84,7 +82,7 @@ public class GameModel{
      * Creates a new Obstacle instance from Obstacle class
      */
     public void createObstacle(){
-        obstacle = new Obstacle(paneWidth,paneHeight);
+        Obstacle obstacle = new Obstacle(paneWidth,paneHeight);
         obstacles.add(obstacle);
     }
 
