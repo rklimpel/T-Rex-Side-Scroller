@@ -16,9 +16,7 @@ public class MenuController {
     public Button btn_startDesktop;
 
     public void onClick_btn_startDeskop() throws IOException {
-
         startDesktop();
-
     }
 
     public void startDesktop () throws IOException{

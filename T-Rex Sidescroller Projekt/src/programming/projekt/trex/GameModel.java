@@ -52,6 +52,9 @@ public class GameModel {
     int paneWidth;
     int paneHeight;
 
+    //Remembers the Players GameScore
+    int score;
+
     //List off all Obstacles that are in the Game
     ArrayList<Obstacle> obstacles = new ArrayList<>();
 
@@ -137,6 +140,7 @@ public class GameModel {
         timerTick += 1;
 
         checklvl();
+        checkScore();
 
         for (int i = 0; i < obstacles.size(); i++) {
             if (!obstacles.get(i).checkOutisde()) {
@@ -153,13 +157,25 @@ public class GameModel {
 
             }else{
                 obstacles.remove(i);
-                score+=1;
                 //System.out.println("removed obstacle");
             }
         }
 
         //Notify the Gamecontroller about value changes
         gameController.Update();
+    }
+
+    /**
+     * Checks if the player jumped completly over an obstacle
+     */
+    private void checkScore() {
+
+        for (int i = 0; i < obstacles.size(); i++) {
+            if(obstacles.get(i).getX()+obstacles.get(i).getWidth()==player.getX()){
+                score += 1;
+            }
+        }
+
     }
 
     /**

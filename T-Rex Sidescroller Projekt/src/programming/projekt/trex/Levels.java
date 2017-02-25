@@ -71,9 +71,6 @@ public class Levels {
         }
 
         System.out.println("lvl loaded: " + activeLvl);
-
-        activeLvl = 3;
-
     }
 
 }

@@ -1,15 +1,20 @@
 package programming.projekt.trex;
 
+import com.sun.javafx.tk.FontLoader;
+import com.sun.javafx.tk.Toolkit;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import java.io.IOException;
-import java.util.ArrayList;
 
+import java.io.IOException;
+
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+
 
 /**
  * Created by ricoklimpel on 23.02.17.
@@ -98,10 +103,7 @@ public class GameController {
             @Override
             public void run() {
 
-                //Remove all Children from Pane
-                for (int i = 0; i < pane.getChildren().size() ; i++) {
-                    pane.getChildren().remove(i);
-                }
+                pane.getChildren().clear();
 
                 //Add Obstacles to Pane
                 for (int i = 0; i < gameModel.obstacles.size(); i++) {
@@ -123,6 +125,19 @@ public class GameController {
                         gameModel.player.getHeight());
 
                 pane.getChildren().add(rectangle);
+
+                //Add Score Label to Pane
+                Label label = new Label();
+                label.setFont(new Font("Arial",50));
+                label.setText("Score: " + gameModel.score);
+
+                FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
+                float labelWidth = fontLoader.computeStringWidth(label.getText(), label.getFont());
+
+                label.setLayoutX((pane.getWidth()/2)-labelWidth/2);
+                label.setLayoutY(pane.getHeight()/5);
+
+                pane.getChildren().add(label);
 
             }
         });
