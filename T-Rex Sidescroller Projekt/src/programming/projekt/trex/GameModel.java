@@ -7,12 +7,19 @@ import java.util.TimerTask;
 /**
  * Created by ricoklimpel on 23.02.17.
  */
-//array for the levelstructure
 public class GameModel {
-    int[] lvl = {10, 300, 500, 10, 10, 800, 10, 700};
 
-    int counterLvlArray = 0;
-    int obstacleTick = 0;
+    //Lvl Arrays
+    int[] lvl1 = {10, 300, 500, 10, 10, 800, 10, 700};
+    int[] lvl2 = {10, 300, 500, 10, 10, 800, 10, 700};
+
+    int lvlIndex = 0;
+    int obstacleTimer = 0;
+    Boolean lvlPause = true;
+
+    Levels levels = new Levels();
+
+    int[] levelArray;
 
 
     //Counts up how often the game timer has ticked,
@@ -104,7 +111,9 @@ public class GameModel {
         };
         gameTimer.scheduleAtFixedRate(task, gameTimerOffset, gameTimerDelay);
         gameTimerEnabled = true;
+
         getPane();
+
     }
 
     /**
@@ -125,22 +134,25 @@ public class GameModel {
     public void GameTick() {
 
         timerTick += 1;
-        checklvl();
 
+        checklvl();
 
         for (int i = 0; i < obstacles.size(); i++) {
             if (!obstacles.get(i).checkOutisde()) {
+
                 obstacles.get(i).moveLeft();
 
                 if(player.checkCollision(obstacles.get(i))){
+
                     stopGameTimer();
+
                     System.out.println("Collision!");
                     player.stopJumpTimer();
                 }
 
             }else{
                 obstacles.remove(i);
-                System.out.println("removed obstacle");
+                //System.out.println("removed obstacle");
             }
         }
 
@@ -154,27 +166,64 @@ public class GameModel {
      */
     private void checklvl() {
 
+        //If no lvl is active set a new random lvl as active lvl and
+        //reset obstacle Timer and lvl Index
+        if(levels.getActiveLvl()==-1){
 
-        if (obstacles != null && obstacleTick == lvl[counterLvlArray]/*+  obstacles.get(obstacles.size()-1).getWidth()*/) {
-            createObstacle();
+            levels.setRandomLvl();
+            obstacleTimer = 500;
+            lvlPause = true;
+            lvlIndex = 0;
 
+            System.out.println("obstacle timer: " + obstacleTimer);
+            System.out.println("lvl index " + lvlIndex);
+            System.out.println("pause: " + lvlPause +"\n");
+        }
 
-            counterLvlArray += 1;
-            obstacleTick = 0;
+        //if Obstacle Timer is down and there is a active lvl fire a new Obstacle
+        if(obstacleTimer == 0 && levels.getActiveLvl() != -1){
+
+            if(lvlPause == true){
+
+                //Get Level Array for active lvl from Level class
+                levelArray = levels.getActiveLvlArray();
+
+                lvlPause = false;
+
+            }else{
+
+                createObstacle();
+                System.out.println("Object created! \n");
+
+            }
+
+            //If lvl index = -1 there are no more obstacles in this lvl and he should not load more
+            //Else do the normal stuff
+            if(lvlIndex!=-1){
+                //Create a helping obstacle to check obstacle width
+                Obstacle helpObstacle = new Obstacle(0,0);
+
+                //set new obstacle timer by lvl array data and add obstacle width offset
+                obstacleTimer = levelArray[lvlIndex] + helpObstacle.getWidth();
+
+                lvlIndex+=1;
+
+                // if lvl index is out of bounds set activelvl to -1 and reset lvl index
+                if(lvlIndex >= levelArray.length){
+                    lvlIndex = -1;
+                }
+            }else{
+                levels.setActiveLvl(-1);
+            }
+
 
         }
-        if (obstacles == null && obstacleTick == lvl[counterLvlArray]) {
-            createObstacle();
+
+        if(obstacleTimer != 0){
+            obstacleTimer -= 1;
+        }
 
 
-            counterLvlArray += 1;
-            obstacleTick = 0;
-        }
-        if (counterLvlArray == lvl.length - 1) {
-            counterLvlArray = 0;
-        }
-        obstacleTick += 1;
     }
-
 
 }

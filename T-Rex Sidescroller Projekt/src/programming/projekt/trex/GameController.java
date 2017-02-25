@@ -115,6 +115,7 @@ public class GameController {
                     pane.getChildren().addAll(rectangle);
                 }
 
+                //Add Player to Pane
                 rectangle = new Rectangle(
                         gameModel.player.getX(),
                         gameModel.player.getY(),

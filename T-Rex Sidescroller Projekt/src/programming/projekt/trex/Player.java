@@ -62,7 +62,7 @@ public class Player extends GameObject {
                     setY(defaultY);
                     stopJumpTimer();
                     jumpTime = 0;
-                    System.out.println("jump's over");
+                    //System.out.println("jump's over");
 
                 //Else calculate the new Players y coordinate
                 }else{
