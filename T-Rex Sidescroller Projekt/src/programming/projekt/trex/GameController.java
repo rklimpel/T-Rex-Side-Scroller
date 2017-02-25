@@ -71,13 +71,27 @@ public class GameController {
 
         //On Space Pressed
         if (event.getCode() == KeyCode.SPACE) {
-            if (!gameModel.gameTimerEnabled) {
+            if (!gameModel.gameTimerEnabled && !gameModel.gameOver) {
 
                 gameModel.createPlayer();
 
                 gameModel.startGameTimer();
 
-            } else {
+            }else if (!gameModel.gameTimerEnabled && gameModel.gameOver){
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            new EndView(gameModel.score);
+                        }catch (IOException e){
+                            System.out.println("somehting failed...");
+                        }
+
+                    }
+                });
+
+            }else{
                 System.out.println("JUMP ");
                 gameModel.jump();
             }
@@ -91,9 +105,9 @@ public class GameController {
             }
         }
         //create Obstacles with o
-        else if (event.getCode() == KeyCode.O){
+        /*else if (event.getCode() == KeyCode.O){
             gameModel.createObstacle();
-        }
+        }*/
     }
 
     /**
@@ -183,7 +197,7 @@ public class GameController {
     public void loadCustomFont(){
 
         try{
-            String currentFontFile = "game_over.ttf";
+            String currentFontFile = "./fonts/game_over.ttf";
             InputStream fontStream = GameController.class.getResourceAsStream(currentFontFile);
             if (fontStream != null) {
                 customScoreFont = Font.loadFont(fontStream, 200);

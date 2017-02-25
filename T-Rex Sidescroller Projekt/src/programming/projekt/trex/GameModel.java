@@ -55,6 +55,9 @@ public class GameModel {
     //Remembers the Players GameScore
     int score;
 
+    //if player died this will be true:
+    Boolean gameOver = false;
+
     //List off all Obstacles that are in the Game
     ArrayList<Obstacle> obstacles = new ArrayList<>();
 
@@ -150,6 +153,7 @@ public class GameModel {
                 if(player.checkCollision(obstacles.get(i))){
 
                     stopGameTimer();
+                    gameOver = true;
 
                     System.out.println("Collision!");
                     player.stopJumpTimer();

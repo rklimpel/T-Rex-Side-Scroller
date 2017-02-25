@@ -33,18 +33,24 @@ public class EndView {
         Parent root = fxmlLoader.load();
         endController = fxmlLoader.getController();
 
+        endController.setView(this);
+        endController.setScore(score);
+
         Scene scene = new Scene(root, EndWidth, EndHeigth);
         Main.stage.setScene(scene);
         centerFrame();
         Main.stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(javafx.scene.input.KeyEvent event) {
-                endController.keyEventHandler(event);
+                try {
+                    endController.keyEventHandler(event);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
         Main.stage.show();
 
-
-
     }
+
 }
