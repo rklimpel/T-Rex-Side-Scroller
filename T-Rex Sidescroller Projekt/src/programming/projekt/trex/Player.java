@@ -21,6 +21,8 @@ public class Player extends GameObject {
     double jumpTime = 0;
     //check if the player is still jump
     Boolean isJumping = false;
+    //Jump Timer
+    Timer timer_jump;
 
 
     /**------------------------**/
@@ -50,7 +52,7 @@ public class Player extends GameObject {
      */
     public void jump() {
 
-        Timer timer_jump = new Timer();
+        timer_jump = new Timer();
         TimerTask task = new TimerTask() {
             public void run() {
 
@@ -58,9 +60,7 @@ public class Player extends GameObject {
                 if(getY()>=defaultY && isJumping){
 
                     setY(defaultY);
-                    timer_jump.cancel();
-                    timer_jump.purge();
-                    isJumping = false;
+                    stopJumpTimer();
                     jumpTime = 0;
                     System.out.println("jump's over");
 
@@ -78,6 +78,12 @@ public class Player extends GameObject {
             }
         };
         timer_jump.scheduleAtFixedRate(task, 0, jumpTimerDelay);
+    }
+
+    public void stopJumpTimer(){
+        timer_jump.cancel();
+        timer_jump.purge();
+        isJumping = false;
     }
 
 }

@@ -33,8 +33,6 @@ public class GameModel {
     //The Player Object that contains to the Game
     Player player;
 
-    Obstacle obstacle;
-
     //Game Controller who called the GameModel, set on contsructor
     GameController gameController;
 
@@ -90,8 +88,8 @@ public class GameModel {
     /**
      * Creates a new Obstacle instance from Obstacle class
      */
-    public void createObstacle() {
-        obstacle = new Obstacle(paneWidth, paneHeight);
+    public void createObstacle(){
+        Obstacle obstacle = new Obstacle(paneWidth,paneHeight);
         obstacles.add(obstacle);
     }
 
@@ -133,7 +131,14 @@ public class GameModel {
         for (int i = 0; i < obstacles.size(); i++) {
             if (!obstacles.get(i).checkOutisde()) {
                 obstacles.get(i).moveLeft();
-            } else {
+
+                if(player.checkCollision(obstacles.get(i))){
+                    stopGameTimer();
+                    System.out.println("Collision!");
+                    player.stopJumpTimer();
+                }
+
+            }else{
                 obstacles.remove(i);
                 System.out.println("removed obstacle");
             }
