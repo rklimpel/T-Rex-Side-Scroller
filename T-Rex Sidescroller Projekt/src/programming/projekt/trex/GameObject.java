@@ -17,7 +17,41 @@ public class GameObject {
     int paneWidth;
     int paneHeight;
 
-    public int getWidth(){
+    public Boolean checkCollision(GameObject clasher) {
+        if (
+            //Check Callers left side is inside clasher
+            ((this.getX() >= clasher.getX()
+                    && this.getX() <= clasher.getX() + clasher.getWidth())
+            //Check Callers right side is inside clasher
+            || (this.getX() + this.getWidth() >= clasher.getX()
+                    && this.getX() + this.getWidth() <= clasher.getX() + clasher.getWidth()))
+            //Check Callers Bottom is inside clasher
+            &&((this.getY() + this.getHeight() >= clasher.getY()
+                    && this.getY() + this.getHeight() <= clasher.getY() + clasher.getHeight())
+            //Check Calles Top is inside clasher
+            || (this.getY() >= clasher.getY()
+                    && this.getY() <= clasher.getY() + clasher.getHeight()))) {
+
+            /*System.out.println("this x: " + this.getX());
+            System.out.println("this x + width: " + (this.getX() + this.getWidth()));
+
+            System.out.println("clasher x: " + clasher.getX());
+            System.out.println("clasher x + width: " + (clasher.getX() + clasher.getWidth()));
+
+            System.out.println();
+
+            System.out.println("this y: " + this.getX());
+            System.out.println("this y + heigth: " + (this.getY() + this.getHeight()));
+
+            System.out.println("clasher y: " + clasher.getY());
+            System.out.println("clasher y + height: " + (clasher.getY() + clasher.getHeight()));*/
+
+            return true;
+        }
+        return false;
+    }
+
+    public int getWidth() {
         return width;
     }
 

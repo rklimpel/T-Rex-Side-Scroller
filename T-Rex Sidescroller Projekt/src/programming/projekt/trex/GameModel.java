@@ -21,7 +21,7 @@ public class GameModel{
 
     //Delay, before the timer starts
     int gameTimerOffset = 0;
-    int gameTimerDelay = 4;
+    int gameTimerDelay = 3;
 
     //The Player Object that contains to the Game
     Player player;
@@ -124,6 +124,13 @@ public class GameModel{
         for (int i = 0; i < obstacles.size(); i++) {
             if(!obstacles.get(i).checkOutisde()){
                 obstacles.get(i).moveLeft();
+
+                if(player.checkCollision(obstacles.get(i))){
+                    stopGameTimer();
+                    System.out.println("Collision!");
+                    player.stopJumpTimer();
+                }
+
             }else{
                 obstacles.remove(i);
                 System.out.println("removed obstacle");
