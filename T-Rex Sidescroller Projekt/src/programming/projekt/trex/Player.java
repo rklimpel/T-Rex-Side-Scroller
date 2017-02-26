@@ -79,7 +79,7 @@ public class Player extends GameObject {
             public void run() {
 
                 //If Player reaches Bottom again end the jump prozess
-                if (y >= defaultY && isJumping){
+                if (y >= defaultY && isJumping) {
 
                     setY(defaultY);
 
@@ -118,8 +118,10 @@ public class Player extends GameObject {
     }
 
     public void crouch() {
-        height = defaultHeight / 2;
-        yOffset = defaultHeight / 2;
+
+        height = (int) (defaultHeight * R.playerCrouchSize);
+        yOffset = (int) (defaultHeight * (1 - R.playerCrouchSize));
+
         isCrouching = true;
     }
 
@@ -134,7 +136,6 @@ public class Player extends GameObject {
         timer_jump.purge();
         isJumping = false;
     }
-
 
 
 }

@@ -13,6 +13,9 @@ public class R {
     public static final int playerHeight = 100;
     public static final int playerWidth = 40;
 
+    //Players crouched size multiplikator (player height * crouchsize)
+    public static final double playerCrouchSize = 0.4;
+
     //Player Color:
     public static final Color playerColor = Color.RED;
 
