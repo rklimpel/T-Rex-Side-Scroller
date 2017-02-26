@@ -8,22 +8,24 @@ import java.util.TimerTask;
 /**
  * Created by ricoklimpel on 23.02.17.
  */
-public class Player extends GameObject {
+public class Player extends GameObject{
 
     //players messurements
-    final int defaultHeight = 40;
-    final int defaultWidth = 40;
+    final int defaultHeight = R.playerHeight;
+    final int defaultWidth = R.playerWidth;
 
     double rotation;
 
     double jumpAllTime;
     double rotationPerTick;
 
+    final double playerJumpRotation = R.playerJumpRotation;
+
     //default y positon of the player
     int defaultY;
 
     //jump timer tick delay in milliseconds
-    int jumpTimerDelay = 10;
+    int jumpTimerDelay = R.playerJumpTimerDelay;
     //counts up on jump, resets after jump
     double jumpTime = 0;
     //check if the player is still jump
@@ -34,9 +36,9 @@ public class Player extends GameObject {
 
     /**------------------------**/
     //Jump Configuration: Formula Data
-    final double gravitation = 20;
+    final double gravitation = R.playerGravitation;
     //optium:20
-    final double jumpSpeed = 80;
+    final double jumpSpeed = R.playerJumpSpeed;
 
 
     public Player(int paneWidth, int paneHeight) {
@@ -54,7 +56,7 @@ public class Player extends GameObject {
 
         rotation = 0;
 
-        color = Color.RED;
+        color = R.playerColor;
 
     }
 
@@ -63,9 +65,9 @@ public class Player extends GameObject {
      */
     public void jump() {
 
-        jumpAllTime = jumpSpeed/gravitation;
-        System.out.println(jumpAllTime);
-        rotationPerTick = 360/jumpAllTime/40.6;
+        jumpAllTime = (jumpSpeed/gravitation)*2;
+        //System.out.println(jumpAllTime);
+        rotationPerTick = (360/jumpAllTime/10)*playerJumpRotation;
 
         timer_jump = new Timer();
         TimerTask task = new TimerTask() {
@@ -86,13 +88,18 @@ public class Player extends GameObject {
 
                     jumpTime += 0.1;
 
+                    System.out.println("jumpTime: " + jumpTime);
+
                     isJumping = true;
 
                     //System.out.println("jump before y: " + getY());
                     setY(paneHeight-(int)((jumpSpeed *jumpTime-(gravitation/2)*Math.pow(jumpTime,2))+height+1));
                     //System.out.println("jump after y: " + getY());
 
-                    rotation += rotationPerTick;
+                    if(R.playerRotation){
+                        rotation += rotationPerTick;
+                    }
+
                 }
             }
         };

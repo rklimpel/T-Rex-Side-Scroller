@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Font;
 
 import java.io.*;
@@ -143,6 +144,9 @@ public class GameController {
 
                 rectangle.setRotate(gameModel.player.rotation);
                 rectangle.setFill(gameModel.player.getColor());
+                rectangle.setStroke(Color.BLACK);
+                rectangle.setStrokeWidth(2);
+                rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
 
                 pane.getChildren().add(rectangle);
 

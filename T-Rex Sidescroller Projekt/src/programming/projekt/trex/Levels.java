@@ -21,7 +21,7 @@ public class Levels {
     int[] lvl5 = {500, 10, 200,10};
     int[] lvl6 = {10,200,250,300,350,400,35,220,35};
 
-    int activeLvl = -1;
+    int activeLvl = R.EMPTY;
 
     public Levels() {
 
@@ -41,7 +41,7 @@ public class Levels {
      * @return
      */
     public int[] getActiveLvlArray(){
-        if(activeLvl == -1){
+        if(activeLvl == R.EMPTY){
             return null;
         }
         return levelList.get(activeLvl);
@@ -72,7 +72,7 @@ public class Levels {
         if(levelList.size()!=0){
             activeLvl = rn.nextInt(levelList.size()) + 0;
         }else{
-            activeLvl = -1;
+            activeLvl = R.EMPTY;
         }
 
         System.out.println("lvl loaded: " + activeLvl);

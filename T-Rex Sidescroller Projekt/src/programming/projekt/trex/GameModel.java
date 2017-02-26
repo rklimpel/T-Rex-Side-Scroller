@@ -34,8 +34,8 @@ public class GameModel {
     Boolean gameTimerEnabled = false;
 
     //Delay, before the timer starts
-    int gameTimerOffset = 0;
-    int gameTimerDelay = 3;
+    int gameTimerOffset = R.gameTimerOffset;
+    int gameTimerDelay = R.gameTimerDelay;
     //optimum:3
 
     //The Player Object that contains to the Game
@@ -190,10 +190,10 @@ public class GameModel {
 
         //If no lvl is active set a new random lvl as active lvl and
         //reset obstacle Timer and lvl Index
-        if(levels.getActiveLvl()==-1){
+        if(levels.getActiveLvl()==R.EMPTY){
 
             levels.setRandomLvl();
-            obstacleTimer = 500;
+            obstacleTimer = R.obstaclePauseTimer;
             lvlPause = true;
             lvlIndex = 0;
 
@@ -203,7 +203,7 @@ public class GameModel {
         }
 
         //if Obstacle Timer is down and there is a active lvl fire a new Obstacle
-        if(obstacleTimer == 0 && levels.getActiveLvl() != -1){
+        if(obstacleTimer == 0 && levels.getActiveLvl() != R.EMPTY){
 
             if(lvlPause == true){
 
@@ -221,7 +221,7 @@ public class GameModel {
 
             //If lvl index = -1 there are no more obstacles in this lvl and he should not load more
             //Else do the normal stuff
-            if(lvlIndex!=-1){
+            if(lvlIndex!=R.EMPTY){
                 //Create a helping obstacle to check obstacle width
                 Obstacle helpObstacle = new Obstacle(0,0);
 
@@ -232,10 +232,10 @@ public class GameModel {
 
                 // if lvl index is out of bounds set activelvl to -1 and reset lvl index
                 if(lvlIndex >= levelArray.length){
-                    lvlIndex = -1;
+                    lvlIndex = R.EMPTY;
                 }
             }else{
-                levels.setActiveLvl(-1);
+                levels.setActiveLvl(R.EMPTY);
             }
 
         }

@@ -11,10 +11,8 @@ import java.awt.*;
  */
 public class Obstacle extends GameObject {
 
-    final int movePerTick = 1;
-
-    final int defaultHeight = 80;
-    final int defaultWidth = 20;
+    final int defaultHeight = R.obstacleHeight;
+    final int defaultWidth = R.obstacleWidth;
 
     public Obstacle (int paneWidth, int paneHeight){
 
@@ -31,7 +29,8 @@ public class Obstacle extends GameObject {
 
     public void moveLeft() {
 
-        x -= movePerTick;
+        //Move Obstacle one px left
+        x -= 1;
 
         //System.out.println("obstacle x: " + x);
         //System.out.println("obstacle y: " + y);
