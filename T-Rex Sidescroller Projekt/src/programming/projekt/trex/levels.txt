@@ -131,6 +131,11 @@ gap=400|type=0|y=50
 gap=200|type=0|y=0
 ---
 
+//testlvl
+#id=lvl14
+gap=1000|type=0|y=500
+---
+
 
 
 
