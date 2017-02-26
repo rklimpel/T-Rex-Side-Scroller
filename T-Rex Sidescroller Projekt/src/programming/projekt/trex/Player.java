@@ -14,15 +14,19 @@ public class Player extends GameObject {
     final int defaultHeight = R.playerHeight;
     final int defaultWidth = R.playerWidth;
 
+    //Rotation value of the player (0-360)
     double rotation;
-
+    //Here the time for a whole jump will be calculated and stored
     double jumpAllTime;
+    //how far the player rotates per jumpTimer tick
     double rotationPerTick;
+    //How far the player should rotate by one jump
+    final double playerJumpRotation = R.playerJumpRotation;
+    //Player rotation activated?
+    final Boolean playerRotation = R.playerRotation;
 
     //Checked if the player is crouching
     Boolean isCrouching = false;
-
-    final double playerJumpRotation = R.playerJumpRotation;
 
     //default y positon of the player
     int defaultY;
@@ -36,10 +40,6 @@ public class Player extends GameObject {
     //Jump Timer
     Timer timer_jump;
 
-
-    /**
-     * ------------------------
-     **/
     //Jump Configuration: Formula Data
     final double gravitation = R.playerGravitation;
     //optium:20
@@ -66,12 +66,12 @@ public class Player extends GameObject {
     }
 
     /**
-     * do the JUMP
+     * calculates the new Y values for the jumping ployer
      */
     public void jump() {
 
+        //Calculations for Player Rotation:
         jumpAllTime = (jumpSpeed / gravitation) * 2;
-        //System.out.println(jumpAllTime);
         rotationPerTick = (360 / jumpAllTime / 10) * playerJumpRotation;
 
         timer_jump = new Timer();
@@ -84,30 +84,24 @@ public class Player extends GameObject {
                     setY(defaultY);
 
                     stopJumpTimer();
-                    jumpTime = 0;
 
+                    jumpTime = 0;
                     rotation = 0;
-                    //System.out.println("jump's over");
+
+                    //System.out.println("Jump done");
+
 
                     //Else calculate the new Players y coordinate
                 } else {
 
-
                     jumpTime += 0.1;
-
-                    //System.out.println("jumpTime: " + jumpTime);
 
                     isJumping = true;
 
-                    //System.out.println("jump before y: " + getY());
-
-
+                    //Calculate the new y value for the player (senkrechter Wurf)
                     setY(paneHeight - (int) ((jumpSpeed * jumpTime - (gravitation / 2) * Math.pow(jumpTime, 2)) + defaultHeight + 1));
 
-
-                    //System.out.println("jump after y: " + getY());
-
-                    if (R.playerRotation) {
+                    if (playerRotation) {
                         rotation += rotationPerTick;
                     }
 
@@ -117,6 +111,9 @@ public class Player extends GameObject {
         timer_jump.scheduleAtFixedRate(task, 0, jumpTimerDelay);
     }
 
+    /**
+     * Set Player to Crouching
+     */
     public void crouch() {
 
         height = (int) (defaultHeight * R.playerCrouchSize);
@@ -125,17 +122,23 @@ public class Player extends GameObject {
         isCrouching = true;
     }
 
+    /**
+     * Reverts the "set Player to Crouching" changes
+     * (crouch ends)
+     */
     public void crouchEnd() {
         height = defaultHeight;
         yOffset = 0;
         isCrouching = false;
     }
 
+    /**
+     * called when player reaches the bottom again or hit an obstacle.
+     * ends the jumpTimer instantly and player won't move on y axis anymore
+     */
     public void stopJumpTimer() {
         timer_jump.cancel();
         timer_jump.purge();
         isJumping = false;
     }
-
-
 }

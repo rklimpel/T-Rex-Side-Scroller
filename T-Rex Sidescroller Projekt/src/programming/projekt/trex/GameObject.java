@@ -13,6 +13,7 @@ public class GameObject {
     int x;
     int y;
 
+    //yOffset for crouching player (else he would fly...)
     int yOffset;
 
     Color color;
