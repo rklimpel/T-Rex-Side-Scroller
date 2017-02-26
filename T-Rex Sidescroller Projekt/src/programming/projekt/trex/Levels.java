@@ -1,5 +1,6 @@
 package programming.projekt.trex;
 
+import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,7 +10,7 @@ import java.util.Random;
  */
 public class Levels {
 
-    ArrayList<int[]> levelList= new ArrayList<>();
+    ArrayList<int[][]> levelList= new ArrayList<>();
 
     Random rn = new Random();
 
@@ -52,6 +53,9 @@ public class Levels {
                     if(levelLines[i].trim().equals("")){
                         levelLines[i] = levelLines[i] + "//";
                     }
+
+                    //Remove this crazy \r characters from text file
+                    levelLines[i].replace("\r","");
                 }
 
                 //Check Level Length for every level
@@ -69,9 +73,9 @@ public class Levels {
                 }
 
                 System.out.println("saved levels: " + savedLevels);
-                System.out.println("lvl0 length: " + lvlLength[0]);
-                System.out.println("lvl1 length: " + lvlLength[1]);
-
+                for (int i = 0; i < savedLevels; i++) {
+                    System.out.println("Level "+i+" length: " +lvlLength[i]);
+                }
 
                 //Saves the Data for one lvl
                 int[][] lvl = null;
@@ -91,7 +95,7 @@ public class Levels {
                     }else if(levelLines[i].contains("---")){
 
                         //add the lvl we read to Level class LevelList Array
-                        levelList.add(lvl[0]);
+                        levelList.add(lvl);
 
                     }else if (!levelLines[i].contains("//")){
 
@@ -100,7 +104,7 @@ public class Levels {
                         //on 0 we find the gap value
                         //on 1 we find the type value
                         //on 2 we find the y value
-                        String[] values = new String[3];
+                        String[] values;
                         values = levelLines[i].split("\\|");
 
                         //Load LVL Object Gaps
@@ -116,12 +120,20 @@ public class Levels {
                             lvl[2][lvlIndex] = Integer.parseInt(Helper.extractDigits(values[2]));
                         }
 
+                        try{
+                            System.out.println("LvL "+checklvl+" load " + (lvlIndex) +". line: " + lvl[0][lvlIndex] + ", "
+                                    + lvl[1][lvlIndex] + ", "
+                                    + lvl[2][lvlIndex]);
+                        }catch(IndexOutOfBoundsException e){
+                            System.out.println(e);
+                        }
+
                         lvlIndex+=1;
+
                     }
                 }
             }
         }).start();
-
     }
 
     /**
@@ -129,7 +141,7 @@ public class Levels {
      *
      * @return
      */
-    public int[] getActiveLvlArray(){
+    public int[][] getActiveLvlArray(){
         if(activeLvl == R.EMPTY){
             return null;
         }
@@ -166,8 +178,8 @@ public class Levels {
 
         System.out.println("lvl loaded: " + activeLvl);
 
-        for (int i = 0; i < levelList.get(activeLvl).length; i++) {
-            System.out.print(levelList.get(activeLvl)[i] + ",");
+        for (int i = 0; i < levelList.get(activeLvl)[0].length; i++) {
+            System.out.print(levelList.get(activeLvl)[0][i] + ",");
         }
 
         System.out.println();

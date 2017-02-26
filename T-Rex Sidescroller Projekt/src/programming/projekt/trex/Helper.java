@@ -41,7 +41,7 @@ public class Helper {
        String returnString = null;
 
         File file = new File(path);
-        System.out.println(file.toString());
+        //System.out.println(file.toString());
 
         FileReader reader = null;
         try {

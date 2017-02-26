@@ -21,7 +21,7 @@ public class GameModel {
     //create a lvls instance to load the lvls from
     Levels levels = new Levels();
     //level array saves the lvl arrays loaded from lvls class locally
-    int[] levelArray;
+    int[][] levelArray;
 
     //Counts up how often the game timer has ticked,
     //can be used to generate the complete gametime
@@ -102,8 +102,8 @@ public class GameModel {
     /**
      * Creates a new Obstacle instance from Obstacle class
      */
-    public void createObstacle(){
-        Obstacle obstacle = new Obstacle(paneWidth,paneHeight);
+    public void createObstacle(int yOffset){
+        Obstacle obstacle = new Obstacle(paneWidth,paneHeight,yOffset);
         obstacles.add(obstacle);
     }
 
@@ -188,6 +188,7 @@ public class GameModel {
      */
     private void checklvl() {
 
+
         //If no lvl is active set a new random lvl as active lvl and
         //reset obstacle Timer and lvl Index
         if(levels.getActiveLvl()==R.EMPTY){
@@ -209,31 +210,35 @@ public class GameModel {
 
                 //Get Level Array for active lvl from Level class
                 levelArray = levels.getActiveLvlArray();
-
                 lvlPause = false;
 
             }else{
 
-                createObstacle();
-                System.out.println("Object created! \n");
+                //Create a new Obstacle Object
+                if(lvlIndex!=R.EMPTY){
+                    createObstacle(levelArray[2][lvlIndex-1]);
+                    System.out.println("Create Obstacle- index: " + (lvlIndex-1));
+                }
 
+                //System.out.println("Object created! \n");
             }
+
 
             //If lvl index = -1 there are no more obstacles in this lvl and he should not load more
             //Else do the normal stuff
-            if(lvlIndex!=R.EMPTY){
+            if(lvlIndex!=R.EMPTY && lvlIndex <levelArray[0].length){
                 //Create a helping obstacle to check obstacle width
-                Obstacle helpObstacle = new Obstacle(0,0);
+                Obstacle helpObstacle = new Obstacle();
 
                 //set new obstacle timer by lvl array data and add obstacle width offset
-                obstacleTimer = levelArray[lvlIndex] + helpObstacle.getWidth();
+                obstacleTimer = levelArray[0][lvlIndex] + helpObstacle.getWidth();
 
                 lvlIndex+=1;
-
-                // if lvl index is out of bounds set activelvl to -1 and reset lvl index
-                if(lvlIndex >= levelArray.length){
-                    lvlIndex = R.EMPTY;
-                }
+            }
+            // if lvl index is out of bounds set activelvl to -1 and reset lvl index
+            else if(lvlIndex >= levelArray[0].length){
+                lvlIndex = R.EMPTY;
+                levels.setActiveLvl(R.EMPTY);
             }else{
                 levels.setActiveLvl(R.EMPTY);
             }
@@ -243,7 +248,6 @@ public class GameModel {
         if(obstacleTimer != 0){
             obstacleTimer -= 1;
         }
-
 
     }
 

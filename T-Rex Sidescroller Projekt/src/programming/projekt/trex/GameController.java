@@ -78,13 +78,15 @@ public class GameController {
 
         //On Space Pressed
         if (event.getCode() == KeyCode.SPACE) {
+            //IF Game is not over but it is not Running start the game
             if (!gameModel.gameTimerEnabled && !gameModel.gameOver) {
 
                 gameModel.createPlayer();
-
                 gameModel.startGameTimer();
 
-            }else if (!gameModel.gameTimerEnabled && gameModel.gameOver){
+            }
+            //IF the Game is over (collision) space switches to menu
+            else if (!gameModel.gameTimerEnabled && gameModel.gameOver){
 
                 Platform.runLater(new Runnable() {
                     @Override
@@ -98,8 +100,9 @@ public class GameController {
                     }
                 });
 
-            }else{
-                System.out.println("JUMP ");
+            }
+            //else space is there to jump
+            else{
                 gameModel.jump();
             }
 
@@ -113,7 +116,6 @@ public class GameController {
         }else if(event.getCode() == KeyCode.CONTROL){
             if(event.getEventType() == KeyEvent.KEY_PRESSED){
                 gameModel.player.crouch();
-                System.out.println("crouch");
             }
         }
         //create Obstacles with o
@@ -219,7 +221,6 @@ public class GameController {
     public void KeyReleasedHandler(KeyEvent event) {
         if(event.getCode() == KeyCode.CONTROL){
             gameModel.player.crouchEnd();
-            System.out.println("crouch released");
         }
     }
 }

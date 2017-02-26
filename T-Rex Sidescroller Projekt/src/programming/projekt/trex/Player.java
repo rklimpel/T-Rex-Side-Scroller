@@ -70,6 +70,8 @@ public class Player extends GameObject {
      */
     public void jump() {
 
+        //System.out.print("Jump!");
+
         //Calculations for Player Rotation:
         jumpAllTime = (jumpSpeed / gravitation) * 2;
         rotationPerTick = (360 / jumpAllTime / 10) * playerJumpRotation;
@@ -120,6 +122,8 @@ public class Player extends GameObject {
         yOffset = (int) (defaultHeight * (1 - R.playerCrouchSize));
 
         isCrouching = true;
+
+        //System.out.print("Crouch");
     }
 
     /**
@@ -130,6 +134,8 @@ public class Player extends GameObject {
         height = defaultHeight;
         yOffset = 0;
         isCrouching = false;
+
+        //System.out.println("Crouch Released");
     }
 
     /**

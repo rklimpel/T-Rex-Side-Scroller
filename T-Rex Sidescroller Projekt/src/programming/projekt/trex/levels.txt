@@ -1,12 +1,11 @@
-
 //Gleichmäßiges Level
 #id=lvl0
 gap=300|type=0|y=0
+gap=300|type=0|y=50
 gap=300|type=0|y=0
+gap=300|type=0|y=50
 gap=300|type=0|y=0
-gap=300|type=0|y=0
-gap=300|type=0|y=0
-gap=300|type=0|y=0
+gap=300|type=0|y=50
 ---
 
 //Zwei Dreierblöcke
