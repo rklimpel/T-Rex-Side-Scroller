@@ -17,7 +17,7 @@
         <RowConstraints maxHeight="144.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Label alignment="CENTER" text="Game Over!!" GridPane.columnIndex="1">
+        <Label fx:id="lbl_gameover" alignment="CENTER" text="Game Over!!" GridPane.columnIndex="1">
             <font>
                 <Font size="75.0"/>
             </font>

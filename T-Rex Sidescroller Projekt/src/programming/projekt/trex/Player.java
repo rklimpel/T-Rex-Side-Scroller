@@ -9,7 +9,7 @@ import java.util.TimerTask;
 public class Player extends GameObject {
 
     //players messurements
-    final int defaultHeight = 80;
+    final int defaultHeight = 40;
     final int defaultWidth = 40;
 
     //default y positon of the player

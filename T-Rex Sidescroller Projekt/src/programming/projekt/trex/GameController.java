@@ -195,21 +195,6 @@ public class GameController {
     }
 
     public void loadCustomFont(){
-
-        try{
-            String currentFontFile = "./fonts/game_over.ttf";
-            InputStream fontStream = GameController.class.getResourceAsStream(currentFontFile);
-            if (fontStream != null) {
-                customScoreFont = Font.loadFont(fontStream, 200);
-                fontStream.close();
-
-
-            } else {
-                throw new IOException("Could not create font: " + currentFontFile);
-            }
-        }catch(Exception e){
-
-        }
-
+        customScoreFont = Helper.loadFont();
     }
 }

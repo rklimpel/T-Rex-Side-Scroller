@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 
@@ -17,6 +18,8 @@ public class EndController {
 
     @FXML
     Label lbl_endscore;
+    @FXML
+    Label lbl_gameover;
 
     EndView endView;
 
@@ -26,6 +29,9 @@ public class EndController {
             @Override
             public void run() {
                 lbl_endscore.setText("Endscore: " + score);
+                Font customFont = Helper.loadFont();
+                lbl_gameover.setFont(customFont);
+                lbl_endscore.setFont(customFont);
             }
         });
 
