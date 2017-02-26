@@ -43,7 +43,7 @@ public class Player extends GameObject {
     //Jump Configuration: Formula Data
     final double gravitation = R.playerGravitation;
     //optium:20
-    final double jumpSpeed = R.playerJumpSpeed;
+    double jumpSpeed = R.playerJumpSpeed;
 
 
     public Player(int paneWidth, int paneHeight) {
@@ -100,8 +100,15 @@ public class Player extends GameObject {
 
                     isJumping = true;
 
+                   /* if(y==paneHeight - defaultHeight&&isCrouching){
+                        jumpSpeed=R.crouchingPlayerJumpSpeed;
+                        System.out.println("crouchjump");
+                    }*/
+
+
                     //Calculate the new y value for the player (senkrechter Wurf)
                     setY(paneHeight - (int) ((jumpSpeed * jumpTime - (gravitation / 2) * Math.pow(jumpTime, 2)) + defaultHeight + 1));
+
 
                     if (playerRotation) {
                         rotation += rotationPerTick;
@@ -123,6 +130,13 @@ public class Player extends GameObject {
 
         isCrouching = true;
 
+
+        //if player is crouching and not jumping then you jump not as high
+        if (!isJumping) {
+            jumpSpeed = R.crouchingPlayerJumpSpeed;
+          System.out.println("crouchjump");
+        }
+
         //System.out.print("Crouch");
     }
 
@@ -134,6 +148,12 @@ public class Player extends GameObject {
         height = defaultHeight;
         yOffset = 0;
         isCrouching = false;
+        //lower jumping ends if player is on ground and crouching is over
+        if (!isJumping) {
+            jumpSpeed = R.playerJumpSpeed;
+            System.out.println("not crouchjump");
+        }
+
 
         //System.out.println("Crouch Released");
     }

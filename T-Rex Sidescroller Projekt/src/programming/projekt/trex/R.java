@@ -23,6 +23,8 @@ public class R {
     public static final int playerJumpTimerDelay = 10;
     public static final double playerGravitation = 20;
     public static final double playerJumpSpeed = 80;
+    public static final double crouchingPlayerJumpSpeed = 50;
+
 
     //Aktivate and deaktivate player jump rotation:
     public static final Boolean playerRotation = false;
