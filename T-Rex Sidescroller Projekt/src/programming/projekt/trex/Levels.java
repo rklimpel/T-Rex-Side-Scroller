@@ -171,7 +171,11 @@ public class Levels {
     public void setRandomLvl(){
 
         if(levelList.size()!=0){
-            activeLvl = rn.nextInt(levelList.size()) + 0;
+            if(R.onlyLvl==R.EMPTY){
+                activeLvl = rn.nextInt(levelList.size()) + 0;
+            }else{
+                activeLvl = R.onlyLvl;
+            }
         }else{
             activeLvl = R.EMPTY;
         }

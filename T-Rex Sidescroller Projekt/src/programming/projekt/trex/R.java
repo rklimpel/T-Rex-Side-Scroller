@@ -50,7 +50,13 @@ public class R {
 
     public static final int EMPTY = -1;
 
+    //Path to Levels File
     public static final String levelsPath = "./src/programming/projekt/trex/levels.txt";
+
+    /** Developer Debugging Helpers **/
+
+    //Only play one lvl (-1 = normal game)
+    public static final int onlyLvl = -1;
 
 
 

@@ -70,6 +70,18 @@ gap=35|type=0|y=0
 ---
 
 #id=lvl7
+gap=10|type=0|y=50
+gap=5|type=0|y=50
+gap=5|type=0|y=50
+gap=300|type=0|y=0
+gap=220|type=0|y=0
+gap=300|type=0|y=10
+gap=250|type=0|y=0
+gap=0|type=0|y=250
+gap=220|type=0|y=0
+gap=240|type=0|y=60
+---
+#id=lvl7
 gap=10|type=0|y=0
 gap=190|type=0|y=0
 gap=10|type=0|y=0
