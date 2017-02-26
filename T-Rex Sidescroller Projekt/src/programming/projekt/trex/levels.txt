@@ -89,7 +89,7 @@ gap=10|type=0|y=0
 gap=300|type=0|y=0
 gap=10|type=0|y=0
 gap=360|type=0|y=0
-gap=170|type=0|y=0
+gap=190|type=0|y=0
 gap=10|type=0|y=0
 gap=10|type=0|y=0
 ---
@@ -111,4 +111,27 @@ gap=10|type=0|y=0
 gap=10|type=0|y=0
 gap=90|type=0|y=0
 ---
+//crouching
+#id=lvl11
+gap=10|type=0|y=0
+gap=170|type=0|y=50
+gap=400|type=0|y=0
+gap=40 |type=0|y=160
+---
+
+#id=lvl12
+gap=10|type=0|y=0
+gap=170|type=0|y=50
+---
+
+#id=lvl13
+gap=10|type=0|y=0
+gap=170|type=0|y=50
+gap=400|type=0|y=50
+gap=200|type=0|y=0
+---
+
+
+
+
 
