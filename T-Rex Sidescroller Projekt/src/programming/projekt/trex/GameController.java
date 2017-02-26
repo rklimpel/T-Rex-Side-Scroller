@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -27,6 +28,8 @@ public class GameController {
     Button btn_backToMenu;
     @FXML
     Pane pane;
+    @FXML
+    BorderPane background;
 
     Rectangle rectangle;
 

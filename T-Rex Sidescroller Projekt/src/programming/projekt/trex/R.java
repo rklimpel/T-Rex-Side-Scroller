@@ -3,6 +3,7 @@ package programming.projekt.trex;
 import javafx.scene.paint.Color;
 
 /**
+ * Global Constants for Game Configuration
  */
 public class R {
 
@@ -21,6 +22,7 @@ public class R {
     public static final double playerJumpSpeed = 80;
 
     //Aktivate and deaktivate player jump rotation:
+    public static final Boolean playerRotation = false;
 
     //How far the Player roates on one jump:
     //0.5 = 180° ; 1 = 360° ... 0.5 steps

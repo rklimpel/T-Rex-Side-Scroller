@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.io.IOException;
@@ -20,6 +22,8 @@ public class EndController {
     Label lbl_endscore;
     @FXML
     Label lbl_gameover;
+    @FXML
+    GridPane background;
 
     EndView endView;
 
@@ -32,6 +36,9 @@ public class EndController {
                 Font customFont = Helper.loadFont();
                 lbl_gameover.setFont(customFont);
                 lbl_endscore.setFont(customFont);
+                lbl_endscore.setTextFill(Color.WHITE);
+                lbl_gameover.setTextFill(Color.WHITE);
+                background.setStyle("-fx-background-color: #000000;");
             }
         });
 
