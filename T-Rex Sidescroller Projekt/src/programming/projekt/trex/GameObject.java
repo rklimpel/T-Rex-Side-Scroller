@@ -1,6 +1,7 @@
 package programming.projekt.trex;
 
-import java.awt.*;
+
+import javafx.scene.paint.Color;
 
 /**
  * Created by janek on 24.02.2017.

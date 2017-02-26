@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
@@ -139,6 +140,9 @@ public class GameController {
                         gameModel.player.getY(),
                         gameModel.player.getWidth(),
                         gameModel.player.getHeight());
+
+                rectangle.setRotate(gameModel.player.rotation);
+                rectangle.setFill(gameModel.player.getColor());
 
                 pane.getChildren().add(rectangle);
 

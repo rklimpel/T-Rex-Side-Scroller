@@ -1,5 +1,7 @@
 package programming.projekt.trex;
 
+import javafx.scene.paint.Color;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -11,6 +13,11 @@ public class Player extends GameObject {
     //players messurements
     final int defaultHeight = 40;
     final int defaultWidth = 40;
+
+    double rotation;
+
+    double jumpAllTime;
+    double rotationPerTick;
 
     //default y positon of the player
     int defaultY;
@@ -45,12 +52,20 @@ public class Player extends GameObject {
 
         defaultY = y;
 
+        rotation = 0;
+
+        color = Color.RED;
+
     }
 
     /**
      * do the JUMP
      */
     public void jump() {
+
+        jumpAllTime = jumpSpeed/gravitation;
+        System.out.println(jumpAllTime);
+        rotationPerTick = 360/jumpAllTime/40.6;
 
         timer_jump = new Timer();
         TimerTask task = new TimerTask() {
@@ -62,6 +77,8 @@ public class Player extends GameObject {
                     setY(defaultY);
                     stopJumpTimer();
                     jumpTime = 0;
+
+                    rotation = 0;
                     //System.out.println("jump's over");
 
                 //Else calculate the new Players y coordinate
@@ -74,6 +91,8 @@ public class Player extends GameObject {
                     //System.out.println("jump before y: " + getY());
                     setY(paneHeight-(int)((jumpSpeed *jumpTime-(gravitation/2)*Math.pow(jumpTime,2))+height+1));
                     //System.out.println("jump after y: " + getY());
+
+                    rotation += rotationPerTick;
                 }
             }
         };
