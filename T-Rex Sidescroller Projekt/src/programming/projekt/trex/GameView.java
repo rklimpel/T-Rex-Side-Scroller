@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 
 import java.awt.*;
 import java.io.IOException;
@@ -49,6 +50,13 @@ public class GameView {
             @Override
             public void handle(javafx.scene.input.KeyEvent event) {
                 gameController.KeyEventHandler(event);
+            }
+        });
+
+        Main.stage.getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                gameController.KeyReleasedHandler(event);
             }
         });
 

@@ -13,6 +13,8 @@ public class GameObject {
     int x;
     int y;
 
+    int yOffset;
+
     Color color;
 
     int paneWidth;
@@ -69,7 +71,7 @@ public class GameObject {
     }
 
     public int getY() {
-        return y;
+        return y + yOffset;
     }
 
     public void setWidth(int width) {
@@ -85,6 +87,7 @@ public class GameObject {
     }
 
     public void setY(int y) {
+
         this.y = y;
     }
 }

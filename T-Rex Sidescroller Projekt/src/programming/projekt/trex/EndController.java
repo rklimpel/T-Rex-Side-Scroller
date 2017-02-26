@@ -45,7 +45,7 @@ public class EndController {
     }
 
     public void keyEventHandler(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.SPACE) {
+        if (event.getCode() == KeyCode.ENTER) {
             new GameView();
         }
         if (event.getCode() == KeyCode.ESCAPE) {

@@ -3,6 +3,7 @@ package programming.projekt.trex;
 import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
 import javafx.application.Platform;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Font;
 
+import javax.swing.event.DocumentEvent;
 import java.io.*;
 
 
@@ -107,6 +109,11 @@ public class GameController {
                 startMenu();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }else if(event.getCode() == KeyCode.CONTROL){
+            if(event.getEventType() == KeyEvent.KEY_PRESSED){
+                gameModel.player.crouch();
+                System.out.println("crouch");
             }
         }
         //create Obstacles with o
@@ -207,5 +214,12 @@ public class GameController {
 
     public void loadCustomFont(){
         customScoreFont = Helper.loadFont();
+    }
+
+    public void KeyReleasedHandler(KeyEvent event) {
+        if(event.getCode() == KeyCode.CONTROL){
+            gameModel.player.crouchEnd();
+            System.out.println("crouch released");
+        }
     }
 }
