@@ -197,9 +197,9 @@ public class GameModel {
             lvlPause = true;
             lvlIndex = 0;
 
-            System.out.println("obstacle timer: " + obstacleTimer);
-            System.out.println("lvl index " + lvlIndex);
-            System.out.println("pause: " + lvlPause +"\n");
+            //System.out.println("obstacle timer: " + obstacleTimer);
+            //System.out.println("lvl index " + lvlIndex);
+            //System.out.println("pause: " + lvlPause +"\n");
         }
 
         //if Obstacle Timer is down and there is a active lvl fire a new Obstacle

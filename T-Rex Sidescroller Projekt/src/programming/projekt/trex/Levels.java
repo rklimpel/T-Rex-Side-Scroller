@@ -1,5 +1,6 @@
 package programming.projekt.trex;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,26 +13,93 @@ public class Levels {
 
     Random rn = new Random();
 
-    //Lvl Arrays
-    int[] lvl0 = {300, 300, 300, 300, 300, 300, 300, 300}; // gleiche abstände
-    int[] lvl1 = {10, 10, 10, 400, 10, 10}; // zwei dreierblöcke
-    int[] lvl2 = {10, 10, 300, 10, 300, 10, 300, 10}; // drei zweierblöcke
-    int[] lvl3 = {400, 10, 400, 350, 300, 250, 230, 10}; //nice one
-    int[] lvl4 = {10,400,10,10,10,400,10,200};
-    int[] lvl5 = {500, 10, 200,10};
-    int[] lvl6 = {10,200,250,300,350,400,35,220,35};
-
     int activeLvl = R.EMPTY;
 
     public Levels() {
+        loadLevelsFromFile();
+    }
 
-        levelList.add(lvl0);
-        levelList.add(lvl1);
-        levelList.add(lvl2);
-        levelList.add(lvl3);
-        levelList.add(lvl4);
-        levelList.add(lvl5);
-        levelList.add(lvl6);
+    private void loadLevelsFromFile() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                Helper helper = new Helper();
+
+                String levelData = null;
+
+                try{
+                    levelData = helper.readFile(R.levelsPath);
+                }catch (IOException e){
+                    System.out.println("Error while lvl reading: " + e);
+                }
+
+                int savedLevels=0;
+                String[] levelLines = levelData.split("\n");
+                for (int i = 0; i < levelLines.length; i++) {
+                    if(levelLines[i].contains("#")){
+                        savedLevels+=1;
+                    }
+                    if(levelLines[i].trim().equals("")){
+                        levelLines[i] = levelLines[i] + "//";
+                    }
+                }
+
+                int[] lvlLength = new int[savedLevels];
+                int checklvl = -1;
+                for (int i = 0; i < levelLines.length; i++) {
+                    if(levelLines[i].contains("#")){
+                        checklvl += 1;
+                    }else if(!levelLines[i].contains("---") && !levelLines[i].contains("//")){
+                        lvlLength[checklvl] += 1;
+                    }
+                }
+
+                System.out.println("saved levels: " + savedLevels);
+                System.out.println("lvl0 length: " + lvlLength[0]);
+                System.out.println("lvl1 length: " + lvlLength[1]);
+
+                int[][] lvl = new int[3][levelLines.length];
+
+                checklvl = 0;
+                int lvlIndex = 0;
+
+                for (int i = 0; i < levelLines.length; i++) {
+
+                    if(levelLines[i].contains("#")){
+
+                        lvl = new int[3][lvlLength[checklvl]];
+                        checklvl+=1;
+                        lvlIndex = 0;
+
+                    }else if(levelLines[i].contains("---")){
+
+                        levelList.add(lvl[0]);
+
+                    }else if (!levelLines[i].contains("//")){
+
+                        String[] values = new String[3];
+                        values = levelLines[i].split("\\|");
+
+                        //Load LVL Object Gaps
+                        lvl[0][lvlIndex] = Integer.parseInt(Helper.extractDigits(values[0]));
+
+                        //Load LVL Objects Types
+                        if(values.length>=2 && values[1]!=null){
+                            lvl[1][lvlIndex] = Integer.parseInt(Helper.extractDigits(values[1]));
+                        }
+
+                        //Load LVL Object Y Coordinates
+                        if(values.length>=3 && values[2]!=null){
+                            lvl[2][lvlIndex] = Integer.parseInt(Helper.extractDigits(values[2]));
+                        }
+
+                        lvlIndex+=1;
+                    }
+                }
+            }
+        }).start();
 
     }
 
@@ -76,6 +144,13 @@ public class Levels {
         }
 
         System.out.println("lvl loaded: " + activeLvl);
+
+        for (int i = 0; i < levelList.get(activeLvl).length; i++) {
+            System.out.print(levelList.get(activeLvl)[i] + ",");
+        }
+
+        System.out.println();
+
     }
 
 }
