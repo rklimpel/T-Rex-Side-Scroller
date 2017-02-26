@@ -19,39 +19,51 @@ public class Levels {
         loadLevelsFromFile();
     }
 
+    /**
+     * Get Levels from File and load them into levellist array
+     */
     private void loadLevelsFromFile() {
 
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                Helper helper = new Helper();
-
+                //Load long String of all Level Data from file
                 String levelData = null;
-
                 try{
-                    levelData = helper.readFile(R.levelsPath);
+                    levelData = Helper.readFile(R.levelsPath);
                 }catch (IOException e){
                     System.out.println("Error while lvl reading: " + e);
                 }
 
-                int savedLevels=0;
+                //Levellines Array holds Level Data, splitted in lines
                 String[] levelLines = levelData.split("\n");
+
+                //Check String for saved levels and store the number of saved levels
+                //Also disable empty lines by setting them to a comment
+                int savedLevels=0;
                 for (int i = 0; i < levelLines.length; i++) {
+
+                    //LvL is stored with an '#' before it so this is the sign for a new lvl
                     if(levelLines[i].contains("#")){
                         savedLevels+=1;
                     }
+                    //if a Line is Empty put the comment marker inside it
                     if(levelLines[i].trim().equals("")){
                         levelLines[i] = levelLines[i] + "//";
                     }
                 }
 
+                //Check Level Length for every level
                 int[] lvlLength = new int[savedLevels];
                 int checklvl = -1;
                 for (int i = 0; i < levelLines.length; i++) {
+                    //If read id lvl start marker go to next lvl
                     if(levelLines[i].contains("#")){
                         checklvl += 1;
-                    }else if(!levelLines[i].contains("---") && !levelLines[i].contains("//")){
+                    }
+                    //Every line that is not lvl end or comment is a lvl line
+                    else if(!levelLines[i].contains("---") && !levelLines[i].contains("//")){
                         lvlLength[checklvl] += 1;
                     }
                 }
@@ -60,9 +72,12 @@ public class Levels {
                 System.out.println("lvl0 length: " + lvlLength[0]);
                 System.out.println("lvl1 length: " + lvlLength[1]);
 
-                int[][] lvl = new int[3][levelLines.length];
 
+                //Saves the Data for one lvl
+                int[][] lvl = null;
+                //remembers which lvl we are watching
                 checklvl = 0;
+                //counts up wich obstacle for the lvl we're watching
                 int lvlIndex = 0;
 
                 for (int i = 0; i < levelLines.length; i++) {
@@ -75,10 +90,16 @@ public class Levels {
 
                     }else if(levelLines[i].contains("---")){
 
+                        //add the lvl we read to Level class LevelList Array
                         levelList.add(lvl[0]);
 
                     }else if (!levelLines[i].contains("//")){
 
+                        //at this point we are looking on one lvl data line
+                        //and split it into the different values
+                        //on 0 we find the gap value
+                        //on 1 we find the type value
+                        //on 2 we find the y value
                         String[] values = new String[3];
                         values = levelLines[i].split("\\|");
 
