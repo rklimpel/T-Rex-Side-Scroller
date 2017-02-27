@@ -33,6 +33,8 @@ public class GameController {
     @FXML
     BorderPane background;
 
+    Label lbl_hints = new Label("Press Space to Jump \n Press Strg to Crouch ");
+
     Rectangle rectangle;
 
     //Remember related mvc classes
@@ -44,7 +46,11 @@ public class GameController {
     public GameController() {
         this.gameModel = new GameModel(this);
         loadCustomFont();
+        //creates the hints at when is called and space isn't pressed yet
+        showhints();
+
     }
+
 
     /**
      * Leave Game, quit every running things and go back to Menu
@@ -57,7 +63,7 @@ public class GameController {
 
     /**
      * Go Back the menu (exit Game)
-     *
+     * <p>
      * switches to Menu scene and stops the game Timer
      *
      * @throws IOException
@@ -83,17 +89,19 @@ public class GameController {
 
                 gameModel.createPlayer();
                 gameModel.startGameTimer();
+                // the hints vanish if game starts
+                deleteHints();
 
             }
             //IF the Game is over (collision) space switches to menu
-            else if (!gameModel.gameTimerEnabled && gameModel.gameOver){
+            else if (!gameModel.gameTimerEnabled && gameModel.gameOver) {
 
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        try{
+                        try {
                             new EndView(gameModel.score);
-                        }catch (IOException e){
+                        } catch (IOException e) {
                             System.out.println("somehting failed...");
                         }
 
@@ -102,19 +110,19 @@ public class GameController {
 
             }
             //else space is there to jump
-            else{
+            else {
                 gameModel.jump();
             }
 
-        //On Escape Pressed:
-        }else if(event.getCode() == KeyCode.ESCAPE){
+            //On Escape Pressed:
+        } else if (event.getCode() == KeyCode.ESCAPE) {
             try {
                 startMenu();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else if(event.getCode() == KeyCode.CONTROL){
-            if(event.getEventType() == KeyEvent.KEY_PRESSED){
+        } else if (event.getCode() == KeyCode.CONTROL) {
+            if (event.getEventType() == KeyEvent.KEY_PRESSED) {
                 gameModel.player.crouch();
             }
         }
@@ -164,15 +172,15 @@ public class GameController {
 
                 //Add Score Label to Pane
                 Label label = new Label();
-                label.setFont(new Font("Arial",50));
+                label.setFont(new Font("Arial", 50));
                 label.setText("Score: " + gameModel.score);
                 label.setFont(customScoreFont);
 
                 FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
                 float labelWidth = fontLoader.computeStringWidth(label.getText(), label.getFont());
 
-                label.setLayoutX((pane.getWidth()/2)-labelWidth/2);
-                label.setLayoutY(pane.getHeight()/5);
+                label.setLayoutX((pane.getWidth() / 2) - labelWidth / 2);
+                label.setLayoutY(pane.getHeight() / 5);
 
                 pane.getChildren().add(label);
 
@@ -195,8 +203,8 @@ public class GameController {
      *
      * @return
      */
-    public int getPaneHeight(){
-        if(pane!=null){
+    public int getPaneHeight() {
+        if (pane != null) {
             return (int) pane.getHeight();
         }
         return 0;
@@ -207,20 +215,56 @@ public class GameController {
      *
      * @return
      */
-    public int getPaneWidth(){
-        if(pane!=null){
-            return (int)pane.getWidth();
+    public int getPaneWidth() {
+        if (pane != null) {
+            return (int) pane.getWidth();
         }
         return 0;
     }
 
-    public void loadCustomFont(){
+    public void loadCustomFont() {
         customScoreFont = Helper.loadFont(200);
     }
 
     public void KeyReleasedHandler(KeyEvent event) {
-        if(event.getCode() == KeyCode.CONTROL){
+        if (event.getCode() == KeyCode.CONTROL) {
             gameModel.player.crouchEnd();
         }
     }
+
+    /**
+     * hides the hints when game is running
+     */
+    public void deleteHints() {
+        lbl_hints.setVisible(false);
+    }
+
+    /**
+     * creates hints at the beginning of the game and centers it
+     */
+    public void create_Hints(){
+        lbl_hints.setFont(Helper.loadFont(100));
+        FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
+        float  btn_hintsWidth = fontLoader.computeStringWidth(lbl_hints.getText(), lbl_hints.getFont());
+        lbl_hints.setVisible(true);
+
+        lbl_hints.setLayoutX((pane.getWidth() / 2) - btn_hintsWidth /2 /2);
+        lbl_hints.setLayoutY(pane.getHeight()/5);
+    }
+
+    /**
+     * shows hints and creates them
+     */
+    private void showhints() {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                create_Hints();
+                pane.getChildren().addAll(lbl_hints);
+            }
+        });
+
+    }
+
 }
