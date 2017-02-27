@@ -235,7 +235,7 @@ public class GameController {
         Rectangle rectangle = new Rectangle();
         rectangle.relocate(0,pane.getHeight()-R.groundLvL);
         rectangle.setWidth(pane.getWidth());
-        rectangle.setHeight(2);
+        rectangle.setHeight(R.groundSize);
 
         pane.getChildren().addAll(rectangle);
     }
@@ -277,8 +277,8 @@ public class GameController {
         for (int i = 0; i < gameModel.obstacles.size(); i++) {
 
             rectangle = new Rectangle(
-                    gameModel.obstacles.get(i).x,
-                    gameModel.obstacles.get(i).y,
+                    gameModel.obstacles.get(i).getX(),
+                    gameModel.obstacles.get(i).getY(),
                     gameModel.obstacles.get(i).width,
                     gameModel.obstacles.get(i).height);
 

@@ -100,7 +100,7 @@ public class GameModel {
 
         if (!player.isJumping) {
             player.jump();
-        }else if(paneHeight - player.getY() <= player.getHeight()/2+player.getHeight()){
+        }else if(paneHeight- R.groundLvL - player.getY() <= player.getHeight()/2+player.getHeight()){
             jumpWaiting = true;
         }
     }

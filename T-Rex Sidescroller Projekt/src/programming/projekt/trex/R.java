@@ -52,7 +52,10 @@ public class R {
     public static final Boolean gameobjectsAsImages = true;
 
     //Ground lvl, offset of all gameobjects from pane bottom
-    public static final int groundLvL = 60;
+    public static final int groundLvL = 50;
+
+    //Ground Height
+    public static final int groundSize = 1;
 
     /** Helper Consants **/
 
