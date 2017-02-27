@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 import java.awt.*;
 import java.io.IOException;
@@ -46,9 +47,9 @@ public class GameView {
         //Main.stage.setFullScreen(true);
 
         //Set Key Listener to the whole Scene and pass it to Game Controllers KeyEventHandler Method
-        Main.stage.getScene().setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() {
+        Main.stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
-            public void handle(javafx.scene.input.KeyEvent event) {
+            public void handle(KeyEvent event) {
                 gameController.KeyEventHandler(event);
             }
         });
@@ -57,6 +58,18 @@ public class GameView {
             @Override
             public void handle(KeyEvent event) {
                 gameController.KeyReleasedHandler(event);
+            }
+        });
+        Main.stage.getScene().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                gameController.MouseEventHandler(event);
+            }
+        });
+       Main.stage.getScene().setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                gameController.MouseClickReleased(event);
             }
         });
 
