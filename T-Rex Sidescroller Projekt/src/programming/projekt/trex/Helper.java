@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class Helper {
 
-    public static Font loadFont(){
+    public static Font loadFont(int size){
 
         Font returnFont = null;
 
@@ -22,7 +22,7 @@ public class Helper {
             String currentFontFile = "./fonts/game_over.ttf";
             InputStream fontStream = GameController.class.getResourceAsStream(currentFontFile);
             if (fontStream != null) {
-                returnFont = Font.loadFont(fontStream, 200);
+                returnFont = Font.loadFont(fontStream, size);
                 fontStream.close();
 
 

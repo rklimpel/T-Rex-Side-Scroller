@@ -215,7 +215,7 @@ public class GameController {
     }
 
     public void loadCustomFont(){
-        customScoreFont = Helper.loadFont();
+        customScoreFont = Helper.loadFont(200);
     }
 
     public void KeyReleasedHandler(KeyEvent event) {
