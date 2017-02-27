@@ -13,6 +13,8 @@ public class GameObject {
     int x;
     int y;
 
+    int groundLvl = R.groundLvL;
+
     //yOffset for crouching player (else he would fly...)
     int yOffset;
 
@@ -72,7 +74,7 @@ public class GameObject {
     }
 
     public int getY() {
-        return y + yOffset;
+        return y + yOffset - groundLvl;
     }
 
     public void setWidth(int width) {

@@ -224,21 +224,20 @@ public class GameController {
 
                 //Add Score Label to Pane
                 addScoreLabelToPane();
-                
-                //Add Score Label to Pane
-                Label label = new Label();
-                label.setFont(new Font("Arial", 50));
-                label.setText("Score: " + gameModel.score);
-                label.setFont(customScoreFont);
 
-                FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
-                float labelWidth = fontLoader.computeStringWidth(label.getText(), label.getFont());
-                
-                label.setLayoutX((pane.getWidth() / 2) - labelWidth / 2);
-                label.setLayoutY(pane.getHeight() / 5);
-
+                //Add One Big Ground
+                addGroundToPane();
             }
         });
+    }
+
+    private void addGroundToPane() {
+        Rectangle rectangle = new Rectangle();
+        rectangle.relocate(0,pane.getHeight()-R.groundLvL);
+        rectangle.setWidth(pane.getWidth());
+        rectangle.setHeight(2);
+
+        pane.getChildren().addAll(rectangle);
     }
 
     private void addImageObastaclesToPane() {

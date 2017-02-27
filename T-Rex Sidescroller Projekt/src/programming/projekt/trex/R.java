@@ -51,6 +51,9 @@ public class R {
     //Load Rectangles or Images for Gameplay
     public static final Boolean gameobjectsAsImages = true;
 
+    //Ground lvl, offset of all gameobjects from pane bottom
+    public static final int groundLvL = 60;
+
     /** Helper Consants **/
 
     //Empty INT
