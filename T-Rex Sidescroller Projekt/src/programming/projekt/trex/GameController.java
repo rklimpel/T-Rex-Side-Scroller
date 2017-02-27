@@ -133,7 +133,7 @@ public class GameController {
                 });
             }
             //else space is there to jump
-            else {
+            else if(gameModel.gameTimerEnabled){
                 gameModel.jump();
             }
 
@@ -396,5 +396,4 @@ public class GameController {
         });
 
     }
-
 }
