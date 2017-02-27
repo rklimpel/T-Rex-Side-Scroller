@@ -128,10 +128,8 @@ public class GameController {
                         } catch (IOException e) {
                             System.out.println("somehting failed...");
                         }
-
                     }
                 });
-
             }
             //else space is there to jump
             else {
@@ -189,6 +187,9 @@ public class GameController {
                 label.setFont(new Font("Arial", 50));
                 label.setText("Score: " + gameModel.score);
                 label.setFont(customScoreFont);
+
+                FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
+                float labelWidth = fontLoader.computeStringWidth(label.getText(), label.getFont());
                 
                 label.setLayoutX((pane.getWidth() / 2) - labelWidth / 2);
                 label.setLayoutY(pane.getHeight() / 5);
@@ -200,7 +201,6 @@ public class GameController {
     private void addImageObastaclesToPane() {
 
         for (int i = 0; i < gameModel.obstacles.size(); i++) {
-
 
             imageView_obstacle = new ImageView();
             imageView_obstacle.setImage(imageObstacle);
