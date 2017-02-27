@@ -21,7 +21,7 @@ import javafx.scene.text.Font;
 
 import java.io.*;
 
-import static com.apple.eio.FileManager.getResource;
+
 
 
 /**
