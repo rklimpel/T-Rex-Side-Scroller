@@ -38,7 +38,7 @@ public class EndView {
 
         Scene scene = new Scene(root, EndWidth, EndHeigth);
         Main.stage.setScene(scene);
-        centerFrame();
+        //centerFrame();
         Main.stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(javafx.scene.input.KeyEvent event) {

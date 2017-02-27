@@ -107,14 +107,8 @@ public class Player extends GameObject {
 
                     isJumping = true;
 
-                   /* if(y==paneHeight - defaultHeight&&isCrouching){
-                        jumpSpeed=R.crouchingPlayerJumpSpeed;
-                        System.out.println("crouchjump");
-                    }*/
-
-
                     //Calculate the new y value for the player (senkrechter Wurf)
-                    setY(paneHeight - (int) ((jumpSpeed * jumpTime - (gravitation / 2) * Math.pow(jumpTime, 2)) + defaultHeight + 1));
+                    setY(paneHeight - (int) ((jumpSpeed * jumpTime -(gravitation / 2) * Math.pow(jumpTime, 2)) + defaultHeight + 1));
 
 
                     if (playerRotation) {

@@ -48,8 +48,12 @@ public class R {
     //Game Ticks between two levels.txt:
     public static int obstaclePauseTimer = 500;
 
+    //Load Rectangles or Images for Gameplay
+    public static final Boolean gameobjectsAsImages = false;
+
     /** Helper Consants **/
 
+    //Empty INT
     public static final int EMPTY = -1;
 
     //Path to Levels File
