@@ -60,7 +60,9 @@ public class GameView {
                 gameController.KeyReleasedHandler(event);
             }
         });
-        Main.stage.getScene().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+        //Set Mouse Event Listener
+        Main.stage.getScene().setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 gameController.MouseEventHandler(event);
@@ -76,6 +78,8 @@ public class GameView {
         //Show GameScene to USer
         Main.stage.show();
     }
+
+
 
     /**
      * Centers the Window (Stage) on the users Desktop

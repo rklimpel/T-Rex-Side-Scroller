@@ -75,7 +75,6 @@ public class GameController {
             System.out.println(e);
         }
 
-
     }
 
     /**
@@ -150,13 +149,12 @@ public class GameController {
                 gameModel.player.crouch();
             }
         }
-        //create Obstacles with o
-        /*else if (event.getCode() == KeyCode.O){
-            gameModel.createObstacle();
-        }*/
     }
+
     public void MouseEventHandler (MouseEvent mouseEvent){
+
         if(mouseEvent.getButton() == MouseButton.PRIMARY){
+
             //IF Game is not over but it is not Running start the game
             if (!gameModel.gameTimerEnabled && !gameModel.gameOver) {
 
@@ -187,10 +185,17 @@ public class GameController {
                 gameModel.jump();
             }
         }
-        if(mouseEvent.getButton()== MouseButton.SECONDARY){
+        else if(mouseEvent.getButton() == MouseButton.SECONDARY){
             gameModel.player.crouch();
         }
     }
+
+    public void MouseClickReleased (MouseEvent event){
+        if(event.getButton() == MouseButton.SECONDARY){
+            gameModel.player.crouchEnd();
+        }
+    }
+
 
     /**
      * Is called on GameModel Data changes
@@ -353,14 +358,6 @@ public class GameController {
 
     public void KeyReleasedHandler(KeyEvent event) {
         if (event.getCode() == KeyCode.CONTROL) {
-            gameModel.player.crouchEnd();
-        }
-    }
-    public void MouseClickReleased (MouseEvent event){
-
-        System.out.println("released called");
-        if(event.getButton()== MouseButton.SECONDARY){
-            System.out.println("secondory release called");
             gameModel.player.crouchEnd();
         }
     }
