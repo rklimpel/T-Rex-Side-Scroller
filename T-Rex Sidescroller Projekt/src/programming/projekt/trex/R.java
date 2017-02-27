@@ -49,7 +49,7 @@ public class R {
     public static int obstaclePauseTimer = 500;
 
     //Load Rectangles or Images for Gameplay
-    public static final Boolean gameobjectsAsImages = false;
+    public static final Boolean gameobjectsAsImages = true;
 
     /** Helper Consants **/
 
@@ -63,7 +63,5 @@ public class R {
 
     //Only play one lvl (-1 = normal game)
     public static final int onlyLvl = -1;
-
-
 
 }
