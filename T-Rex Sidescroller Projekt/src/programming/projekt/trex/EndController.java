@@ -2,6 +2,7 @@ package programming.projekt.trex;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -24,8 +25,17 @@ public class EndController {
     Label lbl_gameover;
     @FXML
     GridPane background;
+    @FXML
+    Label lbl_restart;
+    @FXML
+    Button btn_restart;
+
 
     EndView endView;
+
+    public void onButtonClicked() throws IOException{
+        new GameView();
+    }
 
     public EndController() {
 
@@ -33,12 +43,19 @@ public class EndController {
             @Override
             public void run() {
                 lbl_endscore.setText("Endscore: " + score);
-                Font customFont = Helper.loadFont();
+                Font customFont = Helper.loadFont(200);
+                Font customFontsmall = Helper.loadFont(100);
                 lbl_gameover.setFont(customFont);
                 lbl_endscore.setFont(customFont);
                 lbl_endscore.setTextFill(Color.WHITE);
                 lbl_gameover.setTextFill(Color.WHITE);
                 background.setStyle("-fx-background-color: #000000;");
+
+
+                lbl_restart.setFont(customFontsmall);
+
+
+                btn_restart.setStyle("-fx-background-color: grey; -fx-text-fill: black;");
             }
         });
 
