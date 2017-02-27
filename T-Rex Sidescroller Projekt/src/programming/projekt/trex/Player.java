@@ -70,6 +70,13 @@ public class Player extends GameObject {
      */
     public void jump() {
 
+        //Other jump speed if player is couched
+        if(isCrouching){
+            jumpSpeed = R.crouchingPlayerJumpSpeed;
+        }else{
+            jumpSpeed = R.playerJumpSpeed;
+        }
+
         //System.out.print("Jump!");
 
         //Calculations for Player Rotation:
@@ -130,13 +137,6 @@ public class Player extends GameObject {
 
         isCrouching = true;
 
-
-        //if player is crouching and not jumping then you jump not as high
-        if (!isJumping) {
-            jumpSpeed = R.crouchingPlayerJumpSpeed;
-          System.out.println("crouchjump");
-        }
-
         //System.out.print("Crouch");
     }
 
@@ -148,12 +148,6 @@ public class Player extends GameObject {
         height = defaultHeight;
         yOffset = 0;
         isCrouching = false;
-        //lower jumping ends if player is on ground and crouching is over
-        if (!isJumping) {
-            jumpSpeed = R.playerJumpSpeed;
-            System.out.println("not crouchjump");
-        }
-
 
         //System.out.println("Crouch Released");
     }
