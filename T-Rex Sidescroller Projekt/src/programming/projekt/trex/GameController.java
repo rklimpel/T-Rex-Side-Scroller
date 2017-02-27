@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -131,6 +133,42 @@ public class GameController {
             gameModel.createObstacle();
         }*/
     }
+    public void MouseEventHandler (MouseEvent mouseEvent){
+        if(mouseEvent.getButton() == MouseButton.PRIMARY){
+            //IF Game is not over but it is not Running start the game
+            if (!gameModel.gameTimerEnabled && !gameModel.gameOver) {
+
+                gameModel.createPlayer();
+                gameModel.startGameTimer();
+                // the hints vanish if game starts
+                deleteHints();
+
+            }
+            //IF the Game is over (collision) space switches to menu
+            else if (!gameModel.gameTimerEnabled && gameModel.gameOver) {
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            new EndView(gameModel.score);
+                        } catch (IOException e) {
+                            System.out.println("somehting failed...");
+                        }
+
+                    }
+                });
+
+            }
+            //else primary mouse is there to jump
+            else {
+                gameModel.jump();
+            }
+        }
+        if(mouseEvent.getButton()== MouseButton.SECONDARY){
+            gameModel.player.crouch();
+        }
+    }
 
     /**
      * Is called on GameModel Data changes
@@ -228,6 +266,14 @@ public class GameController {
 
     public void KeyReleasedHandler(KeyEvent event) {
         if (event.getCode() == KeyCode.CONTROL) {
+            gameModel.player.crouchEnd();
+        }
+    }
+    public void MouseClickReleased (MouseEvent event){
+
+        System.out.println("released called");
+        if(event.getButton()== MouseButton.SECONDARY){
+            System.out.println("secondory release called");
             gameModel.player.crouchEnd();
         }
     }
