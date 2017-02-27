@@ -33,6 +33,9 @@ public class GameModel {
     //is the Timer enabled?
     Boolean gameTimerEnabled = false;
 
+    //Jump waiting
+    Boolean jumpWaiting = false;
+
     //Delay, before the timer starts
     int gameTimerOffset = R.gameTimerOffset;
     int gameTimerDelay = R.gameTimerDelay;
@@ -94,8 +97,11 @@ public class GameModel {
      * Called by Space, makes the player jump
      */
     public void jump() {
+
         if (!player.isJumping) {
             player.jump();
+        }else if(paneHeight - player.getY() <= player.getHeight()/2+player.getHeight()){
+            jumpWaiting = true;
         }
     }
 
@@ -144,6 +150,11 @@ public class GameModel {
 
         checklvl();
         checkScore();
+
+        if(jumpWaiting && !player.isJumping){
+            jump();
+            jumpWaiting = false;
+        }
 
         for (int i = 0; i < obstacles.size(); i++) {
             if (!obstacles.get(i).checkOutisde()) {
