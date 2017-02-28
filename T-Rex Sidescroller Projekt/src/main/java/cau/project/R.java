@@ -45,7 +45,7 @@ public class R {
     public static final int gameTimerOffset = 0;
     public static final int gameTimerDelay = 3;
 
-    //Game Ticks between two sample_levels.txt:
+    //Game Ticks between two sample_levels:
     public static int obstaclePauseTimer = 500;
 
     //Load Rectangles or Images for Gameplay
@@ -62,8 +62,17 @@ public class R {
     //Empty INT
     public static final int EMPTY = -1;
 
+    /** Level Things **/
+
+    //Save Lvl Configuration File Names here
+    public static final String lvl_freeTesting = "free_testing";
+    public static final String lvl_samples = "sample_levels";
+
     //Path to Levels File
-    public static final String levelsPath = "./src/main/res/leveldata/sample_levels.txt";
+    public static final String levelsPath = "./src/main/res/leveldata/";
+
+    //Chosse Wich Lvl File should be loaded
+    public static final String levelFile = lvl_samples;
 
     /** Developer Debugging Helpers **/
 

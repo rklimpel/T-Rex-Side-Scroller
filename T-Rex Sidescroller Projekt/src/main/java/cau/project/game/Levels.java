@@ -34,7 +34,7 @@ public class Levels {
                 //Load long String of all Level Data from file
                 String levelData = null;
                 try{
-                    levelData = Helper.readFile(R.levelsPath);
+                    levelData = Helper.readFile(R.levelsPath + R.levelFile);
                 }catch (IOException e){
                     System.out.println("Error while lvl reading: " + e);
                 }
