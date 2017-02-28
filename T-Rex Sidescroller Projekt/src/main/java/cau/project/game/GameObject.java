@@ -17,7 +17,7 @@ public class GameObject {
     private int groundLvl = R.groundLvL;
 
     //yOffset for crouching player (else he would fly...)
-    private int yOffset;
+    public  int yOffset;
 
     public Color color;
 
