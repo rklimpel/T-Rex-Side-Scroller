@@ -36,31 +36,28 @@ import java.io.*;
 public class GameController {
 
     //objects from FXML configuration
-    @FXML
-    Button btn_backToMenu;
-    @FXML
-    Pane pane;
-    @FXML
-    BorderPane background;
+    @FXML Button btn_backToMenu;
+    @FXML Pane pane;
+    @FXML BorderPane background;
 
-    Label lbl_hints = new Label("Press Space to Jump \n Press Strg to Crouch ");
+    private Label lbl_hints = new Label("Press Space to Jump \n Press Strg to Crouch ");
 
-    Rectangle rectangle;
+    private Rectangle rectangle;
 
-    ImageView imageView_player = new ImageView();
-    ImageView imageView_obstacle;
+    private ImageView imageView_player = new ImageView();
+    private ImageView imageView_obstacle;
 
-    Image imagePlayer = null;
-    Image imagePlayerCrouched = null;
-    Image imageObstacle = null;
+    private Image imagePlayer = null;
+    private Image imagePlayerCrouched = null;
+    private Image imageObstacle = null;
 
     //Remember related mvc classes
     private GameModel gameModel;
     private GameView gameView;
 
-    Boolean gameObjectsAsImages = R.gameobjectsAsImages;
+    private Boolean gameObjectsAsImages = R.gameobjectsAsImages;
 
-    Font customScoreFont;
+    private Font customScoreFont;
 
     public GameController() {
         this.gameModel = new GameModel(this);

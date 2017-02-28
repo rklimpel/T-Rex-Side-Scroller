@@ -12,11 +12,11 @@ import java.util.Random;
  */
 public class Levels {
 
-    ArrayList<int[][]> levelList= new ArrayList<>();
+    private ArrayList<int[][]> levelList= new ArrayList<>();
 
-    Random rn = new Random();
+    private Random rn = new Random();
 
-    int activeLvl = R.EMPTY;
+    private int activeLvl = R.EMPTY;
 
     public Levels() {
         loadLevelsFromFile();

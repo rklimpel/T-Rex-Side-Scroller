@@ -9,22 +9,23 @@ import main.java.cau.project.R;
  */
 public class GameObject {
 
-    int width;
-    int height;
-    int x;
-    int y;
+    public int width;
+    public int height;
+    public int x;
+    public int y;
 
-    int groundLvl = R.groundLvL;
+    private int groundLvl = R.groundLvL;
 
     //yOffset for crouching player (else he would fly...)
-    int yOffset;
+    private int yOffset;
 
-    Color color;
+    public Color color;
 
-    int paneWidth;
-    int paneHeight;
+    public int paneWidth;
+    public int paneHeight;
 
     public Boolean checkCollision(GameObject clasher) {
+
         if (
             //Check Callers left side is inside clasher
             ((this.getX() >= clasher.getX()
@@ -55,6 +56,7 @@ public class GameObject {
 
             return true;
         }
+
         return false;
     }
 
@@ -75,6 +77,7 @@ public class GameObject {
     }
 
     public int getY() {
+        //Add Offset and Groundlvl variables to y value
         return y + yOffset - groundLvl;
     }
 
@@ -91,7 +94,6 @@ public class GameObject {
     }
 
     public void setY(int y) {
-
         this.y = y;
     }
 }

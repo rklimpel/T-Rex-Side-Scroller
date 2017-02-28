@@ -15,57 +15,53 @@ public class GameModel {
     //LvL Index counts the positions in the lvl Array
     //after every fired obstacle lvl index += 1
     //to get the next obstacle waiting time for obstacle timer
-    int lvlIndex = 0;
+    private int lvlIndex = 0;
     //Timer set to the numbers in lvlArrays and count down with game timer.
     //On obstacle Timer 0 a object is fired
-    int obstacleTimer = 0;
+    private int obstacleTimer = 0;
     //toggled by new lvl load. Makes the first obstacle Timer countdown don't fire a obstacle
-    Boolean lvlPause = true;
+    private Boolean lvlPause = true;
     //create a lvls instance to load the lvls from
-    Levels levels = new Levels();
+    private Levels levels = new Levels();
     //level array saves the lvl arrays loaded from lvls class locally
-    int[][] levelArray;
+    private int[][] levelArray;
 
     //Counts up how often the game timer has ticked,
     //can be used to generate the complete gametime
-    int timerTick = 0;
+    private int timerTick = 0;
 
     //GameTimer von continoues moves
-    Timer gameTimer = new Timer();
+    private Timer gameTimer = new Timer();
 
     //is the Timer enabled?
-    public Boolean gameTimerEnabled = false;
+    public  Boolean gameTimerEnabled = false;
 
     //Jump waiting
-    Boolean jumpWaiting = false;
+    private Boolean jumpWaiting = false;
 
     //Delay, before the timer starts
-    int gameTimerOffset = R.gameTimerOffset;
-    int gameTimerDelay = R.gameTimerDelay;
+    private int gameTimerOffset = R.gameTimerOffset;
+    private int gameTimerDelay = R.gameTimerDelay;
     //optimum:3
 
     //The Player Object that contains to the Game
     public Player player;
 
     //Game Controller who called the GameModel, set on contsructor
-    GameController gameController;
-
-    //Save Scene Size when constructor gets called:
-    int SceneWidth;
-    int SceneHeight;
+    private GameController gameController;
 
     //Save Pane Size here when constructor gets called:
-    int paneWidth;
-    int paneHeight;
+    private int paneWidth;
+    private int paneHeight;
 
     //Remembers the Players GameScore
-    int score;
+    private int score;
 
     //if player died this will be true:
     public Boolean gameOver = false;
 
     //List off all Obstacles that are in the Game
-    ArrayList<Obstacle> obstacles = new ArrayList<>();
+    private ArrayList<Obstacle> obstacles = new ArrayList<>();
 
     /**
      * Creates a new GameModel Instance (i think there should be just one...)
