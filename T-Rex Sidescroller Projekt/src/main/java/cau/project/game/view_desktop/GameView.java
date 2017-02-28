@@ -35,9 +35,6 @@ public class GameView {
         //extract Controller from fxml configuration
         gameController = fxmlLoader.getController();
 
-        //Notify Game Controller about his caller View
-        gameController.setView(this);
-
         //Create Game Scene and put it in the stage
         Scene scene = new Scene(root, GameWidth, GameHeight);
         Main.stage.setScene(scene);

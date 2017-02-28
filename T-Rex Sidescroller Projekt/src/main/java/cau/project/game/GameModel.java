@@ -48,7 +48,7 @@ public class GameModel {
     public Player player;
 
     //Game Controller who called the GameModel, set on contsructor
-    private GameController gameController;
+    private Controller gameController;
 
     //Save Pane Size here when constructor gets called:
     private int paneWidth;

@@ -22,6 +22,7 @@ import main.java.cau.project.Helper;
 import main.java.cau.project.Main;
 import main.java.cau.project.R;
 import main.java.cau.project.end.EndView;
+import main.java.cau.project.game.Controller;
 import main.java.cau.project.game.GameModel;
 import main.java.cau.project.menu.MenuView;
 
@@ -33,7 +34,7 @@ import java.io.*;
 /**
  * Created by ricoklimpel on 23.02.17.
  */
-public class GameController {
+public class GameController extends Controller{
 
     //objects from FXML configuration
     @FXML Button btn_backToMenu;
@@ -53,7 +54,6 @@ public class GameController {
 
     //Remember related mvc classes
     private GameModel gameModel;
-    private GameView gameView;
 
     private Boolean gameObjectsAsImages = R.gameobjectsAsImages;
 
@@ -319,16 +319,6 @@ public class GameController {
         rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
 
         pane.getChildren().add(rectangle);
-    }
-
-    /**
-     * Tells the GameController about his relatted gameView.
-     * Could'nt be set in constructor because constructor is called by fxml configuration
-     *
-     * @param gameView
-     */
-    public void setView(GameView gameView) {
-        this.gameView = gameView;
     }
 
     /**
