@@ -1,8 +1,8 @@
-package programming.projekt.trex;
+package main.java.cau.project;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import programming.projekt.trex.menu.MenuView;
+import main.java.cau.project.menu.MenuView;
 
 public class Main extends Application {
 

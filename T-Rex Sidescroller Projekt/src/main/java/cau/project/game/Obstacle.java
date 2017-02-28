@@ -1,6 +1,6 @@
-package programming.projekt.trex.game;
+package main.java.cau.project.game;
 
-import programming.projekt.trex.R;
+import main.java.cau.project.R;
 
 /**
  * Created by ricoklimpel on 23.02.17.

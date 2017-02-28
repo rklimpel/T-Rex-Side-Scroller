@@ -1,4 +1,4 @@
-package programming.projekt.trex;
+package main.java.cau.project;
 
 import javafx.scene.text.Font;
 import sun.misc.IOUtils;
@@ -20,6 +20,7 @@ public class Helper {
         Font returnFont = null;
         try {
             returnFont = Font.loadFont(new FileInputStream(
+                    new File("src/main/res/fonts/game_over.ttf")), size);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

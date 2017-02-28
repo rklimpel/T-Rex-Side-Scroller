@@ -1,4 +1,4 @@
-package programming.projekt.trex.game.view_desktop;
+package main.java.cau.project.game.view_desktop;
 
 import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
@@ -18,10 +18,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Font;
-import programming.projekt.trex.*;
-import programming.projekt.trex.end.EndView;
-import programming.projekt.trex.game.GameModel;
-import programming.projekt.trex.menu.MenuView;
+import main.java.cau.project.Helper;
+import main.java.cau.project.Main;
+import main.java.cau.project.R;
+import main.java.cau.project.end.EndView;
+import main.java.cau.project.game.GameModel;
+import main.java.cau.project.menu.MenuView;
 
 import java.io.*;
 
@@ -72,9 +74,9 @@ public class GameController {
     private void loadImages() {
 
         try{
-            imagePlayer = new Image(Main.class.getResourceAsStream("./res/assets/player_mexiko.png"));
-            imagePlayerCrouched = new Image(Main.class.getResourceAsStream("./res/assets/playerCrouched_mexiko.png"));
-            imageObstacle = new Image(Main.class.getResourceAsStream("./res/assets/obstacle_mexiko.png"));
+            imagePlayer = new Image("file:src/main/res/assets/player_mexiko.png");
+            imagePlayerCrouched = new Image("file:src/main/res/assets/playerCrouched_mexiko.png");
+            imageObstacle = new Image("file:src/main/res/assets/obstacle_mexiko.png");
         }catch(Exception e){
             System.out.println(e);
         }

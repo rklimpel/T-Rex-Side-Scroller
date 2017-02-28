@@ -1,9 +1,9 @@
-package programming.projekt.trex.menu;
+package main.java.cau.project.menu;
 
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import programming.projekt.trex.game.view_desktop.GameView;
+import main.java.cau.project.game.view_desktop.GameView;
 
 import java.io.IOException;
 

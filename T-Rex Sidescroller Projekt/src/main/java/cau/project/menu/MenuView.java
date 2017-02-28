@@ -1,10 +1,10 @@
-package programming.projekt.trex.menu;
+package main.java.cau.project.menu;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import programming.projekt.trex.Main;
+import main.java.cau.project.Main;
 
 import java.awt.*;
 import java.io.IOException;

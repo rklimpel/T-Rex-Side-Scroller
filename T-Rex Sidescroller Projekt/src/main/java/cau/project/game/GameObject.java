@@ -1,8 +1,8 @@
-package programming.projekt.trex.game;
+package main.java.cau.project.game;
 
 
 import javafx.scene.paint.Color;
-import programming.projekt.trex.R;
+import main.java.cau.project.R;
 
 /**
  * Created by janek on 24.02.2017.

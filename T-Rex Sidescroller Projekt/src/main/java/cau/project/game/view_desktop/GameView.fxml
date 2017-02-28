@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="background" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programming.projekt.trex.game.view_desktop.GameController">
+<BorderPane fx:id="background" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.cau.project.game.view_desktop.GameController">
     <top>
         <Button fx:id="btn_backToMenu" focusTraversable="false" onAction="#OnClick_btn_backToMenu" text="Back to Menu" />
     </top>

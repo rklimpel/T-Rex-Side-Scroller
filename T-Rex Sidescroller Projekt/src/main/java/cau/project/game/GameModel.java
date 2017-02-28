@@ -1,7 +1,7 @@
-package programming.projekt.trex.game;
+package main.java.cau.project.game;
 
-import programming.projekt.trex.R;
-import programming.projekt.trex.game.view_desktop.GameController;
+import main.java.cau.project.R;
+import main.java.cau.project.game.view_desktop.GameController;
 
 import java.util.ArrayList;
 import java.util.Timer;

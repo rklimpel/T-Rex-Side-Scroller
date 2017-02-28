@@ -1,4 +1,4 @@
-package programming.projekt.trex;
+package main.java.cau.project;
 
 import javafx.scene.paint.Color;
 
@@ -63,7 +63,7 @@ public class R {
     public static final int EMPTY = -1;
 
     //Path to Levels File
-    public static final String levelsPath = "./src/programming/projekt/trex/leveldata/sample_levels.txt";
+    public static final String levelsPath = "./src/main/res/leveldata/sample_levels.txt";
 
     /** Developer Debugging Helpers **/
 

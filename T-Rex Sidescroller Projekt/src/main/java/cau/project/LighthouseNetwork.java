@@ -1,4 +1,4 @@
-package programming.projekt.trex;
+package main.java.cau.project;
 
 import java.io.IOException;
 import java.io.OutputStream;

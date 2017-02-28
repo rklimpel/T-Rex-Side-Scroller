@@ -1,4 +1,4 @@
-package programming.projekt.trex.game.view_desktop;
+package main.java.cau.project.game.view_desktop;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import programming.projekt.trex.Main;
+import main.java.cau.project.Main;
 
 import java.awt.*;
 import java.io.IOException;

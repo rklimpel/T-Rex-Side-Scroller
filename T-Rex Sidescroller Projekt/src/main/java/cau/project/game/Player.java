@@ -1,6 +1,6 @@
-package programming.projekt.trex.game;
+package main.java.cau.project.game;
 
-import programming.projekt.trex.R;
+import main.java.cau.project.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

@@ -1,9 +1,8 @@
-package programming.projekt.trex.game;
+package main.java.cau.project.game;
 
-import programming.projekt.trex.Helper;
-import programming.projekt.trex.R;
+import main.java.cau.project.Helper;
+import main.java.cau.project.R;
 
-import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
