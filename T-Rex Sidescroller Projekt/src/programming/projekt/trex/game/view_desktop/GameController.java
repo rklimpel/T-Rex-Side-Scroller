@@ -1,4 +1,4 @@
-package programming.projekt.trex;
+package programming.projekt.trex.game.view_desktop;
 
 import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
@@ -18,6 +18,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Font;
+import programming.projekt.trex.*;
+import programming.projekt.trex.end.EndView;
+import programming.projekt.trex.game.GameModel;
+import programming.projekt.trex.menu.MenuView;
 
 import java.io.*;
 
@@ -68,9 +72,9 @@ public class GameController {
     private void loadImages() {
 
         try{
-            imagePlayer = new Image(Main.class.getResourceAsStream("./assets/player_mexiko.png"));
-            imagePlayerCrouched = new Image(Main.class.getResourceAsStream("./assets/playerCrouched_mexiko.png"));
-            imageObstacle = new Image(Main.class.getResourceAsStream("./assets/obstacle_mexiko.png"));
+            imagePlayer = new Image(Main.class.getResourceAsStream("./res/assets/player_mexiko.png"));
+            imagePlayerCrouched = new Image(Main.class.getResourceAsStream("./res/assets/playerCrouched_mexiko.png"));
+            imageObstacle = new Image(Main.class.getResourceAsStream("./res/assets/obstacle_mexiko.png"));
         }catch(Exception e){
             System.out.println(e);
         }
@@ -125,7 +129,7 @@ public class GameController {
                     @Override
                     public void run() {
                         try {
-                            new EndView(gameModel.score);
+                            new EndView(gameModel.getScore());
                         } catch (IOException e) {
                             System.out.println("somehting failed...");
                         }
@@ -171,7 +175,7 @@ public class GameController {
                     @Override
                     public void run() {
                         try {
-                            new EndView(gameModel.score);
+                            new EndView(gameModel.getScore());
                         } catch (IOException e) {
                             System.out.println("somehting failed...");
                         }
@@ -242,14 +246,14 @@ public class GameController {
 
     private void addImageObastaclesToPane() {
 
-        for (int i = 0; i < gameModel.obstacles.size(); i++) {
+        for (int i = 0; i < gameModel.getObstacles().size(); i++) {
 
             imageView_obstacle = new ImageView();
             imageView_obstacle.setImage(imageObstacle);
-            imageView_obstacle.relocate(gameModel.obstacles.get(i).getX(),
-                    gameModel.obstacles.get(i).getY());
-            imageView_obstacle.setFitHeight(gameModel.obstacles.get(i).getHeight());
-            imageView_obstacle.setFitWidth(gameModel.obstacles.get(i).getWidth());
+            imageView_obstacle.relocate(gameModel.getObstacles().get(i).getX(),
+                    gameModel.getObstacles().get(i).getY());
+            imageView_obstacle.setFitHeight(gameModel.getObstacles().get(i).getHeight());
+            imageView_obstacle.setFitWidth(gameModel.getObstacles().get(i).getWidth());
 
             pane.getChildren().addAll(imageView_obstacle);
         }
@@ -259,7 +263,7 @@ public class GameController {
 
     private void addImagePlayerToPane(){
 
-        if(gameModel.player.isCrouching){
+        if(gameModel.player.getCrouching()){
             imageView_player.setImage(imagePlayerCrouched);
         }else{
             imageView_player.setImage(imagePlayer);
@@ -274,13 +278,13 @@ public class GameController {
     }
 
     private void addObstaclesToPane() {
-        for (int i = 0; i < gameModel.obstacles.size(); i++) {
+        for (int i = 0; i < gameModel.getObstacles().size(); i++) {
 
             rectangle = new Rectangle(
-                    gameModel.obstacles.get(i).getX(),
-                    gameModel.obstacles.get(i).getY(),
-                    gameModel.obstacles.get(i).width,
-                    gameModel.obstacles.get(i).height);
+                    gameModel.getObstacles().get(i).getX(),
+                    gameModel.getObstacles().get(i).getY(),
+                    gameModel.getObstacles().get(i).getWidth(),
+                    gameModel.getObstacles().get(i).getHeight());
 
             pane.getChildren().addAll(rectangle);
         }
@@ -289,7 +293,7 @@ public class GameController {
     private void addScoreLabelToPane() {
         Label label = new Label();
         label.setFont(new Font("Arial",50));
-        label.setText("Score: " + gameModel.score);
+        label.setText("Score: " + gameModel.getScore());
         label.setFont(customScoreFont);
 
         FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
@@ -301,6 +305,7 @@ public class GameController {
         pane.getChildren().add(label);
     }
 
+
     private void addPlayerToPane() {
         rectangle = new Rectangle(
                 gameModel.player.getX(),
@@ -308,7 +313,7 @@ public class GameController {
                 gameModel.player.getWidth(),
                 gameModel.player.getHeight());
 
-        rectangle.setRotate(gameModel.player.rotation);
+        rectangle.setRotate(gameModel.player.getRotation());
         rectangle.setFill(gameModel.player.getColor());
         rectangle.setStroke(Color.BLACK);
         rectangle.setStrokeWidth(2);

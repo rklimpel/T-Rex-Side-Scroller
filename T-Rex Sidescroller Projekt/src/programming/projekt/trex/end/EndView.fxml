@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 <GridPane fx:id="background" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="programming.projekt.trex.EndController">
+          fx:controller="programming.projekt.trex.end.EndController">
 
     <columnConstraints>
         <ColumnConstraints/>

@@ -10,7 +10,7 @@
           vgap="10"
           xmlns="http://javafx.com/javafx/8.0.111"
           xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="programming.projekt.trex.MenuController">
+          fx:controller="programming.projekt.trex.menu.MenuController">
 
     <children>
         <Button fx:id="btn_startDesktop"

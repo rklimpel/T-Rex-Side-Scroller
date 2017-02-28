@@ -16,21 +16,12 @@ public class Helper {
 
     public static Font loadFont(int size){
 
+
         Font returnFont = null;
-
-        try{
-            String currentFontFile = "./fonts/game_over.ttf";
-            InputStream fontStream = GameController.class.getResourceAsStream(currentFontFile);
-            if (fontStream != null) {
-                returnFont = Font.loadFont(fontStream, size);
-                fontStream.close();
-
-
-            } else {
-                throw new IOException("Could not create font: " + currentFontFile);
-            }
-        }catch(Exception e){
-
+        try {
+            returnFont = Font.loadFont(new FileInputStream(
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
 
         return returnFont;

@@ -2,6 +2,7 @@ package programming.projekt.trex;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import programming.projekt.trex.menu.MenuView;
 
 public class Main extends Application {
 

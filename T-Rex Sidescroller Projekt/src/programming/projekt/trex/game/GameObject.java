@@ -1,7 +1,8 @@
-package programming.projekt.trex;
+package programming.projekt.trex.game;
 
 
 import javafx.scene.paint.Color;
+import programming.projekt.trex.R;
 
 /**
  * Created by janek on 24.02.2017.

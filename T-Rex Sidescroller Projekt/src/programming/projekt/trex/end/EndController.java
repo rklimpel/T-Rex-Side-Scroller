@@ -1,4 +1,4 @@
-package programming.projekt.trex;
+package programming.projekt.trex.end;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -9,6 +9,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import programming.projekt.trex.Helper;
+import programming.projekt.trex.game.view_desktop.GameView;
+import programming.projekt.trex.menu.MenuView;
 
 import java.io.IOException;
 

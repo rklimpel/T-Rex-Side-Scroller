@@ -1,6 +1,6 @@
-package programming.projekt.trex;
+package programming.projekt.trex.game;
 
-import java.awt.*;
+import programming.projekt.trex.R;
 
 /**
  * Created by ricoklimpel on 23.02.17.

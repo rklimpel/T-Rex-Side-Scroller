@@ -45,7 +45,7 @@ public class R {
     public static final int gameTimerOffset = 0;
     public static final int gameTimerDelay = 3;
 
-    //Game Ticks between two levels.txt:
+    //Game Ticks between two sample_levels.txt:
     public static int obstaclePauseTimer = 500;
 
     //Load Rectangles or Images for Gameplay
@@ -63,7 +63,7 @@ public class R {
     public static final int EMPTY = -1;
 
     //Path to Levels File
-    public static final String levelsPath = "./src/programming/projekt/trex/levels.txt";
+    public static final String levelsPath = "./src/programming/projekt/trex/leveldata/sample_levels.txt";
 
     /** Developer Debugging Helpers **/
 

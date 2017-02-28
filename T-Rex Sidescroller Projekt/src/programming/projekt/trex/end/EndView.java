@@ -1,10 +1,11 @@
-package programming.projekt.trex;
+package programming.projekt.trex.end;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import programming.projekt.trex.Main;
 
 import java.awt.*;
 import java.io.IOException;

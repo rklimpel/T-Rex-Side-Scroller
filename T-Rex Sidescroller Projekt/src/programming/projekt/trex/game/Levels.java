@@ -1,4 +1,7 @@
-package programming.projekt.trex;
+package programming.projekt.trex.game;
+
+import programming.projekt.trex.Helper;
+import programming.projekt.trex.R;
 
 import javax.sound.midi.SysexMessage;
 import java.io.IOException;

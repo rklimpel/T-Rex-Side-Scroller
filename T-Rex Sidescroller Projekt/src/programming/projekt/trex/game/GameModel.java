@@ -1,4 +1,7 @@
-package programming.projekt.trex;
+package programming.projekt.trex.game;
+
+import programming.projekt.trex.R;
+import programming.projekt.trex.game.view_desktop.GameController;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -31,7 +34,7 @@ public class GameModel {
     Timer gameTimer = new Timer();
 
     //is the Timer enabled?
-    Boolean gameTimerEnabled = false;
+    public Boolean gameTimerEnabled = false;
 
     //Jump waiting
     Boolean jumpWaiting = false;
@@ -42,7 +45,7 @@ public class GameModel {
     //optimum:3
 
     //The Player Object that contains to the Game
-    Player player;
+    public Player player;
 
     //Game Controller who called the GameModel, set on contsructor
     GameController gameController;
@@ -59,7 +62,7 @@ public class GameModel {
     int score;
 
     //if player died this will be true:
-    Boolean gameOver = false;
+    public Boolean gameOver = false;
 
     //List off all Obstacles that are in the Game
     ArrayList<Obstacle> obstacles = new ArrayList<>();
@@ -262,4 +265,19 @@ public class GameModel {
 
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Boolean getGameOver() {
+        return gameOver;
+    }
+
+    public ArrayList<Obstacle> getObstacles() {
+        return obstacles;
+    }
 }

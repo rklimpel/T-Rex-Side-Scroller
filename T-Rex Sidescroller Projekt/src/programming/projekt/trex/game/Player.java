@@ -1,6 +1,6 @@
-package programming.projekt.trex;
+package programming.projekt.trex.game;
 
-import javafx.scene.paint.Color;
+import programming.projekt.trex.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -154,5 +154,17 @@ public class Player extends GameObject {
         timer_jump.cancel();
         timer_jump.purge();
         isJumping = false;
+    }
+
+    public Boolean getCrouching() {
+        return isCrouching;
+    }
+
+    public Boolean getJumping() {
+        return isJumping;
+    }
+
+    public double getRotation() {
+        return rotation;
     }
 }
