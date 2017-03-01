@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import main.java.cau.project.Helper;
 import main.java.cau.project.LighthouseNetwork;
 import main.java.cau.project.game.view_desktop.GameView;
 
@@ -57,7 +58,7 @@ public class MenuController {
     }
 
     public void onClick_btn_startLighthouse(){
-        Timer timer = new Timer();
+       /* Timer timer = new Timer();
         int begin = 1000; //timer starts after 1 second.
         int timeinterval = 1000; //timer executes every 10 seconds.
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -75,7 +76,13 @@ public class MenuController {
                     e.printStackTrace();
                 }
             }
-        },begin, timeinterval);
+        },begin, timeinterval);*/
+
+        try {
+            lighthouseNetwork.send(Helper.convertLighthouseImage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void KeyEventHandler(KeyEvent event) {

@@ -74,6 +74,11 @@ public class R {
     //Chosse Wich Lvl File should be loaded
     public static final String levelFile = lvl_samples;
 
+    /** Lighthouse **/
+
+    public static final int lighthouseWidth = 28;
+    public static final int lighthouseHeight = 14;
+
     /** Developer Debugging Helpers **/
 
     //Only play one lvl (-1 = normal game)

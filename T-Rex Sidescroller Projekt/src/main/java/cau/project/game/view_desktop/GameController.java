@@ -319,6 +319,7 @@ public class GameController extends Controller{
         rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
 
         pane.getChildren().add(rectangle);
+
     }
 
     /**
