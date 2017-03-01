@@ -54,7 +54,6 @@ public class GameController {
      */
     public void update() {
         for (int i = 0; i < listeningViews.size(); i++) {
-            System.out.println(listeningViews.get(i));
             listeningViews.get(i).Update();
         }
     }
