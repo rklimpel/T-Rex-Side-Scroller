@@ -1,51 +1,68 @@
 package main.java.cau.project.menu;
 
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import main.java.cau.project.Main;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import main.java.cau.project.*;
+import main.java.cau.project.services.LighthouseNetwork;
+import main.java.cau.project.services.KeyboardListener;
+import main.java.cau.project.services.SceneSwitcher;
 
-import java.awt.*;
 import java.io.IOException;
 
-/**
- * Constructor creates the Menu View and displays it to the user
- */
-public class MenuView {
 
-    int MenuWidth = 300;
-    int MenuHeight = 275;
+public class MenuView extends View {
 
-    MenuController menuController = new MenuController();
+   @FXML
+   public Button btn_startDesktop;
+   @FXML
+   public Button btn_startLighthouse;
 
-    public MenuView() throws IOException {
+   private Boolean lighthouseConnected = false;
 
+   private View view;
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
-        Parent root = fxmlLoader.load();
-        menuController = fxmlLoader.getController();
-        Scene scene = new Scene(root, MenuWidth, MenuHeight);
-        Main.stage.setScene(scene);
-        Main.stage.setTitle("T-Rex Sidescroller Game");
+   LighthouseNetwork lighthouseNetwork = new LighthouseNetwork();
 
-        Main.stage.getScene().setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() {
-            @Override
-            public void handle(javafx.scene.input.KeyEvent event) {
-                menuController.KeyEventHandler(event);
+   public MenuView() {
+
+      view = this;
+      setViewID(R.viewIdMenu);
+
+      try {
+         lighthouseNetwork.connect();
+         lighthouseConnected = true;
+      } catch (IOException e) {
+         e.printStackTrace();
+         lighthouseConnected = false;
+      }
+
+      Platform.runLater(new Runnable() {
+         @Override
+         public void run() {
+
+            new KeyboardListener(view);
+
+            if (lighthouseConnected) {
+               btn_startLighthouse.setStyle("-fx-background-color:  #4caf50;");
+            } else {
+               btn_startLighthouse.setStyle("-fx-background-color:  #f44336;");
             }
-        });
 
-        centerFrame();
-        Main.stage.show();
+         }
+      });
+   }
 
-    }
+   public void startGameDesktop() {
+      SceneSwitcher.GAME_DESKTOP.load();
+   }
 
-    private void centerFrame() {
-        // Get the size of the screen
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        // Move the window to the Center of Desktop
-        Main.stage.setX(dim.width / 2 - MenuWidth /2);
-        Main.stage.setY(dim.height / 2 - MenuHeight /2);
-    }
+   public void onClick_btn_startLighthouse() {
+      try {
+         lighthouseNetwork.send(Helper.convertLighthouseImage());
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+
 }

@@ -1,57 +1,83 @@
 package main.java.cau.project.end;
 
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
-import main.java.cau.project.Main;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import main.java.cau.project.*;
+import main.java.cau.project.services.CustomFontLoader;
+import main.java.cau.project.services.KeyboardListener;
+import main.java.cau.project.services.SceneSwitcher;
 
-import java.awt.*;
 import java.io.IOException;
 
-/**
- * Created by janek on 25.02.2017.
- */
-public class EndView {
+public class EndView extends View{
 
-    int EndWidth=1080;
-    int EndHeigth=530;
+   int score;
 
-    EndController endController;
+   @FXML
+   Label lbl_endscore;
+   @FXML
+   Label lbl_gameover;
+   @FXML
+   GridPane background;
+   @FXML
+   Label lbl_restart;
+   @FXML
+   Button btn_restart;
 
-    private void centerFrame() {
-        // Get the size of the screen
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        // Move the window to the Center of Desktop
-        Main.stage.setX(dim.width / 2 - EndWidth/2);
-        Main.stage.setY(dim.height / 2 - EndHeigth /2);
-    }
+   CustomFontLoader customFontLoader = new CustomFontLoader();
 
-    public EndView(int score)throws IOException{
+   public EndView() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EndView.fxml"));
-        Parent root = fxmlLoader.load();
-        endController = fxmlLoader.getController();
+      view = this;
+      setViewID(R.viewIdEnd);
 
-        endController.setView(this);
-        endController.setScore(score);
+      score = Helper.score;
 
-        Scene scene = new Scene(root, EndWidth, EndHeigth);
-        Main.stage.setScene(scene);
-        //centerFrame();
-        Main.stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(javafx.scene.input.KeyEvent event) {
-                try {
-                    endController.keyEventHandler(event);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        Main.stage.show();
+      Platform.runLater(new Runnable() {
+         @Override
+         public void run() {
 
-    }
+            new KeyboardListener(view);
 
+            setScoreLabel();
+            setGameoverLabel();
+            setRestartButton();
+
+            background.setStyle("-fx-background-color: #000000;");
+            lbl_restart.setFont(customFontLoader.load(R.fontPixel,100));
+         }
+      });
+   }
+
+   private void setRestartButton() {
+      btn_restart.setStyle("-fx-background-color: grey;");
+      btn_restart.setStyle("-fx-text-fill: black;");
+   }
+
+   private void setGameoverLabel() {
+      lbl_gameover.setFont(customFontLoader.load(R.fontPixel,100));
+      lbl_gameover.setTextFill(Color.WHITE);
+   }
+
+   private void setScoreLabel() {
+      lbl_endscore.setText("Endscore: " + score);
+      lbl_endscore.setFont(customFontLoader.load(R.fontPixel,100));
+      lbl_endscore.setTextFill(Color.WHITE);
+   }
+
+   public void onButtonClicked() throws IOException {
+      SceneSwitcher.GAME_DESKTOP.load();
+   }
+
+   public void restartGame() {
+      SceneSwitcher.GAME_DESKTOP.load();
+   }
+
+   public void exit(){
+      SceneSwitcher.MENU.load();
+   }
 }

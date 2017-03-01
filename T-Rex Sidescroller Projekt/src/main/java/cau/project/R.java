@@ -7,81 +7,110 @@ import javafx.scene.paint.Color;
  */
 public class R {
 
-    /** Player **/
+   /**
+    * Player
+    **/
 
-    //Players Size:
-    public static final int playerHeight = 100;
-    public static final int playerWidth = 40;
+   //Players Size:
+   public static final int playerHeight = 100;
+   public static final int playerWidth = 40;
 
-    //Players crouched size multiplikator (player height * crouchsize)
-    public static final double playerCrouchSize = 0.4;
+   //Players crouched size multiplikator (player height * crouchsize)
+   public static final double playerCrouchSize = 0.4;
 
-    //Player Color:
-    public static final Color playerColor = Color.RED;
+   //Player Color:
+   public static final Color playerColor = Color.RED;
 
-    //Player's Jump configuration
-    public static final int playerJumpTimerDelay = 10;
-    public static final double playerGravitation = 20;
-    public static final double playerJumpSpeed = 80;
-    public static final double crouchingPlayerJumpSpeed = 50;
+   //Player's Jump configuration
+   public static final int playerJumpTimerDelay = 10;
+   public static final double playerGravitation = 20;
+   public static final double playerJumpSpeed = 80;
+   public static final double crouchingPlayerJumpSpeed = 50;
 
 
-    //Aktivate and deaktivate player jump rotation:
-    public static final Boolean playerRotation = false;
+   //Aktivate and deaktivate player jump rotation:
+   public static final Boolean playerRotation = false;
 
-    //How far the Player roates on one jump:
-    //0.5 = 180° ; 1 = 360° ... 0.5 steps
-    public static final double playerJumpRotation = 0.5;
+   //How far the Player roates on one jump:
+   //0.5 = 180° ; 1 = 360° ... 0.5 steps
+   public static final double playerJumpRotation = 0.5;
 
-    /** Obstacle **/
+   /**
+    * Obstacle
+    **/
 
-    //Obstacle Size:
-    public static final int obstacleHeight = 80;
-    public static final int obstacleWidth = 20;
+   //Obstacle Size:
+   public static final int obstacleHeight = 80;
+   public static final int obstacleWidth = 20;
 
-    /** Game Parameters **/
+   /**
+    * Game Parameters
+    **/
 
-    //Game Timer Settings in Milliseconds:
-    public static final int gameTimerOffset = 0;
-    public static final int gameTimerDelay = 3;
+   //Game Timer Settings in Milliseconds:
+   public static final int gameTimerOffset = 0;
+   public static final int gameTimerDelay = 3;
 
-    //Game Ticks between two sample_levels:
-    public static int obstaclePauseTimer = 500;
+   //Game Ticks between two sample_levels:
+   public static int obstaclePauseTimer = 500;
 
-    //Load Rectangles or Images for Gameplay
-    public static final Boolean gameobjectsAsImages = true;
+   //Load Rectangles or Images for Gameplay
+   public static final Boolean gameobjectsAsImages = true;
 
-    //Ground lvl, offset of all gameobjects from pane bottom
-    public static final int groundLvL = 50;
+   //Ground lvl, offset of all gameobjects from pane bottom
+   public static final int groundLvL = 30;
 
-    //Ground Height
-    public static final int groundSize = 1;
+   //Ground Height
+   public static final int groundSize = 1;
 
-    /** Helper Consants **/
+   /**
+    * Helper Consants
+    **/
 
-    //Empty INT
-    public static final int EMPTY = -1;
+   //Empty INT
+   public static final int EMPTY = -1;
 
-    /** Level Things **/
+   /**
+    * Level Things
+    **/
 
-    //Save Lvl Configuration File Names here
-    public static final String lvl_freeTesting = "free_testing";
-    public static final String lvl_samples = "sample_levels";
+   //Save Lvl Configuration File Names here
+   public static final String lvl_freeTesting = "free_testing";
+   public static final String lvl_samples = "sample_levels";
 
-    //Path to Levels File
-    public static final String levelsPath = "./src/main/res/leveldata/";
+   //Path to Levels File
+   public static final String levelsPath = "./src/main/res/leveldata/";
 
-    //Chosse Wich Lvl File should be loaded
-    public static final String levelFile = lvl_samples;
+   //Chosse Wich Lvl File should be loaded
+   public static final String levelFile = lvl_samples;
 
-    /** Lighthouse **/
+   /**
+    * Lighthouse
+    **/
 
-    public static final int lighthouseWidth = 28;
-    public static final int lighthouseHeight = 14;
+   public static final int lighthouseWidth = 28;
+   public static final int lighthouseHeight = 14;
 
-    /** Developer Debugging Helpers **/
+   /**
+    * View ID'S
+    */
 
-    //Only play one lvl (-1 = normal game)
-    public static final int onlyLvl = -1;
+   public static final String viewIdGameDesktop = "GD";
+   public static final String viewIdGameLighthouse = "GL";
+   public static final String viewIdMenu = "ME";
+   public static final String viewIdEnd = "EN";
+
+   /**
+    * Font Id's
+    */
+
+   public static final String fontPixel = "game_over";
+
+   /**
+    * Developer Debugging Helpers
+    **/
+
+   //Only play one lvl (-1 = normal game)
+   public static final int onlyLvl = -1;
 
 }

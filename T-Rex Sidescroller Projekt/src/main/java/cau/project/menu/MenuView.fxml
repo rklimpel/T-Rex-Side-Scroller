@@ -10,13 +10,13 @@
           vgap="10"
           xmlns="http://javafx.com/javafx/8.0.112"
           xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="main.java.cau.project.menu.MenuController">
+          fx:controller="main.java.cau.project.menu.MenuView">
 
     <children>
         <Button fx:id="btn_startDesktop"
                 focusTraversable="false"
                 mnemonicParsing="false"
-                onAction="#onClick_btn_startDeskop"
+                onAction="#startGameDesktop"
                 text="Start Game Desktop"
                 GridPane.halignment="CENTER"/>
         <Button fx:id="btn_startLighthouse"
