@@ -17,8 +17,6 @@ import main.java.cau.project.*;
 import main.java.cau.project.game.controller.GameController;
 import main.java.cau.project.services.*;
 
-import java.io.*;
-
 
 public class DesktopView extends View {
 
@@ -67,6 +65,9 @@ public class DesktopView extends View {
 
             if (Main.gameController == null) {
                Main.gameController = new GameController(view, (int) pane.getWidth(), (int) pane.getHeight());
+               controller = Main.gameController;
+            }else{
+               Main.gameController.addListener(view);
                controller = Main.gameController;
             }
 
@@ -248,11 +249,12 @@ public class DesktopView extends View {
     * Exit Desktop Game Screen when getting exit call from Game Controller
     *
     * check for Gameover, if not exit to menu
+    * @param i
     */
-   public void exit() {
-      if (controller.gameModel.gameOver) {
+   public void exit(int i) {
+      if (i == 0) {
          SceneSwitcher.END.load();
-      } else {
+      } else if (i == -1) {
          SceneSwitcher.MENU.load();
       }
    }

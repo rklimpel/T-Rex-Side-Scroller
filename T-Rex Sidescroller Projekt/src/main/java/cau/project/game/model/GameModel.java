@@ -104,6 +104,7 @@ public class GameModel {
     * Starts the continous ticking Game Timer
     */
    public void startGameTimer() {
+      gameTimer = new Timer();
       TimerTask task = new TimerTask() {
          public void run() {
             GameTick();

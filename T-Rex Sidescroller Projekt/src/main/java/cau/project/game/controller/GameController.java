@@ -44,12 +44,17 @@ public class GameController {
         }
     }
 
+    public void addListener(View newListener){
+        this.listeningViews.add(newListener);
+    }
+
     /**
      * Update, Called by gamemodel on gametick
      * updates all listening views
      */
     public void update() {
         for (int i = 0; i < listeningViews.size(); i++) {
+            System.out.println(listeningViews.get(i));
             listeningViews.get(i).Update();
         }
     }
@@ -102,13 +107,19 @@ public class GameController {
      * @param view
      */
     public void quitGame(View view) {
+        gameModel.stopGameTimer();
         listeningViews.remove(view);
-        if (listeningViews.size() == 0) {
-            gameModel.stopGameTimer();
+        if(listeningViews.size()==0){
             Main.gameController = null;
         }
         Helper.score = gameModel.getScore();
-        view.exit();
+        if(gameModel.gameOver){
+            view.exit(0);
+        }else{
+            view.exit(-1);
+        }
+        gameModel.gameOver=false;
+
     }
 
     /**

@@ -66,7 +66,7 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
             }
 
             else if (event.getCode() == KeyCode.ESCAPE){
-               view.exit();
+               view.exit(-1);
             }
 
          }
