@@ -7,14 +7,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import main.java.cau.project.Helper;
 import main.java.cau.project.LighthouseNetwork;
-import main.java.cau.project.game.view_desktop.GameView;
+import main.java.cau.project.game.view_desktop.DesktopView;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class MenuController {
@@ -54,7 +49,7 @@ public class MenuController {
     }
 
     public void startDesktop () throws IOException{
-        new GameView();
+        new DesktopView();
     }
 
     public void onClick_btn_startLighthouse(){

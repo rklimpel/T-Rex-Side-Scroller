@@ -4,6 +4,8 @@ import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -34,7 +36,7 @@ import java.io.*;
 /**
  * Created by ricoklimpel on 23.02.17.
  */
-public class GameController extends Controller{
+public class DesktopController extends Controller{
 
     //objects from FXML configuration
     @FXML Button btn_backToMenu;
@@ -59,11 +61,13 @@ public class GameController extends Controller{
 
     private Font customScoreFont;
 
-    public GameController() {
+    public DesktopController() {
         this.gameModel = new GameModel(this);
         loadCustomFont();
         //creates the hints at when is called and space isn't pressed yet
         showhints();
+
+
 
         loadImages();
     }
@@ -104,7 +108,7 @@ public class GameController extends Controller{
     }
 
     /**
-     * This Methods gets and handles the Key event from GameView
+     * This Methods gets and handles the Key event from DesktopView
      *
      * @param event
      */
@@ -232,6 +236,8 @@ public class GameController extends Controller{
                 addGroundToPane();
             }
         });
+
+
     }
 
     private void addGroundToPane() {

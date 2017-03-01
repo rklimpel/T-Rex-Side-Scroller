@@ -12,24 +12,24 @@ import java.awt.*;
 import java.io.IOException;
 
 
-public class GameView {
+public class DesktopView {
 
     //Game Scene Size
     int GameWidth = 1080;
     int GameHeight = 530;
 
     //the belonging game controller
-    GameController gameController;
+    DesktopController gameController;
 
     /**
      * Game View constructor automatically starts switches Menu Scene to Game Scene and shows it to the user
      *
      * @throws IOException
      */
-    public GameView() throws IOException {
+    public DesktopView() throws IOException {
 
         //Load fxml configuration for the GameScreen and set it as Parent
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DesktopView.fxml"));
         Parent root = fxmlLoader.load();
 
         //extract Controller from fxml configuration

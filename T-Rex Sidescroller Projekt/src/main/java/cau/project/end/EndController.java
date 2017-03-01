@@ -10,7 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import main.java.cau.project.Helper;
-import main.java.cau.project.game.view_desktop.GameView;
+import main.java.cau.project.game.view_desktop.DesktopView;
 import main.java.cau.project.menu.MenuView;
 
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class EndController {
     EndView endView;
 
     public void onButtonClicked() throws IOException{
-        new GameView();
+        new DesktopView();
     }
 
     public EndController() {
@@ -66,7 +66,7 @@ public class EndController {
 
     public void keyEventHandler(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.ENTER) {
-            new GameView();
+            new DesktopView();
         }
         if (event.getCode() == KeyCode.ESCAPE) {
             new MenuView();

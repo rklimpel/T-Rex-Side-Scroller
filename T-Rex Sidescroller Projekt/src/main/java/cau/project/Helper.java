@@ -134,9 +134,8 @@ public class Helper {
 
             color+=1;
 
-
-
             if(color==3){
+
                 color=0;
 
                 positionX += 1;
@@ -151,6 +150,5 @@ public class Helper {
 
         return returnBytes;
     }
-
 
 }

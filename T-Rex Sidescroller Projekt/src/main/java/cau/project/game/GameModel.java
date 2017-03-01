@@ -1,7 +1,7 @@
 package main.java.cau.project.game;
 
 import main.java.cau.project.R;
-import main.java.cau.project.game.view_desktop.GameController;
+import main.java.cau.project.game.view_desktop.DesktopController;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -67,14 +67,14 @@ public class GameModel {
      * Creates a new GameModel Instance (i think there should be just one...)
      * saves Controller to class variable
      *
-     * @param gameController
+     * @param controller
      */
-    public GameModel(GameController gameController) {
-        this.gameController = gameController;
+    public GameModel(Controller controller) {
+        this.gameController = controller;
     }
 
     /**
-     * Gets Pane Size from GameController
+     * Gets Pane Size from DesktopController
      */
     private void getPane() {
         paneWidth = gameController.getPaneWidth();
@@ -99,7 +99,8 @@ public class GameModel {
 
         if (!player.isJumping) {
             player.jump();
-        }else if(paneHeight- R.groundLvL - player.getY() <= player.getHeight()/2+player.getHeight()){
+        }else if(paneHeight- R.groundLvL - player.getY()
+                <= player.getHeight()/2+player.getHeight()){
             jumpWaiting = true;
         }
     }
