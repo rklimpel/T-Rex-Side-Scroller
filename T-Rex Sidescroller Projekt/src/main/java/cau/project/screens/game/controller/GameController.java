@@ -140,6 +140,8 @@ public class GameController {
       gameModel = null;
       Main.gameController = null;
 
+      stopUpdater();
+
    }
 
    /**

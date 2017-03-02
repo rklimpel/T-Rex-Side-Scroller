@@ -40,7 +40,7 @@ public class LhView extends GameView{
         pixelsReduced = new Color[R.lighthouseHeight][R.lighthouseWidth];
 
         scaleFactorWidth = controller.getModelPaneWidth()/R.lighthouseWidth;
-        scaleFactorHeight = controller.getModelPaneWidth()/R.lighthouseHeight;
+        scaleFactorHeight = controller.getModelPaneHeight()/R.lighthouseHeight;
 
         System.out.println("scaleFactorWidth: "+scaleFactorWidth);
         System.out.println("scaleFactorHeihgt: "+scaleFactorHeight);

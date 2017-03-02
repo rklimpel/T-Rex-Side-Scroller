@@ -143,6 +143,7 @@ public class GameModel {
       }
 
       for (int i = 0; i < obstacles.size(); i++) {
+
          if (!obstacles.get(i).checkOutisde()) {
 
             obstacles.get(i).moveLeft();
@@ -151,10 +152,17 @@ public class GameModel {
 
                stopGameTimer();
                gameOver = true;
-               gameController.stopUpdater();
 
                System.out.println("Collision!");
+
                player.stopJumpTimer();
+
+               new Timer().schedule(new TimerTask() {
+                  @Override
+                  public void run() {
+                     gameController.stopUpdater();
+                  }
+               }, 1000);
 
             }
 
@@ -213,7 +221,7 @@ public class GameModel {
             //Create a new Obstacle Object
             if (lvlIndex != R.EMPTY) {
                createObstacle(levelArray[2][lvlIndex - 1]);
-               System.out.println("Create Obstacle- index: " + (lvlIndex - 1));
+               //System.out.println("Create Obstacle- index: " + (lvlIndex - 1));
             }
 
             //System.out.println("Object created! \n");

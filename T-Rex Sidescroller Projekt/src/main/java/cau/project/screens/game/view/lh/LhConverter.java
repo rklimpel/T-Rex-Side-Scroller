@@ -30,32 +30,34 @@ public class LhConverter {
          }
       }
 
-      //Paint PlayerPixels White
-      for (int i = scaleY(gameModel.player.getY()); i < scaleY(gameModel.player.getY()+gameModel.player.getHeight()); i++) {
-
-         for (int j = scaleX(gameModel.player.getX()); j < scaleX(gameModel.player.getX()+gameModel.player.getWidth()); j++) {
-
-            System.out.println("PlayerPixels: " + i + " / " + j);
-
-            pixelsReduced[i][j] = Color.RED;
-         }
-      }
-
-      System.out.println("---");
-
       //Paint obstacle Pixels
       for (int i = 0; i < gameModel.getObstacles().size(); i++) {
 
          for (int j = scaleY(gameModel.getObstacles().get(i).getY());
-              j < scaleY(gameModel.getObstacles().get(i).getY()+gameModel.getObstacles().get(i).getHeight()); j++) {
+              j < scaleY(gameModel.getObstacles().get(i).getY()
+                      +gameModel.getObstacles().get(i).getHeight()); j++) {
 
             for (int k = scaleX(gameModel.getObstacles().get(i).getX());
-                 k < scaleX(gameModel.getObstacles().get(i).getX()+gameModel.getObstacles().get(i).getWidth()); k++) {
+                 k < scaleX(gameModel.getObstacles().get(i).getX()
+                         +gameModel.getObstacles().get(i).getWidth()); k++) {
 
                if(!(j>pixelsReduced.length||k>=pixelsReduced[0].length)){
                   pixelsReduced[j][k]=Color.BLUE;
                }
             }
+         }
+      }
+
+      //Paint PlayerPixels White
+      for (int i = scaleY(gameModel.player.getY());
+           i < scaleY(gameModel.player.getY()+gameModel.player.getHeight()); i++) {
+
+         for (int j = scaleX(gameModel.player.getX());
+              j < scaleX(gameModel.player.getX()+gameModel.player.getWidth()); j++) {
+
+            //System.out.println("PlayerPixels: " + i + " / " + j);
+
+            pixelsReduced[i][j] = Color.RED;
          }
       }
 
