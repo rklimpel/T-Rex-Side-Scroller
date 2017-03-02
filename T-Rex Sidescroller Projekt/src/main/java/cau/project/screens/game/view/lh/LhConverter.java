@@ -41,7 +41,7 @@ public class LhConverter {
                  k < scaleX(gameModel.getObstacles().get(i).getX()
                          +gameModel.getObstacles().get(i).getWidth()); k++) {
 
-               if(!(j>pixelsReduced.length||k>=pixelsReduced[0].length)){
+               if(!(j>pixelsReduced.length||k>=pixelsReduced[0].length||j<0||k<0)){
                   pixelsReduced[j][k]=Color.BLUE;
                }
             }
