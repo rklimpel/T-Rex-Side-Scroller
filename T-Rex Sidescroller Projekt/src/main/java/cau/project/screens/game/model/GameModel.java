@@ -259,4 +259,12 @@ public class GameModel {
    public ArrayList<Obstacle> getObstacles() {
       return obstacles;
    }
+
+   public int getPaneWidth() {
+      return paneWidth;
+   }
+
+   public int getPaneHeight() {
+      return paneHeight;
+   }
 }

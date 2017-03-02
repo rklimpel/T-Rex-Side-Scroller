@@ -16,14 +16,12 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Font;
 import main.java.cau.project.*;
 import main.java.cau.project.screens.game.controller.GameController;
+import main.java.cau.project.screens.game.view.GameView;
 import main.java.cau.project.services.*;
 
 
-public class DesktopView extends View {
+public class DesktopView extends GameView {
 
-   //objects from FXML configuration
-   @FXML
-   Button btn_backToMenu;
    @FXML
    Pane pane;
    @FXML
@@ -40,12 +38,15 @@ public class DesktopView extends View {
 
    private Font customFont;
 
-   private GameController controller;
-
    private Boolean gameObjectsAsImages = R.gameobjectsAsImages;
 
    private int paneWidth;
    private int paneHeight;
+
+
+   public long lastTime;
+   public int frames;
+
 
    /**
     * Deskotp View Constructor
@@ -69,18 +70,12 @@ public class DesktopView extends View {
             paneWidth =(int)pane.getWidth();
             paneHeight = (int)(pane.getHeight());
 
-            if (Main.gameController == null) {
-               Main.gameController = new GameController(view, (int)paneWidth, (int)paneHeight);
-               controller = Main.gameController;
-            }else{
-               Main.gameController.addListener(view);
-               controller = Main.gameController;
-            }
-
             new KeyboardListener(view);
             new MouseListener(view);
          }
       });
+
+      super.setController(paneWidth,paneHeight);
 
       imageLoader = new ImageLoader();
       imageLoader.load();
@@ -89,15 +84,6 @@ public class DesktopView extends View {
 
       //creates the hints at when is called and space isn't pressed yet
       showHints();
-   }
-
-   /**
-    * Button back to Menu's onClick
-    *
-    * calls Controllers quit game
-    */
-   public void OnClick_btn_backToMenu() {
-      controller.quitGame(this);
    }
 
    /**
@@ -135,6 +121,14 @@ public class DesktopView extends View {
             if(controller.gameModel.gameOver){
                Main.stage.getScene().getRoot().setEffect(new GaussianBlur());
             }
+
+            if(System.currentTimeMillis() >= lastTime+1000){
+               System.out.println("FPS: " + frames);
+               lastTime = System.currentTimeMillis();
+               frames = 0;
+            }
+
+            frames +=1;
 
          }
       });
