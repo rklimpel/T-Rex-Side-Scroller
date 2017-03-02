@@ -2,8 +2,8 @@ package main.java.cau.project;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import main.java.cau.project.game.controller.GameController;
-import main.java.cau.project.game.model.GameModel;
+import main.java.cau.project.screens.game.controller.GameController;
+import main.java.cau.project.screens.game.model.GameModel;
 import main.java.cau.project.services.SceneSwitcher;
 
 import java.awt.*;

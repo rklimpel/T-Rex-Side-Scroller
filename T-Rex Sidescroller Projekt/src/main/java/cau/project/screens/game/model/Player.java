@@ -1,4 +1,4 @@
-package main.java.cau.project.game.model;
+package main.java.cau.project.screens.game.model;
 
 import main.java.cau.project.R;
 

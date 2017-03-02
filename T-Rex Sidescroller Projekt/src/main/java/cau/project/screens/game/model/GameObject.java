@@ -1,4 +1,4 @@
-package main.java.cau.project.game.model;
+package main.java.cau.project.screens.game.model;
 
 
 import javafx.scene.paint.Color;
@@ -25,7 +25,7 @@ public class GameObject {
    public Boolean checkCollision(GameObject clasher) {
 
       //Check Callers left side is inside clasher
-      if (((this.getX() >= clasher.getX()
+      return ((this.getX() >= clasher.getX()
               && this.getX() <= clasher.getX() + clasher.getWidth())
               //Check Callers right side is inside clasher
               || (this.getX() + this.getWidth() >= clasher.getX()
@@ -35,26 +35,8 @@ public class GameObject {
               && this.getY() + this.getHeight() <= clasher.getY() + clasher.getHeight())
               //Check Calles Top is inside clasher
               || (this.getY() >= clasher.getY()
-              && this.getY() <= clasher.getY() + clasher.getHeight()))) {
+              && this.getY() <= clasher.getY() + clasher.getHeight()));
 
-            /*System.out.println("this x: " + this.getX());
-            System.out.println("this x + width: " + (this.getX() + this.getWidth()));
-
-            System.out.println("clasher x: " + clasher.getX());
-            System.out.println("clasher x + width: " + (clasher.getX() + clasher.getWidth()));
-
-            System.out.println();
-
-            System.out.println("this y: " + this.getX());
-            System.out.println("this y + heigth: " + (this.getY() + this.getHeight()));
-
-            System.out.println("clasher y: " + clasher.getY());
-            System.out.println("clasher y + height: " + (clasher.getY() + clasher.getHeight()));*/
-
-         return true;
-      }
-
-      return false;
    }
 
    public int getWidth() {

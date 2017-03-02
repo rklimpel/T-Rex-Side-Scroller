@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.SubScene?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Region?>
+
+
+<SplitPane dividerPositions="0.29797979797979796"
+           prefHeight="400.0"
+           prefWidth="1200.0"
+           fx:id="flowpane"
+           xmlns="http://javafx.com/javafx/8.0.112"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="main.java.cau.project.screens.split.SplitView">
+    <items>
+
+        <SubScene fx:id="sub1"
+                  height="400.0"
+                  width="600.0">
+            <root>
+                <Region/>
+            </root>
+        </SubScene>
+        <SubScene fx:id="sub2"
+                  height="400.0"
+                  width="600.0">
+            <root>
+                <Region/>
+            </root>
+        </SubScene>
+    </items>
+</SplitPane>
+

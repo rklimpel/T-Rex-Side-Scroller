@@ -1,6 +1,7 @@
-package main.java.cau.project.menu;
+package main.java.cau.project.screens.menu;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import main.java.cau.project.*;
@@ -54,6 +55,7 @@ public class MenuView extends View {
    }
 
    public void startGameDesktop() {
+      //SceneSwitcher.GAME_DESKTOP.load();
       SceneSwitcher.GAME_DESKTOP.load();
    }
 
@@ -65,4 +67,7 @@ public class MenuView extends View {
       }
    }
 
+   public void onClick_btn_startSplit(ActionEvent actionEvent) {
+      SceneSwitcher.GAME_DOUBLE.load();
+   }
 }

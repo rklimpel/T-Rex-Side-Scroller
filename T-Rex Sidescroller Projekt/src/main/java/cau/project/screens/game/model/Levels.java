@@ -1,4 +1,4 @@
-package main.java.cau.project.game.model;
+package main.java.cau.project.screens.game.model;
 
 import main.java.cau.project.Helper;
 import main.java.cau.project.R;
@@ -171,7 +171,7 @@ public class Levels {
 
       if (levelList.size() != 0) {
          if (R.onlyLvl == R.EMPTY) {
-            activeLvl = rn.nextInt(levelList.size()) + 0;
+            activeLvl = rn.nextInt(levelList.size());
          } else {
             activeLvl = R.onlyLvl;
          }

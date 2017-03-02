@@ -10,7 +10,7 @@
 <GridPane fx:id="background"
           xmlns="http://javafx.com/javafx/8.0.111"
           xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="main.java.cau.project.end.EndView">
+          fx:controller="main.java.cau.project.screens.end.EndView">
 
     <columnConstraints>
         <ColumnConstraints/>

@@ -6,8 +6,8 @@ import javafx.scene.input.KeyEvent;
 import main.java.cau.project.Main;
 import main.java.cau.project.R;
 import main.java.cau.project.View;
-import main.java.cau.project.end.EndView;
-import main.java.cau.project.menu.MenuView;
+import main.java.cau.project.screens.end.EndView;
+import main.java.cau.project.screens.menu.MenuView;
 
 public class KeyboardListener implements EventHandler<KeyEvent> {
 

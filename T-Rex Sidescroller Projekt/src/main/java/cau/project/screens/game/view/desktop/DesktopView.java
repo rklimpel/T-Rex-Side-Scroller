@@ -1,4 +1,4 @@
-package main.java.cau.project.game.view.desktop;
+package main.java.cau.project.screens.game.view.desktop;
 
 import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -14,7 +15,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Font;
 import main.java.cau.project.*;
-import main.java.cau.project.game.controller.GameController;
+import main.java.cau.project.screens.game.controller.GameController;
 import main.java.cau.project.services.*;
 
 
@@ -33,7 +34,6 @@ public class DesktopView extends View {
    private Rectangle rectangle;
 
    private ImageView iV_player = new ImageView();
-   private ImageView iv_Obstacle;
 
    private ImageLoader imageLoader;
    private CustomFontLoader customFontLoader;
@@ -43,6 +43,9 @@ public class DesktopView extends View {
    private GameController controller;
 
    private Boolean gameObjectsAsImages = R.gameobjectsAsImages;
+
+   private int paneWidth;
+   private int paneHeight;
 
    /**
     * Deskotp View Constructor
@@ -63,8 +66,11 @@ public class DesktopView extends View {
          @Override
          public void run() {
 
+            paneWidth =(int)pane.getWidth();
+            paneHeight = (int)(pane.getHeight());
+
             if (Main.gameController == null) {
-               Main.gameController = new GameController(view, (int) pane.getWidth(), (int) pane.getHeight());
+               Main.gameController = new GameController(view, (int)paneWidth, (int)paneHeight);
                controller = Main.gameController;
             }else{
                Main.gameController.addListener(view);
@@ -120,11 +126,16 @@ public class DesktopView extends View {
                drawPlayer();
             }
 
+            //Add One Big Ground
+            drawGround();
+
             //Add Score Label to Pane
             drawScoreLabel();
 
-            //Add One Big Ground
-            drawGround();
+            if(controller.gameModel.gameOver){
+               Main.stage.getScene().getRoot().setEffect(new GaussianBlur());
+            }
+
          }
       });
    }
@@ -136,7 +147,7 @@ public class DesktopView extends View {
    private void drawGround() {
 
       Rectangle rectangle = new Rectangle();
-      rectangle.relocate(0, pane.getHeight() - R.groundLvL);
+      rectangle.relocate(0, paneHeight - R.groundLvL);
       rectangle.setWidth(pane.getWidth());
       rectangle.setHeight(R.groundSize);
 
@@ -153,7 +164,7 @@ public class DesktopView extends View {
 
       for (int i = 0; i < controller.gameModel.getObstacles().size(); i++) {
 
-         iv_Obstacle = new ImageView();
+         ImageView iv_Obstacle = new ImageView();
          iv_Obstacle.setImage(imageLoader.getImg_obstacle());
          iv_Obstacle.relocate(controller.getObstacles().get(i).getX(),
                  controller.getObstacles().get(i).getY());

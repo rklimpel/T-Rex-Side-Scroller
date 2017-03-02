@@ -1,4 +1,4 @@
-package main.java.cau.project.end;
+package main.java.cau.project.screens.end;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;

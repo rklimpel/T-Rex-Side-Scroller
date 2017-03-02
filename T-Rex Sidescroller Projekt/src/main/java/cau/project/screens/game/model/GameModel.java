@@ -1,7 +1,7 @@
-package main.java.cau.project.game.model;
+package main.java.cau.project.screens.game.model;
 
 import main.java.cau.project.R;
-import main.java.cau.project.game.controller.GameController;
+import main.java.cau.project.screens.game.controller.GameController;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -71,6 +71,7 @@ public class GameModel {
       this.GameController = gameController;
       this.paneWidth = paneWidth;
       this.paneHeight = paneHeight;
+      this.gameOver = false;
    }
 
    /**
@@ -200,7 +201,7 @@ public class GameModel {
       //if Obstacle Timer is down and there is a active lvl fire a new Obstacle
       if (obstacleTimer == 0 && levels.getActiveLvl() != R.EMPTY) {
 
-         if (lvlPause == true) {
+         if (lvlPause) {
 
             //Get Level Array for active lvl from Level class
             levelArray = levels.getActiveLvlArray();

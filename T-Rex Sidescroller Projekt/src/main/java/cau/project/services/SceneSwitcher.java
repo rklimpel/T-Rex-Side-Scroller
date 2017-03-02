@@ -3,6 +3,7 @@ package main.java.cau.project.services;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.effect.GaussianBlur;
 import javafx.stage.Stage;
 import main.java.cau.project.Main;
 
@@ -10,10 +11,11 @@ import java.io.IOException;
 
 public enum SceneSwitcher {
 
-   MENU("../menu/MenuView.fxml",300,300),
-   GAME_DESKTOP("../game/view/desktop/DesktopView.fxml",800,400),
-   GAME_LH("../game/view/lh/LighthouseView.fxml",400,200),
-   END("../end/Endview.fxml",800,400);
+   MENU("../screens/menu/MenuView.fxml",300,300),
+   GAME_DESKTOP("../screens/game/view/desktop/DesktopView.fxml",800,400),
+   GAME_LH("../screens/game/view/lh/LighthouseView.fxml",400,200),
+   END("../screens/end/Endview.fxml",800,400),
+   GAME_DOUBLE("../screens/split/SplitView.fxml",1200,400);
 
    private String path = null;
    private int width;
@@ -36,9 +38,7 @@ public enum SceneSwitcher {
 
       //Load fxml configuration for the GameScreen and set it as Parent
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(scenepath));
-      Parent root = null;
-
-      try {
+      Parent root = null;try {
          root = fxmlLoader.load();
       } catch (IOException e) {
          e.printStackTrace();

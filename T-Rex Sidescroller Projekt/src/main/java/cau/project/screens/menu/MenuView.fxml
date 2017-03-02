@@ -10,7 +10,7 @@
           vgap="10"
           xmlns="http://javafx.com/javafx/8.0.112"
           xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="main.java.cau.project.menu.MenuView">
+          fx:controller="main.java.cau.project.screens.menu.MenuView">
 
     <children>
         <Button fx:id="btn_startDesktop"
@@ -19,6 +19,13 @@
                 onAction="#startGameDesktop"
                 text="Start Game Desktop"
                 GridPane.halignment="CENTER"/>
+        <Button fx:id="btn_startSplit"
+                onAction="#onClick_btn_startSplit"
+                focusTraversable="false"
+                mnemonicParsing="false"
+                text="Start Split Game"
+                GridPane.halignment="CENTER"
+                GridPane.rowIndex="1"/>
         <Button fx:id="btn_startLighthouse"
                 onAction="#onClick_btn_startLighthouse"
                 focusTraversable="false"
