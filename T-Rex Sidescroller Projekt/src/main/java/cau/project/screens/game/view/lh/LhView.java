@@ -20,11 +20,16 @@ public class LhView extends GameView{
     private Color[][] pixelsUnscaled;
     private Color[][] pixelsReduced;
 
+    private Boolean update = true;
+
+    private double scaleFactorWidth;
+    private double scaleFactorHeight;
+
+    private LhConverter lhConverter;
+
     private LighthouseNetwork lighthouseNetwork = new LighthouseNetwork();
 
     public LhView() {
-
-
 
         view = this;
         view.setViewID(R.viewIdGameDesktop);
@@ -33,6 +38,14 @@ public class LhView extends GameView{
 
         pixelsUnscaled = new Color[controller.getModelPaneHeight()][controller.getModelPaneWidth()];
         pixelsReduced = new Color[R.lighthouseHeight][R.lighthouseWidth];
+
+        scaleFactorWidth = controller.getModelPaneWidth()/R.lighthouseWidth;
+        scaleFactorHeight = controller.getModelPaneWidth()/R.lighthouseHeight;
+
+        System.out.println("scaleFactorWidth: "+scaleFactorWidth);
+        System.out.println("scaleFactorHeihgt: "+scaleFactorHeight);
+
+        lhConverter = new LhConverter(scaleFactorWidth,scaleFactorHeight);
 
         Platform.runLater(new Runnable() {
             @Override
@@ -51,13 +64,20 @@ public class LhView extends GameView{
 
     @Override
     public void Update() {
-        System.out.println("Lighthouse Update");
+
+        super.calcAndShowFPS();
+
         try {
-            lighthouseNetwork.send(Helper.oneLighthouseWindow(2,8,Color.RED));
+            if(pixelsReduced!=null && controller.gameModel.player != null && controller.gameModel.getObstacles() != null){
+                lighthouseNetwork.send(lhConverter.convertToByteArray(lhConverter.loadGamemodelData(controller.gameModel,pixelsReduced)));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
+
+
 
     @Override
     public void exit(int i) {

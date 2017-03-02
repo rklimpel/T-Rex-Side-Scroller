@@ -17,6 +17,7 @@ public class GameController {
    private ArrayList<View> listeningViews = new ArrayList<>();
 
    public GameModel gameModel;
+   Timer updateTimer;
 
    /**
     * Constructor adds calling view to Listener List and creates a new GameModel with default Size
@@ -39,15 +40,26 @@ public class GameController {
    public GameController(View newListener, int paneWidth, int paneHeight) {
       this.listeningViews.add(newListener);
 
-      try{
-         System.out.println(newListener.getViewID()+ " is the new listener");
-      }catch (Exception e){
-         System.out.println(e);
-      }
-
       if (this.gameModel == null) {
          this.gameModel = new GameModel(this, paneWidth, paneHeight);
       }
+
+      startUpdater();
+   }
+
+   private void startUpdater() {
+      updateTimer = new Timer();
+      TimerTask task = new TimerTask() {
+         public void run() {
+            update();
+         }
+      };
+      updateTimer.scheduleAtFixedRate(task, 0, 10);
+   }
+
+   public void stopUpdater(){
+      updateTimer.cancel();
+      updateTimer.purge();
    }
 
    public void addListener(View newListener) {
@@ -59,9 +71,6 @@ public class GameController {
     * updates all listening views
     */
    public void update() {
-
-      System.out.println("Update called");
-
       for (int i = 0; i < listeningViews.size(); i++) {
          listeningViews.get(i).Update();
       }

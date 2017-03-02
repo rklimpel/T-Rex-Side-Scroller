@@ -46,7 +46,7 @@ public class GameModel {
    public Player player;
 
    //Game GameController who called the GameModel, set on contsructor
-   private GameController GameController;
+   private GameController gameController;
 
    //Save Pane Size here when constructor gets called:
    private int paneWidth;
@@ -68,7 +68,7 @@ public class GameModel {
     * @param gameController
     */
    public GameModel(GameController gameController,int paneWidth, int paneHeight) {
-      this.GameController = gameController;
+      this.gameController = gameController;
       this.paneWidth = paneWidth;
       this.paneHeight = paneHeight;
       this.gameOver = false;
@@ -151,6 +151,7 @@ public class GameModel {
 
                stopGameTimer();
                gameOver = true;
+               gameController.stopUpdater();
 
                System.out.println("Collision!");
                player.stopJumpTimer();
@@ -164,7 +165,7 @@ public class GameModel {
       }
 
       //Notify the Gamecontroller about value changes
-      GameController.update();
+      //GameController.update();
    }
 
    /**

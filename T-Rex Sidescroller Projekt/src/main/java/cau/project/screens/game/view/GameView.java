@@ -8,6 +8,9 @@ public class GameView extends View{
 
    public GameController controller;
 
+   public long lastTime;
+   public int frames;
+
    public GameView() {
 
 
@@ -36,5 +39,15 @@ public class GameView extends View{
    @Override
    public void exit(int i) {
 
+   }
+
+   public void calcAndShowFPS(){
+
+      if(System.currentTimeMillis() >= lastTime+1000){
+         System.out.println("FPS: " + frames);
+         lastTime = System.currentTimeMillis();
+         frames = 0;
+      }
+      frames +=1;
    }
 }

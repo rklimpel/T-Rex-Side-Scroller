@@ -18,6 +18,7 @@ import main.java.cau.project.*;
 import main.java.cau.project.screens.game.controller.GameController;
 import main.java.cau.project.screens.game.view.GameView;
 import main.java.cau.project.services.*;
+import sun.security.krb5.internal.crypto.Des;
 
 
 public class DesktopView extends GameView {
@@ -42,11 +43,6 @@ public class DesktopView extends GameView {
 
    private int paneWidth;
    private int paneHeight;
-
-
-   public long lastTime;
-   public int frames;
-
 
    /**
     * Deskotp View Constructor
@@ -122,13 +118,9 @@ public class DesktopView extends GameView {
                Main.stage.getScene().getRoot().setEffect(new GaussianBlur());
             }
 
-            if(System.currentTimeMillis() >= lastTime+1000){
-               System.out.println("FPS: " + frames);
-               lastTime = System.currentTimeMillis();
-               frames = 0;
-            }
 
-            frames +=1;
+            DesktopView.super.calcAndShowFPS();
+
 
          }
       });
