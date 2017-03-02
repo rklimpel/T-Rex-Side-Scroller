@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import main.java.cau.project.*;
+import main.java.cau.project.screens.game.view.lh.LhView;
 import main.java.cau.project.services.LighthouseNetwork;
 import main.java.cau.project.services.KeyboardListener;
 import main.java.cau.project.services.SceneSwitcher;
@@ -55,16 +56,16 @@ public class MenuView extends View {
    }
 
    public void startGameDesktop() {
-      //SceneSwitcher.GAME_DESKTOP.load();
       SceneSwitcher.GAME_DESKTOP.load();
    }
 
    public void onClick_btn_startLighthouse() {
-      try {
+      /*try {
          lighthouseNetwork.send(Helper.convertLighthouseImage());
       } catch (IOException e) {
          e.printStackTrace();
-      }
+      }*/
+      SceneSwitcher.GAME_LH.load();
    }
 
    public void onClick_btn_startSplit(ActionEvent actionEvent) {

@@ -33,6 +33,8 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
             if (event.getCode() == KeyCode.SPACE) {
                Main.gameController.jump(view);
 
+               System.out.println("Space pressed");
+
             }
 
             //On Escape Pressed:

@@ -38,6 +38,13 @@ public class GameController {
     */
    public GameController(View newListener, int paneWidth, int paneHeight) {
       this.listeningViews.add(newListener);
+
+      try{
+         System.out.println(newListener.getViewID()+ " is the new listener");
+      }catch (Exception e){
+         System.out.println(e);
+      }
+
       if (this.gameModel == null) {
          this.gameModel = new GameModel(this, paneWidth, paneHeight);
       }
@@ -52,6 +59,8 @@ public class GameController {
     * updates all listening views
     */
    public void update() {
+
+      System.out.println("Update called");
 
       for (int i = 0; i < listeningViews.size(); i++) {
          listeningViews.get(i).Update();
