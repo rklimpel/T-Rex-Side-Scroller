@@ -99,6 +99,7 @@ public class R {
    public static final String viewIdGameLighthouse = "GL";
    public static final String viewIdMenu = "ME";
    public static final String viewIdEnd = "EN";
+   public static final String viewIdSplit = "SP";
 
    /**
     * Font Id's

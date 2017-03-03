@@ -5,7 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.SubScene;
+import main.java.cau.project.Main;
+import main.java.cau.project.R;
 import main.java.cau.project.View;
+import main.java.cau.project.services.SceneSwitcher;
 
 import java.io.IOException;
 
@@ -22,13 +25,14 @@ public class SplitView extends View{
 
    public SplitView() {
 
+      setViewID(R.viewIdSplit);
+      Main.setMainView(this);
+
       Platform.runLater(new Runnable() {
          @Override
          public void run() {
-            sub1.setRoot(loadSceneFromFXML("../game/view/desktop/DesktopView.fxml",(int)
-                    sub1.getWidth(),(int)sub1.getHeight()));
-            sub2.setRoot(loadSceneFromFXML("../game/view/desktop/DesktopView.fxml",
-                    (int)sub1.getWidth(),(int)sub1.getHeight()));
+            sub1.setRoot(SceneSwitcher.GAME_DESKTOP.getRoot());
+            sub2.setRoot(SceneSwitcher.GAME_DESKTOP.getRoot());
          }
       });
 
@@ -48,5 +52,13 @@ public class SplitView extends View{
       System.out.println(root);
 
       return root;
+   }
+
+   public void setSub1(Parent root) {
+      this.sub1.setRoot(root);
+   }
+
+   public void setSub2(Parent root) {
+      this.sub2.setRoot(root);
    }
 }

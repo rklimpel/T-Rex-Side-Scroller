@@ -162,7 +162,7 @@ public class GameModel {
                   public void run() {
                      gameController.stopUpdater();
                   }
-               }, 1000);
+               }, 50);
 
             }
 
@@ -171,9 +171,6 @@ public class GameModel {
             //System.out.println("removed obstacle");
          }
       }
-
-      //Notify the Gamecontroller about value changes
-      //GameController.update();
    }
 
    /**

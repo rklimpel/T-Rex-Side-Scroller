@@ -78,7 +78,7 @@ public class EndView extends View{
       SceneSwitcher.GAME_DESKTOP.load();
    }
 
-   public void exit(int i){
+   public void exit(String nextViewID){
       SceneSwitcher.MENU.load();
    }
 }

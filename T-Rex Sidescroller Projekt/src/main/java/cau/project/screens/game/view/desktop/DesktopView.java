@@ -59,6 +59,10 @@ public class DesktopView extends GameView {
       view = this;
       setViewID(R.viewIdGameDesktop);
 
+      if(Main.getMainView() == null || Main.getMainView().getViewID()!=R.viewIdSplit){
+         Main.setMainView(this);
+      }
+
       Platform.runLater(new Runnable() {
          @Override
          public void run() {
@@ -72,7 +76,6 @@ public class DesktopView extends GameView {
             new MouseListener(view);
          }
       });
-
 
       imageLoader = new ImageLoader();
       imageLoader.load();

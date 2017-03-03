@@ -29,22 +29,34 @@ public enum SceneSwitcher {
    }
 
    public void load(){
-      Main.stage.setScene(loadSceneFromFXML(path,width, height));
+      Main.stage.setScene(loadSceneFromFXML());
       Main.stage.show();
       Main.centerFrame();
    }
 
-   private Scene loadSceneFromFXML(String scenepath, int sceneWidth, int sceneHeight) {
-
+   public Parent getRoot(){
       //Load fxml configuration for the GameScreen and set it as Parent
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(scenepath));
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
       Parent root = null;try {
          root = fxmlLoader.load();
       } catch (IOException e) {
          e.printStackTrace();
       }
 
-      return new Scene(root, sceneWidth, sceneHeight);
+      return root;
+   }
+
+   private Scene loadSceneFromFXML() {
+
+      //Load fxml configuration for the GameScreen and set it as Parent
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+      Parent root = null;try {
+         root = fxmlLoader.load();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+
+      return new Scene(root, width,height);
    }
 
 }

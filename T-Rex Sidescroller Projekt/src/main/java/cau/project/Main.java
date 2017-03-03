@@ -11,8 +11,9 @@ import java.awt.*;
 public class Main extends Application {
 
    public static Stage stage;
+
+   private static View mainView;
    public static GameController gameController;
-   public static GameModel gameModel;
 
    @Override
    public void start(Stage primaryStage) throws Exception {
@@ -20,6 +21,7 @@ public class Main extends Application {
       stage = primaryStage;
 
       SceneSwitcher.MENU.load();
+
    }
 
    /**
@@ -35,5 +37,13 @@ public class Main extends Application {
 
    public static void main(String[] args) {
       launch(args);
+   }
+
+   public static View getMainView() {
+      return mainView;
+   }
+
+   public static void setMainView(View mainView) {
+      Main.mainView = mainView;
    }
 }
