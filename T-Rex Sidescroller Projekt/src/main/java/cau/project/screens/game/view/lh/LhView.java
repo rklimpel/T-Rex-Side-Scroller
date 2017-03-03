@@ -3,6 +3,7 @@ package main.java.cau.project.screens.game.view.lh;
 
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
+import main.java.cau.project.Main;
 import main.java.cau.project.R;
 import main.java.cau.project.screens.game.view.GameView;
 import main.java.cau.project.services.listeners.KeyboardListener;
@@ -26,7 +27,9 @@ public class LhView extends GameView{
     public LhView() {
 
         view = this;
-        view.setViewID(R.viewIdGameDesktop);
+        view.setViewID(R.viewIdGameLighthouse);
+
+        Main.setMainView(this);
 
         super.setController();
 

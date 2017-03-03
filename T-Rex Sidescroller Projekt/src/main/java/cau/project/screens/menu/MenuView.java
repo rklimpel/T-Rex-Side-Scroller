@@ -30,6 +30,8 @@ public class MenuView extends View {
       view = this;
       setViewID(R.viewIdMenu);
 
+      Main.setMainView(this);
+
       try {
          lighthouseNetwork.connect();
          lighthouseConnected = true;

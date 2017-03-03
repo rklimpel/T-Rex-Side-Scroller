@@ -27,7 +27,8 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
       if (event.getEventType() == KeyEvent.KEY_PRESSED) {
 
          //IF Caller Is Desktop Game
-         if (view.getViewID() == R.viewIdGameDesktop) {
+         if (view.getViewID() == R.viewIdGameDesktop
+                 || view.getViewID() == R.viewIdGameLighthouse) {
 
             //On Space Pressed
             if (event.getCode() == KeyCode.SPACE) {
@@ -78,7 +79,8 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
       else if (event.getEventType() == KeyEvent.KEY_RELEASED) {
 
          //IF Caller Is Desktop Game
-         if(view.getViewID() == R.viewIdGameDesktop){
+         if(view.getViewID() == R.viewIdGameDesktop
+                 || view.getViewID() == R.viewIdGameLighthouse){
 
             //On Control Pressed
             if (event.getCode() == KeyCode.CONTROL) {

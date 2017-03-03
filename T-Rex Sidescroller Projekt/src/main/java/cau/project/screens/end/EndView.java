@@ -75,7 +75,14 @@ public class EndView extends View{
    }
 
    public void restartGame() {
-      SceneSwitcher.GAME_DESKTOP.load();
+      if(Main.getMainView().getViewID()==R.viewIdSplit){
+         SceneSwitcher.GAME_DOUBLE.load();
+      }else if(Main.getMainView().getViewID()==R.viewIdGameDesktop){
+         SceneSwitcher.GAME_DESKTOP.load();
+      }else if(Main.getMainView().getViewID()==R.viewIdGameLighthouse){
+         SceneSwitcher.GAME_LH.load();
+      }
+
    }
 
    public void exit(String nextViewID){

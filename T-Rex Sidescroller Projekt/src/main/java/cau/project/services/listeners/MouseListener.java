@@ -22,14 +22,22 @@ public class MouseListener implements EventHandler<MouseEvent> {
    public void handle(MouseEvent event) {
 
       if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+
          if (event.getButton() == MouseButton.PRIMARY) {
+
             Main.gameController.jump(view);
+            
          } else if (event.getButton() == MouseButton.SECONDARY) {
+
             Main.gameController.crouch();
+
          }
       } else if (event.getEventType() == MouseEvent.MOUSE_RELEASED) {
+
          if (event.getButton() == MouseButton.SECONDARY) {
+
             Main.gameController.crouchEnd();
+
          }
       }
    }
