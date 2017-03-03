@@ -1,4 +1,4 @@
-package main.java.cau.project.services;
+package main.java.cau.project.services.loader;
 
 import javafx.scene.image.Image;
 

@@ -1,8 +1,10 @@
 package main.java.cau.project.screens.game.view;
 
 import main.java.cau.project.Main;
+import main.java.cau.project.R;
 import main.java.cau.project.View;
 import main.java.cau.project.screens.game.controller.GameController;
+import main.java.cau.project.services.SceneSwitcher;
 
 public class GameView extends View{
 
@@ -36,9 +38,19 @@ public class GameView extends View{
 
    }
 
+   /**
+    * Exit Desktop Game Screen when getting exit call from Game Controller
+    * <p>
+    * check for Gameover, if not exit to menu
+    *
+    */
    @Override
-   public void exit(int i) {
-
+   public void exit(String nextViewID) {
+      if (nextViewID == R.viewIdEnd) {
+         SceneSwitcher.END.load();
+      } else if (nextViewID == R.viewIdMenu) {
+         SceneSwitcher.MENU.load();
+      }
    }
 
    public void calcAndShowFPS(){

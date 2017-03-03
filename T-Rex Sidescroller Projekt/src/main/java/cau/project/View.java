@@ -11,7 +11,7 @@ public class View {
 
    }
 
-   public void exit(int i) {
+   public void exit(String nextViewID) {
 
    }
 

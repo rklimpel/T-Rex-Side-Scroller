@@ -1,4 +1,4 @@
-package main.java.cau.project.services;
+package main.java.cau.project.services.listeners;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -68,7 +68,7 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
             }
 
             else if (event.getCode() == KeyCode.ESCAPE){
-               view.exit(-1);
+               view.exit(R.viewIdMenu);
             }
 
          }

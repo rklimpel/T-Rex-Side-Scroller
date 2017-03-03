@@ -1,12 +1,12 @@
 package main.java.cau.project.screens.game.controller;
 
-import main.java.cau.project.Helper;
+import main.java.cau.project.R;
+import main.java.cau.project.services.Helper;
 import main.java.cau.project.Main;
 import main.java.cau.project.View;
 import main.java.cau.project.screens.game.model.GameModel;
 import main.java.cau.project.screens.game.model.Obstacle;
 import main.java.cau.project.screens.game.model.Player;
-import main.java.cau.project.screens.game.view.GameView;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -124,16 +124,16 @@ public class GameController {
     */
    public void quitGame(View view) {
 
+      if (gameModel.gameOver) Helper.score = gameModel.getScore();
+
       for (int i = 0; i < listeningViews.size(); i++) {
          if (gameModel.gameOver) {
-            view.exit(0);
+            view.exit(R.viewIdEnd);
          } else {
-            view.exit(- 1);
+            view.exit(R.viewIdMenu);
          }
       }
       gameModel.stopGameTimer();
-
-      if (gameModel.gameOver) Helper.score = gameModel.getScore();
 
       listeningViews = null;
       gameModel = null;

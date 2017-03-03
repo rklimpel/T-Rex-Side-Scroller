@@ -1,6 +1,6 @@
 package main.java.cau.project.screens.game.model;
 
-import main.java.cau.project.Helper;
+import main.java.cau.project.services.Helper;
 import main.java.cau.project.R;
 
 import java.io.IOException;

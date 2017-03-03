@@ -7,8 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import main.java.cau.project.*;
-import main.java.cau.project.services.CustomFontLoader;
-import main.java.cau.project.services.KeyboardListener;
+import main.java.cau.project.services.loader.CustomFontLoader;
+import main.java.cau.project.services.Helper;
+import main.java.cau.project.services.listeners.KeyboardListener;
 import main.java.cau.project.services.SceneSwitcher;
 
 import java.io.IOException;

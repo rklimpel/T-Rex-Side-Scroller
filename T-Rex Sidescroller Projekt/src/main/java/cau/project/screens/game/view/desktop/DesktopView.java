@@ -4,7 +4,6 @@ import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.*;
 import javafx.scene.image.ImageView;
@@ -15,10 +14,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Font;
 import main.java.cau.project.*;
-import main.java.cau.project.screens.game.controller.GameController;
 import main.java.cau.project.screens.game.view.GameView;
 import main.java.cau.project.services.*;
-import sun.security.krb5.internal.crypto.Des;
+import main.java.cau.project.services.listeners.KeyboardListener;
+import main.java.cau.project.services.listeners.MouseListener;
+import main.java.cau.project.services.loader.CustomFontLoader;
+import main.java.cau.project.services.loader.ImageLoader;
 
 
 public class DesktopView extends GameView {
@@ -121,9 +122,7 @@ public class DesktopView extends GameView {
                Main.stage.getScene().getRoot().setEffect(new GaussianBlur());
             }
 
-
             DesktopView.super.calcAndShowFPS();
-
 
          }
       });
@@ -190,8 +189,6 @@ public class DesktopView extends GameView {
     */
    private void drawImagePlayer() {
 
-      System.out.println(controller.getPlayer().getY());
-
       if (controller.getPlayer().getCrouching()) {
          iV_player.setImage(imageLoader.getImg_playerCrouched());
       } else {
@@ -245,21 +242,6 @@ public class DesktopView extends GameView {
       label.setLayoutY(pane.getHeight() / 5);
 
       pane.getChildren().add(label);
-   }
-
-   /**
-    * Exit Desktop Game Screen when getting exit call from Game Controller
-    * <p>
-    * check for Gameover, if not exit to menu
-    *
-    * @param i
-    */
-   public void exit(int i) {
-      if (i == 0) {
-         SceneSwitcher.END.load();
-      } else if (i == - 1) {
-         SceneSwitcher.MENU.load();
-      }
    }
 
    /**

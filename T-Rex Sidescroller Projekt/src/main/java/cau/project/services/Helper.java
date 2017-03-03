@@ -1,7 +1,9 @@
-package main.java.cau.project;
+package main.java.cau.project.services;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import main.java.cau.project.Main;
+import main.java.cau.project.R;
 
 import java.awt.*;
 import java.io.*;

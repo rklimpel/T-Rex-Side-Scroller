@@ -5,9 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import main.java.cau.project.*;
-import main.java.cau.project.screens.game.view.lh.LhView;
 import main.java.cau.project.services.LighthouseNetwork;
-import main.java.cau.project.services.KeyboardListener;
+import main.java.cau.project.services.listeners.KeyboardListener;
 import main.java.cau.project.services.SceneSwitcher;
 
 import java.io.IOException;
