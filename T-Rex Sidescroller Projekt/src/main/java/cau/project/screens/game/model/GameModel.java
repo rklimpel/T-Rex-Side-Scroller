@@ -45,6 +45,9 @@ public class GameModel {
    //The Player Object that contains to the Game
    public Player player;
 
+   //The Ground
+   public Ground ground;
+
    //Game GameController who called the GameModel, set on contsructor
    private GameController gameController;
 
@@ -72,6 +75,8 @@ public class GameModel {
       this.paneWidth = paneWidth;
       this.paneHeight = paneHeight;
       this.gameOver = false;
+
+      this.ground = new Ground(paneWidth,paneHeight);
    }
 
    /**
@@ -272,5 +277,9 @@ public class GameModel {
 
    public int getPaneHeight() {
       return paneHeight;
+   }
+
+   public Ground getGround() {
+      return ground;
    }
 }

@@ -138,9 +138,9 @@ public class DesktopView extends GameView {
    private void drawGround() {
 
       Rectangle rectangle = new Rectangle();
-      rectangle.relocate(0, paneHeight - R.groundLvL);
-      rectangle.setWidth(pane.getWidth());
-      rectangle.setHeight(R.groundSize);
+      rectangle.relocate(controller.getGround().getX(), controller.getGround().getY());
+      rectangle.setWidth(controller.getGround().getWidth());
+      rectangle.setHeight(controller.getGround().getHeight());
 
       pane.getChildren().addAll(rectangle);
    }

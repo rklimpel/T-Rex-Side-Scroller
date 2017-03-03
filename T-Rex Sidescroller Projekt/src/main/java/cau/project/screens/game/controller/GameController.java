@@ -1,6 +1,7 @@
 package main.java.cau.project.screens.game.controller;
 
 import main.java.cau.project.R;
+import main.java.cau.project.screens.game.model.Ground;
 import main.java.cau.project.services.Helper;
 import main.java.cau.project.Main;
 import main.java.cau.project.View;
@@ -177,5 +178,9 @@ public class GameController {
 
    public int getModelPaneHeight() {
       return gameModel.getPaneHeight();
+   }
+
+   public Ground getGround(){
+      return gameModel.getGround();
    }
 }
