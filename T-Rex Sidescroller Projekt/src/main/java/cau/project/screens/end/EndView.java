@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import main.java.cau.project.*;
+import main.java.cau.project.screens.game.view.lh.LhConverter;
+import main.java.cau.project.services.LighthouseNetwork;
 import main.java.cau.project.services.loader.CustomFontLoader;
 import main.java.cau.project.services.Helper;
 import main.java.cau.project.services.listeners.KeyboardListener;
@@ -52,6 +54,11 @@ public class EndView extends View{
             lbl_restart.setFont(customFontLoader.load(R.fontPixel,100));
          }
       });
+
+      if(Main.getMainView().getViewID()==R.viewIdGameLighthouse){
+         LighthousEnd();
+      }
+
    }
 
    private void setRestartButton() {
@@ -87,5 +94,25 @@ public class EndView extends View{
 
    public void exit(String nextViewID){
       SceneSwitcher.MENU.load();
+   }
+
+   private void LighthousEnd(){
+
+      Color[][] color = new Color[R.lighthouseHeight][R.lighthouseWidth];
+      for (int i = 0; i < R.lighthouseHeight; i++) {
+         for (int j = 0; j < R.lighthouseWidth; j++) {
+            color[i][j] = Color.DARKRED;
+         }
+      }
+
+      LighthouseNetwork lighthouseNetwork = new LighthouseNetwork();
+      try {
+         lighthouseNetwork.connect();
+         lighthouseNetwork.send(Helper.convertToByteArray(color));
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+
+
    }
 }
