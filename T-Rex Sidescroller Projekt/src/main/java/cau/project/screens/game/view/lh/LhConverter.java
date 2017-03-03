@@ -63,7 +63,7 @@ public class LhConverter {
          }
       }
 
-      //Paint PlayerPixels White
+      //Paint PlayerPixels Red
       for (int i = scaleY(gameModel.player.getY());
            i < scaleY(gameModel.player.getY()+gameModel.player.getHeight()); i++) {
 
