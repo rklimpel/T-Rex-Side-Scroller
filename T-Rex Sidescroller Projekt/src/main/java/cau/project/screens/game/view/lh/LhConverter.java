@@ -30,6 +30,21 @@ public class LhConverter {
          }
       }
 
+      //Paint Ground pixels
+      for (int i = scaleY(gameModel.getGround().getY());
+           i < scaleY(gameModel.getGround().getY())+1; i++) {
+
+         for (int j = scaleX(gameModel.getGround().getX());
+              j < scaleX(gameModel.getGround().getX()+gameModel.getGround().getWidth()); j++) {
+
+            try {
+               pixelsReduced[i][j] = Color.GREEN;
+            }catch (ArrayIndexOutOfBoundsException e){
+               //Ground out of Lighthouse Bounds...
+            }
+         }
+      }
+
       //Paint obstacle Pixels
       for (int i = 0; i < gameModel.getObstacles().size(); i++) {
 
@@ -65,11 +80,23 @@ public class LhConverter {
    }
 
    private int scaleX(int value){
-      return (int)Math.round(value/scaleFactorWidth);
+      int scaledValue = (int)Math.round(value/scaleFactorWidth);
+      if(scaledValue>=R.lighthouseWidth){
+         scaledValue=R.lighthouseWidth;
+      }
+      return scaledValue;
    }
 
    private int scaleY(int value){
       return (int)Math.round(value/scaleFactorHeight);
+   }
+
+   private int scaleXGround(int value){
+      return (int)(value/scaleFactorWidth);
+   }
+
+   private int scaleYGround(int value){
+      return (int)(value/scaleFactorHeight);
    }
 
 
