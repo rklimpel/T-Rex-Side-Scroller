@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import main.java.cau.project.Main;
 import main.java.cau.project.R;
 import main.java.cau.project.screens.game.view.GameView;
+import main.java.cau.project.services.Helper;
 import main.java.cau.project.services.listeners.KeyboardListener;
 import main.java.cau.project.services.LighthouseNetwork;
 import main.java.cau.project.services.listeners.MouseListener;
@@ -64,8 +65,13 @@ public class LhView extends GameView{
         super.calcAndShowFPS();
 
         try {
-            if(pixelsReduced!=null && controller.gameModel.player != null && controller.gameModel.getObstacles() != null){
-                lighthouseNetwork.send(lhConverter.convertToByteArray(lhConverter.loadGamemodelData(controller.gameModel,pixelsReduced)));
+            if(pixelsReduced!=null
+                    && controller.gameModel.player != null
+                    && controller.gameModel.getObstacles() != null){
+
+                lighthouseNetwork.send(Helper.convertToByteArray(
+                        lhConverter.loadGamemodelData(controller.gameModel, pixelsReduced)));
+
             }
         } catch (IOException e) {
             e.printStackTrace();

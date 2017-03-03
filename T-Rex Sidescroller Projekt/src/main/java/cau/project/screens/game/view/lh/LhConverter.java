@@ -72,42 +72,7 @@ public class LhConverter {
       return (int)Math.round(value/scaleFactorHeight);
    }
 
-   public byte[] convertToByteArray(Color[][] pixelColors) {
 
-      byte[] returnBytes = new byte[1176];
-
-      int color = 0;
-      int positionY = 0;
-      int positionX = 0;
-
-      for (int i = 0; i < returnBytes.length; i++) {
-
-         if (color == 0) {
-            returnBytes[i] = (byte) ((int) (pixelColors[positionY][positionX].getRed() * 127));
-         } else if (color == 1) {
-            returnBytes[i] = (byte) ((int) (pixelColors[positionY][positionX].getGreen() * 127));
-         } else if (color == 2) {
-            returnBytes[i] = (byte) ((int) (pixelColors[positionY][positionX].getBlue() * 127));
-         }
-
-         color += 1;
-
-         if (color == 3) {
-
-            color = 0;
-
-            positionX += 1;
-            if (positionX >= R.lighthouseWidth) {
-               positionX = 0;
-               positionY += 1;
-            }
-         }
-
-         returnBytes[i] *= 2;
-      }
-
-      return returnBytes;
-   }
 
 
 }
