@@ -1,9 +1,12 @@
 package main.java.cau.project.screens.end;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import main.java.cau.project.*;
@@ -15,6 +18,8 @@ import main.java.cau.project.services.listeners.KeyboardListener;
 import main.java.cau.project.services.SceneSwitcher;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class EndView extends View{
 
@@ -61,9 +66,10 @@ public class EndView extends View{
 
    }
 
+   int x = 0;
+
    private void setRestartButton() {
-      btn_restart.setStyle("-fx-background-color: grey;");
-      btn_restart.setStyle("-fx-text-fill: black;");
+      btn_restart.setStyle("-fx-text-fill: grey; -fx-base: black;");
    }
 
    private void setGameoverLabel() {
