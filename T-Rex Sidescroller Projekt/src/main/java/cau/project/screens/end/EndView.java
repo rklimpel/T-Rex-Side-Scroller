@@ -14,6 +14,8 @@ import main.java.cau.project.services.listeners.KeyboardListener;
 import main.java.cau.project.services.SceneSwitcher;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class EndView extends View{
 
@@ -60,7 +62,6 @@ public class EndView extends View{
 
    }
 
-   int x = 0;
 
    private void setRestartButton() {
       btn_restart.setStyle("-fx-text-fill: grey; -fx-base: black;");
@@ -96,23 +97,54 @@ public class EndView extends View{
       SceneSwitcher.MENU.load();
    }
 
+
+
+   int x = 0;
+   int y = 0;
+
    private void LighthousEnd(){
 
-      Color[][] color = new Color[R.lighthouseHeight][R.lighthouseWidth];
-      for (int i = 0; i < R.lighthouseHeight; i++) {
-         for (int j = 0; j < R.lighthouseWidth; j++) {
-            color[i][j] = Color.DARKRED;
-         }
-      }
-
       LighthouseNetwork lighthouseNetwork = new LighthouseNetwork();
+
       try {
          lighthouseNetwork.connect();
-         lighthouseNetwork.send(Helper.convertToByteArray(color));
       } catch (IOException e) {
          e.printStackTrace();
       }
 
+      Color[][] color = new Color[R.lighthouseHeight][R.lighthouseWidth];
+
+      for (int i = 0; i < R.lighthouseHeight; i++) {
+         for (int j = 0; j < R.lighthouseWidth; j++) {
+            color[i][j]=Color.BLACK;
+         }
+      }
+
+      Timer timer = new Timer();
+      TimerTask task = new TimerTask() {
+         public void run() {
+
+            color[y][x] = Color.DARKRED;
+
+            x+=1;
+
+            if(x == R.lighthouseWidth){
+               y+=1;
+               x=0;
+            }
+
+            if(y == R.lighthouseHeight && x == R.lighthouseWidth){
+               timer.purge();
+            }
+
+            try {
+               lighthouseNetwork.send(Helper.convertToByteArray(color));
+            } catch (IOException e) {
+               e.printStackTrace();
+            }
+         }
+      };
+      timer.scheduleAtFixedRate(task, 0, 5);
 
    }
 }
