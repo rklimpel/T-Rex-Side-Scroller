@@ -13,7 +13,7 @@ public enum SceneSwitcher {
 
    MENU("../screens/menu/MenuView.fxml",300,300),
    GAME_DESKTOP("../screens/game/view/desktop/DesktopView.fxml",800,400),
-   GAME_LH("../screens/game/view/lh/LhView.fxml",800,400),
+   GAME_LH("../screens/game/view/lh/LhView.fxml",200,200),
    END("../screens/end/Endview.fxml",800,400),
    GAME_DOUBLE("../screens/split/SplitView.fxml",1200,400);
 

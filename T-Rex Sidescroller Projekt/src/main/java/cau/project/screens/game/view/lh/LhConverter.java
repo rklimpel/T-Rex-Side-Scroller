@@ -65,11 +65,11 @@ public class LhConverter {
    }
 
    private int scaleX(int value){
-      return (int)(value/scaleFactorWidth);
+      return (int)Math.round(value/scaleFactorWidth);
    }
 
    private int scaleY(int value){
-      return (int)(value/scaleFactorHeight);
+      return (int)Math.round(value/scaleFactorHeight);
    }
 
    public byte[] convertToByteArray(Color[][] pixelColors) {
