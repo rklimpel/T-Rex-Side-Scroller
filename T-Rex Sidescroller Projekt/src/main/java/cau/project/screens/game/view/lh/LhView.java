@@ -10,7 +10,6 @@ import main.java.cau.project.services.Helper;
 import main.java.cau.project.services.listeners.KeyboardListener;
 import main.java.cau.project.services.LighthouseNetwork;
 import main.java.cau.project.services.listeners.MouseListener;
-import main.java.cau.project.services.SceneSwitcher;
 
 import java.io.IOException;
 

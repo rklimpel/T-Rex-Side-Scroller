@@ -1,7 +1,5 @@
 package main.java.cau.project.screens.game.model;
 
-import main.java.cau.project.R;
-
 /**
  * Created by ricoklimpel on 03.03.17.
  */

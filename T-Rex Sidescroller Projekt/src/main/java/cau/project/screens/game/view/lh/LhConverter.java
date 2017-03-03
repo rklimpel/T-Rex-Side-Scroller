@@ -1,6 +1,5 @@
 package main.java.cau.project.screens.game.view.lh;
 
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import main.java.cau.project.R;
 import main.java.cau.project.screens.game.model.GameModel;

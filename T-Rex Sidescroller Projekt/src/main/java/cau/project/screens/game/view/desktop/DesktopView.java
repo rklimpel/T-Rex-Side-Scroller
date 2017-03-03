@@ -15,7 +15,6 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Font;
 import main.java.cau.project.*;
 import main.java.cau.project.screens.game.view.GameView;
-import main.java.cau.project.services.*;
 import main.java.cau.project.services.listeners.KeyboardListener;
 import main.java.cau.project.services.listeners.MouseListener;
 import main.java.cau.project.services.loader.CustomFontLoader;
