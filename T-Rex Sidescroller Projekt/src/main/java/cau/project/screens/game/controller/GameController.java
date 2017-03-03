@@ -26,7 +26,7 @@ public class GameController {
     * @param newListener
     */
    public GameController(View newListener) {
-      this(newListener,800,400);
+      this(newListener,600,300);
    }
 
    /**
@@ -43,8 +43,6 @@ public class GameController {
       if (this.gameModel == null) {
          this.gameModel = new GameModel(this, paneWidth, paneHeight);
       }
-
-      startUpdater();
    }
 
    private void startUpdater() {
@@ -87,6 +85,7 @@ public class GameController {
       if (! gameModel.gameTimerEnabled && ! gameModel.gameOver) {
          gameModel.createPlayer();
          gameModel.startGameTimer();
+         startUpdater();
       }
 
       //IF the Game is over (collision) space switches to menu

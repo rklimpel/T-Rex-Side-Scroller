@@ -19,7 +19,7 @@ public class GameView extends View{
    public void setController(int paneWidth, int paneHeight){
 
       if (Main.gameController == null) {
-         Main.gameController = new GameController(view);
+         Main.gameController = new GameController(view,paneWidth,paneHeight);
          controller = Main.gameController;
       } else {
          Main.gameController.addListener(view);

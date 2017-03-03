@@ -46,13 +46,12 @@ public class DesktopView extends GameView {
 
    /**
     * Deskotp View Constructor
-    *
+    * <p>
     * set a view variable to use if "this" is not possible
     * sets the View ID
     * set Keyboard and Mouse Listeners
     * Load Images and Fonts
     * Show Hints
-    *
     */
    public DesktopView() {
 
@@ -63,15 +62,16 @@ public class DesktopView extends GameView {
          @Override
          public void run() {
 
-            paneWidth =(int)pane.getWidth();
-            paneHeight = (int)(pane.getHeight());
+            paneWidth = (int) pane.getWidth();
+            paneHeight = (int) (pane.getHeight());
+
+            DesktopView.super.setController(paneWidth, paneHeight);
 
             new KeyboardListener(view);
             new MouseListener(view);
          }
       });
 
-      super.setController(paneWidth,paneHeight);
 
       imageLoader = new ImageLoader();
       imageLoader.load();
@@ -96,12 +96,15 @@ public class DesktopView extends GameView {
 
             if (gameObjectsAsImages) {
 
+               //Add Obstacles to Pane
                drawImageObstacles();
 
+               //Add Player to Pane
                drawImagePlayer();
 
             } else {
                //Add Obstacles to Pane
+
                drawObstacles();
 
                //Add Player to Pane
@@ -114,7 +117,7 @@ public class DesktopView extends GameView {
             //Add Score Label to Pane
             drawScoreLabel();
 
-            if(controller.gameModel.gameOver){
+            if (controller.gameModel.gameOver) {
                Main.stage.getScene().getRoot().setEffect(new GaussianBlur());
             }
 
@@ -143,7 +146,7 @@ public class DesktopView extends GameView {
    /**
     * create a new Image with obstacle values from gamecontroller -> gamemodell
     * add obstacle Image to pane
-    *
+    * <p>
     * will be called for every obstacle in obstacle array list
     */
    private void drawImageObstacles() {
@@ -164,7 +167,7 @@ public class DesktopView extends GameView {
    /**
     * create a new rectangle with obstacle values from gamecontroller -> gamemodell
     * add obstacle rectangle to pane
-    *
+    * <p>
     * will be called for every obstacle in obstacle array list
     */
    private void drawObstacles() {
@@ -187,7 +190,9 @@ public class DesktopView extends GameView {
     */
    private void drawImagePlayer() {
 
-      if (controller.gameModel.player.getCrouching()) {
+      System.out.println(controller.getPlayer().getY());
+
+      if (controller.getPlayer().getCrouching()) {
          iV_player.setImage(imageLoader.getImg_playerCrouched());
       } else {
          iV_player.setImage(imageLoader.getImg_player());
@@ -244,21 +249,22 @@ public class DesktopView extends GameView {
 
    /**
     * Exit Desktop Game Screen when getting exit call from Game Controller
-    *
+    * <p>
     * check for Gameover, if not exit to menu
+    *
     * @param i
     */
    public void exit(int i) {
       if (i == 0) {
          SceneSwitcher.END.load();
-      } else if (i == -1) {
+      } else if (i == - 1) {
          SceneSwitcher.MENU.load();
       }
    }
 
    /**
     * Show Hints how to move the player with the Keyboard to the User
-    *
+    * <p>
     * will automatically be destroyed on first update
     */
    private void showHints() {
