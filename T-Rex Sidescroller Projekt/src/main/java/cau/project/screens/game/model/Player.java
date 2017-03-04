@@ -131,6 +131,8 @@ public class Player extends GameObject {
     */
    public void crouch() {
 
+      soundService.playCrouchDown();
+
       height = (int) (defaultHeight * R.playerCrouchSize);
       yOffset = (int) (defaultHeight * (1 - R.playerCrouchSize));
 
@@ -144,6 +146,9 @@ public class Player extends GameObject {
     * (crouch ends)
     */
    public void crouchEnd() {
+
+      soundService.playCrouchUp();
+
       height = defaultHeight;
       yOffset = 0;
       isCrouching = false;
