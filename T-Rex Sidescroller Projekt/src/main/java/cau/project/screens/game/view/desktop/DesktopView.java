@@ -69,6 +69,11 @@ public class DesktopView extends GameView {
             paneWidth = (int) pane.getWidth();
             paneHeight = (int) (pane.getHeight());
 
+            if(paneWidth == 0 || paneHeight == 0){
+               paneWidth = 800;
+               paneHeight = 400;
+            }
+
             DesktopView.super.setController(paneWidth, paneHeight);
 
             new KeyboardListener(view);
