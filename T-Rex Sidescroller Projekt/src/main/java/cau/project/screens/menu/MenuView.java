@@ -5,12 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import main.java.cau.project.*;
-import main.java.cau.project.services.LighthouseNetwork;
 import main.java.cau.project.services.LighthouseService;
 import main.java.cau.project.services.listeners.KeyboardListener;
 import main.java.cau.project.services.SceneSwitcher;
-
-import java.io.IOException;
 
 
 public class MenuView extends View {
@@ -62,6 +59,6 @@ public class MenuView extends View {
    }
 
    public void onClick_btn_startSplit(ActionEvent actionEvent) {
-      SceneSwitcher.GAME_DOUBLE.load();
+      SceneSwitcher.GAME_SPLIT.load();
    }
 }

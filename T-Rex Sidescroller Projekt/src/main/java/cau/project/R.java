@@ -103,6 +103,16 @@ public class R {
    public static final String viewIdSplitChooser = "SC";
 
    /**
+    * Scene Switcher FXML View Paths's
+    */
+   public static final String viewPathGameDesktop= "../screens/game/view/desktop/DesktopView.fxml";
+   public static final String viewPathMenu = "../screens/menu/MenuView.fxml";
+   public static final String viewPathGameLighthouse = "../screens/game/view/lh/LhView.fxml";
+   public static final String viewPathGameEnd = "../screens/end/Endview.fxml";
+   public static final String viewPathGameSplit = "../screens/split/SplitView.fxml";
+   public static final String viewPathSplitChooser = "../screens/split/SplitChooserView.fxml";
+
+   /**
     * Font Id's
     */
 

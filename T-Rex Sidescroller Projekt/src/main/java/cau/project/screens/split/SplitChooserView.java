@@ -46,12 +46,25 @@ public class SplitChooserView extends View{
             comboBox.valueProperty().addListener(new ChangeListener() {
                @Override
                public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+
                   SplitView splitView = (SplitView)Main.getMainView();
-                  if(sub==1){
-                     splitView.setSub1(SceneSwitcher.GAME_DESKTOP.getRoot());
-                  }else if(sub == 2){
-                       splitView.setSub2(SceneSwitcher.GAME_DESKTOP.getRoot());
+
+                  Parent root = null;
+
+                  if(newValue.equals("Lighthouse")){
+                     root = SceneSwitcher.GAME_LH.getRoot();
+                  }else if (newValue.equals("Desktop Shapes")){
+                     root = SceneSwitcher.GAME_DESKTOP.getRoot(false);
+                  }else if (newValue.equals("Desktop Images")){
+                     root = SceneSwitcher.GAME_DESKTOP.getRoot(true);
                   }
+
+                  if(sub==1){
+                     splitView.setSub1(root);
+                  }else if(sub == 2){
+                       splitView.setSub2(root);
+                  }
+
                }
             });
 

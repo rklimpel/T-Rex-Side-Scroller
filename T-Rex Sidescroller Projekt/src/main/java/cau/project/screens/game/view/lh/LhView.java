@@ -29,7 +29,9 @@ public class LhView extends GameView{
         view = this;
         view.setViewID(R.viewIdGameLighthouse);
 
-        Main.setMainView(this);
+        if(Main.getMainView() == null || Main.getMainView().getViewID()!=R.viewIdSplit){
+            Main.setMainView(this);
+        }
 
         super.setController();
 

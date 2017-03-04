@@ -7,15 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import main.java.cau.project.*;
-import main.java.cau.project.services.LighthouseNetwork;
 import main.java.cau.project.services.loader.CustomFontLoader;
 import main.java.cau.project.services.Helper;
 import main.java.cau.project.services.listeners.KeyboardListener;
 import main.java.cau.project.services.SceneSwitcher;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class EndView extends View{
 
@@ -83,7 +80,7 @@ public class EndView extends View{
 
    public void restartGame() {
       if(Main.getMainView().getViewID()==R.viewIdSplit){
-         SceneSwitcher.GAME_DOUBLE.load();
+         SceneSwitcher.GAME_SPLIT.load();
       }else if(Main.getMainView().getViewID()==R.viewIdGameDesktop){
          SceneSwitcher.GAME_DESKTOP.load();
       }else if(Main.getMainView().getViewID()==R.viewIdGameLighthouse){

@@ -275,4 +275,8 @@ public class DesktopView extends GameView {
          }
       });
    }
+
+   public void init(Boolean gameObjectsAsImages){
+      this.gameObjectsAsImages = gameObjectsAsImages;
+   }
 }
