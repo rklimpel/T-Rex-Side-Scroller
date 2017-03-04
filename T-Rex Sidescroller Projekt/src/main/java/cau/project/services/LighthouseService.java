@@ -14,13 +14,14 @@ import java.util.TimerTask;
 public class LighthouseService {
 
    LighthouseNetwork lighthouseNetwork = new LighthouseNetwork();
+   Color[][] lastPixels;
 
    public LighthouseService() {
 
    }
 
    public Boolean connect(){
-      try { 
+      try {
          lighthouseNetwork.connect();
       } catch (IOException e) {
          return false;
@@ -30,6 +31,8 @@ public class LighthouseService {
 
 
    public Boolean sendPixelsToLighthouse(Color[][] pixels){
+
+      lastPixels = pixels;
 
       try {
          lighthouseNetwork.send(convertToByteArray(pixels));
@@ -52,13 +55,7 @@ public class LighthouseService {
          e.printStackTrace();
       }
 
-      Color[][] color = new Color[R.lighthouseHeight][R.lighthouseWidth];
-
-      for (int i = 0; i < R.lighthouseHeight; i++) {
-         for (int j = 0; j < R.lighthouseWidth; j++) {
-            color[i][j]=Color.BLACK;
-         }
-      }
+      Color[][] color = lastPixels;
 
       Timer timer = new Timer();
       TimerTask task = new TimerTask() {
