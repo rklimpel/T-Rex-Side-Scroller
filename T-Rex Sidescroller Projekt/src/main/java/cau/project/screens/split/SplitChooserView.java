@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 import main.java.cau.project.*;
 import main.java.cau.project.services.SceneSwitcher;
+import main.java.cau.project.services.listeners.KeyboardListener;
 
 import java.io.IOException;
 
@@ -38,6 +39,7 @@ public class SplitChooserView extends View{
          @Override
          public void run() {
 
+            new KeyboardListener(view);
 
             background.setStyle("-fx-background-color:  #FFFFFF;");
 

@@ -8,6 +8,7 @@ import main.java.cau.project.R;
 import main.java.cau.project.View;
 import main.java.cau.project.screens.end.EndView;
 import main.java.cau.project.screens.menu.MenuView;
+import main.java.cau.project.services.SceneSwitcher;
 
 public class KeyboardListener implements EventHandler<KeyEvent> {
 
@@ -70,6 +71,13 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
                view.exit(R.viewIdMenu);
             }
 
+         }
+
+         //If Caller ist View Split Chooser
+         else if (view.getViewID() == R.viewIdSplitChooser){
+            if(event.getCode() == KeyCode.ESCAPE){
+               SceneSwitcher.MENU.load();
+            }
          }
       }
 
