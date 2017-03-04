@@ -52,7 +52,6 @@ public class EndView extends View{
             setRestartButton();
 
             background.setStyle("-fx-background-color: #000000;");
-            lbl_restart.setFont(customFontLoader.load(R.fontPixel,100));
          }
       });
 
