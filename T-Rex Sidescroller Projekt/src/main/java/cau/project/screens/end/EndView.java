@@ -57,7 +57,7 @@ public class EndView extends View{
       });
 
       if(Main.getMainView().getViewID()==R.viewIdGameLighthouse){
-         LighthousEnd();
+         Main.getLighthouseService().lighthouseEnd();
       }
 
    }
@@ -99,52 +99,5 @@ public class EndView extends View{
 
 
 
-   int x = 0;
-   int y = 0;
 
-   private void LighthousEnd(){
-
-      LighthouseNetwork lighthouseNetwork = new LighthouseNetwork();
-
-      try {
-         lighthouseNetwork.connect();
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
-
-      Color[][] color = new Color[R.lighthouseHeight][R.lighthouseWidth];
-
-      for (int i = 0; i < R.lighthouseHeight; i++) {
-         for (int j = 0; j < R.lighthouseWidth; j++) {
-            color[i][j]=Color.BLACK;
-         }
-      }
-
-      Timer timer = new Timer();
-      TimerTask task = new TimerTask() {
-         public void run() {
-
-            color[y][x] = Color.DARKRED;
-
-            x+=1;
-
-            if(x == R.lighthouseWidth){
-               y+=1;
-               x=0;
-            }
-
-            if(y == R.lighthouseHeight && x == R.lighthouseWidth){
-               timer.purge();
-            }
-
-            try {
-               lighthouseNetwork.send(Helper.convertToByteArray(color));
-            } catch (IOException e) {
-               e.printStackTrace();
-            }
-         }
-      };
-      timer.scheduleAtFixedRate(task, 0, 5);
-
-   }
 }

@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import main.java.cau.project.*;
 import main.java.cau.project.services.LighthouseNetwork;
+import main.java.cau.project.services.LighthouseService;
 import main.java.cau.project.services.listeners.KeyboardListener;
 import main.java.cau.project.services.SceneSwitcher;
 
@@ -23,7 +24,7 @@ public class MenuView extends View {
 
    private View view;
 
-   LighthouseNetwork lighthouseNetwork = new LighthouseNetwork();
+   LighthouseService lighthouseService = new LighthouseService();
 
    public MenuView() {
 
@@ -32,13 +33,8 @@ public class MenuView extends View {
 
       Main.setMainView(this);
 
-      try {
-         lighthouseNetwork.connect();
-         lighthouseConnected = true;
-      } catch (IOException e) {
-         e.printStackTrace();
-         lighthouseConnected = false;
-      }
+      lighthouseConnected = lighthouseService.connect();
+      Main.setLighthouseService(lighthouseService);
 
       Platform.runLater(new Runnable() {
          @Override
@@ -48,6 +44,7 @@ public class MenuView extends View {
 
             if (lighthouseConnected) {
                btn_startLighthouse.setStyle("-fx-background-color:  #4caf50;");
+
             } else {
                btn_startLighthouse.setStyle("-fx-background-color:  #f44336;");
             }

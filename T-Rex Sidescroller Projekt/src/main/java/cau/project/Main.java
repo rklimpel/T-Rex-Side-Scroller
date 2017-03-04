@@ -3,6 +3,7 @@ package main.java.cau.project;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import main.java.cau.project.screens.game.controller.GameController;
+import main.java.cau.project.services.LighthouseService;
 import main.java.cau.project.services.SceneSwitcher;
 
 import java.awt.*;
@@ -13,6 +14,7 @@ public class Main extends Application {
 
    private static View mainView;
    public static GameController gameController;
+   private static LighthouseService lighthouseService;
 
    @Override
    public void start(Stage primaryStage) throws Exception {
@@ -44,5 +46,13 @@ public class Main extends Application {
 
    public static void setMainView(View mainView) {
       Main.mainView = mainView;
+   }
+
+   public static LighthouseService getLighthouseService() {
+      return lighthouseService;
+   }
+
+   public static void setLighthouseService(LighthouseService lighthouseService) {
+      Main.lighthouseService = lighthouseService;
    }
 }
