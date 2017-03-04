@@ -32,7 +32,7 @@ public class SplitView extends View{
          @Override
          public void run() {
             sub1.setRoot(SceneSwitcher.GAME_DESKTOP.getRoot());
-            sub2.setRoot(SceneSwitcher.GAME_DESKTOP.getRoot());
+            sub2.setRoot(SceneSwitcher.GAME_LH.getRoot());
          }
       });
 

@@ -58,11 +58,6 @@ public class MenuView extends View {
    }
 
    public void onClick_btn_startLighthouse() {
-      /*try {
-         lighthouseNetwork.send(Helper.convertLighthouseImage());
-      } catch (IOException e) {
-         e.printStackTrace();
-      }*/
       SceneSwitcher.GAME_LH.load();
    }
 
