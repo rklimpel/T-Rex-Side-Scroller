@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import main.java.cau.project.screens.game.controller.GameController;
 import main.java.cau.project.services.LighthouseService;
 import main.java.cau.project.services.SceneSwitcher;
+import main.java.cau.project.services.SoundService;
 
 import java.awt.*;
 
@@ -15,6 +16,7 @@ public class Main extends Application {
    private static View mainView;
    public static GameController gameController;
    private static LighthouseService lighthouseService = new LighthouseService();
+   private static SoundService soundService;
 
    @Override
    public void start(Stage primaryStage) throws Exception {
@@ -54,5 +56,9 @@ public class Main extends Application {
 
    public static void setLighthouseService(LighthouseService lighthouseService) {
       Main.lighthouseService = lighthouseService;
+   }
+
+   public static SoundService getSoundService() {
+      return soundService;
    }
 }

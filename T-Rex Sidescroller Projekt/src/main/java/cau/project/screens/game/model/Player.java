@@ -1,6 +1,9 @@
 package main.java.cau.project.screens.game.model;
 
+import javafx.application.Platform;
+import main.java.cau.project.Main;
 import main.java.cau.project.R;
+import main.java.cau.project.services.SoundService;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -43,6 +46,8 @@ public class Player extends GameObject {
    //optium:20
    double jumpSpeed = R.playerJumpSpeed;
 
+   SoundService soundService = new SoundService();
+
 
    public Player(int paneWidth, int paneHeight) {
 
@@ -67,6 +72,8 @@ public class Player extends GameObject {
     * calculates the new Y values for the jumping ployer
     */
    public void jump() {
+
+      soundService.playJump();
 
       //Other jump speed if player is couched
       if (isCrouching) {
