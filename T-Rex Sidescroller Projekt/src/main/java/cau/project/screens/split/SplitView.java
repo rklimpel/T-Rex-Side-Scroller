@@ -31,27 +31,12 @@ public class SplitView extends View{
       Platform.runLater(new Runnable() {
          @Override
          public void run() {
-            sub1.setRoot(SceneSwitcher.GAME_DESKTOP.getRoot());
-            sub2.setRoot(SceneSwitcher.GAME_LH.getRoot());
+            sub1.setRoot(SceneSwitcher.SPLIT_CHOOSER.getRoot(1));
+            sub2.setRoot(SceneSwitcher.SPLIT_CHOOSER.getRoot(2));
+
          }
       });
 
-   }
-
-   private Parent loadSceneFromFXML(String scenepath, int sceneWidth, int sceneHeight) {
-
-      //Load fxml configuration for the GameScreen and set it as Parent
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(scenepath));
-      Parent root = null;
-      try {
-         root = fxmlLoader.load();
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
-
-      System.out.println(root);
-
-      return root;
    }
 
    public void setSub1(Parent root) {

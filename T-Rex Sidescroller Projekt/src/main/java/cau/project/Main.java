@@ -14,7 +14,7 @@ public class Main extends Application {
 
    private static View mainView;
    public static GameController gameController;
-   private static LighthouseService lighthouseService;
+   private static LighthouseService lighthouseService = new LighthouseService();
 
    @Override
    public void start(Stage primaryStage) throws Exception {

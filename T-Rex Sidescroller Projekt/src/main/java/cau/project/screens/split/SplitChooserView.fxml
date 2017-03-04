@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<GridPane fx:id="background"
+          alignment="center"
+          hgap="10.0"
+          vgap="10"
+          xmlns="http://javafx.com/javafx/8.0.112"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="main.java.cau.project.screens.split.SplitChooserView">
+
+    <columnConstraints>
+        <ColumnConstraints/>
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
+
+    <children>
+        <ComboBox prefWidth="150.0"
+                  fx:id="comboBox">
+
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Desktop Images" />
+                <String fx:value="Desktop Shapes" />
+                <String fx:value="Lighthouse" />
+            </FXCollections>
+        </items>
+
+        </ComboBox>
+    </children>
+
+</GridPane>

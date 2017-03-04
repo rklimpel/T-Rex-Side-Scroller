@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import main.java.cau.project.Main;
+import main.java.cau.project.screens.split.SplitChooserView;
 
 import java.io.IOException;
 
@@ -13,7 +14,8 @@ public enum SceneSwitcher {
    GAME_DESKTOP("../screens/game/view/desktop/DesktopView.fxml",800,400),
    GAME_LH("../screens/game/view/lh/LhView.fxml",200,200),
    END("../screens/end/Endview.fxml",800,400),
-   GAME_DOUBLE("../screens/split/SplitView.fxml",1200,400);
+   GAME_DOUBLE("../screens/split/SplitView.fxml",1200,400),
+   SPLIT_CHOOSER("../screens/split/SplitChooserView.fxml",800,400);
 
    private String path = null;
    private int width;
@@ -35,7 +37,8 @@ public enum SceneSwitcher {
    public Parent getRoot(){
       //Load fxml configuration for the GameScreen and set it as Parent
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
-      Parent root = null;try {
+      Parent root = null;
+      try {
          root = fxmlLoader.load();
       } catch (IOException e) {
          e.printStackTrace();
@@ -44,7 +47,25 @@ public enum SceneSwitcher {
       return root;
    }
 
-   private Scene loadSceneFromFXML() {
+   public Parent getRoot(int sub){
+      //Load fxml configuration for the GameScreen and set it as Parent
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+      Parent root = null;
+      try {
+         root = fxmlLoader.load();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+
+      if(path.equals("../screens/split/SplitChooserView.fxml")){
+         SplitChooserView splitChooserView = (SplitChooserView)fxmlLoader.getController();
+         splitChooserView.init(sub);
+      }
+
+      return root;
+   }
+
+   public Scene loadSceneFromFXML() {
 
       //Load fxml configuration for the GameScreen and set it as Parent
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
