@@ -83,6 +83,9 @@ public class LighthouseService {
       };
       timer.scheduleAtFixedRate(task, 0, 5);
 
+      x = 0;
+      y = 0;
+
    }
 
 
