@@ -25,7 +25,7 @@ public class GameObject {
    public Boolean checkCollision(GameObject clasher) {
 
       //Check Callers left side is inside clasher
-      return ((this.getX() >= clasher.getX()
+      return (((this.getX() >= clasher.getX()
               && this.getX() <= clasher.getX() + clasher.getWidth())
               //Check Callers right side is inside clasher
               || (this.getX() + this.getWidth() >= clasher.getX()
@@ -35,7 +35,19 @@ public class GameObject {
               && this.getY() + this.getHeight() <= clasher.getY() + clasher.getHeight())
               //Check Calles Top is inside clasher
               || (this.getY() >= clasher.getY()
-              && this.getY() <= clasher.getY() + clasher.getHeight()));
+              && this.getY() <= clasher.getY() + clasher.getHeight()))
+              //Clahsers left side is inside caller
+              || (((clasher.getX() >= this.getX()
+              && clasher.getX() <= this.getX() + this.getWidth())
+              //Check Clashers Right side is inside caller
+              || (clasher.getX() + clasher.getWidth() >= this.getX()
+              && clasher.getX() + clasher.getWidth() <= this.getX() + this.getWidth()))
+              //Check Clashers Bottom is inside caller
+              && ((clasher.getY() + clasher.getHeight() >= this.getY()
+              && clasher.getY() + clasher.getHeight() <= this.getY() + this.getHeight())
+              //Check Clashers Top is inside Caller
+              || clasher.getY() >= this.getY()
+              && clasher.getY() <= this.getY() + this.getHeight())));
 
    }
 

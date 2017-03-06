@@ -1,13 +1,10 @@
 package main.java.cau.project.screens.game.controller;
 
 import main.java.cau.project.R;
-import main.java.cau.project.screens.game.model.Ground;
+import main.java.cau.project.screens.game.model.*;
 import main.java.cau.project.services.Helper;
 import main.java.cau.project.Main;
 import main.java.cau.project.View;
-import main.java.cau.project.screens.game.model.GameModel;
-import main.java.cau.project.screens.game.model.Obstacle;
-import main.java.cau.project.screens.game.model.Player;
 import main.java.cau.project.services.SoundService;
 
 import java.util.ArrayList;
@@ -211,5 +208,9 @@ public class GameController {
 
    public Ground getGround(){
       return gameModel.getGround();
+   }
+
+   public ArrayList<Powerup> getPowerups(){
+      return gameModel.getPowerups();
    }
 }

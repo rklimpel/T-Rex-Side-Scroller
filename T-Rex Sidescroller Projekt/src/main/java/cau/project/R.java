@@ -44,6 +44,13 @@ public class R {
    public static final int obstacleWidth = 20;
 
    /**
+    * Powerups
+    */
+
+   public static final int powerupHeight = 20;
+   public static final int powerupWidth = 20;
+
+   /**
     * Game Parameters
     **/
 
@@ -80,6 +87,7 @@ public class R {
    //Save Lvl Configuration File Names here
    public static final String lvl_freeTesting = "free_testing";
    public static final String lvl_samples = "sample_levels";
+   public static final String lvl_powerupTesting = "powerup_test";
 
    //Path to Levels File
    public static final String levelsPath = "./src/main/res/leveldata/";
@@ -87,7 +95,7 @@ public class R {
    //Chosse Wich Lvl File should be loaded
    public static final String levelFile = lvl_samples;
 
-   public static String[] levelFiles = {R.lvl_samples,R.lvl_freeTesting};
+   //Put all Lvl Files that should be loaded in this String Array. Lvl Loader will do the rest....
 
    /**
     * Lighthouse

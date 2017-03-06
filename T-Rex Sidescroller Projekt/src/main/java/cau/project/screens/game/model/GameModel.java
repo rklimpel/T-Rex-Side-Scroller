@@ -64,6 +64,9 @@ public class GameModel {
    //List off all Obstacles that are in the Game
    private ArrayList<Obstacle> obstacles = new ArrayList<>();
 
+   //List of all Powerups that are in the Game
+   private ArrayList<Powerup> powerups = new ArrayList<>();
+
    /**
     * Creates a new GameModel Instance (i think there should be just one...)
     * saves GameController to class variable
@@ -106,6 +109,12 @@ public class GameModel {
       obstacles.add(obstacle);
    }
 
+
+   public void createPowerup(int powerupType, int yOffset){
+      Powerup powerup = new Powerup(powerupType,paneWidth,paneHeight,yOffset);
+      powerups.add(powerup);
+   }
+
    /**
     * Starts the continous ticking Game Timer
     */
@@ -146,6 +155,25 @@ public class GameModel {
          jump();
          jumpWaiting = false;
       }
+
+
+      for (int i = 0; i <powerups.size(); i++) {
+         if(!powerups.get(i).checkOutisde()){
+            powerups.get(i).moveLeft();
+
+            if(player.checkCollision(powerups.get(i))){
+
+               System.out.println("Got that Powerup!");
+
+               powerups.remove(i);
+
+            }
+         }else{
+            powerups.remove(i);
+         }
+      }
+
+
 
       for (int i = 0; i < obstacles.size(); i++) {
 
@@ -222,24 +250,44 @@ public class GameModel {
 
             //Create a new Obstacle Object
             if (lvlIndex != R.EMPTY) {
-               createObstacle(levelArray[2][lvlIndex - 1]);
-               //System.out.println("Create Obstacle- index: " + (lvlIndex - 1));
+
+               if (levelArray[1][lvlIndex-1]<100){
+                  createObstacle(levelArray[2][lvlIndex - 1]);
+                  //System.out.println("Create Obstacle- index: " + (lvlIndex - 1));
+               }else if(levelArray[1][lvlIndex-1]>=100 && levelArray[1][lvlIndex-1] < 200){
+                  createPowerup(levelArray[1][lvlIndex - 1],levelArray[2][lvlIndex -1]);
+               }
+
             }
 
             //System.out.println("Object created! \n");
          }
 
+         //Check if next stuff in the lvl Array ist an obstacle or an powerup
          //If lvl index = -1 there are no more obstacles in this lvl and he should not load more
          //Else do the normal stuff
          if (lvlIndex != R.EMPTY && lvlIndex < levelArray[0].length) {
-            //Create a helping obstacle to check obstacle width
-            Obstacle helpObstacle = new Obstacle();
 
-            //set new obstacle timer by lvl array data and add obstacle width offset
-            obstacleTimer = levelArray[0][lvlIndex] + helpObstacle.getWidth();
+            if(levelArray[1][lvlIndex]<100){
+
+               //Create a helping obstacle to check obstacle width
+               Obstacle helpObstacle = new Obstacle();
+
+               //set new obstacle timer by lvl array data and add obstacle width offset
+               obstacleTimer = levelArray[0][lvlIndex] + helpObstacle.getWidth();
+
+            }else if (levelArray[1][lvlIndex]>=100 && levelArray[1][lvlIndex] < 200){
+
+               Powerup helpPowerup = new Powerup(levelArray[1][lvlIndex],paneWidth,paneHeight,0);
+
+               obstacleTimer = levelArray[0][lvlIndex] + helpPowerup.getWidth();
+
+            }
 
             lvlIndex += 1;
+
          }
+
          // if lvl index is out of bounds set activelvl to -1 and reset lvl index
          else if (lvlIndex >= levelArray[0].length) {
             lvlIndex = R.EMPTY;
@@ -281,5 +329,9 @@ public class GameModel {
 
    public Ground getGround() {
       return ground;
+   }
+
+   public ArrayList<Powerup> getPowerups() {
+      return powerups;
    }
 }
