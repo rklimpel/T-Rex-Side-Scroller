@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -20,19 +21,24 @@
                 text="Start Game Desktop"
                 GridPane.halignment="CENTER"/>
         <Button fx:id="btn_startSplit"
-                onAction="#onClick_btn_startSplit"
                 focusTraversable="false"
                 mnemonicParsing="false"
+                onAction="#onClick_btn_startSplit"
                 text="Start Split Game"
                 GridPane.halignment="CENTER"
                 GridPane.rowIndex="1"/>
         <Button fx:id="btn_startLighthouse"
-                onAction="#onClick_btn_startLighthouse"
                 focusTraversable="false"
                 mnemonicParsing="false"
+                onAction="#onClick_btn_startLighthouse"
                 text="Start Game Lighthouse"
                 GridPane.halignment="CENTER"
                 GridPane.rowIndex="2"/>
+        <CheckBox mnemonicParsing="false"
+                  fx:id="checkBoxMusic"
+                  text="Music"
+                  GridPane.halignment="CENTER"
+                  GridPane.rowIndex="3"/>
     </children>
 
     <columnConstraints>
@@ -40,6 +46,7 @@
     </columnConstraints>
 
     <rowConstraints>
+        <RowConstraints/>
         <RowConstraints/>
         <RowConstraints/>
         <RowConstraints minHeight="10.0"

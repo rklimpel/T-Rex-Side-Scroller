@@ -8,6 +8,7 @@ import main.java.cau.project.View;
 import main.java.cau.project.screens.game.model.GameModel;
 import main.java.cau.project.screens.game.model.Obstacle;
 import main.java.cau.project.screens.game.model.Player;
+import main.java.cau.project.services.SoundService;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -19,6 +20,9 @@ public class GameController {
 
    public GameModel gameModel;
    Timer updateTimer;
+
+
+   private SoundService soundService = new SoundService();
 
    /**
     * Constructor adds calling view to Listener List and creates a new GameModel with default Size
@@ -53,8 +57,8 @@ public class GameController {
             update();
          }
       };
-      updateTimer.scheduleAtFixedRate(task, 0, 10);
-   }
+      updateTimer.scheduleAtFixedRate(task, 0, 8);
+}
 
    public void stopUpdater(){
       updateTimer.cancel();
@@ -73,6 +77,11 @@ public class GameController {
       for (int i = 0; i < listeningViews.size(); i++) {
          listeningViews.get(i).Update();
       }
+
+      if(gameModel.gameOver && R.musicOn){
+         soundService.stopGametrack();
+         soundService.playGameover();
+      }
    }
 
    /**
@@ -87,6 +96,11 @@ public class GameController {
          gameModel.createPlayer();
          gameModel.startGameTimer();
          startUpdater();
+
+         if(R.musicOn){
+            soundService.playGametrack();
+         }
+
       }
 
       //IF the Game is over (collision) space switches to menu
@@ -97,6 +111,11 @@ public class GameController {
       //else space is there to jump
       else if (gameModel.gameTimerEnabled) {
          gameModel.jump();
+
+         if(R.musicOn){
+            soundService.playJump();
+         }
+
       }
    }
 
@@ -105,6 +124,11 @@ public class GameController {
     */
    public void crouch() {
       gameModel.player.crouch();
+
+      if(R.musicOn){
+         soundService.playCrouchDown();
+      }
+
    }
 
    /**
@@ -112,6 +136,11 @@ public class GameController {
     */
    public void crouchEnd() {
       gameModel.player.crouchEnd();
+
+      if(R.musicOn){
+         soundService.playCrouchUp();
+      }
+
    }
 
    /**

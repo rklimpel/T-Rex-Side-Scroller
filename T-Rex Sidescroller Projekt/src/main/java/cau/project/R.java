@@ -57,6 +57,9 @@ public class R {
    //Load Rectangles or Images for Gameplay
    public static final Boolean gameobjectsAsImages = true;
 
+   //MUSIC on off default value
+   public static Boolean musicOn = false;
+
    //Ground lvl, offset of all gameobjects from pane bottom
    public static final int groundLvL = 30;
 

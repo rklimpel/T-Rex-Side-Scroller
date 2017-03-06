@@ -14,10 +14,17 @@ public class SoundService {
    Media mediaJump;
    Media mediaCrouchDown;
    Media mediaCrouchUp;
+   Media mediaGameOpenining;
+   Media mediaGameLoop;
+   Media mediaGameover;
 
    MediaPlayer playerJump;
    MediaPlayer playerCrouchDown;
    MediaPlayer playerCrouchUp;
+   MediaPlayer playerGameOpening;
+   MediaPlayer playerGameLoop;
+   MediaPlayer playerGameover;
+
 
    public SoundService() {
 
@@ -30,24 +37,120 @@ public class SoundService {
       bip = "src/main/res/sounds/crouch_up.wav";
       mediaCrouchUp = new Media(new File(bip).toURI().toString());
 
+      bip = "src/main/res/sounds/country_opening.mp3";
+      mediaGameOpenining = new Media(new File(bip).toURI().toString());
+
+      bip = "src/main/res/sounds/country_loop.mp3";
+      mediaGameLoop = new Media(new File(bip).toURI().toString());
+
+      bip = "src/main/res/sounds/gameover.wav";
+      mediaGameover = new Media(new File(bip).toURI().toString());
+
+
       playerJump = new MediaPlayer(mediaJump);
       playerCrouchDown = new MediaPlayer(mediaCrouchDown);
       playerCrouchUp = new MediaPlayer(mediaCrouchUp);
+      playerGameOpening = new MediaPlayer(mediaGameOpenining);
+      playerGameLoop = new MediaPlayer(mediaGameLoop);
+      playerGameover = new MediaPlayer(mediaGameover);
+
+
+
 
    }
 
-   public void playJump(){
-      playerJump.seek(Duration.ZERO);
-      playerJump.play();
+   public void playJump() {
+
+      Thread thread = new Thread(new Runnable() {
+         @Override
+         public void run() {
+            playerJump.stop();
+            playerJump.seek(Duration.ZERO);
+            playerJump.play();
+         }
+      });
+
+      thread.start();
+
    }
 
-   public void playCrouchDown(){
-      playerCrouchDown.seek(Duration.ZERO);
-     playerCrouchDown.play();
+   public void playCrouchDown() {
+
+      Thread thread = new Thread(new Runnable() {
+         @Override
+         public void run() {
+            playerCrouchDown.stop();
+            playerCrouchDown.seek(Duration.ZERO);
+            playerCrouchDown.play();
+         }
+      });
+
+      thread.start();
+
    }
 
-   public void playCrouchUp(){
-      playerCrouchUp.seek(Duration.ZERO);
-      playerCrouchUp.play();
+   public void playCrouchUp() {
+
+      Thread threadCrouchUp = new Thread(new Runnable() {
+         @Override
+         public void run() {
+            playerCrouchUp.stop();
+            playerCrouchUp.seek(Duration.ZERO);
+            playerCrouchUp.play();
+         }
+      });
+
+      threadCrouchUp.start();
    }
+
+   public void playGametrack() {
+
+      Thread threadGameLoop = new Thread(new Runnable() {
+         @Override
+         public void run() {
+
+            playerGameOpening.seek(Duration.ZERO);
+            playerGameOpening.play();
+            playerGameOpening.setOnEndOfMedia(new Runnable() {
+               @Override
+               public void run() {
+                  playerGameLoop.seek(Duration.ZERO);
+                  playerGameLoop.setCycleCount(MediaPlayer.INDEFINITE);
+                  playerGameLoop.play();
+
+               }
+            });
+
+         }
+      });
+
+      threadGameLoop.start();
+
+   }
+
+   public void stopGametrack() {
+      playerGameOpening.stop();
+      playerGameLoop.stop();
+   }
+
+   public void playGameover() {
+
+      Thread thread = new Thread(new Runnable() {
+         @Override
+         public void run() {
+            playerGameover.stop();
+            playerGameover.seek(Duration.ZERO);
+            playerGameover.play();
+         }
+      });
+
+      thread.start();
+
+   }
+
+   public void stopGameover() {
+      playerGameover.stop();
+   }
+
+
 }

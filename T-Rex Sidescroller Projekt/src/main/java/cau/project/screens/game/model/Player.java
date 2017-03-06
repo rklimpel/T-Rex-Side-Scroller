@@ -46,9 +46,6 @@ public class Player extends GameObject {
    //optium:20
    double jumpSpeed = R.playerJumpSpeed;
 
-   SoundService soundService = new SoundService();
-
-
    public Player(int paneWidth, int paneHeight) {
 
       this.paneHeight = paneHeight;
@@ -72,8 +69,6 @@ public class Player extends GameObject {
     * calculates the new Y values for the jumping ployer
     */
    public void jump() {
-
-      soundService.playJump();
 
       //Other jump speed if player is couched
       if (isCrouching) {
@@ -131,8 +126,6 @@ public class Player extends GameObject {
     */
    public void crouch() {
 
-      soundService.playCrouchDown();
-
       height = (int) (defaultHeight * R.playerCrouchSize);
       yOffset = (int) (defaultHeight * (1 - R.playerCrouchSize));
 
@@ -146,8 +139,6 @@ public class Player extends GameObject {
     * (crouch ends)
     */
    public void crouchEnd() {
-
-      soundService.playCrouchUp();
 
       height = defaultHeight;
       yOffset = 0;

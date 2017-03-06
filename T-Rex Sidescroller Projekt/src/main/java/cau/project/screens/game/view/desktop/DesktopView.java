@@ -15,6 +15,7 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Font;
 import main.java.cau.project.*;
 import main.java.cau.project.screens.game.view.GameView;
+import main.java.cau.project.services.SoundService;
 import main.java.cau.project.services.listeners.KeyboardListener;
 import main.java.cau.project.services.listeners.MouseListener;
 import main.java.cau.project.services.loader.CustomFontLoader;
@@ -58,7 +59,7 @@ public class DesktopView extends GameView {
       view = this;
       setViewID(R.viewIdGameDesktop);
 
-      if(Main.getMainView() == null || Main.getMainView().getViewID()!=R.viewIdSplit){
+      if (Main.getMainView() == null || Main.getMainView().getViewID() != R.viewIdSplit) {
          Main.setMainView(this);
       }
 
@@ -69,7 +70,7 @@ public class DesktopView extends GameView {
             paneWidth = (int) pane.getWidth();
             paneHeight = (int) (pane.getHeight());
 
-            if(paneWidth == 0 || paneHeight == 0){
+            if (paneWidth == 0 || paneHeight == 0) {
                paneWidth = 800;
                paneHeight = 400;
             }
@@ -276,7 +277,7 @@ public class DesktopView extends GameView {
       });
    }
 
-   public void init(Boolean gameObjectsAsImages){
+   public void init(Boolean gameObjectsAsImages) {
       this.gameObjectsAsImages = gameObjectsAsImages;
    }
 }

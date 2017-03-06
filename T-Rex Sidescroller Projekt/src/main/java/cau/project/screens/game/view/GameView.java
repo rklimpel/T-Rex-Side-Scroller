@@ -7,6 +7,7 @@ import main.java.cau.project.View;
 import main.java.cau.project.screens.game.controller.GameController;
 import main.java.cau.project.screens.split.SplitView;
 import main.java.cau.project.services.SceneSwitcher;
+import main.java.cau.project.services.SoundService;
 
 public class GameView extends View{
 

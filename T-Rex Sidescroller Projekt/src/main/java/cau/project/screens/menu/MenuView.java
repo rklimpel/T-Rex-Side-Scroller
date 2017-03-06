@@ -2,8 +2,10 @@ package main.java.cau.project.screens.menu;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import main.java.cau.project.*;
 import main.java.cau.project.services.LighthouseService;
 import main.java.cau.project.services.listeners.KeyboardListener;
@@ -16,6 +18,8 @@ public class MenuView extends View {
    public Button btn_startDesktop;
    @FXML
    public Button btn_startLighthouse;
+   @FXML
+   public CheckBox checkBoxMusic;
 
    private Boolean lighthouseConnected = false;
 
@@ -45,6 +49,19 @@ public class MenuView extends View {
             } else {
                btn_startLighthouse.setStyle("-fx-background-color:  #f44336;");
             }
+
+            checkBoxMusic.setSelected(R.musicOn);
+
+            checkBoxMusic.setOnAction(new EventHandler<ActionEvent>() {
+               @Override
+               public void handle(ActionEvent event) {
+                  if(checkBoxMusic.isSelected()){
+                     R.musicOn = true;
+                  }else{
+                     R.musicOn = false;
+                  }
+               }
+            });
 
          }
       });
