@@ -87,6 +87,8 @@ public class R {
    //Chosse Wich Lvl File should be loaded
    public static final String levelFile = lvl_samples;
 
+   public static String[] levelFiles = {R.lvl_samples,R.lvl_freeTesting};
+
    /**
     * Lighthouse
     **/
