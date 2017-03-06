@@ -96,6 +96,7 @@ public class R {
    public static final String levelFile = lvl_samples;
 
    //Put all Lvl Files that should be loaded in this String Array. Lvl Loader will do the rest....
+   public static String[] levelFiles = {R.lvl_samples};
 
    /**
     * Lighthouse
