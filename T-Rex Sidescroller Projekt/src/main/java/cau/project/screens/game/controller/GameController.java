@@ -1,5 +1,6 @@
 package main.java.cau.project.screens.game.controller;
 
+import javafx.scene.image.ImageView;
 import main.java.cau.project.R;
 import main.java.cau.project.screens.game.model.*;
 import main.java.cau.project.screens.game.view.desktop.DesktopView;
@@ -90,10 +91,8 @@ public class GameController {
 
       if(nextWalkingImg==0){
          nextWalkingImg = 15;
-         System.out.println("Next Player Image!");
          for (int i = 0; i < listeningViews.size(); i++) {
             if(listeningViews.get(i).getViewID().equals(R.viewIdGameDesktop)){
-               System.out.println("NEXT");
                DesktopView desktopView = (DesktopView)listeningViews.get(i);
                desktopView.nextPlayerImage();
             }
@@ -240,5 +239,9 @@ public class GameController {
 
    public ArrayList<Platform> getPlatforms() {
       return gameModel.getPlatforms();
+   }
+
+   public ArrayList<ImageView> getBackgroundObjects(){
+      return gameModel.getBackgroundObjects();
    }
 }

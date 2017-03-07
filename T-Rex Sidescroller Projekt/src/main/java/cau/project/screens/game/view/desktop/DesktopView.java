@@ -117,6 +117,8 @@ public class DesktopView extends GameView {
 
             if (gameObjectsAsImages) {
 
+               drawBackgroundObjects();
+
                drawImagePowerup();
 
                drawPlatform();
@@ -154,6 +156,17 @@ public class DesktopView extends GameView {
 
          }
       });
+   }
+
+   private void drawBackgroundObjects() {
+
+      for (int i = 0; i < controller.getBackgroundObjects().size(); i++) {
+         ImageView imageView = controller.getBackgroundObjects().get(i);
+         imageView.setImage(imageLoader.getImg_cactus());
+
+         pane.getChildren().add(imageView);
+      }
+
    }
 
    /**

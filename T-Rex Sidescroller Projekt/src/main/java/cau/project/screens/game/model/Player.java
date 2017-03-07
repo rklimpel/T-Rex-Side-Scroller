@@ -85,8 +85,6 @@ public class Player extends GameObject {
     */
    public void jump(final double jumpSpeedValue) {
 
-      System.out.println("Jump called! :D");
-
       isJumpingDown = false;
 
       jumpSpeed = jumpSpeedValue;
@@ -114,22 +112,14 @@ public class Player extends GameObject {
                landingOffset = platform.getPlatformOffset();
             }
 
-            System.out.println("landing offset: " + landingOffset);
-
             nextPlatformOffset = 0;
-
 
             if(platform == null){
                landingOffset = 0;
             }
 
-            System.out.println("playerY: " + y);
-            System.out.println("def-landing: " + (defaultY-landingOffset));
-
             //If Player reaches Bottom again end the jump prozess
             if (y >= defaultY - landingOffset && isJumping) {
-
-               System.out.println("reached Bottom!");
 
                setY(defaultY - landingOffset);
 

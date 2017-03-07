@@ -1,9 +1,11 @@
 package main.java.cau.project.screens.game.model;
 
+import javafx.scene.image.ImageView;
 import main.java.cau.project.R;
 import main.java.cau.project.screens.game.controller.GameController;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -70,6 +72,13 @@ public class GameModel {
    //List of all Platforms that are in the Game
    private ArrayList<Platform> platforms = new ArrayList<>();
 
+   //List of all Background Objects
+   private ArrayList<ImageView> backgroundObjects = new ArrayList<>();
+
+   Random rand = new Random();
+
+   int nextBackground = 500;
+
    /**
     * Creates a new GameModel Instance (i think there should be just one...)
     * saves GameController to class variable
@@ -89,14 +98,14 @@ public class GameModel {
     * Creates a new Player instace from Player class
     */
    public void createPlayer() {
-      player = new Player(paneWidth, paneHeight,this);
+      player = new Player(paneWidth, paneHeight, this);
    }
 
    /**
     * Called by Space, makes the player jump
     */
    public void jump() {
-      if (! player.isJumping) {
+      if (!player.isJumping) {
          player.jump();
          for (int i = 0; i < platforms.size(); i++) {
             platforms.get(i).playerOnPlatform = false;
@@ -112,7 +121,7 @@ public class GameModel {
     * Creates a new Obstacle instance from Obstacle class
     */
    public void createObstacle(int type, int yOffset) {
-      Obstacle obstacle = new Obstacle(type,paneWidth, paneHeight, yOffset);
+      Obstacle obstacle = new Obstacle(type, paneWidth, paneHeight, yOffset);
       obstacles.add(obstacle);
    }
 
@@ -175,9 +184,9 @@ public class GameModel {
 
       checkScore();
 
-      if (jumpWaiting && ! player.isJumping) {
+      if (jumpWaiting && !player.isJumping) {
 
-         System.out.println("Waiting jump called!");
+         //System.out.println("Waiting jump called!");
 
          jump();
          jumpWaiting = false;
@@ -189,6 +198,55 @@ public class GameModel {
 
       checkObstacles();
 
+      nextBackground -= 1;
+      if (nextBackground == 0) {
+         checkBackgroundObjects();
+      }
+
+      for (int i = 0; i < backgroundObjects.size(); i++) {
+         backgroundObjects.get(i).setX(backgroundObjects.get(i).getX() - 0.3);
+         if(backgroundObjects.get(i).getX()+backgroundObjects.get(i).getFitWidth()<0){
+            backgroundObjects.remove(i);
+         }
+      }
+
+
+   }
+
+   private void checkBackgroundObjects() {
+
+      nextBackground = randInt(0, 2500);
+
+      System.out.println("New Background Cactus!");
+
+      ImageView imageView = new ImageView();
+      imageView.setX(paneWidth);
+      imageView.setY(randInt(paneHeight/2, paneHeight-R.groundLvL-50));
+
+      /*int mid = (int)(((paneHeight/2) + (paneHeight-R.groundLvL-50))/2);
+      int diff = mid - (int)imageView.getY();
+
+      int ratio = R.backgroundObjectHeight/R.backgroundObjectWidth;*/
+
+      imageView.setFitWidth(R.backgroundObjectWidth);
+      imageView.setFitHeight(R.backgroundObjectHeight);
+
+      backgroundObjects.add(imageView);
+
+   }
+
+   private int randInt(int min, int max) {
+
+      if (min < 0) {
+         min = 1;
+      }
+      if (max < 0) {
+         max = 2;
+      }
+
+      int randomNum = rand.nextInt((max - min) + 1) + min;
+
+      return randomNum;
    }
 
    /**
@@ -198,21 +256,19 @@ public class GameModel {
       // Do Things with Platforms
       for (int i = 0; i < platforms.size(); i++) {
 
-         if(!platforms.get(i).checkOutisde()){
+         if (!platforms.get(i).checkOutisde()) {
 
             platforms.get(i).moveLeft();
 
             //Jump on Platform and land on it
-            if(platforms.get(i).checkOnPlatform(player)&&player.isJumpingDown){
+            if (platforms.get(i).checkOnPlatform(player) && player.isJumpingDown) {
                player.stopJumpTimer();
-               player.setPlatformOffset((paneHeight-player.groundLvl)-platforms.get(i).getY());
+               player.setPlatformOffset((paneHeight - player.groundLvl) - platforms.get(i).getY());
                platforms.get(i).playerOnPlatform = true;
                player.setPlatform(platforms.get(i));
-            }else if (platforms.get(i).playerOnPlatform
+            } else if (platforms.get(i).playerOnPlatform
                     && !platforms.get(i).checkOnPlatform(player)
-                    &&!player.isJumping){
-
-               System.out.println("CALL THAT JUMP FROM HERE");
+                    && !player.isJumping) {
 
                platforms.get(i).playerOnPlatform = false;
                player.setPlatform(null);
@@ -220,18 +276,18 @@ public class GameModel {
                player.setY(player.defaultY);
 
                for (int j = 0; j < platforms.size(); j++) {
-                  if(platforms.get(j).checkOverPlatform(player)){
-                     player.setPlatformOffset((paneHeight-player.groundLvl)-platforms.get(j).getY());
+                  if (platforms.get(j).checkOverPlatform(player)) {
+                     player.setPlatformOffset((paneHeight - player.groundLvl) - platforms.get(j).getY());
                      platforms.get(j).playerOnPlatform = true;
                      player.setPlatform(platforms.get(j));
-                     player.setY(player.defaultY-player.platformOffset);
+                     player.setY(player.defaultY - player.platformOffset);
                   }
                }
 
 
             }
 
-         }else{
+         } else {
 
             platforms.remove(i);
 
@@ -247,7 +303,7 @@ public class GameModel {
       //Do Things with Powerups
       for (int i = 0; i < powerups.size(); i++) {
 
-         if (! powerups.get(i).checkOutisde()) {
+         if (!powerups.get(i).checkOutisde()) {
 
             powerups.get(i).moveLeft();
 
@@ -255,7 +311,7 @@ public class GameModel {
 
                System.out.println("Got that Powerup!");
 
-               score+=5;
+               score += 5;
                powerups.remove(i);
 
             }
@@ -272,7 +328,7 @@ public class GameModel {
       //Do Things with obstacles
       for (int i = 0; i < obstacles.size(); i++) {
 
-         if (! obstacles.get(i).checkOutisde()) {
+         if (!obstacles.get(i).checkOutisde()) {
 
             obstacles.get(i).moveLeft();
 
@@ -346,7 +402,7 @@ public class GameModel {
             if (lvlIndex != R.EMPTY) {
 
                if (levelArray[1][lvlIndex - 1] < 100) {
-                  createObstacle(levelArray[1][lvlIndex-1],levelArray[2][lvlIndex - 1]);
+                  createObstacle(levelArray[1][lvlIndex - 1], levelArray[2][lvlIndex - 1]);
                   //System.out.println("Create Obstacle- index: " + (lvlIndex - 1));
                } else if (levelArray[1][lvlIndex - 1] >= 100 && levelArray[1][lvlIndex - 1] < 200) {
                   createPowerup(levelArray[1][lvlIndex - 1], levelArray[2][lvlIndex - 1]);
@@ -437,5 +493,9 @@ public class GameModel {
 
    public ArrayList<Platform> getPlatforms() {
       return platforms;
+   }
+
+   public ArrayList<ImageView> getBackgroundObjects() {
+      return backgroundObjects;
    }
 }

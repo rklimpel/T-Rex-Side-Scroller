@@ -76,6 +76,13 @@ public class R {
    public static final int platformWidth2 = 300;
 
    /**
+    * Background Objects
+    */
+
+   public static final int backgroundObjectWidth = 10;
+   public static final int backgroundObjectHeight = 40;
+
+   /**
     * Game Parameters
     **/
 
@@ -119,7 +126,7 @@ public class R {
    public static final String levelsPath = "./src/main/res/leveldata/";
 
    //Put all Lvl Files that should be loaded in this String Array. Lvl Loader will do the rest....
-   public static String[] levelFiles = {lvl_levelsTryout};
+   public static String[] levelFiles = {lvl_freeTesting};
 
    /**
     * Lighthouse

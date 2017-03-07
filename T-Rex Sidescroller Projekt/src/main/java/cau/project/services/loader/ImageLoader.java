@@ -16,6 +16,8 @@ public class ImageLoader {
    private Image img_walking4 = null;
    private Image img_jump = null;
 
+   private Image img_cactus = null;
+
 
    String stylePackage = "mexiko";
 
@@ -41,6 +43,9 @@ public class ImageLoader {
                  "file:src/main/res/assets/"+stylePackage+"/walking4.png");
          img_jump = new Image(
                  "file:src/main/res/assets/"+stylePackage+"/jump.png");
+
+         img_cactus = new Image(
+                 "file:src/main/res/assets/"+stylePackage+"/cactus.png");
 
 
       } catch (Exception e) {
@@ -82,5 +87,9 @@ public class ImageLoader {
 
    public Image getImg_jump() {
       return img_jump;
+   }
+
+   public Image getImg_cactus() {
+      return img_cactus;
    }
 }
