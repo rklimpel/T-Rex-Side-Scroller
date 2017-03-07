@@ -1,15 +1,8 @@
 //One Level with big offset
 #id=lvl0
-gap=40|type=0|y=0
-gap=40|type=1|y=0
-gap=0|type=2|y=80
-gap=0|type=2|y=80
-gap=0|type=2|y=80
-gap=350|type=0|y=0
-gap=200|type=0|y=0
-gape=400|type=1|y=28
-gape=150|type=2|y=0
-gape=300|type=0|y=0
-gape=10|type=0|y=10
-gape=10|type=0|y=20
+gap=40|type=200|y=100
+gap=650|type=201|y=100
+gap=650|type=202|y=100
+
+
 ---

@@ -39,29 +39,41 @@ public class R {
     * Obstacle
     **/
 
-   //Obstacle Size:
+   //normal one
    public static final int obstacleHeight0 = 80;
    public static final int obstacleWidth0 = 20;
-
+   //half height
    public static final int obstacleHeight1 = 50;
    public static final int obstacleWidth1 = 20;
-
+   //normal lie
    public static final int obstacleHeight2 = 30;
    public static final int obstacleWidth2 = 100;
+   //thicker one
+   public static final int obstacleHeight3 = 70;
+   public static final int obstacleWidth3 = 50;
+   //long on the ground
+   public static final int obstacleHeight4 = 30;
+   public static final int obstacleWidth4 = 300;
 
    /**
     * Powerups
     */
 
-   public static final int powerupHeight = 35;
-   public static final int powerupWidth = 35;
+   public static final int powerupHeight = 30;
+   public static final int powerupWidth = 30;
 
    /**
     * Platforms
     */
-
-   public static final int platformHeight = 10;
-   public static final int platformWidth = 600;
+   //normal running plattform
+   public static final int platformHeight0 = 40;
+   public static final int platformWidth0 = 600;
+   //normal block plattform
+   public static final int platformHeight1 = 40;
+   public static final int platformWidth1 = 40;
+   //semilong plattform
+   public static final int platformHeight2 = 40;
+   public static final int platformWidth2 = 300;
 
    /**
     * Game Parameters

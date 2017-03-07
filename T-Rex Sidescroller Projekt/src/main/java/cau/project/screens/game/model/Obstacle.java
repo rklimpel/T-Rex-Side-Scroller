@@ -40,6 +40,14 @@ public class Obstacle extends GameObject {
             defaultHeight = R.obstacleHeight2;
             defaultWidth = R.obstacleWidth2;
             break;
+         case 3:
+            defaultHeight = R.obstacleHeight3;
+            defaultWidth = R.obstacleWidth3;
+            break;
+         case 4:
+            defaultHeight = R.obstacleHeight4;
+            defaultWidth = R.obstacleWidth4;
+            break;
       }
 
       width = defaultWidth;
