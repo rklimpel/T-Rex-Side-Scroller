@@ -40,8 +40,14 @@ public class R {
     **/
 
    //Obstacle Size:
-   public static final int obstacleHeight = 80;
-   public static final int obstacleWidth = 20;
+   public static final int obstacleHeight0 = 80;
+   public static final int obstacleWidth0 = 20;
+
+   public static final int obstacleHeight1 = 50;
+   public static final int obstacleWidth1 = 20;
+
+   public static final int obstacleHeight2 = 30;
+   public static final int obstacleWidth2 = 100;
 
    /**
     * Powerups
@@ -100,7 +106,7 @@ public class R {
    public static final String levelsPath = "./src/main/res/leveldata/";
 
    //Put all Lvl Files that should be loaded in this String Array. Lvl Loader will do the rest....
-   public static String[] levelFiles = {lvl_samples};
+   public static String[] levelFiles = {lvl_freeTesting};
 
    /**
     * Lighthouse
