@@ -114,6 +114,26 @@ public class LhView extends GameView{
             }
         }
 
+        //Paint powerup Pixels
+        for (int i = 0; i < gameModel.getPowerups().size(); i++) {
+
+            for (int j = scaleY(gameModel.getPowerups().get(i).getY());
+                 j < scaleY(gameModel.getPowerups().get(i).getY()
+                 + gameModel.getPowerups().get(i).getHeight()); j++) {
+
+                for (int k = scaleX(gameModel.getPowerups().get(i).getX());
+                     k < scaleX(gameModel.getPowerups().get(i).getX()
+                             + gameModel.getPowerups().get(i).getWidth()); k++) {
+
+                    if(!(j>pixelsReduced.length||k>=pixelsReduced[0].length||j<0||k<0)){
+                        pixelsReduced[j][k]=Color.YELLOW;
+                    }
+
+                }
+
+            }
+        }
+
         //Paint PlayerPixels Red
         for (int i = scaleY(gameModel.player.getY());
              i < scaleY(gameModel.player.getY()+gameModel.player.getHeight()); i++) {
