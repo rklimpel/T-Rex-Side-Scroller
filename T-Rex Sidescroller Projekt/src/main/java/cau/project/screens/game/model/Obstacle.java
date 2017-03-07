@@ -4,13 +4,15 @@ import main.java.cau.project.R;
 
 public class Obstacle extends GameObject {
 
-   final int defaultHeight = R.obstacleHeight;
-   final int defaultWidth = R.obstacleWidth;
+   int defaultHeight;
+   int defaultWidth;
 
-   public Obstacle(int paneWidth, int paneHeight, int yOffset) {
+   public Obstacle(int type, int paneWidth, int paneHeight, int yOffset) {
 
       this.paneWidth = paneWidth;
       this.paneHeight = paneHeight;
+
+      setMeasures(type);
 
       width = defaultWidth;
       height = defaultHeight;
@@ -20,12 +22,26 @@ public class Obstacle extends GameObject {
 
    }
 
-   public Obstacle(int paneWidth, int paneHeight) {
-      this(paneWidth, paneHeight, 0);
+   public Obstacle(int type, int paneWidth, int paneHeight) {
+      this(type, paneWidth, paneHeight, 0);
    }
 
-   public Obstacle() {
-      this(0, 0, 0);
+   public Obstacle(int type) {
+      this(type, 0, 0);
+   }
+
+   /**
+    * Set Height and Width
+    *
+    * @param type
+    */
+   private void setMeasures(int type){
+      switch (type){
+         case 0:
+            defaultHeight = R.obstacleHeight;
+            defaultWidth = R.obstacleWidth;
+            break;
+      }
    }
 
 }

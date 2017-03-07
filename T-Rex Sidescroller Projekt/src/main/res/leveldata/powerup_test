@@ -1,6 +1,6 @@
 //Gleichmäßiges Level
 #id=lvl0
-gap=300|type=100|y=60
+gap=300|type=0|y=60
 gap=500|type=200|y=70
 gap=300|type=200|y=30
 gap=800|type=200|y=70

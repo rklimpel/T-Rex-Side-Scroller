@@ -100,7 +100,7 @@ public class R {
    public static final String levelsPath = "./src/main/res/leveldata/";
 
    //Put all Lvl Files that should be loaded in this String Array. Lvl Loader will do the rest....
-   public static String[] levelFiles = {lvl_powerupTesting};
+   public static String[] levelFiles = {lvl_samples};
 
    /**
     * Lighthouse

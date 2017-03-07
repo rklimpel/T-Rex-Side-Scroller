@@ -107,8 +107,8 @@ public class GameModel {
    /**
     * Creates a new Obstacle instance from Obstacle class
     */
-   public void createObstacle(int yOffset) {
-      Obstacle obstacle = new Obstacle(paneWidth, paneHeight, yOffset);
+   public void createObstacle(int type, int yOffset) {
+      Obstacle obstacle = new Obstacle(type,paneWidth, paneHeight, yOffset);
       obstacles.add(obstacle);
    }
 
@@ -334,7 +334,7 @@ public class GameModel {
             if (lvlIndex != R.EMPTY) {
 
                if (levelArray[1][lvlIndex - 1] < 100) {
-                  createObstacle(levelArray[2][lvlIndex - 1]);
+                  createObstacle(levelArray[1][lvlIndex-1],levelArray[2][lvlIndex - 1]);
                   //System.out.println("Create Obstacle- index: " + (lvlIndex - 1));
                } else if (levelArray[1][lvlIndex - 1] >= 100 && levelArray[1][lvlIndex - 1] < 200) {
                   createPowerup(levelArray[1][lvlIndex - 1], levelArray[2][lvlIndex - 1]);
@@ -354,7 +354,7 @@ public class GameModel {
             if (levelArray[1][lvlIndex] < 100) {
 
                //Create a helping obstacle to check obstacle width
-               Obstacle helpObstacle = new Obstacle();
+               Obstacle helpObstacle = new Obstacle(levelArray[1][lvlIndex]);
 
                //set new obstacle timer by lvl array data and add obstacle width offset
                obstacleTimer = levelArray[0][lvlIndex] + helpObstacle.getWidth();
