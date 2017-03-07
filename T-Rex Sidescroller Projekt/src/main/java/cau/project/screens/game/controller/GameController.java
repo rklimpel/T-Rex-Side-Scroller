@@ -89,7 +89,8 @@ public class GameController {
    public void jump(View view) {
 
       //IF Game is not over but it is not Running start the game
-      if (! gameModel.gameTimerEnabled && ! gameModel.gameOver) {
+      if (!gameModel.gameTimerEnabled && ! gameModel.gameOver) {
+
          gameModel.createPlayer();
          gameModel.startGameTimer();
          startUpdater();
@@ -107,6 +108,7 @@ public class GameController {
 
       //else space is there to jump
       else if (gameModel.gameTimerEnabled) {
+
          gameModel.jump();
 
          if(R.musicOn){

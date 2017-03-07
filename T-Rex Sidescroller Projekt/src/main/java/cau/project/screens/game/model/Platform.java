@@ -40,4 +40,15 @@ public class Platform extends GameObject {
       return false;
    }
 
+   public Boolean checkOverPlatform(GameObject object){
+      if((object.getX() >= this.getX()
+              && object.getX() <= this.getX() + this.getWidth())
+              || (object.getX() + object.getWidth() >= this.getX()
+              && object.getX() + object.getWidth() <= this.getX() + this.getWidth())
+              && object.getY() <= this.getY()){
+         return true;
+      }
+      return false;
+   }
+
 }

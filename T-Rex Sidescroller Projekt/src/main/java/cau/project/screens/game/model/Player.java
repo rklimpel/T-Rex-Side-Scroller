@@ -18,6 +18,8 @@ public class Player extends GameObject {
    //Player rotation activated?
    final Boolean playerRotation = R.playerRotation;
 
+   Player player;
+
    //Checked if the player is crouching
    Boolean isCrouching = false;
 
@@ -27,15 +29,31 @@ public class Player extends GameObject {
    double jumpTime = 0;
    //check if the player is still jump
    Boolean isJumping = false;
+
+   Boolean isJumpingDown = false;
    //Jump Timer
    Timer timer_jump;
 
    //Jump Configuration: Formula Data
    final double gravitation = R.playerGravitation;
    //optium:20
-   double jumpSpeed = R.playerJumpSpeed;
+   double defaultJumpSpeed = R.playerJumpSpeed;
 
-   public Player(int paneWidth, int paneHeight) {
+   int landingOffset;
+
+   int nextPlatformOffset;
+
+   GameModel gameModel;
+
+   Platform platform;
+
+   double jumpSpeed;
+
+   public Player(int paneWidth, int paneHeight, GameModel gameModel) {
+
+      this.gameModel = gameModel;
+
+      this.player = this;
 
       //players messurements
       defaultHeight = R.playerHeight;
@@ -58,10 +76,20 @@ public class Player extends GameObject {
 
    }
 
+   public void jump(){
+      this.jump(defaultJumpSpeed);
+   }
+
    /**
     * calculates the new Y values for the jumping ployer
     */
-   public void jump() {
+   public void jump(final double jumpSpeedValue) {
+
+      System.out.println("Jump called! :D");
+
+      isJumpingDown = false;
+
+      jumpSpeed = jumpSpeedValue;
 
       //Other jump speed if player is couched
       if (isCrouching) {
@@ -80,15 +108,39 @@ public class Player extends GameObject {
       TimerTask task = new TimerTask() {
          public void run() {
 
-            //If Player reaches Bottom again end the jump prozess
-            if (y >= defaultY && isJumping) {
+            if(platform != null && !platform.playerOnPlatform){
+               landingOffset = 0;
+            }else if(platform!=null && platform.playerOnPlatform){
+               landingOffset = platform.getPlatformOffset();
+            }
 
-               setY(defaultY);
+            System.out.println("landing offset: " + landingOffset);
+
+            nextPlatformOffset = 0;
+
+
+            if(platform == null){
+               landingOffset = 0;
+            }
+
+            System.out.println("playerY: " + y);
+            System.out.println("def-landing: " + (defaultY-landingOffset));
+
+            //If Player reaches Bottom again end the jump prozess
+            if (y >= defaultY - landingOffset && isJumping) {
+
+               System.out.println("reached Bottom!");
+
+               setY(defaultY - landingOffset);
 
                stopJumpTimer();
 
                jumpTime = 0;
                rotation = 0;
+
+               if(platform == null){
+                  platformOffset=0;
+               }
 
                //System.out.println("Jump done");
 
@@ -103,6 +155,11 @@ public class Player extends GameObject {
                //Calculate the new y value for the player (senkrechter Wurf)
                setY(paneHeight - (int) ((jumpSpeed * jumpTime - (gravitation / 2) * Math.pow(jumpTime, 2))
                        + defaultHeight + 1 + platformOffset));
+
+               if(jumpSpeed-gravitation*jumpTime<0){
+                  isJumpingDown=true;
+               }
+
 
                if (playerRotation) {
                   rotation += rotationPerTick;
@@ -149,6 +206,7 @@ public class Player extends GameObject {
       timer_jump.purge();
       jumpTime = 0;
       isJumping = false;
+      isJumpingDown = false;
    }
 
    public Boolean getCrouching() {
@@ -161,5 +219,9 @@ public class Player extends GameObject {
 
    public double getRotation() {
       return rotation;
+   }
+
+   public void setPlatform(Platform platform) {
+      this.platform = platform;
    }
 }

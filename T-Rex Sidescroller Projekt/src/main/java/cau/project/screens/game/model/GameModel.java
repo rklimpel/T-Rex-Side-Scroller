@@ -89,7 +89,7 @@ public class GameModel {
     * Creates a new Player instace from Player class
     */
    public void createPlayer() {
-      player = new Player(paneWidth, paneHeight);
+      player = new Player(paneWidth, paneHeight,this);
    }
 
    /**
@@ -98,6 +98,10 @@ public class GameModel {
    public void jump() {
       if (! player.isJumping) {
          player.jump();
+         for (int i = 0; i < platforms.size(); i++) {
+            platforms.get(i).playerOnPlatform = false;
+         }
+         player.platform = null;
       } else if (paneHeight - R.groundLvL - player.getY()
               <= player.getHeight() / 2 + player.getHeight()) {
          jumpWaiting = true;
@@ -172,6 +176,9 @@ public class GameModel {
       checkScore();
 
       if (jumpWaiting && ! player.isJumping) {
+
+         System.out.println("Waiting jump called!");
+
          jump();
          jumpWaiting = false;
       }
@@ -187,45 +194,49 @@ public class GameModel {
    /**
     * check existing Platforms
     */
-   private void checkPlatforms() {
+   public void checkPlatforms() {
       // Do Things with Platforms
       for (int i = 0; i < platforms.size(); i++) {
 
-         if (! platforms.get(i).checkOutisde()) {
+         if(!platforms.get(i).checkOutisde()){
 
             platforms.get(i).moveLeft();
 
-            if (platforms.get(i).checkOnPlatform(player) && ! platforms.get(i).playerOnPlatform
-                    || platforms.get(i).checkOnPlatform(player) && platforms.get(i).playerOnPlatform && player.isJumping) {
-
-               System.out.println("Player entered Platform");
-               platforms.get(i).playerOnPlatform = true;
-
+            //Jump on Platform and land on it
+            if(platforms.get(i).checkOnPlatform(player)&&player.isJumpingDown){
                player.stopJumpTimer();
-               player.setPlatformOffset(paneHeight - platforms.get(i).getY());
+               player.setPlatformOffset((paneHeight-player.groundLvl)-platforms.get(i).getY());
+               platforms.get(i).playerOnPlatform = true;
+               player.setPlatform(platforms.get(i));
+            }else if (platforms.get(i).playerOnPlatform
+                    && !platforms.get(i).checkOnPlatform(player)
+                    &&!player.isJumping){
 
-            } else if (!platforms.get(i).checkOnPlatform(player) && platforms.get(i).playerOnPlatform && !player.isJumping) {
+               System.out.println("CALL THAT JUMP FROM HERE");
 
                platforms.get(i).playerOnPlatform = false;
-
-               System.out.println("Player leaved Platforms");
-               player.setPlatformOffset(0);
-
-            } else if (!player.isJumping && !platforms.get(i).playerOnPlatform) {
-
+               player.setPlatform(null);
                player.setPlatformOffset(0);
                player.setY(player.defaultY);
 
+               for (int j = 0; j < platforms.size(); j++) {
+                  if(platforms.get(j).checkOverPlatform(player)){
+                     player.setPlatformOffset((paneHeight-player.groundLvl)-platforms.get(j).getY());
+                     platforms.get(j).playerOnPlatform = true;
+                     player.setPlatform(platforms.get(j));
+                     player.setY(player.defaultY-player.platformOffset);
+                  }
+               }
+
+
             }
 
-         } else {
+         }else{
+
             platforms.remove(i);
+
          }
 
-      }
-
-      if (platforms.size() == 0 && player.isJumping == false) {
-         player.setPlatformOffset(0);
       }
    }
 
@@ -382,6 +393,7 @@ public class GameModel {
          } else {
             levels.setActiveLvl(R.EMPTY);
          }
+
       }
 
       if (obstacleTimer != 0) {
