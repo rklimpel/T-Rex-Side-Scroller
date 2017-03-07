@@ -59,8 +59,8 @@ public class R {
     * Powerups
     */
 
-   public static final int powerupHeight = 30;
-   public static final int powerupWidth = 30;
+   public static final int powerupHeight = 40;
+   public static final int powerupWidth = 40;
 
    /**
     * Platforms

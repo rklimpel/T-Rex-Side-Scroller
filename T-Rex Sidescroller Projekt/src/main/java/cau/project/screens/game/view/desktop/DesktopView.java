@@ -4,11 +4,12 @@ import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.effect.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
@@ -45,6 +46,8 @@ public class DesktopView extends GameView {
    private int paneWidth;
    private int paneHeight;
 
+   int playerWalkImage = 1;
+
    /**
     * Deskotp View Constructor
     * <p>
@@ -74,6 +77,17 @@ public class DesktopView extends GameView {
                paneWidth = 800;
                paneHeight = 400;
             }
+
+            BackgroundFill myBF = new BackgroundFill(Color.BLUEVIOLET, new CornerRadii(1),
+                    new Insets(0.0,0.0,0.0,0.0));// or null for the padding
+
+            BackgroundImage myBI= new BackgroundImage(new Image
+                    ("file:src/main/res/assets/mexiko/background.png",paneWidth,paneHeight,false,true),
+                    BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                    BackgroundSize.DEFAULT);
+
+            background.setBackground(new Background(myBI));
+
 
             DesktopView.super.setController(paneWidth, paneHeight);
 
@@ -105,7 +119,7 @@ public class DesktopView extends GameView {
 
             if (gameObjectsAsImages) {
 
-               drawPowerup();
+               drawImagePowerup();
 
                drawPlatform();
 
@@ -206,9 +220,33 @@ public class DesktopView extends GameView {
    private void drawImagePlayer() {
 
       if (controller.getPlayer().getCrouching()) {
+
          iV_player.setImage(imageLoader.getImg_playerCrouched());
+
       } else {
-         iV_player.setImage(imageLoader.getImg_player());
+
+         if(controller.getPlayer().getJumping()){
+
+            iV_player.setImage(imageLoader.getImg_jump());
+
+         }else{
+
+            switch (playerWalkImage){
+               case 1:
+                  iV_player.setImage(imageLoader.getImg_walking1());
+                  break;
+               case 2:
+                  iV_player.setImage(imageLoader.getImg_walking2());
+                  break;
+               case 3:
+                  iV_player.setImage(imageLoader.getImg_walking3());
+                  break;
+               case 4:
+                  iV_player.setImage(imageLoader.getImg_walking4());
+                  break;
+            }
+         }
+
       }
       iV_player.setFitWidth(controller.getPlayer().getWidth());
       iV_player.setFitHeight(controller.getPlayer().getHeight());
@@ -237,6 +275,22 @@ public class DesktopView extends GameView {
       rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
 
       pane.getChildren().add(rectangle);
+
+   }
+
+   private void drawImagePowerup(){
+
+      for (int i = 0; i < controller.gameModel.getPowerups().size(); i++) {
+
+         ImageView iv_powerup = new ImageView();
+         iv_powerup.setImage(imageLoader.getImg_powerupTaco());
+         iv_powerup.relocate(controller.getPowerups().get(i).getX(),
+                 controller.getPowerups().get(i).getY());
+         iv_powerup.setFitHeight(controller.getPowerups().get(i).getHeight());
+         iv_powerup.setFitWidth(controller.getPowerups().get(i).getWidth());
+
+         pane.getChildren().addAll(iv_powerup);
+      }
 
    }
 
@@ -291,7 +345,7 @@ public class DesktopView extends GameView {
       float labelWidth = fontLoader.computeStringWidth(label.getText(), label.getFont());
 
       label.setLayoutX((pane.getWidth() / 2) - labelWidth / 2);
-      label.setLayoutY(pane.getHeight() / 5);
+      label.setLayoutY(pane.getHeight() / 7);
 
       pane.getChildren().add(label);
    }
@@ -314,7 +368,7 @@ public class DesktopView extends GameView {
             float btn_hintsWidth = fontLoader.computeStringWidth(lbl_hints.getText(), lbl_hints.getFont());
 
             lbl_hints.setLayoutX((pane.getWidth() / 2) - btn_hintsWidth / 2 / 2);
-            lbl_hints.setLayoutY(pane.getHeight() / 5);
+            lbl_hints.setLayoutY(pane.getHeight() / 2);
 
             pane.getChildren().addAll(lbl_hints);
          }
@@ -323,5 +377,12 @@ public class DesktopView extends GameView {
 
    public void init(Boolean gameObjectsAsImages) {
       this.gameObjectsAsImages = gameObjectsAsImages;
+   }
+
+   public void nextPlayerImage(){
+      playerWalkImage+=1;
+      if(playerWalkImage==5){
+         playerWalkImage=1;
+      }
    }
 }

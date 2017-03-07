@@ -255,6 +255,7 @@ public class GameModel {
 
                System.out.println("Got that Powerup!");
 
+               score+=5;
                powerups.remove(i);
 
             }

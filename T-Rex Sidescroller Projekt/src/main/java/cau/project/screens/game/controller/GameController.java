@@ -2,11 +2,13 @@ package main.java.cau.project.screens.game.controller;
 
 import main.java.cau.project.R;
 import main.java.cau.project.screens.game.model.*;
+import main.java.cau.project.screens.game.view.desktop.DesktopView;
 import main.java.cau.project.services.Helper;
 import main.java.cau.project.Main;
 import main.java.cau.project.View;
 import main.java.cau.project.services.SoundService;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,6 +20,8 @@ public class GameController {
    public GameModel gameModel;
    Timer updateTimer;
 
+   int nextWalkingImg;
+
 
    private SoundService soundService = new SoundService();
 
@@ -28,7 +32,7 @@ public class GameController {
     * @param newListener
     */
    public GameController(View newListener) {
-      this(newListener,600,300);
+      this(newListener, 600, 300);
    }
 
    /**
@@ -55,9 +59,11 @@ public class GameController {
          }
       };
       updateTimer.scheduleAtFixedRate(task, 0, 8);
-}
 
-   public void stopUpdater(){
+      nextWalkingImg = 12;
+   }
+
+   public void stopUpdater() {
       updateTimer.cancel();
       updateTimer.purge();
    }
@@ -75,9 +81,23 @@ public class GameController {
          listeningViews.get(i).Update();
       }
 
-      if(gameModel.gameOver && R.musicOn){
+      if (gameModel.gameOver && R.musicOn) {
          soundService.stopGametrack();
          soundService.playGameover();
+      }
+
+      nextWalkingImg-=1;
+
+      if(nextWalkingImg==0){
+         nextWalkingImg = 15;
+         System.out.println("Next Player Image!");
+         for (int i = 0; i < listeningViews.size(); i++) {
+            if(listeningViews.get(i).getViewID().equals(R.viewIdGameDesktop)){
+               System.out.println("NEXT");
+               DesktopView desktopView = (DesktopView)listeningViews.get(i);
+               desktopView.nextPlayerImage();
+            }
+         }
       }
    }
 
@@ -89,20 +109,20 @@ public class GameController {
    public void jump(View view) {
 
       //IF Game is not over but it is not Running start the game
-      if (!gameModel.gameTimerEnabled && ! gameModel.gameOver) {
+      if (!gameModel.gameTimerEnabled && !gameModel.gameOver) {
 
          gameModel.createPlayer();
          gameModel.startGameTimer();
          startUpdater();
 
-         if(R.musicOn){
+         if (R.musicOn) {
             soundService.playGametrack();
          }
 
       }
 
       //IF the Game is over (collision) space switches to menu
-      else if (! gameModel.gameTimerEnabled && gameModel.gameOver) {
+      else if (!gameModel.gameTimerEnabled && gameModel.gameOver) {
          quitGame(view);
       }
 
@@ -111,7 +131,7 @@ public class GameController {
 
          gameModel.jump();
 
-         if(R.musicOn){
+         if (R.musicOn) {
             soundService.playJump();
          }
 
@@ -124,7 +144,7 @@ public class GameController {
    public void crouch() {
       gameModel.player.crouch();
 
-      if(R.musicOn){
+      if (R.musicOn) {
          soundService.playCrouchDown();
       }
 
@@ -136,7 +156,7 @@ public class GameController {
    public void crouchEnd() {
       gameModel.player.crouchEnd();
 
-      if(R.musicOn){
+      if (R.musicOn) {
          soundService.playCrouchUp();
       }
 
@@ -210,15 +230,15 @@ public class GameController {
       return gameModel.getPaneHeight();
    }
 
-   public Ground getGround(){
+   public Ground getGround() {
       return gameModel.getGround();
    }
 
-   public ArrayList<Powerup> getPowerups(){
+   public ArrayList<Powerup> getPowerups() {
       return gameModel.getPowerups();
    }
 
-   public ArrayList<Platform> getPlatforms(){
+   public ArrayList<Platform> getPlatforms() {
       return gameModel.getPlatforms();
    }
 }
