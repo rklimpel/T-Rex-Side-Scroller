@@ -66,13 +66,13 @@ public class R {
     * Platforms
     */
    //normal running plattform
-   public static final int platformHeight0 = 40;
+   public static final int platformHeight0 = 15;
    public static final int platformWidth0 = 600;
    //normal block plattform
-   public static final int platformHeight1 = 40;
+   public static final int platformHeight1 = 20;
    public static final int platformWidth1 = 40;
    //semilong plattform
-   public static final int platformHeight2 = 40;
+   public static final int platformHeight2 = 15;
    public static final int platformWidth2 = 300;
 
    /**
@@ -118,7 +118,7 @@ public class R {
    public static final String levelsPath = "./src/main/res/leveldata/";
 
    //Put all Lvl Files that should be loaded in this String Array. Lvl Loader will do the rest....
-   public static String[] levelFiles = {lvl_powerupTesting};
+   public static String[] levelFiles = {lvl_freeTesting};
 
    /**
     * Lighthouse
