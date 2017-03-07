@@ -55,7 +55,7 @@ public class R {
     */
 
    public static final int platformHeight = 8;
-   public static final int platformWidth = 300;
+   public static final int platformWidth = 600;
 
    /**
     * Game Parameters

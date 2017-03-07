@@ -162,6 +162,8 @@ public class GameController {
       }
       gameModel.stopGameTimer();
 
+      soundService.stopGametrack();
+
       listeningViews = null;
       gameModel = null;
       Main.gameController = null;

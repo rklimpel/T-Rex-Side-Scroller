@@ -7,10 +7,6 @@ import java.util.TimerTask;
 
 public class Player extends GameObject {
 
-   //players messurements
-   final int defaultHeight = R.playerHeight;
-   final int defaultWidth = R.playerWidth;
-
    //Rotation value of the player (0-360)
    double rotation;
    //Here the time for a whole jump will be calculated and stored
@@ -25,9 +21,6 @@ public class Player extends GameObject {
    //Checked if the player is crouching
    Boolean isCrouching = false;
 
-   //default y positon of the player
-   int defaultY;
-
    //jump timer tick delay in milliseconds
    int jumpTimerDelay = R.playerJumpTimerDelay;
    //counts up on jump, resets after jump
@@ -35,6 +28,9 @@ public class Player extends GameObject {
    //check if the player is still jump
    Boolean isJumping = false;
    //Jump Timer
+
+   Boolean isOnPlatform = false;
+
    Timer timer_jump;
 
    //Jump Configuration: Formula Data
@@ -43,6 +39,10 @@ public class Player extends GameObject {
    double jumpSpeed = R.playerJumpSpeed;
 
    public Player(int paneWidth, int paneHeight) {
+
+      //players messurements
+      defaultHeight = R.playerHeight;
+      defaultWidth = R.playerWidth;
 
       this.paneHeight = paneHeight;
       this.paneWidth = paneWidth;
@@ -104,8 +104,8 @@ public class Player extends GameObject {
                isJumping = true;
 
                //Calculate the new y value for the player (senkrechter Wurf)
-               setY(paneHeight - (int) ((jumpSpeed * jumpTime - (gravitation / 2) * Math.pow(jumpTime, 2)) + defaultHeight + 1));
-
+               setY(paneHeight - (int) ((jumpSpeed * jumpTime - (gravitation / 2) * Math.pow(jumpTime, 2))
+                       + defaultHeight + 1 + platformOffset));
 
                if (playerRotation) {
                   rotation += rotationPerTick;
@@ -150,6 +150,7 @@ public class Player extends GameObject {
    public void stopJumpTimer() {
       timer_jump.cancel();
       timer_jump.purge();
+      jumpTime = 0;
       isJumping = false;
    }
 

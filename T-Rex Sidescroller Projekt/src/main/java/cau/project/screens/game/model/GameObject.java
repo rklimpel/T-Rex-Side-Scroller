@@ -12,7 +12,18 @@ public class GameObject {
    public int x;
    public int y;
 
-   private int groundLvl = R.groundLvL;
+
+   //players messurements
+   int defaultHeight;
+   int defaultWidth;
+
+
+   //default y positon of the player (used just by player)
+   int defaultY;
+
+   public int groundLvl = R.groundLvL;
+
+   public int platformOffset;
 
    //yOffset for crouching player (else he would fly...)
    public int yCrouchOffset;
@@ -48,11 +59,9 @@ public class GameObject {
               //Check Clashers Top is inside Caller
               || clasher.getY() >= this.getY()
               && clasher.getY() <= this.getY() + this.getHeight())));
-
    }
 
    public void moveLeft() {
-      //Move Obstacle one px left
       x -= 1;
    }
 
@@ -87,5 +96,13 @@ public class GameObject {
 
    public void setY(int y) {
       this.y = y;
+   }
+
+   public int getPlatformOffset() {
+      return platformOffset;
+   }
+
+   public void setPlatformOffset(int platformOffset) {
+      this.platformOffset = platformOffset;
    }
 }

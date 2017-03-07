@@ -165,6 +165,7 @@ public class GameModel {
       }
 
 
+      //Do Things with Powerups
       for (int i = 0; i <powerups.size(); i++) {
 
          if(!powerups.get(i).checkOutisde()){
@@ -184,19 +185,29 @@ public class GameModel {
       }
 
 
+      // Do Things with Platforms
       for (int i = 0; i < platforms.size(); i++) {
 
          if(!platforms.get(i).checkOutisde()){
 
             platforms.get(i).moveLeft();
 
-            if(platforms.get(i).checkOnPlatform(player)){
-               System.out.println("Spieler auf Platform!");
+            if(platforms.get(i).checkOnPlatform(player) && !player.isOnPlatform
+                    || platforms.get(i).checkOnPlatform(player)&&player.isOnPlatform&&player.isJumping){
+               System.out.println("Player entered Platform");
+               player.isOnPlatform = true;
                player.stopJumpTimer();
-            }else{
-               if(player.isJumping==false&&player.getY()!=player.defaultY){
-                  player.setY(player.defaultY);
-               }
+               player.setPlatformOffset(paneHeight-platforms.get(i).getY());
+            }else if (player.getY() >= player.defaultY){
+               player.isOnPlatform = false;
+               player.setPlatformOffset(0);
+            }else if(!platforms.get(i).checkOnPlatform(player) && player.isOnPlatform && !player.isJumping){
+               System.out.println("Player leaved Platform");
+               player.setPlatformOffset(0);
+               player.isOnPlatform = false;
+            }else if (!player.isJumping && !player.isOnPlatform){
+               player.setPlatformOffset(0);
+               player.setY(player.defaultY);
             }
 
          }else{
@@ -205,8 +216,12 @@ public class GameModel {
 
       }
 
+      if(platforms.size()==0 && player.isJumping==false){
+         player.setPlatformOffset(0);
+      }
 
 
+      //Do Things with obstacles
       for (int i = 0; i < obstacles.size(); i++) {
 
          if (!obstacles.get(i).checkOutisde()) {
