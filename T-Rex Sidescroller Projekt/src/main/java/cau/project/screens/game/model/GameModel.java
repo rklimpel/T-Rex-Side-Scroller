@@ -67,6 +67,9 @@ public class GameModel {
    //List of all Powerups that are in the Game
    private ArrayList<Powerup> powerups = new ArrayList<>();
 
+   //List of all Platforms that are in the Game
+   private ArrayList<Platform> platforms = new ArrayList<>();
+
    /**
     * Creates a new GameModel Instance (i think there should be just one...)
     * saves GameController to class variable
@@ -115,6 +118,11 @@ public class GameModel {
       powerups.add(powerup);
    }
 
+   public void createPlatform(int platformType, int yOffset){
+      Platform platform = new Platform(platformType,this,paneWidth,paneHeight,yOffset);
+      platforms.add(platform);
+   }
+
    /**
     * Starts the continous ticking Game Timer
     */
@@ -158,7 +166,9 @@ public class GameModel {
 
 
       for (int i = 0; i <powerups.size(); i++) {
+
          if(!powerups.get(i).checkOutisde()){
+
             powerups.get(i).moveLeft();
 
             if(player.checkCollision(powerups.get(i))){
@@ -171,6 +181,28 @@ public class GameModel {
          }else{
             powerups.remove(i);
          }
+      }
+
+
+      for (int i = 0; i < platforms.size(); i++) {
+
+         if(!platforms.get(i).checkOutisde()){
+
+            platforms.get(i).moveLeft();
+
+            if(platforms.get(i).checkOnPlatform(player)){
+               System.out.println("Spieler auf Platform!");
+               player.stopJumpTimer();
+            }else{
+               if(player.isJumping==false&&player.getY()!=player.defaultY){
+                  player.setY(player.defaultY);
+               }
+            }
+
+         }else{
+            platforms.remove(i);
+         }
+
       }
 
 
@@ -248,7 +280,7 @@ public class GameModel {
 
          } else {
 
-            //Create a new Obstacle Object
+            //Create a new Game Object here
             if (lvlIndex != R.EMPTY) {
 
                if (levelArray[1][lvlIndex-1]<100){
@@ -256,11 +288,12 @@ public class GameModel {
                   //System.out.println("Create Obstacle- index: " + (lvlIndex - 1));
                }else if(levelArray[1][lvlIndex-1]>=100 && levelArray[1][lvlIndex-1] < 200){
                   createPowerup(levelArray[1][lvlIndex - 1],levelArray[2][lvlIndex -1]);
+               }else if(levelArray[1][lvlIndex-1]>=200 && levelArray[1][lvlIndex-1] < 300){
+                  createPlatform(levelArray[1][lvlIndex-1],levelArray[2][lvlIndex-1]);
                }
 
             }
 
-            //System.out.println("Object created! \n");
          }
 
          //Check if next stuff in the lvl Array ist an obstacle or an powerup
@@ -276,11 +309,15 @@ public class GameModel {
                //set new obstacle timer by lvl array data and add obstacle width offset
                obstacleTimer = levelArray[0][lvlIndex] + helpObstacle.getWidth();
 
-            }else if (levelArray[1][lvlIndex]>=100 && levelArray[1][lvlIndex] < 200){
+            }else if(levelArray[1][lvlIndex]>=100 && levelArray[1][lvlIndex]<200){
 
                Powerup helpPowerup = new Powerup(levelArray[1][lvlIndex],paneWidth,paneHeight,0);
 
                obstacleTimer = levelArray[0][lvlIndex] + helpPowerup.getWidth();
+
+            }else if (levelArray[1][lvlIndex]>=200 && levelArray[1][lvlIndex]<300){
+
+               obstacleTimer = levelArray[0][lvlIndex];
 
             }
 
@@ -333,5 +370,9 @@ public class GameModel {
 
    public ArrayList<Powerup> getPowerups() {
       return powerups;
+   }
+
+   public ArrayList<Platform> getPlatforms() {
+      return platforms;
    }
 }

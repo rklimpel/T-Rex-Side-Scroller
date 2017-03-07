@@ -107,6 +107,8 @@ public class DesktopView extends GameView {
 
                drawPowerup();
 
+               drawPlatform();
+
                //Add Obstacles to Pane
                drawImageObstacles();
 
@@ -116,6 +118,8 @@ public class DesktopView extends GameView {
             } else {
 
                drawPowerup();
+
+               drawPlatform();
 
                //Add Obstacles to Pane
                drawObstacles();
@@ -251,6 +255,25 @@ public class DesktopView extends GameView {
          pane.getChildren().add(rectangle);
 
       }
+   }
+
+   private void drawPlatform(){
+
+
+      for (int i = 0; i < controller.getPlatforms().size(); i++) {
+
+         rectangle = new Rectangle(
+                 controller.getPlatforms().get(i).getX(),
+                 controller.getPlatforms().get(i).getY(),
+                 controller.getPlatforms().get(i).getWidth(),
+                 controller.getPlatforms().get(i).getHeight());
+
+         rectangle.setFill(controller.getPlatforms().get(i).getColor());
+
+         pane.getChildren().add(rectangle);
+
+      }
+
    }
 
    /**

@@ -213,4 +213,8 @@ public class GameController {
    public ArrayList<Powerup> getPowerups(){
       return gameModel.getPowerups();
    }
+
+   public ArrayList<Platform> getPlatforms(){
+      return gameModel.getPlatforms();
+   }
 }

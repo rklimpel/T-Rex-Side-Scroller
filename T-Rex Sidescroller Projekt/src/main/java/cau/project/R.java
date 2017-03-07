@@ -47,8 +47,15 @@ public class R {
     * Powerups
     */
 
-   public static final int powerupHeight = 20;
-   public static final int powerupWidth = 20;
+   public static final int powerupHeight = 35;
+   public static final int powerupWidth = 35;
+
+   /**
+    * Platforms
+    */
+
+   public static final int platformHeight = 8;
+   public static final int platformWidth = 300;
 
    /**
     * Game Parameters
@@ -96,7 +103,7 @@ public class R {
    public static final String levelFile = lvl_samples;
 
    //Put all Lvl Files that should be loaded in this String Array. Lvl Loader will do the rest....
-   public static String[] levelFiles = {R.lvl_samples};
+   public static String[] levelFiles = {R.lvl_powerupTesting};
 
    /**
     * Lighthouse

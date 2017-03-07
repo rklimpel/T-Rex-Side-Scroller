@@ -28,12 +28,4 @@ public class Obstacle extends GameObject {
       this(0, 0, 0);
    }
 
-   public void moveLeft() {
-      //Move Obstacle one px left
-      x -= 1;
-   }
-
-   public Boolean checkOutisde() {
-      return (x + width) < 0;
-   }
 }

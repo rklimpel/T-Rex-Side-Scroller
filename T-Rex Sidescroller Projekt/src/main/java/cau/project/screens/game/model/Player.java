@@ -1,10 +1,6 @@
 package main.java.cau.project.screens.game.model;
 
-import javafx.application.Platform;
-import main.java.cau.project.Main;
 import main.java.cau.project.R;
-import main.java.cau.project.services.SoundService;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -127,7 +123,7 @@ public class Player extends GameObject {
    public void crouch() {
 
       height = (int) (defaultHeight * R.playerCrouchSize);
-      yOffset = (int) (defaultHeight * (1 - R.playerCrouchSize));
+      yCrouchOffset = (int) (defaultHeight * (1 - R.playerCrouchSize));
 
       isCrouching = true;
 
@@ -141,7 +137,7 @@ public class Player extends GameObject {
    public void crouchEnd() {
 
       height = defaultHeight;
-      yOffset = 0;
+      yCrouchOffset = 0;
       isCrouching = false;
 
       //System.out.println("crouch Released");

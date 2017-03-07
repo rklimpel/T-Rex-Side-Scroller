@@ -15,7 +15,7 @@ public class GameObject {
    private int groundLvl = R.groundLvL;
 
    //yOffset for crouching player (else he would fly...)
-   public int yOffset;
+   public int yCrouchOffset;
 
    public Color color;
 
@@ -51,6 +51,15 @@ public class GameObject {
 
    }
 
+   public void moveLeft() {
+      //Move Obstacle one px left
+      x -= 1;
+   }
+
+   public Boolean checkOutisde() {
+      return (x + width) < 0;
+   }
+
    public int getWidth() {
       return width;
    }
@@ -69,7 +78,7 @@ public class GameObject {
 
    public int getY() {
       //Add Offset and Groundlvl variables to y value
-      return y + yOffset - groundLvl;
+      return y + yCrouchOffset - groundLvl;
    }
 
    public void setX(int x) {
