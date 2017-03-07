@@ -9,6 +9,8 @@ public class Platform extends GameObject {
    GameModel gameModel;
    int type;
 
+   Boolean playerOnPlatform = false;
+
    public Platform(int type, GameModel gameModel, int paneWidth, int paneHeight, int yOffset) {
 
       this.type = type;

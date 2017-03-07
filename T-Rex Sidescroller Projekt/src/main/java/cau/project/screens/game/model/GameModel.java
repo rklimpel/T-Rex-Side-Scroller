@@ -76,13 +76,13 @@ public class GameModel {
     *
     * @param gameController
     */
-   public GameModel(GameController gameController,int paneWidth, int paneHeight) {
+   public GameModel(GameController gameController, int paneWidth, int paneHeight) {
       this.gameController = gameController;
       this.paneWidth = paneWidth;
       this.paneHeight = paneHeight;
       this.gameOver = false;
 
-      this.ground = new Ground(paneWidth,paneHeight);
+      this.ground = new Ground(paneWidth, paneHeight);
    }
 
    /**
@@ -96,7 +96,7 @@ public class GameModel {
     * Called by Space, makes the player jump
     */
    public void jump() {
-      if (!player.isJumping) {
+      if (! player.isJumping) {
          player.jump();
       } else if (paneHeight - R.groundLvL - player.getY()
               <= player.getHeight() / 2 + player.getHeight()) {
@@ -112,14 +112,25 @@ public class GameModel {
       obstacles.add(obstacle);
    }
 
-
-   public void createPowerup(int powerupType, int yOffset){
-      Powerup powerup = new Powerup(powerupType,paneWidth,paneHeight,yOffset);
+   /**
+    * Creates a new Powerup
+    *
+    * @param powerupType
+    * @param yOffset
+    */
+   public void createPowerup(int powerupType, int yOffset) {
+      Powerup powerup = new Powerup(powerupType, paneWidth, paneHeight, yOffset);
       powerups.add(powerup);
    }
 
-   public void createPlatform(int platformType, int yOffset){
-      Platform platform = new Platform(platformType,this,paneWidth,paneHeight,yOffset);
+   /**
+    * Creates a new Platform
+    *
+    * @param platformType
+    * @param yOffset
+    */
+   public void createPlatform(int platformType, int yOffset) {
+      Platform platform = new Platform(platformType, this, paneWidth, paneHeight, yOffset);
       platforms.add(platform);
    }
 
@@ -157,74 +168,99 @@ public class GameModel {
       timerTick += 1;
 
       checklvl();
+
       checkScore();
 
-      if (jumpWaiting && !player.isJumping) {
+      if (jumpWaiting && ! player.isJumping) {
          jump();
          jumpWaiting = false;
       }
 
+      checkPowerups();
 
+      checkPlatforms();
+
+      checkObstacles();
+
+   }
+
+   /**
+    * check existing Platforms
+    */
+   private void checkPlatforms() {
+      // Do Things with Platforms
+      for (int i = 0; i < platforms.size(); i++) {
+
+         if (! platforms.get(i).checkOutisde()) {
+
+            platforms.get(i).moveLeft();
+
+            if (platforms.get(i).checkOnPlatform(player) && ! platforms.get(i).playerOnPlatform
+                    || platforms.get(i).checkOnPlatform(player) && platforms.get(i).playerOnPlatform && player.isJumping) {
+
+               System.out.println("Player entered Platform");
+               platforms.get(i).playerOnPlatform = true;
+
+               player.stopJumpTimer();
+               player.setPlatformOffset(paneHeight - platforms.get(i).getY());
+
+            } else if (!platforms.get(i).checkOnPlatform(player) && platforms.get(i).playerOnPlatform && !player.isJumping) {
+
+               platforms.get(i).playerOnPlatform = false;
+
+               System.out.println("Player leaved Platforms");
+               player.setPlatformOffset(0);
+
+            } else if (!player.isJumping && !platforms.get(i).playerOnPlatform) {
+
+               player.setPlatformOffset(0);
+               player.setY(player.defaultY);
+
+            }
+
+         } else {
+            platforms.remove(i);
+         }
+
+      }
+
+      if (platforms.size() == 0 && player.isJumping == false) {
+         player.setPlatformOffset(0);
+      }
+   }
+
+   /**
+    * check existing Powerups
+    */
+   private void checkPowerups() {
       //Do Things with Powerups
-      for (int i = 0; i <powerups.size(); i++) {
+      for (int i = 0; i < powerups.size(); i++) {
 
-         if(!powerups.get(i).checkOutisde()){
+         if (! powerups.get(i).checkOutisde()) {
 
             powerups.get(i).moveLeft();
 
-            if(player.checkCollision(powerups.get(i))){
+            if (player.checkCollision(powerups.get(i))) {
 
                System.out.println("Got that Powerup!");
 
                powerups.remove(i);
 
             }
-         }else{
+         } else {
             powerups.remove(i);
          }
       }
+   }
 
-
-      // Do Things with Platforms
-      for (int i = 0; i < platforms.size(); i++) {
-
-         if(!platforms.get(i).checkOutisde()){
-
-            platforms.get(i).moveLeft();
-
-            if(platforms.get(i).checkOnPlatform(player) && !player.isOnPlatform
-                    || platforms.get(i).checkOnPlatform(player)&&player.isOnPlatform&&player.isJumping){
-               System.out.println("Player entered Platform");
-               player.isOnPlatform = true;
-               player.stopJumpTimer();
-               player.setPlatformOffset(paneHeight-platforms.get(i).getY());
-            }else if (player.getY() >= player.defaultY){
-               player.isOnPlatform = false;
-               player.setPlatformOffset(0);
-            }else if(!platforms.get(i).checkOnPlatform(player) && player.isOnPlatform && !player.isJumping){
-               System.out.println("Player leaved Platform");
-               player.setPlatformOffset(0);
-               player.isOnPlatform = false;
-            }else if (!player.isJumping && !player.isOnPlatform){
-               player.setPlatformOffset(0);
-               player.setY(player.defaultY);
-            }
-
-         }else{
-            platforms.remove(i);
-         }
-
-      }
-
-      if(platforms.size()==0 && player.isJumping==false){
-         player.setPlatformOffset(0);
-      }
-
-
+   /**
+    * Checks existing Obstacles
+    */
+   private void checkObstacles() {
       //Do Things with obstacles
       for (int i = 0; i < obstacles.size(); i++) {
 
-         if (!obstacles.get(i).checkOutisde()) {
+         if (! obstacles.get(i).checkOutisde()) {
 
             obstacles.get(i).moveLeft();
 
@@ -248,7 +284,6 @@ public class GameModel {
 
          } else {
             obstacles.remove(i);
-            //System.out.println("removed obstacle");
          }
       }
    }
@@ -298,13 +333,13 @@ public class GameModel {
             //Create a new Game Object here
             if (lvlIndex != R.EMPTY) {
 
-               if (levelArray[1][lvlIndex-1]<100){
+               if (levelArray[1][lvlIndex - 1] < 100) {
                   createObstacle(levelArray[2][lvlIndex - 1]);
                   //System.out.println("Create Obstacle- index: " + (lvlIndex - 1));
-               }else if(levelArray[1][lvlIndex-1]>=100 && levelArray[1][lvlIndex-1] < 200){
-                  createPowerup(levelArray[1][lvlIndex - 1],levelArray[2][lvlIndex -1]);
-               }else if(levelArray[1][lvlIndex-1]>=200 && levelArray[1][lvlIndex-1] < 300){
-                  createPlatform(levelArray[1][lvlIndex-1],levelArray[2][lvlIndex-1]);
+               } else if (levelArray[1][lvlIndex - 1] >= 100 && levelArray[1][lvlIndex - 1] < 200) {
+                  createPowerup(levelArray[1][lvlIndex - 1], levelArray[2][lvlIndex - 1]);
+               } else if (levelArray[1][lvlIndex - 1] >= 200 && levelArray[1][lvlIndex - 1] < 300) {
+                  createPlatform(levelArray[1][lvlIndex - 1], levelArray[2][lvlIndex - 1]);
                }
 
             }
@@ -316,7 +351,7 @@ public class GameModel {
          //Else do the normal stuff
          if (lvlIndex != R.EMPTY && lvlIndex < levelArray[0].length) {
 
-            if(levelArray[1][lvlIndex]<100){
+            if (levelArray[1][lvlIndex] < 100) {
 
                //Create a helping obstacle to check obstacle width
                Obstacle helpObstacle = new Obstacle();
@@ -324,13 +359,13 @@ public class GameModel {
                //set new obstacle timer by lvl array data and add obstacle width offset
                obstacleTimer = levelArray[0][lvlIndex] + helpObstacle.getWidth();
 
-            }else if(levelArray[1][lvlIndex]>=100 && levelArray[1][lvlIndex]<200){
+            } else if (levelArray[1][lvlIndex] >= 100 && levelArray[1][lvlIndex] < 200) {
 
-               Powerup helpPowerup = new Powerup(levelArray[1][lvlIndex],paneWidth,paneHeight,0);
+               Powerup helpPowerup = new Powerup(levelArray[1][lvlIndex], paneWidth, paneHeight, 0);
 
                obstacleTimer = levelArray[0][lvlIndex] + helpPowerup.getWidth();
 
-            }else if (levelArray[1][lvlIndex]>=200 && levelArray[1][lvlIndex]<300){
+            } else if (levelArray[1][lvlIndex] >= 200 && levelArray[1][lvlIndex] < 300) {
 
                obstacleTimer = levelArray[0][lvlIndex];
 

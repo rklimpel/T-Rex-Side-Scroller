@@ -54,7 +54,7 @@ public class R {
     * Platforms
     */
 
-   public static final int platformHeight = 8;
+   public static final int platformHeight = 10;
    public static final int platformWidth = 600;
 
    /**
@@ -99,11 +99,8 @@ public class R {
    //Path to Levels File
    public static final String levelsPath = "./src/main/res/leveldata/";
 
-   //Chosse Wich Lvl File should be loaded
-   public static final String levelFile = lvl_samples;
-
    //Put all Lvl Files that should be loaded in this String Array. Lvl Loader will do the rest....
-   public static String[] levelFiles = {R.lvl_powerupTesting};
+   public static String[] levelFiles = {lvl_powerupTesting};
 
    /**
     * Lighthouse

@@ -28,9 +28,6 @@ public class Player extends GameObject {
    //check if the player is still jump
    Boolean isJumping = false;
    //Jump Timer
-
-   Boolean isOnPlatform = false;
-
    Timer timer_jump;
 
    //Jump Configuration: Formula Data
