@@ -54,6 +54,13 @@ public class SoundService {
       playerGameLoop = new MediaPlayer(mediaGameLoop);
       playerGameover = new MediaPlayer(mediaGameover);
 
+      playerJump.setVolume(1.0);
+      playerCrouchDown.setVolume(0.6);
+      playerCrouchUp.setVolume(0.6);
+      playerGameLoop.setVolume(0.4);
+      playerGameOpening.setVolume(0.4);
+      playerGameover.setVolume(0.9);
+
 
 
 

@@ -78,16 +78,14 @@ public class DesktopView extends GameView {
                paneHeight = 400;
             }
 
-            BackgroundFill myBF = new BackgroundFill(Color.BLUEVIOLET, new CornerRadii(1),
-                    new Insets(0.0,0.0,0.0,0.0));// or null for the padding
+            if(gameObjectsAsImages){
+               BackgroundImage myBI= new BackgroundImage(new Image
+                       ("file:src/main/res/assets/mexiko/background.png",paneWidth,paneHeight,false,true),
+                       BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                       BackgroundSize.DEFAULT);
 
-            BackgroundImage myBI= new BackgroundImage(new Image
-                    ("file:src/main/res/assets/mexiko/background.png",paneWidth,paneHeight,false,true),
-                    BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                    BackgroundSize.DEFAULT);
-
-            background.setBackground(new Background(myBI));
-
+               background.setBackground(new Background(myBI));
+            }
 
             DesktopView.super.setController(paneWidth, paneHeight);
 

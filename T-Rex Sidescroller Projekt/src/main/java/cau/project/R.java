@@ -113,12 +113,13 @@ public class R {
    public static final String lvl_freeTesting = "free_testing";
    public static final String lvl_samples = "sample_levels";
    public static final String lvl_powerupTesting = "powerup_test";
+   public static final String lvl_levelsTryout = "levels_tryout";
 
    //Path to Levels File
    public static final String levelsPath = "./src/main/res/leveldata/";
 
    //Put all Lvl Files that should be loaded in this String Array. Lvl Loader will do the rest....
-   public static String[] levelFiles = {lvl_freeTesting};
+   public static String[] levelFiles = {lvl_levelsTryout};
 
    /**
     * Lighthouse
