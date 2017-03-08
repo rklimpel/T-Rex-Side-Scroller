@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Font;
@@ -301,6 +302,16 @@ public class DesktopView extends GameView {
          iv_powerup.setFitWidth(controller.getPowerups().get(i).getWidth());
 
          pane.getChildren().addAll(iv_powerup);
+
+         Circle circle = new Circle(controller.getPowerups().get(i).getX()+controller.getPowerups().get(i).getWidth()/2,
+                 controller.getPowerups().get(i).getY()+controller.getPowerups().get(i).getHeight()/2,
+                 controller.getPowerups().get(i).getHeight()/2);
+
+         circle.setFill(Color.TRANSPARENT);
+         circle.setStroke(Color.rgb(255,0,0,0.4));
+         circle.setStrokeWidth(2);
+
+         pane.getChildren().add(circle);
       }
 
    }
