@@ -5,7 +5,7 @@ import main.java.cau.project.R;
 import java.util.Random;
 
 /**
- * Created by janek on 08.03.2017.
+ * class which creates the backgroundobjects
  */
 public class BackgroundObject {
     Random rand= new Random();
@@ -17,6 +17,13 @@ public class BackgroundObject {
    int width;
    int height;
 
+    /**
+     * constructor for the backgroundobjcet which calculates the position
+     * the size of the object is given in R-class
+     *
+     * @param paneWidth current pane width
+     * @param paneHeight current pane height
+     */
     public BackgroundObject(int paneWidth, int paneHeight) {
         this.paneHeight = paneHeight;
         this.paneWidth = paneWidth;
@@ -26,8 +33,16 @@ public class BackgroundObject {
         this.setWidth(R.backgroundObjectWidth);
 
     }
-    private int randInt(int min, int max) {
 
+    /**
+     * generates a random number between the two min and max values
+     * @param min bottom of the amount of numbers to chose from
+     * @param max top of the amount of numbers to chose from
+     *
+     * @return the randomly choosen number
+     */
+    private int randInt(int min, int max) {
+        //setting limits for the case min is smaller zero and max is smaller zero
         if (min < 0) {
             min = 1;
         }
