@@ -1,50 +1,46 @@
 package main.java.cau.project.services;
 
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import main.java.cau.project.R;
 
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 public class Helper {
 
    public static int score;
 
    public String readFile(String path) throws IOException {
+      InputStream inputStream = this.getClass().getResourceAsStream(path);
+      return getStringFromInputStream(inputStream);
+   }
 
-      String returnString = null;
+   // convert InputStream to String
+   private static String getStringFromInputStream(InputStream is) {
 
-      // path = "/main/res/leveldata/free_testing"
+      BufferedReader br = null;
+      StringBuilder sb = new StringBuilder();
 
-      URL url = this.getClass().getResource(path);
-
-      System.out.println(url);
-
-      File file = null;
+      String line;
       try {
-         file = new File(url.toURI());
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
 
-      FileReader reader = null;
-      try {
-         reader = new FileReader(file);
-         char[] chars = new char[(int) file.length()];
-         reader.read(chars);
-         returnString = new String(chars);
-         reader.close();
+         br = new BufferedReader(new InputStreamReader(is));
+         while ((line = br.readLine()) != null) {
+            sb.append(line + "\n");
+         }
+
       } catch (IOException e) {
          e.printStackTrace();
       } finally {
-         if (reader != null) {
-            reader.close();
+         if (br != null) {
+            try {
+               br.close();
+            } catch (IOException e) {
+               e.printStackTrace();
+            }
          }
       }
 
-      return returnString;
+      return sb.toString();
+
    }
 
 
@@ -90,7 +86,6 @@ public class Helper {
 
       return data;
    }
-
 
 
 }
