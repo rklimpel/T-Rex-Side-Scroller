@@ -162,7 +162,11 @@ public class DesktopView extends GameView {
    private void drawBackgroundObjects() {
 
       for (int i = 0; i < controller.getBackgroundObjects().size(); i++) {
-         ImageView imageView = controller.getBackgroundObjects().get(i);
+         ImageView imageView = new ImageView();
+         imageView.setX(controller.getBackgroundObjects().get(i).getX());
+        imageView.setY(controller.getBackgroundObjects().get(i).getY());
+        imageView.setFitHeight(controller.getBackgroundObjects().get(i).getHeight());
+        imageView.setFitWidth(controller.getBackgroundObjects().get(i).getWidth());
          imageView.setImage(imageLoader.getImg_cactus());
 
          pane.getChildren().add(imageView);

@@ -121,6 +121,8 @@ public class R {
    public static final String lvl_samples = "sample_levels";
    public static final String lvl_powerupTesting = "powerup_test";
    public static final String lvl_levelsTryout = "levels_tryout";
+   public static final String lvl_easy = "easy_lvl";
+
 
    //Path to Levels File
    public static final String levelsPath = "./src/main/res/leveldata/";

@@ -1,6 +1,5 @@
 package main.java.cau.project.screens.game.model;
 
-import javafx.scene.image.ImageView;
 import main.java.cau.project.R;
 import main.java.cau.project.screens.game.controller.GameController;
 
@@ -73,7 +72,7 @@ public class GameModel {
    private ArrayList<Platform> platforms = new ArrayList<>();
 
    //List of all Background Objects
-   private ArrayList<ImageView> backgroundObjects = new ArrayList<>();
+   private ArrayList<BackgroundObject> backgroundObjects = new ArrayList<>();
 
    Random rand = new Random();
 
@@ -205,7 +204,7 @@ public class GameModel {
 
       for (int i = 0; i < backgroundObjects.size(); i++) {
          backgroundObjects.get(i).setX(backgroundObjects.get(i).getX() - 0.3);
-         if(backgroundObjects.get(i).getX()+backgroundObjects.get(i).getFitWidth()<0){
+         if(backgroundObjects.get(i).getX()+backgroundObjects.get(i).getWidth()<0){
             backgroundObjects.remove(i);
          }
       }
@@ -219,24 +218,21 @@ public class GameModel {
 
       System.out.println("New Background Cactus!");
 
-      ImageView imageView = new ImageView();
-      imageView.setX(paneWidth);
-      imageView.setY(randInt(paneHeight/2, paneHeight-R.groundLvL-50));
+      BackgroundObject backgroundObject = new BackgroundObject(paneWidth, paneHeight);
+
 
       /*int mid = (int)(((paneHeight/2) + (paneHeight-R.groundLvL-50))/2);
       int diff = mid - (int)imageView.getY();
 
       int ratio = R.backgroundObjectHeight/R.backgroundObjectWidth;*/
 
-      imageView.setFitWidth(R.backgroundObjectWidth);
-      imageView.setFitHeight(R.backgroundObjectHeight);
+      backgroundObject.setWidth(R.backgroundObjectWidth);
+      backgroundObject.setHeight(R.backgroundObjectHeight);
 
-      backgroundObjects.add(imageView);
+      backgroundObjects.add(backgroundObject);
 
    }
-
    private int randInt(int min, int max) {
-
       if (min < 0) {
          min = 1;
       }
@@ -248,6 +244,7 @@ public class GameModel {
 
       return randomNum;
    }
+
 
    /**
     * check existing Platforms
@@ -495,7 +492,7 @@ public class GameModel {
       return platforms;
    }
 
-   public ArrayList<ImageView> getBackgroundObjects() {
+   public ArrayList<BackgroundObject> getBackgroundObjects() {
       return backgroundObjects;
    }
 }

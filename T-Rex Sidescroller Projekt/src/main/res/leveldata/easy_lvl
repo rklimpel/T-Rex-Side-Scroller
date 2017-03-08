@@ -1,0 +1,8 @@
+//the easy level package
+
+#id=lvl0
+gap=200|type=200|y=50
+gap=750|type=200|y=125
+gap=630|type=100|y=250
+---
+

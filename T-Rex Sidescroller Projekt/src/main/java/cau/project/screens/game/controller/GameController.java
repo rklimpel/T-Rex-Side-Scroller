@@ -241,7 +241,7 @@ public class GameController {
       return gameModel.getPlatforms();
    }
 
-   public ArrayList<ImageView> getBackgroundObjects(){
-      return gameModel.getBackgroundObjects();
+   public ArrayList<BackgroundObject> getBackgroundObjects(){
+      return gameModel.getBackgroundObjects() ;
    }
 }
