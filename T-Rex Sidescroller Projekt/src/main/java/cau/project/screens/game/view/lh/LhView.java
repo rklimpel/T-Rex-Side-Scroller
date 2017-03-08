@@ -96,6 +96,28 @@ public class LhView extends GameView{
             }
         }
 
+        //Paint Platforms
+        for (int i = 0; i < controller.getPlatforms().size(); i++) {
+
+            for (int j = scaleY(gameModel.getPlatforms().get(i).getY());
+                 j < scaleY(gameModel.getPlatforms().get(i).getY())+1; j++) {
+
+                for (int k = scaleX(gameModel.getPlatforms().get(i).getX());
+                     k < scaleX(gameModel.getPlatforms().get(i).getX()
+                     + gameModel.getPlatforms().get(i).getWidth()); k++) {
+
+                    try{
+                        pixelsReduced[j][k] = Color.GREEN;
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        //Remember this... the Array is out of bounds
+                    }
+
+
+                }
+
+            }
+        }
+
         //Paint obstacle Pixels
         for (int i = 0; i < gameModel.getObstacles().size(); i++) {
 
