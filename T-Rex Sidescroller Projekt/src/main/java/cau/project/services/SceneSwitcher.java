@@ -33,7 +33,7 @@ public enum SceneSwitcher {
    public void load() {
       Main.stage.setScene(loadSceneFromFXML());
       Main.stage.show();
-      //Main.centerFrame();
+      Main.centerFrame();
    }
 
    public void load(Boolean objectsAsImages) {
@@ -48,7 +48,7 @@ public enum SceneSwitcher {
 
       Main.stage.setScene(loadSceneFromFXML());
       Main.stage.show();
-      //Main.centerFrame();
+      Main.centerFrame();
    }
 
    public Parent getRoot() {
