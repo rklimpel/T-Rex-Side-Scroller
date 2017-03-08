@@ -58,7 +58,7 @@ public class R {
    /**
     * Powerups
     */
-
+   //Size of the powerups
    public static final int powerupHeight = 40;
    public static final int powerupWidth = 40;
 
@@ -78,7 +78,7 @@ public class R {
    /**
     * Background Objects
     */
-
+   //Size of the Background objects (cactus)
    public static final int backgroundObjectWidth = 10;
    public static final int backgroundObjectHeight = 40;
 
@@ -90,10 +90,10 @@ public class R {
    public static final int gameTimerOffset = 0;
    public static final int gameTimerDelay = 3;
 
-   //Game Ticks between two sample_levels:
+   //Game Ticks between two levels
    public static int obstaclePauseTimer = 500;
 
-   //Load Rectangles or Images for Gameplay
+   //Load Rectangles or Images for gameplay
    public static final Boolean gameobjectsAsImages = true;
 
    //MUSIC on off default value
@@ -142,7 +142,7 @@ public class R {
    /**
     * View ID'S
     */
-
+   //shortend IDs for the different views
    public static final String viewIdGameDesktop = "GD";
    public static final String viewIdGameLighthouse = "GL";
    public static final String viewIdMenu = "ME";
@@ -153,6 +153,8 @@ public class R {
    /**
     * Scene Switcher FXML View Paths's
     */
+
+   //shows the paths of the fxml-files for the specific views
    public static final String viewPathGameDesktop= "/main/java/cau/project/screens/game/view/desktop/DesktopView.fxml";
    public static final String viewPathMenu = "/main/java/cau/project/screens/menu/MenuView.fxml";
    public static final String viewPathGameLighthouse = "/main/java/cau/project/screens/game/view/lh/LhView.fxml";
