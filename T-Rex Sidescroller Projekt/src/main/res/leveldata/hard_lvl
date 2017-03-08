@@ -1,0 +1,27 @@
+//the hard level package
+
+#id=lvl0
+gap=100|type=0|y=0
+gap=100|type=201|y=75
+gap=0|type=2|y=0
+gap=150|type=201|y=150
+gap=0|type=2|y=0
+gap=150|type=201|y=225
+gap=0|type=2|y=0
+
+---
+
+#id=lvl1
+gap=100|type=0|y=0
+gap=10|type=0|y=0
+gap=10|type=0|y=0
+gap=10|type=0|y=0
+gap=300|type=0|y=0
+gap=10|type=0|y=0
+gap=10|type=0|y=0
+gap=10|type=0|y=0
+gap=200|type=2|y=0
+---
+
+
+

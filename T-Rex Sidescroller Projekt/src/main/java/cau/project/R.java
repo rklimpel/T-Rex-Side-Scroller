@@ -48,7 +48,7 @@ public class R {
    //normal lie
    public static final int obstacleHeight2 = 30;
    public static final int obstacleWidth2 = 80;
-   //thicker one
+   //the adler
    public static final int obstacleHeight3 = 60;
    public static final int obstacleWidth3 = 60;
    //long on the ground
@@ -122,6 +122,8 @@ public class R {
    public static final String lvl_powerupTesting = "powerup_test";
    public static final String lvl_levelsTryout = "levels_tryout";
    public static final String lvl_easy = "easy_lvl";
+   public static final String lvl_medium = "medium_lvl";
+   public static final String lvl_hard = "hard_lvl";
 
 
    //Path to Levels File
