@@ -163,9 +163,12 @@ public class LhView extends GameView{
             for (int j = scaleX(gameModel.player.getX());
                  j < scaleX(gameModel.player.getX()+gameModel.player.getWidth()); j++) {
 
-                //System.out.println("PlayerPixels: " + i + " / " + j);
+                //System.out.println("PlayerPixels: " + i + " / " + j)
+                try{
+                    pixelsReduced[i][j] = Color.BLUE;
+                }catch(Exception e){
 
-                pixelsReduced[i][j] = Color.BLUE;
+                }
             }
         }
 

@@ -22,6 +22,7 @@ public class ImageLoader {
    private Image img_obstacleBottom = null;
    private Image img_obstacleAdler = null;
    private Image img_obstacleAdlerAM = null;
+   private Image img_platform0 = null;
 
 
    String stylePackage = "mexiko";
@@ -30,19 +31,34 @@ public class ImageLoader {
 
       try {
 
-         URL urlPlayer = this.getClass().getResource("/main/res/assets/"+stylePackage+"/player_mexiko.png");
-         URL urlPlayerCrouched = this.getClass().getResource("/main/res/assets/"+stylePackage+"/playerCrouched_mexiko.png");
-         URL urlObstacle = this.getClass().getResource("/main/res/assets/"+stylePackage+"/obstacle_mexiko.png");
-         URL urlPowerupTaco = this.getClass().getResource("/main/res/assets/"+stylePackage+"/powerup_taco.png");
-         URL urlWalking1 = this.getClass().getResource("/main/res/assets/"+stylePackage+"/walking1.png");
-         URL urlWalking2 = this.getClass().getResource("/main/res/assets/"+stylePackage+"/walking2.png");
-         URL urlWalking3 = this.getClass().getResource("/main/res/assets/"+stylePackage+"/walking3.png");
-         URL urlWalking4 = this.getClass().getResource("/main/res/assets/"+stylePackage+"/walking4.png");
-         URL urlJump = this.getClass().getResource("/main/res/assets/"+stylePackage+"/jump.png");
-         URL urlCactus = this.getClass().getResource("/main/res/assets/"+stylePackage+"/cactus.png");
-         URL urlObstacleBot = this.getClass().getResource("/main/res/assets/"+stylePackage+"/stacheldraht.png");
-         URL urlAdler = this.getClass().getResource("/main/res/assets/"+stylePackage+"/adler.png");
-         URL urlAdlerAM = this.getClass().getResource("/main/res/assets/"+stylePackage+"/adlermurica.png");
+         URL urlPlayer = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/player_mexiko.png");
+         URL urlPlayerCrouched = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/playerCrouched_mexiko.png");
+         URL urlObstacle = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/obstacle_mexiko.png");
+         URL urlPowerupTaco = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/powerup_taco.png");
+         URL urlWalking1 = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/walking1.png");
+         URL urlWalking2 = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/walking2.png");
+         URL urlWalking3 = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/walking3.png");
+         URL urlWalking4 = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/walking4.png");
+         URL urlJump = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/jump.png");
+         URL urlCactus = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/cactus.png");
+         URL urlObstacleBot = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/stacheldraht.png");
+         URL urlAdler = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/adler.png");
+         URL urlAdlerAM = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/adlermurica.png");
+         URL urlPlatform0 = this.getClass().getResource(
+                 "/main/res/assets/"+stylePackage+"/platform0.png");
 
          img_player = new Image(urlPlayer.openStream());
          img_playerCrouched = new Image(urlPlayerCrouched.openStream());
@@ -57,6 +73,7 @@ public class ImageLoader {
          img_obstacleBottom = new Image(urlObstacleBot.openStream());
          img_obstacleAdler = new Image(urlAdler.openStream());
          img_obstacleAdlerAM = new Image(urlAdlerAM.openStream());
+         img_platform0 = new Image(urlPlatform0.openStream());
 
 
       } catch (Exception e) {
@@ -114,5 +131,9 @@ public class ImageLoader {
 
    public Image getImg_obstacleAdlerAM() {
       return img_obstacleAdlerAM;
+   }
+
+   public Image getImg_platform0() {
+      return img_platform0;
    }
 }

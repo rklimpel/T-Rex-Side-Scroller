@@ -134,7 +134,7 @@ public class DesktopView extends GameView {
 
                drawImagePowerup();
 
-               drawPlatform();
+               drawImagePlatform();
 
                //Add Obstacles to Pane
                drawImageObstacles();
@@ -366,6 +366,24 @@ public class DesktopView extends GameView {
          pane.getChildren().add(rectangle);
 
       }
+   }
+
+   private void drawImagePlatform(){
+
+      for (int i = 0; i < controller.getPlatforms().size(); i++) {
+
+         ImageView imageView = new ImageView();
+         imageView.setImage(imageLoader.getImg_platform0());
+
+         imageView.setX(controller.getPlatforms().get(i).getX());
+         imageView.setY(controller.getPlatforms().get(i).getY());
+         imageView.setFitWidth(controller.getPlatforms().get(i).getWidth());
+         imageView.setFitHeight(controller.getPlatforms().get(i).getHeight());
+
+         pane.getChildren().add(imageView);
+
+      }
+
    }
 
    private void drawPlatform(){

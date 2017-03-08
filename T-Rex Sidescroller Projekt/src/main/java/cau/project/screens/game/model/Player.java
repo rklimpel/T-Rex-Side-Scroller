@@ -132,11 +132,10 @@ public class Player extends GameObject {
                   platformOffset=0;
                }
 
-               //System.out.println("Jump done");
+            }
 
-
-               //Else calculate the new Players y coordinate
-            } else {
+            //Else calculate the new Players y coordinate
+            else {
 
                jumpTime += 0.1;
 
