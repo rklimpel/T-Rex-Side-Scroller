@@ -9,19 +9,26 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
+/**
+ * This class is the main Game calculation class it handles all important game value changes
+ */
 public class GameModel {
 
    //LvL Index counts the positions in the lvl Array
    //after every fired obstacle lvl index += 1
    //to get the next obstacle waiting time for obstacle timer
    private int lvlIndex = 0;
+
    //Timer set to the numbers in lvlArrays and count down with game timer.
    //On obstacle Timer 0 a object is fired
    private int obstacleTimer = 0;
+
    //toggled by new lvl load. Makes the first obstacle Timer countdown don't fire a obstacle
    private Boolean lvlPause = true;
+
    //create a lvls instance to load the lvls from
    private Levels levels = new Levels();
+
    //level array saves the lvl arrays loaded from lvls class locally
    private int[][] levelArray;
 
@@ -32,21 +39,23 @@ public class GameModel {
    //GameTimer von continoues moves
    private Timer gameTimer = new Timer();
 
-   //is the Timer enabled?
+   //is the GameTimer enabled?
    public Boolean gameTimerEnabled = false;
 
-   //Jump waiting
+   //Jump waiting Boolean
+   //if the player is jumping and the user send jump input short before touching the ground
+   //the jump will be saved and executed when the last jump ends
    private Boolean jumpWaiting = false;
 
-   //Delay, before the timer starts
+   //Delay, before the Gametimer starts...
    private int gameTimerOffset = R.gameTimerOffset;
+   //Delay of the Gametimer, ticks every gameTimerDelay Milliseconds
    private int gameTimerDelay = R.gameTimerDelay;
-   //optimum:3
 
    //The Player Object that contains to the Game
    public Player player;
 
-   //The Ground
+   //The Ground Object that contains to the Game
    public Ground ground;
 
    //Game GameController who called the GameModel, set on contsructor
@@ -71,20 +80,24 @@ public class GameModel {
    //List of all Platforms that are in the Game
    private ArrayList<Platform> platforms = new ArrayList<>();
 
-   //List of all Background Objects
+   //List of all Background Objects (Cactus things)
    private ArrayList<BackgroundObject> backgroundObjects = new ArrayList<>();
 
-   Random rand = new Random();
+   //Random generator, used to set Random Background object gaps
+   private Random rand = new Random();
 
-   int nextBackground = 500;
+   //integer that counts down from a number and when it is 0 it spawn a new background object
+   //500 is the value for the first background object. then the random int will be used
+   private int nextBackground = 500;
 
    /**
-    * Creates a new GameModel Instance (i think there should be just one...)
+    * Creates a new GameModel Instance
     * saves GameController to class variable
     *
     * @param gameController
     */
    public GameModel(GameController gameController, int paneWidth, int paneHeight) {
+
       this.gameController = gameController;
       this.paneWidth = paneWidth;
       this.paneHeight = paneHeight;
@@ -104,13 +117,20 @@ public class GameModel {
     * Called by Space, makes the player jump
     */
    public void jump() {
+
+      //If the player isn't jumping call jump in players class
       if (!player.isJumping) {
          player.jump();
+
+         //If players jump is called all Platforms should be notified that
+         //the player is no longer on any platform
          for (int i = 0; i < platforms.size(); i++) {
             platforms.get(i).playerOnPlatform = false;
          }
          player.platform = null;
-      } else if (paneHeight - R.groundLvL - player.getY()
+      }
+      //If the player is near to the ground save the jump and execute it later
+      else if (paneHeight - R.groundLvL - player.getY()
               <= player.getHeight() / 2 + player.getHeight()) {
          jumpWaiting = true;
       }
@@ -118,6 +138,10 @@ public class GameModel {
 
    /**
     * Creates a new Obstacle instance from Obstacle class
+    * adds obstacle to obstacle list
+    *
+    * @param type
+    * @param yOffset
     */
    public void createObstacle(int type, int yOffset) {
       Obstacle obstacle = new Obstacle(type, paneWidth, paneHeight, yOffset);
@@ -126,6 +150,7 @@ public class GameModel {
 
    /**
     * Creates a new Powerup
+    * adds Powerup to powerup list
     *
     * @param powerupType
     * @param yOffset
@@ -137,6 +162,7 @@ public class GameModel {
 
    /**
     * Creates a new Platform
+    * adds Platform to Platform List
     *
     * @param platformType
     * @param yOffset
@@ -147,7 +173,7 @@ public class GameModel {
    }
 
    /**
-    * Starts the continous ticking Game Timer
+    * Starts the continous ticking Game Timer and set GameTimer to Enabled
     */
    public void startGameTimer() {
       gameTimer = new Timer();
@@ -161,7 +187,7 @@ public class GameModel {
    }
 
    /**
-    * Stops the continous ticking Game Timer
+    * Stops the continous ticking Game Timer and set GameTimer to Disabled
     */
    public void stopGameTimer() {
       gameTimer.cancel();
@@ -171,9 +197,12 @@ public class GameModel {
 
    /**
     * Fires on every GameTimer tick
-    * object and other movements should be done here
-    * <p>
-    * sends update notification to controller
+    *
+    * do object movements
+    * check collisions
+    * setup levels and lvl objects
+    * setup background objects (cactus things)
+    *
     */
    public void GameTick() {
 
@@ -183,10 +212,8 @@ public class GameModel {
 
       checkScore();
 
+      //If a waiting jump is called and the player is no longer jumping do the waiting jump
       if (jumpWaiting && !player.isJumping) {
-
-         //System.out.println("Waiting jump called!");
-
          jump();
          jumpWaiting = false;
       }
@@ -197,147 +224,212 @@ public class GameModel {
 
       checkObstacles();
 
+
       nextBackground -= 1;
+      //create new background object if nextBackground value = 0
       if (nextBackground == 0) {
          checkBackgroundObjects();
       }
 
+      //Move the background objects
       for (int i = 0; i < backgroundObjects.size(); i++) {
          backgroundObjects.get(i).setX(backgroundObjects.get(i).getX() - 0.3);
          if(backgroundObjects.get(i).getX()+backgroundObjects.get(i).getWidth()<0){
             backgroundObjects.remove(i);
          }
       }
-
-
    }
 
+   /**
+    * Sets up a new Background object object and adds it to background object list
+    * creates a new Random int how long we should wait for the next background obejct
+    */
    private void checkBackgroundObjects() {
 
       nextBackground = randInt(0, 2500);
 
-      System.out.println("New Background Cactus!");
-
       BackgroundObject backgroundObject = new BackgroundObject(paneWidth, paneHeight);
-
-
-      /*int mid = (int)(((paneHeight/2) + (paneHeight-R.groundLvL-50))/2);
-      int diff = mid - (int)imageView.getY();
-
-      int ratio = R.backgroundObjectHeight/R.backgroundObjectWidth;*/
-
-      backgroundObject.setWidth(R.backgroundObjectWidth);
-      backgroundObject.setHeight(R.backgroundObjectHeight);
 
       backgroundObjects.add(backgroundObject);
 
-   }
-   private int randInt(int min, int max) {
-      if (min < 0) {
-         min = 1;
-      }
-      if (max < 0) {
-         max = 2;
-      }
+      //System.out.println("New Background Cactus!");
 
-      int randomNum = rand.nextInt((max - min) + 1) + min;
+   }
+
+   /**
+    * Helper Method to create a random int
+    *
+    * @param min
+    * @param max
+    * @return
+    */
+   private int randInt(int min, int max) {
+
+      int randomNum = 500;
+
+      try{
+
+         randomNum = rand.nextInt((max - min) + 1) + min;
+
+      }catch (Exception e){
+
+         System.out.println(e);
+         //In the beginning we sometimes got the error that min is bigger than max.
+         //this catch will catch the exeption. then the default value for the next background
+         //obstacle is 500
+
+      }
 
       return randomNum;
    }
 
 
    /**
-    * check existing Platforms
+    * do things with the existing platforms:
+    *
+    * move them left
+    * check for out of game window
+    * check for player jump on them
+    * check for player fall of from them
+    *
     */
-   public void checkPlatforms() {
-      // Do Things with Platforms
+   private void checkPlatforms() {
+
+      //For every Platform in the List:
       for (int i = 0; i < platforms.size(); i++) {
 
+         //If Platform is not Outside the Window
          if (!platforms.get(i).checkOutisde()) {
 
             platforms.get(i).moveLeft();
 
-            //Jump on Platform and land on it
+            //Play was not on a Platform and now Jumps down on it
             if (platforms.get(i).checkOnPlatform(player) && player.isJumpingDown) {
+
+               //Stop the Players Jump instantly so he remains on the Platform lvl
                player.stopJumpTimer();
+
+               //Tell the players class instance the Offset of the y poisition because of the platform
+               //Tell the players class about the platform object he is on
                player.setPlatformOffset((paneHeight - player.groundLvl) - platforms.get(i).getY());
-               platforms.get(i).playerOnPlatform = true;
                player.setPlatform(platforms.get(i));
-            } else if (platforms.get(i).playerOnPlatform
+
+               //Tell the platform that the player is on it
+               platforms.get(i).playerOnPlatform = true;
+            }
+
+            //Player was on Platform, is not jumping but the Platform checker says he is no longer on the Platform
+            // => means: Player should fall down
+            else if (platforms.get(i).playerOnPlatform
                     && !platforms.get(i).checkOnPlatform(player)
                     && !player.isJumping) {
 
+               //Tell the platfrom that the player is no longer on it
                platforms.get(i).playerOnPlatform = false;
+
+               //Removes the platform offset from player class
                player.setPlatform(null);
                player.setPlatformOffset(0);
+
+               //Hard! reset of the player to the ground. Not really smooth. should be changed
                player.setY(player.defaultY);
 
+               //Check for all platforms:
                for (int j = 0; j < platforms.size(); j++) {
-                  if (platforms.get(j).checkOverPlatform(player)) {
+
+                  //If the player is inside the bounds of an platform and the platform is lower than the
+                  //platform he fall of
+                  if (platforms.get(j).checkOverPlatform(player)
+                          &&platforms.get(j).getPlatformOffset()<platforms.get(i).getPlatformOffset()) {
+
+                     //Tell the player about his next platform
                      player.setPlatformOffset((paneHeight - player.groundLvl) - platforms.get(j).getY());
-                     platforms.get(j).playerOnPlatform = true;
                      player.setPlatform(platforms.get(j));
+
+                     //Set player position to next platform (hard) not smooth argl
                      player.setY(player.defaultY - player.platformOffset);
+
+                     //Tell this platform about the player on it
+                     platforms.get(j).playerOnPlatform = true;
                   }
                }
-
-
             }
-
-         } else {
-
-            platforms.remove(i);
-
          }
 
+         //If the platform has been moved outside the game window remove it from the list
+         else {
+            platforms.remove(i);
+         }
       }
    }
 
    /**
-    * check existing Powerups
+    * do things with all of the powerups in the powerup list
+    *
+    * move them left
+    * check collision and handles on collision actions
+    * remove if out of window bounds
+    *
     */
    private void checkPowerups() {
-      //Do Things with Powerups
+
+      //Do Things with every Powerup in the List
       for (int i = 0; i < powerups.size(); i++) {
 
+         //If powerups is inside the game window move it left
+         //and check the collision with the player
          if (!powerups.get(i).checkOutisde()) {
 
             powerups.get(i).moveLeft();
 
             if (player.checkCollision(powerups.get(i))) {
 
-               System.out.println("Got that Powerup!");
-
+               //If player collides with the powerup give him 5 points
+               //and remove the powerup from the powerup list
                score += 5;
                powerups.remove(i);
 
+               System.out.println("Got that Powerup!");
             }
-         } else {
+         }
+
+         //If powerup is outside the screen bound remove it from the powerup list
+         else {
             powerups.remove(i);
          }
       }
    }
 
    /**
-    * Checks existing Obstacles
+    * Check every existing Obstacle
+    * look up if it is ouside of the screen, then remove it from obstacle list
+    *
+    * for all inside obstacles:
+    *
+    * move them left and check collision with player
+    * if there is a collision stop game and jump and set gameover to true
     */
    private void checkObstacles() {
-      //Do Things with obstacles
+
+      //Do Things with all obstacles
       for (int i = 0; i < obstacles.size(); i++) {
 
+         //If inside of the window move and check for collision
          if (!obstacles.get(i).checkOutisde()) {
 
             obstacles.get(i).moveLeft();
 
+            //If collision from player and obstacle stop this game
             if (player.checkCollision(obstacles.get(i))) {
 
                stopGameTimer();
-               gameOver = true;
 
-               System.out.println("Collision!");
+               gameOver = true;
 
                player.stopJumpTimer();
 
+               //Call the gameController stopUpdate Timer delayed so every view hast the change to update to
+               //the last view state
                new Timer().schedule(new TimerTask() {
                   @Override
                   public void run() {
@@ -345,9 +437,12 @@ public class GameModel {
                   }
                }, 50);
 
+               System.out.println("Collision!");
             }
+         }
 
-         } else {
+         //If outside of the window remove obstacle from list
+         else {
             obstacles.remove(i);
          }
       }
@@ -355,6 +450,7 @@ public class GameModel {
 
    /**
     * Checks if the player jumped completly over an obstacle
+    * if true he got that point
     */
    private void checkScore() {
       for (int i = 0; i < obstacles.size(); i++) {
@@ -379,12 +475,9 @@ public class GameModel {
          lvlPause = true;
          lvlIndex = 0;
 
-         //System.out.println("obstacle timer: " + obstacleTimer);
-         //System.out.println("lvl index " + lvlIndex);
-         //System.out.println("pause: " + lvlPause +"\n");
       }
 
-      //if Obstacle Timer is down and there is a active lvl fire a new Obstacle
+      //if Obstacle Timer is down and there is a active lvl fire a new Game Object
       if (obstacleTimer == 0 && levels.getActiveLvl() != R.EMPTY) {
 
          if (lvlPause) {
@@ -398,49 +491,63 @@ public class GameModel {
             //Create a new Game Object here
             if (lvlIndex != R.EMPTY) {
 
+               //If GameObject type in lvl Array is between 0 and 99 it's an Obstacle
                if (levelArray[1][lvlIndex - 1] < 100) {
+                  //Create the Obstacle with Type and y Offset from levelArray
                   createObstacle(levelArray[1][lvlIndex - 1], levelArray[2][lvlIndex - 1]);
-                  //System.out.println("Create Obstacle- index: " + (lvlIndex - 1));
-               } else if (levelArray[1][lvlIndex - 1] >= 100 && levelArray[1][lvlIndex - 1] < 200) {
-                  createPowerup(levelArray[1][lvlIndex - 1], levelArray[2][lvlIndex - 1]);
-               } else if (levelArray[1][lvlIndex - 1] >= 200 && levelArray[1][lvlIndex - 1] < 300) {
-                  createPlatform(levelArray[1][lvlIndex - 1], levelArray[2][lvlIndex - 1]);
                }
 
-            }
+               //If Gameobject type in lvl Array is between 100 and 199 it's an Powerup
+               else if (levelArray[1][lvlIndex - 1] >= 100 && levelArray[1][lvlIndex - 1] < 200) {
+                  //Create the powerup with type and yOffset from levelArray
+                  createPowerup(levelArray[1][lvlIndex - 1], levelArray[2][lvlIndex - 1]);
+               }
 
+               //If gameobject type in lvl Array ist between 200 and 299 it's a Platform
+               else if (levelArray[1][lvlIndex - 1] >= 200 && levelArray[1][lvlIndex - 1] < 300) {
+                  //Create the platform with type and y offset from level Array
+                  createPlatform(levelArray[1][lvlIndex - 1], levelArray[2][lvlIndex - 1]);
+               }
+            }
          }
 
-         //Check if next stuff in the lvl Array ist an obstacle or an powerup
+         //Check if next stuff in the lvl Array ist an obstacle or an powerup or Platform
          //If lvl index = -1 there are no more obstacles in this lvl and he should not load more
-         //Else do the normal stuff
          if (lvlIndex != R.EMPTY && lvlIndex < levelArray[0].length) {
 
+            //For the obstacles in levelArray
             if (levelArray[1][lvlIndex] < 100) {
 
                //Create a helping obstacle to check obstacle width
                Obstacle helpObstacle = new Obstacle(levelArray[1][lvlIndex]);
 
                //set new obstacle timer by lvl array data and add obstacle width offset
+               //so obstacles cannot lie in each other
                obstacleTimer = levelArray[0][lvlIndex] + helpObstacle.getWidth();
+            }
 
-            } else if (levelArray[1][lvlIndex] >= 100 && levelArray[1][lvlIndex] < 200) {
+            //For the Powerups in Level Array
+            else if (levelArray[1][lvlIndex] >= 100 && levelArray[1][lvlIndex] < 200) {
 
+               //create a helping powerup instance to get width from it
                Powerup helpPowerup = new Powerup(levelArray[1][lvlIndex], paneWidth, paneHeight, 0);
 
+               //Set obstacle timer by lvl array data and add powerup with as offset
+               //so no gameobject can be inside the powerup
                obstacleTimer = levelArray[0][lvlIndex] + helpPowerup.getWidth();
+            }
 
-            } else if (levelArray[1][lvlIndex] >= 200 && levelArray[1][lvlIndex] < 300) {
-
+            //for the platforms in levelArray:
+            else if (levelArray[1][lvlIndex] >= 200 && levelArray[1][lvlIndex] < 300) {
                obstacleTimer = levelArray[0][lvlIndex];
-
             }
 
             lvlIndex += 1;
 
          }
 
-         // if lvl index is out of bounds set activelvl to -1 and reset lvl index
+         // if lvl index is out of bounds the active lvl is completly done.
+         // set activelvl to -1 and reset lvl index
          else if (lvlIndex >= levelArray[0].length) {
             lvlIndex = R.EMPTY;
             levels.setActiveLvl(R.EMPTY);
@@ -450,11 +557,14 @@ public class GameModel {
 
       }
 
+      //decrase the obstacle timer on every time checkLvL's is called
       if (obstacleTimer != 0) {
          obstacleTimer -= 1;
       }
-
    }
+
+
+
 
    public int getScore() {
       return score;
