@@ -5,17 +5,22 @@ import javafx.scene.text.Font;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
 
 
 public class CustomFontLoader {
 
-   public static Font load( String fontID,int size) {
+   public Font load( String fontID,int size) {
+
+
+      URL url = this.getClass().getResource("/main/res/fonts/"+fontID+".ttf");
 
       Font returnFont = null;
+
       try {
-         returnFont = Font.loadFont(new FileInputStream(
-                 new File("src/main/res/fonts/"+fontID+".ttf")), size);
-      } catch (FileNotFoundException e) {
+         returnFont = Font.loadFont(url.openStream(),size);
+      } catch (IOException e) {
          e.printStackTrace();
       }
 

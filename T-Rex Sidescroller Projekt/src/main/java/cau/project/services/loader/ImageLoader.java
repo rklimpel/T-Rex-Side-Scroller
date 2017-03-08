@@ -2,6 +2,8 @@ package main.java.cau.project.services.loader;
 
 import javafx.scene.image.Image;
 
+import java.net.URL;
+
 public class ImageLoader {
 
    private Image img_player = null;
@@ -27,37 +29,34 @@ public class ImageLoader {
    public void load() {
 
       try {
-         img_player = new Image(
-                 "file:src/main/res/assets/"+stylePackage+"/player_mexiko.png");
-         img_playerCrouched = new Image(
-                 "file:src/main/res/assets/"+stylePackage+"/playerCrouched_mexiko.png");
-         img_obstacle = new Image(
-                 "file:src/main/res/assets/"+stylePackage+"/obstacle_mexiko.png");
-         img_powerupTaco = new Image(
-                 "file:src/main/res/assets/"+stylePackage+"/powerup_taco.png");
 
-         img_walking1 = new Image(
-                 "file:src/main/res/assets/"+stylePackage+"/walking1.png");
-         img_walking2 = new Image(
-                 "file:src/main/res/assets/"+stylePackage+"/walking2.png");
-         img_walking3 = new Image(
-                 "file:src/main/res/assets/"+stylePackage+"/walking3.png");
-         img_walking4 = new Image(
-                 "file:src/main/res/assets/"+stylePackage+"/walking4.png");
-         img_jump = new Image(
-                 "file:src/main/res/assets/"+stylePackage+"/jump.png");
+         URL urlPlayer = this.getClass().getResource("/main/res/assets/"+stylePackage+"/player_mexiko.png");
+         URL urlPlayerCrouched = this.getClass().getResource("/main/res/assets/"+stylePackage+"/playerCrouched_mexiko.png");
+         URL urlObstacle = this.getClass().getResource("/main/res/assets/"+stylePackage+"/obstacle_mexiko.png");
+         URL urlPowerupTaco = this.getClass().getResource("/main/res/assets/"+stylePackage+"/powerup_taco.png");
+         URL urlWalking1 = this.getClass().getResource("/main/res/assets/"+stylePackage+"/walking1.png");
+         URL urlWalking2 = this.getClass().getResource("/main/res/assets/"+stylePackage+"/walking2.png");
+         URL urlWalking3 = this.getClass().getResource("/main/res/assets/"+stylePackage+"/walking3.png");
+         URL urlWalking4 = this.getClass().getResource("/main/res/assets/"+stylePackage+"/walking4.png");
+         URL urlJump = this.getClass().getResource("/main/res/assets/"+stylePackage+"/jump.png");
+         URL urlCactus = this.getClass().getResource("/main/res/assets/"+stylePackage+"/cactus.png");
+         URL urlObstacleBot = this.getClass().getResource("/main/res/assets/"+stylePackage+"/stacheldraht.png");
+         URL urlAdler = this.getClass().getResource("/main/res/assets/"+stylePackage+"/adler.png");
+         URL urlAdlerAM = this.getClass().getResource("/main/res/assets/"+stylePackage+"/adlermurica.png");
 
-         img_cactus = new Image(
-                 "file:src/main/res/assets/"+stylePackage+"/cactus.png");
-
-         img_obstacleBottom = new Image(
-                 "file:src/main/res/assets/"+stylePackage+"/stacheldraht.png");
-
-         img_obstacleAdler = new Image(
-                 "file:src/main/res/assets/"+stylePackage+"/adler.png");
-
-         img_obstacleAdlerAM = new Image(
-                 "file:src/main/res/assets/"+stylePackage+"/adlermurica.png");
+         img_player = new Image(urlPlayer.openStream());
+         img_playerCrouched = new Image(urlPlayerCrouched.openStream());
+         img_obstacle = new Image(urlObstacle.openStream());
+         img_powerupTaco = new Image(urlPowerupTaco.openStream());
+         img_walking1 = new Image(urlWalking1.openStream());
+         img_walking2 = new Image(urlWalking2.openStream());
+         img_walking3 = new Image(urlWalking3.openStream());
+         img_walking4 = new Image(urlWalking4.openStream());
+         img_jump = new Image(urlJump.openStream());
+         img_cactus = new Image(urlCactus.openStream());
+         img_obstacleBottom = new Image(urlObstacleBot.openStream());
+         img_obstacleAdler = new Image(urlAdler.openStream());
+         img_obstacleAdlerAM = new Image(urlAdlerAM.openStream());
 
 
       } catch (Exception e) {

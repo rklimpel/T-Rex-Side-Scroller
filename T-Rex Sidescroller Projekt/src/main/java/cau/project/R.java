@@ -125,7 +125,7 @@ public class R {
 
 
    //Path to Levels File
-   public static final String levelsPath = "./src/main/res/leveldata/";
+   public static final String levelsPath = "/main/res/leveldata/";
 
    //Put all Lvl Files that should be loaded in this String Array. Lvl Loader will do the rest....
    public static String[] levelFiles = {lvl_freeTesting};
@@ -151,12 +151,13 @@ public class R {
    /**
     * Scene Switcher FXML View Paths's
     */
-   public static final String viewPathGameDesktop= "../screens/game/view/desktop/DesktopView.fxml";
-   public static final String viewPathMenu = "../screens/menu/MenuView.fxml";
-   public static final String viewPathGameLighthouse = "../screens/game/view/lh/LhView.fxml";
-   public static final String viewPathGameEnd = "../screens/end/Endview.fxml";
-   public static final String viewPathGameSplit = "../screens/split/SplitView.fxml";
-   public static final String viewPathSplitChooser = "../screens/split/SplitChooserView.fxml";
+   public static final String viewPathGameDesktop= "/main/java/cau/project/screens/game/view/desktop/DesktopView.fxml";
+   public static final String viewPathMenu = "/main/java/cau/project/screens/menu/MenuView.fxml";
+   public static final String viewPathGameLighthouse = "/main/java/cau/project/screens/game/view/lh/LhView.fxml";
+   public static final String viewPathGameEnd = "/main/java/cau/project/screens/end/Endview.fxml";
+   public static final String viewPathGameSplit = "/main/java/cau/project/screens/split/SplitView.fxml";
+   public static final String viewPathSplitChooser = "/main/java/cau/project/screens/split/SplitChooserView.fxml";
+
 
    /**
     * Font Id's

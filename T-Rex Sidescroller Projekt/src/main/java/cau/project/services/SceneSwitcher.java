@@ -111,7 +111,8 @@ public enum SceneSwitcher {
 
       //Load fxml configuration for the GameScreen and set it as Parent
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
-      Parent root = null;try {
+      Parent root = null;
+      try {
          root = fxmlLoader.load();
       } catch (IOException e) {
          e.printStackTrace();

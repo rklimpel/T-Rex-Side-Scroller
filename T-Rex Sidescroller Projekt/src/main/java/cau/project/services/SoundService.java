@@ -5,6 +5,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 
 /**
  * Created by ricoklimpel on 04.03.17.
@@ -28,24 +32,31 @@ public class SoundService {
 
    public SoundService() {
 
-      String bip = "src/main/res/sounds/jump.mp3";
-      mediaJump = new Media(new File(bip).toURI().toString());
 
-      bip = "src/main/res/sounds/crouch_down.wav";
-      mediaCrouchDown = new Media(new File(bip).toURI().toString());
+      try {
+         URL url = this.getClass().getResource("/main/res/sounds/jump.mp3");
+         mediaJump = new Media(url.toURI().toString());
 
-      bip = "src/main/res/sounds/crouch_up.wav";
-      mediaCrouchUp = new Media(new File(bip).toURI().toString());
+         url = this.getClass().getResource("/main/res/sounds/crouch_down.wav");
+         mediaCrouchDown = new Media(url.toURI().toString());
 
-      bip = "src/main/res/sounds/country_opening.mp3";
-      mediaGameOpenining = new Media(new File(bip).toURI().toString());
+         url = this.getClass().getResource("/main/res/sounds/crouch_up.wav");
+         mediaCrouchUp = new Media(url.toURI().toString());
 
-      bip = "src/main/res/sounds/country_loop.mp3";
-      mediaGameLoop = new Media(new File(bip).toURI().toString());
+         url = this.getClass().getResource("/main/res/sounds/country_opening.mp3");
+         mediaGameOpenining = new Media(url.toURI().toString());
 
-      bip = "src/main/res/sounds/gameover.wav";
-      mediaGameover = new Media(new File(bip).toURI().toString());
 
+         url = this.getClass().getResource("/main/res/sounds/country_loop.mp3");
+         mediaGameLoop = new Media(url.toURI().toString());
+
+
+         url = this.getClass().getResource("/main/res/sounds/gameover.wav");
+         mediaGameover = new Media(url.toURI().toString());
+
+      }catch (URISyntaxException e) {
+         e.printStackTrace();
+      }
 
       playerJump = new MediaPlayer(mediaJump);
       playerCrouchDown = new MediaPlayer(mediaCrouchDown);

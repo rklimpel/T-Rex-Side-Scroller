@@ -23,6 +23,9 @@ import main.java.cau.project.services.listeners.MouseListener;
 import main.java.cau.project.services.loader.CustomFontLoader;
 import main.java.cau.project.services.loader.ImageLoader;
 
+import java.io.IOException;
+import java.net.URL;
+
 
 public class DesktopView extends GameView {
 
@@ -80,8 +83,17 @@ public class DesktopView extends GameView {
             }
 
             if(gameObjectsAsImages){
-               BackgroundImage myBI= new BackgroundImage(new Image
-                       ("file:src/main/res/assets/mexiko/background.png",paneWidth,paneHeight,false,true),
+
+               URL url = this.getClass().getResource("/main/res/assets/mexiko/background.png");
+
+               Image image = null;
+               try {
+                  image = new Image(url.openStream(),paneWidth,paneHeight,false,false);
+               } catch (IOException e) {
+                  e.printStackTrace();
+               }
+
+               BackgroundImage myBI= new BackgroundImage(image,
                        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                        BackgroundSize.DEFAULT);
 

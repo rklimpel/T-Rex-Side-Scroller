@@ -5,16 +5,29 @@ import javafx.scene.paint.Color;
 import main.java.cau.project.R;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class Helper {
 
    public static int score;
 
-   public static String readFile(String path) throws IOException {
+   public String readFile(String path) throws IOException {
 
       String returnString = null;
 
-      File file = new File(path);
+      // path = "/main/res/leveldata/free_testing"
+
+      URL url = this.getClass().getResource(path);
+
+      System.out.println(url);
+
+      File file = null;
+      try {
+         file = new File(url.toURI());
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
 
       FileReader reader = null;
       try {
