@@ -294,6 +294,7 @@ public class DesktopView extends GameView {
          }
       }
 
+      iV_player.setRotate(controller.getPlayer().getRotation());
       iV_player.setFitWidth(controller.getPlayer().getWidth());
       iV_player.setFitHeight(controller.getPlayer().getHeight());
       iV_player.relocate(controller.getPlayer().getX(), controller.getPlayer().getY());

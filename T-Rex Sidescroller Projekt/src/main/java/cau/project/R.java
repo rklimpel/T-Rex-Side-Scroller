@@ -33,7 +33,7 @@ public class R {
 
    //How far the Player roates on one jump:
    //0.5 = 180° ; 1 = 360° ... 0.5 steps
-   public static final double playerJumpRotation = 0.5;
+   public static final double playerJumpRotation = 1;
 
    /**
     * Obstacle
