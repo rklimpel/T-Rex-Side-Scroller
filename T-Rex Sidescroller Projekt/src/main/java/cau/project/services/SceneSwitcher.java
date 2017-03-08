@@ -12,52 +12,46 @@ import java.io.IOException;
 
 public enum SceneSwitcher {
 
-   MENU(R.viewPathMenu,300,300),
-   GAME_DESKTOP(R.viewPathGameDesktop,800,400),
-   GAME_LH(R.viewPathGameLighthouse,200,200),
-   END(R.viewPathGameEnd,800,400),
-   GAME_SPLIT(R.viewPathGameSplit,1200,400),
-   SPLIT_CHOOSER(R.viewPathSplitChooser,800,400);
+   MENU(R.viewPathMenu, 300, 300),
+   GAME_DESKTOP(R.viewPathGameDesktop, 800, 400),
+   GAME_LH(R.viewPathGameLighthouse, 200, 200),
+   END(R.viewPathGameEnd, 800, 400),
+   GAME_SPLIT(R.viewPathGameSplit, 1200, 400),
+   SPLIT_CHOOSER(R.viewPathSplitChooser, 800, 400);
 
    public String path = null;
    private int width;
    private int height;
 
 
-   SceneSwitcher(final String path,final int width,final int height) {
+   SceneSwitcher(final String path, final int width, final int height) {
       this.path = path;
       this.width = width;
       this.height = height;
    }
 
-   public void load(){
+   public void load() {
       Main.stage.setScene(loadSceneFromFXML());
       Main.stage.show();
-      Main.centerFrame();
+      //Main.centerFrame();
    }
 
-   public void load(Boolean objectsAsImages){
-
+   public void load(Boolean objectsAsImages) {
 
       //Load fxml configuration for the GameScreen and set it as Parent
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
-      Parent root = null;try {
-         root = fxmlLoader.load();
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
+      FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(path));
 
-      if(path.equals(R.viewPathGameDesktop)){
-         DesktopView desktopView = (DesktopView)fxmlLoader.getController();
+      if (path.equals(R.viewPathGameDesktop)) {
+         DesktopView desktopView = (DesktopView) fxmlLoader.getController();
          desktopView.init(objectsAsImages);
       }
 
       Main.stage.setScene(loadSceneFromFXML());
       Main.stage.show();
-      Main.centerFrame();
+      //Main.centerFrame();
    }
 
-   public Parent getRoot(){
+   public Parent getRoot() {
       //Load fxml configuration for the GameScreen and set it as Parent
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
       Parent root = null;
@@ -70,7 +64,7 @@ public enum SceneSwitcher {
       return root;
    }
 
-   public Parent getRoot(int sub){
+   public Parent getRoot(int sub) {
       //Load fxml configuration for the GameScreen and set it as Parent
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
       Parent root = null;
@@ -80,8 +74,8 @@ public enum SceneSwitcher {
          e.printStackTrace();
       }
 
-      if(path.equals(R.viewPathSplitChooser)){
-         SplitChooserView splitChooserView = (SplitChooserView)fxmlLoader.getController();
+      if (path.equals(R.viewPathSplitChooser)) {
+         SplitChooserView splitChooserView = (SplitChooserView) fxmlLoader.getController();
          splitChooserView.init(sub);
       }
 
@@ -89,7 +83,7 @@ public enum SceneSwitcher {
    }
 
 
-   public Parent getRoot(Boolean objectsAsImages){
+   public Parent getRoot(Boolean objectsAsImages) {
       //Load fxml configuration for the GameScreen and set it as Parent
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
       Parent root = null;
@@ -99,8 +93,8 @@ public enum SceneSwitcher {
          e.printStackTrace();
       }
 
-      if(path.equals(R.viewPathGameDesktop)){
-         DesktopView desktopView = (DesktopView)fxmlLoader.getController();
+      if (path.equals(R.viewPathGameDesktop)) {
+         DesktopView desktopView = (DesktopView) fxmlLoader.getController();
          desktopView.init(objectsAsImages);
       }
 
@@ -110,7 +104,7 @@ public enum SceneSwitcher {
    public Scene loadSceneFromFXML() {
 
       //Load fxml configuration for the GameScreen and set it as Parent
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+      FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(path));
       Parent root = null;
       try {
          root = fxmlLoader.load();
@@ -118,7 +112,7 @@ public enum SceneSwitcher {
          e.printStackTrace();
       }
 
-      return new Scene(root, width,height);
+      return new Scene(root, width, height);
    }
 
 }
