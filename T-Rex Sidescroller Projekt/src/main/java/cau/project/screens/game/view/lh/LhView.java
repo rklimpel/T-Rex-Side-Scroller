@@ -76,7 +76,7 @@ public class LhView extends GameView{
 
             for (int j = 0; j < pixelsReduced[0].length; j++) {
 
-                pixelsReduced[i][j] = Color.BLACK;
+                pixelsReduced[i][j] = Color.rgb(60,60,60);
 
             }
         }
@@ -130,7 +130,7 @@ public class LhView extends GameView{
                              +gameModel.getObstacles().get(i).getWidth()); k++) {
 
                     if(!(j>pixelsReduced.length||k>=pixelsReduced[0].length||j<0||k<0)){
-                        pixelsReduced[j][k]=Color.BLUE;
+                        pixelsReduced[j][k]=Color.RED;
                     }
                 }
             }
@@ -165,7 +165,7 @@ public class LhView extends GameView{
 
                 //System.out.println("PlayerPixels: " + i + " / " + j);
 
-                pixelsReduced[i][j] = Color.RED;
+                pixelsReduced[i][j] = Color.BLUE;
             }
         }
 
