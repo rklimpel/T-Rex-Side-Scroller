@@ -1,8 +1,6 @@
 package main.java.cau.project.services.loader;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 
 public class ImageLoader {
 

@@ -172,12 +172,16 @@ public class GameController {
     */
    public void quitGame(View view) {
 
+      System.out.println("QUIT Gameover: " + gameModel.gameOver);
+
       if (gameModel.gameOver) Helper.score = gameModel.getScore();
 
       for (int i = 0; i < listeningViews.size(); i++) {
          if (gameModel.gameOver) {
+            System.out.println("exit to EndView");
             view.exit(R.viewIdEnd);
          } else {
+            System.out.println("exit to MenuView");
             view.exit(R.viewIdMenu);
          }
       }
