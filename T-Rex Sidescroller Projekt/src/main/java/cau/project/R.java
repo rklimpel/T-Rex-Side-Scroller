@@ -47,13 +47,13 @@ public class R {
    public static final int obstacleWidth1 = 20;
    //normal lie
    public static final int obstacleHeight2 = 30;
-   public static final int obstacleWidth2 = 100;
+   public static final int obstacleWidth2 = 80;
    //thicker one
-   public static final int obstacleHeight3 = 70;
-   public static final int obstacleWidth3 = 50;
+   public static final int obstacleHeight3 = 60;
+   public static final int obstacleWidth3 = 60;
    //long on the ground
    public static final int obstacleHeight4 = 30;
-   public static final int obstacleWidth4 = 300;
+   public static final int obstacleWidth4 = 130;
 
    /**
     * Powerups

@@ -7,12 +7,14 @@ public class Obstacle extends GameObject {
    int defaultHeight;
    int defaultWidth;
    int yOffset;
+   int type;
 
    public Obstacle(int type, int paneWidth, int paneHeight, int yOffset) {
 
       this.paneWidth = paneWidth;
       this.paneHeight = paneHeight;
       this.yOffset = yOffset;
+      this.type = type;
 
       setMeasures(type);
 
@@ -66,5 +68,7 @@ public class Obstacle extends GameObject {
    }
 
 
-
+   public int getType() {
+      return type;
+   }
 }
