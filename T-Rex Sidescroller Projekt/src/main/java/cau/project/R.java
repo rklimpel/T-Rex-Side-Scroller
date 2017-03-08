@@ -156,7 +156,7 @@ public class R {
    public static final String viewPathGameDesktop= "/main/java/cau/project/screens/game/view/desktop/DesktopView.fxml";
    public static final String viewPathMenu = "/main/java/cau/project/screens/menu/MenuView.fxml";
    public static final String viewPathGameLighthouse = "/main/java/cau/project/screens/game/view/lh/LhView.fxml";
-   public static final String viewPathGameEnd = "/main/java/cau/project/screens/end/Endview.fxml";
+   public static final String viewPathGameEnd = "/main/java/cau/project/screens/end/EndView.fxml";
    public static final String viewPathGameSplit = "/main/java/cau/project/screens/split/SplitView.fxml";
    public static final String viewPathSplitChooser = "/main/java/cau/project/screens/split/SplitChooserView.fxml";
 

@@ -36,6 +36,14 @@ public class Main extends Application {
       // Move the window to the Center of Desktop
       stage.setX(dim.width / 2 - stage.getWidth() / 2);
       stage.setY(dim.height / 2 - stage.getHeight() / 2);
+
+      System.out.println("Desktop (dimension) width: " + dim.width);
+      System.out.println("Desktop (dimension) height: " + dim.width);
+      System.out.println("Window (stage) width: " + stage.getWidth());
+      System.out.println("Window (satge) height: " + stage.getHeight());
+      System.out.println("set Window to X: " + stage.getX());
+      System.out.println("set Window to Y: " + stage.getY());
+
    }
 
    public static void main(String[] args) {
