@@ -130,7 +130,7 @@ public class GameController {
 
          gameModel.jump();
 
-         if (R.musicOn) {
+         if (R.musicOn && !gameModel.player.getJumping()) {
             soundService.playJump();
          }
 
