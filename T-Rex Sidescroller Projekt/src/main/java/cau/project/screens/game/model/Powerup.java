@@ -4,12 +4,20 @@ import javafx.scene.paint.Color;
 import main.java.cau.project.R;
 
 /**
- * Created by Rico on 06.03.2017.
+ * class for the powerup which defines this kind of gameobject
  */
 public class Powerup extends GameObject{
 
    int powerupType;
 
+   /**
+    * constructor for the powerup
+    *
+    * @param type type of the powerup
+    * @param paneWidth width of the current pane
+    * @param paneHeight height of the current pane
+    * @param yOffset y-position of the powerup above the ground-level
+    */
    Powerup(int type, int paneWidth, int paneHeight, int yOffset) {
 
       this.paneWidth = paneWidth;

@@ -10,10 +10,23 @@ import main.java.cau.project.screens.end.EndView;
 import main.java.cau.project.screens.menu.MenuView;
 import main.java.cau.project.services.SceneSwitcher;
 
+/**
+ * class for handling mouse-events
+ */
 public class KeyboardListener implements EventHandler<KeyEvent> {
 
    View view;
 
+   /**
+    * constructer for every kind of used keylistener
+    * the different actions are splitted:
+    *
+    * 1. by pressed and released
+    * 2. by the view which calls the listener
+    * 3. by the key itself
+    *
+    * @param view view which calls the listener
+    */
    public KeyboardListener(View view) {
       this.view = view;
 

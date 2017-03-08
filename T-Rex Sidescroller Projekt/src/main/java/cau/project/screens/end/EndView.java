@@ -14,6 +14,9 @@ import main.java.cau.project.services.SceneSwitcher;
 
 import java.io.IOException;
 
+/**
+ * class who creates the layout of the end view and handels its actions
+ */
 public class EndView extends View {
 
     int score;
@@ -77,6 +80,9 @@ public class EndView extends View {
         lbl_gameover.setTextFill(Color.WHITE);
     }
 
+    /**
+     * setting layout for the score label
+     */
     private void setScoreLabel() {
         lbl_endscore.setText("Endscore: " + score);
         lbl_endscore.setFont(customFontLoader.load(R.fontPixel, 100));
@@ -84,13 +90,19 @@ public class EndView extends View {
     }
 
     /**
-     * opens
+     * loads the new game view, there the view is switched in the scene-switcher-
+     * class and the gamedeasktop-view is loaded, the new game starts
      * @throws IOException
      */
     public void onButtonClicked() throws IOException {
-        SceneSwitcher.GAME_DESKTOP.load();
+        restartGame();
     }
 
+    /**
+     * first is looked which kind of game is running, therefor the current viewID is
+     * compared with the three existing ones. For each one the next gamestarting view is
+     * loaded by the sceneswitcher-class
+     */
     public void restartGame() {
         if (Main.getMainView().getViewID() == R.viewIdSplit) {
             SceneSwitcher.GAME_SPLIT.load();
@@ -102,6 +114,10 @@ public class EndView extends View {
 
     }
 
+    /**
+     * when exit is called your are switched to the menu-view
+     * @param nextViewID viewID for the next shown view
+     */
     public void exit(String nextViewID) {
         SceneSwitcher.MENU.load();
     }
