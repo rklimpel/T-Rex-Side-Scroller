@@ -66,9 +66,17 @@ public class GameView extends View{
 
             }else if(Main.getMainView().getViewID()==R.viewIdSplit){
 
+
                SplitView splitView = (SplitView)Main.getMainView();
-               splitView.setSub2(SceneSwitcher.END.getRoot());
-               splitView.setSub1(SceneSwitcher.END.getRoot());
+
+               if(nextViewID == R.viewIdEnd){
+                  splitView.setSub2(SceneSwitcher.END.getRoot());
+                  splitView.setSub1(SceneSwitcher.END.getRoot());
+               }else if(nextViewID == R.viewIdMenu){
+                  SceneSwitcher.MENU.load();
+               }
+
+
 
             }
          }

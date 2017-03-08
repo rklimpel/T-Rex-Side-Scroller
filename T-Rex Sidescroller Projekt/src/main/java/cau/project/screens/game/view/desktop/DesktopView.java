@@ -199,7 +199,25 @@ public class DesktopView extends GameView {
       for (int i = 0; i < controller.gameModel.getObstacles().size(); i++) {
 
          ImageView iv_Obstacle = new ImageView();
-         iv_Obstacle.setImage(imageLoader.getImg_obstacle());
+
+         switch (controller.getObstacles().get(i).getType()){
+            case 0:
+               iv_Obstacle.setImage(imageLoader.getImg_obstacle());
+               break;
+            case 1:
+               iv_Obstacle.setImage(imageLoader.getImg_obstacle());
+               break;
+            case 2:
+               iv_Obstacle.setImage(imageLoader.getImg_obstacleBottom());
+               break;
+            case 3:
+               iv_Obstacle.setImage(imageLoader.getImg_obstacleAdlerAM());
+               break;
+            case 4:
+               iv_Obstacle.setImage(imageLoader.getImg_obstacleBottom());
+               break;
+         }
+
          iv_Obstacle.relocate(controller.getObstacles().get(i).getX(),
                  controller.getObstacles().get(i).getY());
          iv_Obstacle.setFitHeight(controller.getObstacles().get(i).getHeight());
@@ -262,8 +280,8 @@ public class DesktopView extends GameView {
                   break;
             }
          }
-
       }
+
       iV_player.setFitWidth(controller.getPlayer().getWidth());
       iV_player.setFitHeight(controller.getPlayer().getHeight());
       iV_player.relocate(controller.getPlayer().getX(), controller.getPlayer().getY());

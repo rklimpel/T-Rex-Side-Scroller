@@ -2,7 +2,6 @@ package main.java.cau.project.services.loader;
 
 import javafx.scene.image.Image;
 
-
 public class ImageLoader {
 
    private Image img_player = null;
@@ -17,6 +16,10 @@ public class ImageLoader {
    private Image img_jump = null;
 
    private Image img_cactus = null;
+
+   private Image img_obstacleBottom = null;
+   private Image img_obstacleAdler = null;
+   private Image img_obstacleAdlerAM = null;
 
 
    String stylePackage = "mexiko";
@@ -46,6 +49,15 @@ public class ImageLoader {
 
          img_cactus = new Image(
                  "file:src/main/res/assets/"+stylePackage+"/cactus.png");
+
+         img_obstacleBottom = new Image(
+                 "file:src/main/res/assets/"+stylePackage+"/stacheldraht.png");
+
+         img_obstacleAdler = new Image(
+                 "file:src/main/res/assets/"+stylePackage+"/adler.png");
+
+         img_obstacleAdlerAM = new Image(
+                 "file:src/main/res/assets/"+stylePackage+"/adlermurica.png");
 
 
       } catch (Exception e) {
@@ -91,5 +103,17 @@ public class ImageLoader {
 
    public Image getImg_cactus() {
       return img_cactus;
+   }
+
+   public Image getImg_obstacleBottom() {
+      return img_obstacleBottom;
+   }
+
+   public Image getImg_obstacleAdler() {
+      return img_obstacleAdler;
+   }
+
+   public Image getImg_obstacleAdlerAM() {
+      return img_obstacleAdlerAM;
    }
 }
