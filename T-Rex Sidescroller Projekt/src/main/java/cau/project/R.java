@@ -124,13 +124,14 @@ public class R {
    public static final String lvl_easy = "easy_lvl";
    public static final String lvl_medium = "medium_lvl";
    public static final String lvl_hard = "hard_lvl";
+   public static final String lvl_lighthouse = "lighthouse_lvl";
 
 
    //Path to Levels File
    public static final String levelsPath = "/main/res/leveldata/";
 
    //Put all Lvl Files that should be loaded in this String Array. Lvl Loader will do the rest....
-   public static String[] levelFiles = {lvl_easy,lvl_medium,lvl_hard};
+   public static String[] levelFiles = {lvl_lighthouse};
 
    /**
     * Lighthouse
