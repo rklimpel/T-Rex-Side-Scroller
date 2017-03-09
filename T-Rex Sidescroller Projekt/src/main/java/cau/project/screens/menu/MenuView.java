@@ -47,7 +47,6 @@ public class MenuView extends View {
 
       Main.setMainView(this);
 
-
       Main.setLighthouseService(lighthouseService);
 
       checkLighthouseConnection();

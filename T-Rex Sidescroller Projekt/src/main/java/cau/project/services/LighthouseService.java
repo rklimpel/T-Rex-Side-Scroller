@@ -15,13 +15,17 @@ import java.util.TimerTask;
  */
 public class LighthouseService {
 
-   LighthouseNetwork lighthouseNetwork = new LighthouseNetwork();
+   LighthouseNetwork lighthouseNetwork;
    Color[][] lastPixels;
    Random rand = new Random();
 
 
    public LighthouseService() {
-
+      if(R.realLighthouse){
+         lighthouseNetwork = new LighthouseNetwork(R.username,R.password);
+      }else {
+         lighthouseNetwork = new LighthouseNetwork();
+      }
    }
 
    public Boolean connect(){

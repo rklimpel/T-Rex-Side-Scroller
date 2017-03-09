@@ -177,4 +177,13 @@ public class R {
    //Only play one lvl (-1 = normal game)
    public static final int onlyLvl = -1;
 
+
+   /**
+    *lighthouse extras:
+    */
+
+   public static final Boolean realLighthouse = false;
+   public static final String username = "14";
+   public static final String password = "7KW0-2X3G-EQ7K-G3D7";
+
 }
