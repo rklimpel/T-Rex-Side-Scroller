@@ -82,7 +82,7 @@ public class DesktopView extends GameView {
 
             if(gameObjectsAsImages){
 
-               BackgroundImage myBI= new BackgroundImage(imageLoader.getImg_background(),
+               BackgroundImage myBI= new BackgroundImage(imageLoader.getImg_backgroundT(),
                        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                        BackgroundSize.DEFAULT);
 
