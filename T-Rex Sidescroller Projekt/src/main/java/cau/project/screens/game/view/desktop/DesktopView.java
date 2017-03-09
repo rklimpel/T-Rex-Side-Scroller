@@ -4,7 +4,6 @@ import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.effect.*;
 import javafx.scene.image.Image;
@@ -17,7 +16,6 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Font;
 import main.java.cau.project.*;
 import main.java.cau.project.screens.game.view.GameView;
-import main.java.cau.project.services.SoundService;
 import main.java.cau.project.services.listeners.KeyboardListener;
 import main.java.cau.project.services.listeners.MouseListener;
 import main.java.cau.project.services.loader.CustomFontLoader;
@@ -84,16 +82,7 @@ public class DesktopView extends GameView {
 
             if(gameObjectsAsImages){
 
-               URL url = this.getClass().getResource("/main/res/assets/mexiko/background.png");
-
-               Image image = null;
-               try {
-                  image = new Image(url.openStream(),paneWidth,paneHeight,false,false);
-               } catch (IOException e) {
-                  e.printStackTrace();
-               }
-
-               BackgroundImage myBI= new BackgroundImage(image,
+               BackgroundImage myBI= new BackgroundImage(imageLoader.getImg_background(),
                        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                        BackgroundSize.DEFAULT);
 

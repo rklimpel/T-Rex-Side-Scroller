@@ -15,6 +15,8 @@ import main.java.cau.project.services.SceneSwitcher;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MenuView extends View {
@@ -23,6 +25,8 @@ public class MenuView extends View {
    public Button btn_startDesktop;
    @FXML
    public Button btn_startLighthouse;
+   @FXML
+   public Button btn_startSplit;
    @FXML
    public CheckBox checkBoxMusic;
    @FXML
@@ -34,6 +38,8 @@ public class MenuView extends View {
 
    LighthouseService lighthouseService = new LighthouseService();
 
+   Timer timer;
+
    public MenuView() {
 
       view = this;
@@ -41,8 +47,10 @@ public class MenuView extends View {
 
       Main.setMainView(this);
 
-      lighthouseConnected = lighthouseService.connect();
+
       Main.setLighthouseService(lighthouseService);
+
+      checkLighthouseConnection();
 
       Platform.runLater(new Runnable() {
          @Override
@@ -50,13 +58,7 @@ public class MenuView extends View {
 
             new KeyboardListener(view);
 
-            if (lighthouseConnected) {
-               btn_startLighthouse.setStyle("-fx-background-color:  #4caf50;");
-
-            } else {
-               btn_startLighthouse.setStyle("-fx-background-color:  #f44336;");
-            }
-
+            styleButtons();
 
             URL url = this.getClass().getResource("/main/res/assets/mexiko/background.png");
 
@@ -90,15 +92,48 @@ public class MenuView extends View {
       });
    }
 
+   private void styleButtons() {
+      btn_startDesktop.setStyle("-fx-text-fill: white; -fx-base:  #795548;");
+      btn_startSplit.setStyle("-fx-text-fill: white; -fx-base:  #795548;");
+   }
+
+   private void checkLighthouseConnection(){
+
+      timer = new Timer();
+      TimerTask task = new TimerTask() {
+         public void run() {
+
+            lighthouseConnected = lighthouseService.connect();
+
+            Platform.runLater(new Runnable() {
+               @Override
+               public void run() {
+                  if (lighthouseConnected) {
+                     btn_startLighthouse.setStyle("-fx-base:  #4caf50;");
+
+                  } else {
+                     btn_startLighthouse.setStyle("-fx-base:  #f44336;");
+                  }
+               }
+            });
+         }
+      };
+      timer.scheduleAtFixedRate(task, 0, 2000);
+
+   }
+
    public void startGameDesktop() {
+      timer.purge();
       SceneSwitcher.GAME_DESKTOP.load();
    }
 
    public void onClick_btn_startLighthouse() {
+      timer.purge();
       SceneSwitcher.GAME_LH.load();
    }
 
    public void onClick_btn_startSplit(ActionEvent actionEvent) {
+      timer.purge();
       SceneSwitcher.GAME_SPLIT.load();
    }
 }
