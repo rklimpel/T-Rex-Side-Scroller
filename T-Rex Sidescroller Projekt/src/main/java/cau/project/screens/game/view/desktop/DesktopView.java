@@ -380,6 +380,10 @@ public class DesktopView extends GameView {
          imageView.setFitWidth(controller.getPlatforms().get(i).getWidth());
          imageView.setFitHeight(controller.getPlatforms().get(i).getHeight());
 
+         DropShadow ds = new DropShadow( 4, Color.BROWN);
+
+         imageView.setEffect(ds);
+
          pane.getChildren().add(imageView);
 
       }

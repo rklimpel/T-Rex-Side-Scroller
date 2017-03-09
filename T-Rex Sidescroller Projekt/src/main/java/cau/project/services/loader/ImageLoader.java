@@ -58,7 +58,7 @@ public class ImageLoader {
          URL urlAdlerAM = this.getClass().getResource(
                  "/main/res/assets/"+stylePackage+"/adlermurica.png");
          URL urlPlatform0 = this.getClass().getResource(
-                 "/main/res/assets/"+stylePackage+"/platform0.png");
+                 "/main/res/assets/"+stylePackage+"/platform.png");
 
          img_player = new Image(urlPlayer.openStream());
          img_playerCrouched = new Image(urlPlayerCrouched.openStream());
