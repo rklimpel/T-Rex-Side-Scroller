@@ -1,9 +1,12 @@
 package main.java.cau.project;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import main.java.cau.project.screens.game.controller.GameController;
 import main.java.cau.project.services.LighthouseService;
 import main.java.cau.project.services.SceneSwitcher;
@@ -25,6 +28,14 @@ public class Main extends Application {
       stage = primaryStage;
 
       SceneSwitcher.MENU.load();
+
+      stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+         @Override
+         public void handle(WindowEvent event) {
+            Platform.exit();
+            System.exit(0);
+         }
+      });
 
    }
 
