@@ -118,6 +118,25 @@ public class GameModel {
     */
    public void jump() {
 
+      Boolean nearPlatform = false;
+      int waitingJumpToleranz = 50;
+
+      //Check if jump called when near Platform
+      for (int i = 0; i < platforms.size(); i++) {
+         if(platforms.get(i).getY()-(player.getY()+player.getHeight())<=waitingJumpToleranz
+                 && platforms.get(i).getY()-(player.getY()+player.getHeight()) >= 0){
+            nearPlatform = true;
+            System.out.println("NEAR PLATFORM");
+         }
+      }
+
+      //Check if jump called when near ground
+      if (ground.getY()-player.getY()-player.getHeight()<=waitingJumpToleranz
+              &&ground.getY()-player.getY()-player.getHeight()>=0){
+         nearPlatform = true;
+         System.out.println("NEAR GROUND");
+      }
+
       //If the player isn't jumping call jump in players class
       if (!player.isJumping) {
          player.jump();
@@ -130,8 +149,7 @@ public class GameModel {
          player.platform = null;
       }
       //If the player is near to the ground save the jump and execute it later
-      else if (paneHeight - R.groundLvL - player.getY()
-              <= player.getHeight() / 2 + player.getHeight()) {
+      else if (nearPlatform && player.isJumpingDown) {
          jumpWaiting = true;
       }
    }

@@ -66,7 +66,7 @@ public class LighthouseService {
          public void run() {
 
             color[y][x] = Color.rgb(Helper.randInt(0,255),Helper.randInt(0,255),Helper.randInt(0,255));
-            
+
             x+=1;
 
             if(x == R.lighthouseWidth){
