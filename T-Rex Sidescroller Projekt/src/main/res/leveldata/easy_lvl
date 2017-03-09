@@ -66,3 +66,11 @@ gap=10|type=1|y=0
 gap=10|type=1|y=0
 gap=300|type=0|y=0
 ---
+//Zwei Dreierblöcke
+#id=lvl8
+gap=10|type=0|y=0
+gap=10|type=0|y=0
+gap=10|type=0|y=0
+gap=400|type=0|y=0
+gap=10|type=0|y=0
+gap=10|type=0|y=0
