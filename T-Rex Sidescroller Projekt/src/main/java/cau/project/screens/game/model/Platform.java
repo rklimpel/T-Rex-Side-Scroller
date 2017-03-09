@@ -19,7 +19,7 @@ public class Platform extends GameObject {
         this.paneWidth = paneWidth;
         this.paneHeight = paneHeight;
         this.yOffset = yOffset;
-        System.out.println("test");
+
         setMeasure(type);
 
         this.color = Color.BLACK;
@@ -27,8 +27,6 @@ public class Platform extends GameObject {
     }
 
     public void setMeasure(int type) {
-        System.out.println("Plattform type: " + type);
-
 
         switch (type) {
             case 200:

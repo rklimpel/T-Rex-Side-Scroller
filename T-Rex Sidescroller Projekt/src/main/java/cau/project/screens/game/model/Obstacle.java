@@ -27,8 +27,6 @@ public class Obstacle extends GameObject {
     */
    private void setMeasures(int type){
 
-      System.out.println("OBstacle type: " + type);
-
       switch (type){
          case 0:
             defaultHeight = R.obstacleHeight0;

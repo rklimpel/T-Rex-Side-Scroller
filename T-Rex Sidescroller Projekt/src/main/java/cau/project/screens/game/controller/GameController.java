@@ -23,6 +23,8 @@ public class GameController {
 
    int nextWalkingImg;
 
+   int updateCounter = 0;
+
 
    private SoundService soundService = new SoundService();
 
@@ -78,8 +80,19 @@ public class GameController {
     * updates all listening views
     */
    public void update() {
+
+      updateCounter += 1;
+
       for (int i = 0; i < listeningViews.size(); i++) {
-         listeningViews.get(i).Update();
+
+         if(listeningViews.get(i).getViewID()==R.viewIdGameLighthouse){
+            if(updateCounter % 4 == 0){
+               listeningViews.get(i).Update();
+            }
+         }else{
+            listeningViews.get(i).Update();
+         }
+
       }
 
       if (gameModel.gameOver && R.musicOn) {
