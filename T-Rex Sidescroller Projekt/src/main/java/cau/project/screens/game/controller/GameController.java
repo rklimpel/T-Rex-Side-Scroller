@@ -62,6 +62,7 @@ public class GameController {
          }
       };
       updateTimer.scheduleAtFixedRate(task, 0, 8);
+      //for janek laptop the period must be between 18 and 20
 
       nextWalkingImg = 12;
    }
