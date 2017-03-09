@@ -3,8 +3,11 @@ package main.java.cau.project.services;
 import javafx.scene.paint.Color;
 
 import java.io.*;
+import java.util.Random;
 
 public class Helper {
+
+    public static Random rand = new Random();
 
     public static int score;
 
@@ -103,6 +106,34 @@ public class Helper {
 
 
         return data;
+    }
+
+
+    /**
+     * Helper Method to create a random int
+     *
+     * @param min
+     * @param max
+     * @return
+     */
+    public static int randInt(int min, int max) {
+
+        int randomNum = 500;
+
+        try{
+
+            randomNum = rand.nextInt((max - min) + 1) + min;
+
+        }catch (Exception e){
+
+            System.out.println(e);
+            //In the beginning we sometimes got the error that min is bigger than max.
+            //this catch will catch the exeption. then the default value for the next background
+            //obstacle is 500
+
+        }
+
+        return randomNum;
     }
 
 

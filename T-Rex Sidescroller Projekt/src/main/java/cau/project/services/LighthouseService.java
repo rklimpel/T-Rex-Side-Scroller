@@ -3,8 +3,10 @@ package main.java.cau.project.services;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import main.java.cau.project.R;
+import main.java.cau.project.screens.end.EndView;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -15,6 +17,8 @@ public class LighthouseService {
 
    LighthouseNetwork lighthouseNetwork = new LighthouseNetwork();
    Color[][] lastPixels;
+   Random rand = new Random();
+
 
    public LighthouseService() {
 
@@ -47,7 +51,7 @@ public class LighthouseService {
    int x = 0;
    int y = 0;
 
-   public void lighthouseEnd(){
+   public void lighthouseEnd(EndView endview){
 
       try {
          lighthouseNetwork.connect();
@@ -61,8 +65,8 @@ public class LighthouseService {
       TimerTask task = new TimerTask() {
          public void run() {
 
-            color[y][x] = Color.DARKRED;
-
+            color[y][x] = Color.rgb(Helper.randInt(0,255),Helper.randInt(0,255),Helper.randInt(0,255));
+            
             x+=1;
 
             if(x == R.lighthouseWidth){
@@ -70,18 +74,24 @@ public class LighthouseService {
                x=0;
             }
 
-            if(y == R.lighthouseHeight && x == R.lighthouseWidth){
-               timer.purge();
-            }
-
             try {
                lighthouseNetwork.send(convertToByteArray(color));
             } catch (IOException e) {
                e.printStackTrace();
             }
+
+
+            System.out.println("x: " + x);
+            System.out.println("y: "+y);
+
+            if(y == R.lighthouseHeight && x == 0){
+               System.out.println("Lighthouse Endview Done");
+               endview.continueAllowed = true;
+               timer.purge();
+            }
          }
       };
-      timer.scheduleAtFixedRate(task, 0, 5);
+      timer.scheduleAtFixedRate(task, 0, 10);
 
       x = 0;
       y = 0;

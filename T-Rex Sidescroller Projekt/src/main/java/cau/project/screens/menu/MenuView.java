@@ -6,10 +6,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import main.java.cau.project.*;
 import main.java.cau.project.services.LighthouseService;
 import main.java.cau.project.services.listeners.KeyboardListener;
 import main.java.cau.project.services.SceneSwitcher;
+
+import java.io.IOException;
+import java.net.URL;
 
 
 public class MenuView extends View {
@@ -20,6 +25,8 @@ public class MenuView extends View {
    public Button btn_startLighthouse;
    @FXML
    public CheckBox checkBoxMusic;
+   @FXML
+   public GridPane background;
 
    private Boolean lighthouseConnected = false;
 
@@ -49,6 +56,22 @@ public class MenuView extends View {
             } else {
                btn_startLighthouse.setStyle("-fx-background-color:  #f44336;");
             }
+
+
+            URL url = this.getClass().getResource("/main/res/assets/mexiko/background.png");
+
+            Image image = null;
+            try {
+               image = new Image(url.openStream(),background.getWidth(),background.getHeight(),false,false);
+            } catch (IOException e) {
+               e.printStackTrace();
+            }
+
+            BackgroundImage myBI= new BackgroundImage(image,
+                    BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                    BackgroundSize.DEFAULT);
+
+            background.setBackground(new Background(myBI));
 
             checkBoxMusic.setSelected(R.musicOn);
 

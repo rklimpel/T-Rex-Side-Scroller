@@ -34,6 +34,8 @@ public class EndView extends View {
     //custom font is created
     CustomFontLoader customFontLoader = new CustomFontLoader();
 
+    public Boolean continueAllowed = true;
+
     /**
      * creates the endview, shows the score and some hints and differs between desktop
      * and the lighthouse version for showing the endscreen
@@ -60,7 +62,8 @@ public class EndView extends View {
         });
         //if the lighthousegame is running show the special lighthouse endscreen
         if (Main.getMainView().getViewID() == R.viewIdGameLighthouse) {
-            Main.getLighthouseService().lighthouseEnd();
+            continueAllowed = false;
+            Main.getLighthouseService().lighthouseEnd(this);
         }
 
     }
@@ -104,14 +107,15 @@ public class EndView extends View {
      * loaded by the sceneswitcher-class
      */
     public void restartGame() {
-        if (Main.getMainView().getViewID() == R.viewIdSplit) {
-            SceneSwitcher.GAME_SPLIT.load();
-        } else if (Main.getMainView().getViewID() == R.viewIdGameDesktop) {
-            SceneSwitcher.GAME_DESKTOP.load();
-        } else if (Main.getMainView().getViewID() == R.viewIdGameLighthouse) {
-            SceneSwitcher.GAME_LH.load();
+        if(continueAllowed){
+            if (Main.getMainView().getViewID() == R.viewIdSplit) {
+                SceneSwitcher.GAME_SPLIT.load();
+            } else if (Main.getMainView().getViewID() == R.viewIdGameDesktop) {
+                SceneSwitcher.GAME_DESKTOP.load();
+            } else if (Main.getMainView().getViewID() == R.viewIdGameLighthouse) {
+                SceneSwitcher.GAME_LH.load();
+            }
         }
-
     }
 
     /**

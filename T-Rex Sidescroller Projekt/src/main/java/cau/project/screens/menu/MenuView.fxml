@@ -11,7 +11,8 @@
           vgap="10"
           xmlns="http://javafx.com/javafx/8.0.112"
           xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="main.java.cau.project.screens.menu.MenuView">
+          fx:controller="main.java.cau.project.screens.menu.MenuView"
+          fx:id="background">
 
     <children>
         <Button fx:id="btn_startDesktop"
