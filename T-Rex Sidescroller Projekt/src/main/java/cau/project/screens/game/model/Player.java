@@ -53,6 +53,8 @@ public class Player extends GameObject {
 
    double jumpSpeed;
 
+   private Boolean trickJumpOn = false;
+
    /**
     * constructor for the player, here the default position and color are set.
     * The size is loaded from the R-class
@@ -169,7 +171,7 @@ public class Player extends GameObject {
                }
 
 
-               if (playerRotation) {
+               if (playerRotation || trickJumpOn) {
                   rotation += rotationPerTick;
                }
 
@@ -295,6 +297,30 @@ public class Player extends GameObject {
       jumpTime = 0;
       isJumping = false;
       isJumpingDown = false;
+
+      System.out.println("rotation: " +rotation);
+      System.out.println("rotation modulo: " +rotation%360);
+
+      if(rotation < 50 || rotation%360 < 50  || (rotation > 360-50 && rotation < 360)){
+         rotation = 0;
+      }else{
+
+         gameModel.stopGameTimer();
+
+         gameModel.gameOver = true;
+         gameModel.trickJumpFail = true;
+
+         //Call the gameController stopUpdate Timer delayed so every view hast the change to update to
+         //the last view state
+         new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+               gameModel.getGameController().stopUpdater();
+            }
+         }, 50);
+
+      }
+
    }
 
    public Boolean getCrouching() {
@@ -311,5 +337,13 @@ public class Player extends GameObject {
 
    public void setPlatform(Platform platform) {
       this.platform = platform;
+   }
+
+   public Boolean getTrickJumpOn() {
+      return trickJumpOn;
+   }
+
+   public void setTrickJumpOn(Boolean trickJumpOn) {
+      this.trickJumpOn = trickJumpOn;
    }
 }

@@ -166,8 +166,25 @@ public class DesktopView extends GameView {
             //Add Score Label to Pane
             drawScoreLabel();
 
-            if (controller.gameModel.gameOver) {
-               Main.stage.getScene().getRoot().setEffect(new GaussianBlur());
+            if (controller.gameModel.gameOver && controller.gameModel.trickJumpFail) {
+
+               Label label = new Label();
+               label.setText("Trickser failed!");
+               label.setFont(customFont);
+
+               FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
+               float labelWidth = fontLoader.computeStringWidth(label.getText(), label.getFont());
+
+               label.setLayoutX((pane.getWidth() / 2) - labelWidth / 2);
+               label.setLayoutY(pane.getHeight() / 7 * 3);
+
+               DropShadow dropShadow = new DropShadow(2,Color.BLACK);
+
+               label.setEffect(dropShadow);
+
+               pane.getChildren().add(label);
+
+               //Main.stage.getScene().getRoot().setEffect(new GaussianBlur());
             }
 
             DesktopView.super.calcAndShowFPS();

@@ -174,6 +174,15 @@ public class GameController {
 
    }
 
+
+   public void trickJumpOn(){
+      gameModel.player.setTrickJumpOn(true);
+   }
+
+   public void trickJumpOff(){
+      gameModel.player.setTrickJumpOn(false);
+   }
+
    /**
     * one of the views called quit game
     * set Score to Helper variable to access it from EndView

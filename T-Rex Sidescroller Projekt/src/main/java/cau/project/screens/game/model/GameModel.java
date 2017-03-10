@@ -90,6 +90,8 @@ public class GameModel {
    //500 is the value for the first background object. then the random int will be used
    private int nextBackground = 500;
 
+   public Boolean trickJumpFail = false;
+
 
    /**
     * Creates a new GameModel Instance
@@ -604,5 +606,9 @@ public class GameModel {
 
    public ArrayList<BackgroundObject> getBackgroundObjects() {
       return backgroundObjects;
+   }
+
+   public GameController getGameController() {
+      return gameController;
    }
 }

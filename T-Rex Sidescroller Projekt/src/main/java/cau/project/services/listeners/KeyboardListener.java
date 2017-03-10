@@ -40,7 +40,7 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
       //For Press Events
       if (event.getEventType() == KeyEvent.KEY_PRESSED) {
 
-         //IF Caller Is Desktop Game
+         //IF Caller Is Desktop Game or Lighthousegame
          if (view.getViewID() == R.viewIdGameDesktop
                  || view.getViewID() == R.viewIdGameLighthouse) {
 
@@ -58,6 +58,11 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
             //On Control Pressed
             else if (event.getCode() == KeyCode.CONTROL) {
                Main.gameController.crouch();
+            }
+
+            //On Shift pressed
+            else if (event.getCode() == KeyCode.SHIFT) {
+               Main.gameController.trickJumpOn();
             }
 
          }
@@ -101,9 +106,14 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
          if(view.getViewID() == R.viewIdGameDesktop
                  || view.getViewID() == R.viewIdGameLighthouse){
 
-            //On Control Pressed
+            //On Control released
             if (event.getCode() == KeyCode.CONTROL) {
                Main.gameController.crouchEnd();
+            }
+
+            //On Shift released
+            else if (event.getCode() == KeyCode.SHIFT){
+               Main.gameController.trickJumpOff();
             }
          }
 
