@@ -154,9 +154,11 @@ public class LighthouseService {
 
             img +=1;
             if(img>3){
-               timer.purge();
+
                endview.continueAllowed=true;
                img = 3;
+               timer.cancel();
+               timer.purge();
             }
          }
       };
@@ -250,8 +252,6 @@ public class LighthouseService {
          } else if (color == 2) {
             returnBytes[i] = (byte) ((int) (pixelColors[positionY][positionX].getBlue() * 127));
          }
-
-         System.out.println((int) returnBytes[i]);
 
          color += 1;
 

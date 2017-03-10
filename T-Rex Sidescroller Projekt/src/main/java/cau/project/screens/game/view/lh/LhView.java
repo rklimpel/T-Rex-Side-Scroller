@@ -7,13 +7,11 @@ import main.java.cau.project.Main;
 import main.java.cau.project.R;
 import main.java.cau.project.screens.game.model.GameModel;
 import main.java.cau.project.screens.game.view.GameView;
-import main.java.cau.project.services.Helper;
 import main.java.cau.project.services.LighthouseService;
 import main.java.cau.project.services.listeners.KeyboardListener;
-import main.java.cau.project.services.LighthouseNetwork;
 import main.java.cau.project.services.listeners.MouseListener;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
 public class LhView extends GameView{
 
@@ -23,6 +21,14 @@ public class LhView extends GameView{
     private double scaleFactorHeight;
 
     private LighthouseService lighthouseService;
+
+    private ArrayList<Color[][]> lastPixels = new ArrayList<>();
+
+    private Color colorLighthousePlayer = Color.DEEPSKYBLUE;
+    private Color colorLigthhouseObstacles = Color.RED;
+    private Color colorLigthhousePlatform = Color.GREEN;
+    private Color colorLighthouseBackground = Color.BLACK;
+    private Color colorLighthousePowerup =Color.YELLOW;
 
     public LhView() {
 
@@ -76,7 +82,7 @@ public class LhView extends GameView{
 
             for (int j = 0; j < pixelsReduced[0].length; j++) {
 
-                pixelsReduced[i][j] = Color.rgb(60,60,60);
+                pixelsReduced[i][j] = colorLighthouseBackground;
 
             }
         }
@@ -89,7 +95,7 @@ public class LhView extends GameView{
                  j < scaleX(gameModel.getGround().getX()+gameModel.getGround().getWidth()); j++) {
 
                 try {
-                    pixelsReduced[i][j] = Color.GREEN;
+                    pixelsReduced[i][j] = colorLigthhousePlatform;
                 }catch (ArrayIndexOutOfBoundsException e){
                     //Ground out of Lighthouse Bounds...
                 }
@@ -107,7 +113,7 @@ public class LhView extends GameView{
                      + gameModel.getPlatforms().get(i).getWidth()); k++) {
 
                     try{
-                        pixelsReduced[j][k] = Color.GREEN;
+                        pixelsReduced[j][k] = colorLigthhousePlatform;
                     }catch (ArrayIndexOutOfBoundsException e){
                         //Remember this... the Array is out of bounds
                     }
@@ -130,7 +136,7 @@ public class LhView extends GameView{
                              +gameModel.getObstacles().get(i).getWidth()); k++) {
 
                     if(!(j>pixelsReduced.length||k>=pixelsReduced[0].length||j<0||k<0)){
-                        pixelsReduced[j][k]=Color.RED;
+                        pixelsReduced[j][k]=colorLigthhouseObstacles;
                     }
                 }
             }
@@ -148,7 +154,7 @@ public class LhView extends GameView{
                              + gameModel.getPowerups().get(i).getWidth()); k++) {
 
                     if(!(j>pixelsReduced.length||k>=pixelsReduced[0].length||j<0||k<0)){
-                        pixelsReduced[j][k]=Color.YELLOW;
+                        pixelsReduced[j][k]=colorLighthousePowerup;
                     }
 
                 }
@@ -165,12 +171,62 @@ public class LhView extends GameView{
 
                 //System.out.println("PlayerPixels: " + i + " / " + j)
                 try{
-                    pixelsReduced[i][j] = Color.BLUE;
+                    pixelsReduced[i][j] = colorLighthousePlayer;
                 }catch(Exception e){
 
                 }
             }
         }
+
+
+        //Add Smothness to Ligthhouse by looking up last ligthhouse values, decrease opacity and add color to lighthouse
+        //if lighthouse would be black
+
+        Color[][] color = new Color[R.lighthouseHeight][R.lighthouseWidth];
+        for (int i = 0; i < pixelsReduced.length; i++) {
+            for (int j = 0; j < pixelsReduced[0].length; j++) {
+                color[i][j] = pixelsReduced[i][j];
+            }
+        }
+
+        lastPixels.add(color);
+
+        double opacity = 1;
+
+        for (int i = lastPixels.size()-2; i > 0; i--) {
+            for (int j = 0; j < pixelsReduced.length; j++) {
+                for (int k = 0; k < pixelsReduced[0].length; k++) {
+                    if(pixelsReduced[j][k]==colorLighthouseBackground
+                            && lastPixels.get(i)[j][k]!=colorLighthouseBackground){
+
+                        pixelsReduced[j][k] = new Color((lastPixels.get(i)[j][k].getRed()*opacity),
+                                (lastPixels.get(i)[j][k].getGreen()*opacity),
+                                (lastPixels.get(i)[j][k].getBlue()*opacity),
+                                1.0);
+
+                    }
+
+                }
+
+            }
+
+            if(opacity>0.6){
+                opacity-=0.15;
+            }else{
+                opacity-=0.05;
+            }
+
+            if(opacity<=0){
+                opacity=0;
+            }
+
+        }
+
+        if(lastPixels.size()>=20){
+            lastPixels.remove(0);
+        }
+
+        //Here ends the smoothness thing
 
         return pixelsReduced;
     }
