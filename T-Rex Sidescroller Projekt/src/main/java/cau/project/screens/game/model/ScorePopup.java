@@ -40,7 +40,7 @@ public class ScorePopup extends GameObject{
          public void run() {
             opacity -= 0.01;
             y -= 0.1;
-            if(opacity == 0){
+            if(opacity <= 0){
                timer.purge();
                gameModel.getScorePopups().remove(ScorePopup.this);
             }

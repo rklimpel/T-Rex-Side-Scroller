@@ -189,10 +189,10 @@ public class R {
     */
 
    public static final Boolean realLighthouse = false;
-   public static final String username = "14";
-   public static final String password = "7WK0-2X3G-EQ7K-G3D7";
+   public static final String username = "36";
+   public static final String password = "FC6K-LR89-8SA8-TBS0";
 
-   public static final int lighthouseBottomOffset = 2;
+   public static final int lighthouseBottomOffset = 0;
 
 
    /**

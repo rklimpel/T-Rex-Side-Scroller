@@ -482,7 +482,10 @@ public class GameModel {
                        obstacles.get(i).getX()+(obstacles.get(i).getWidth()/2),
                        1,false,this);
                scorePopups.add(scorePopup);
+
             }
+
+            System.out.println("Score POP: " + getScorePopups().size());
          }
       }
    }

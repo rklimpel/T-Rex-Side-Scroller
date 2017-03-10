@@ -54,7 +54,6 @@ public class LighthouseNetwork {
    public LighthouseNetwork(String host, int port) {
       this.hostname = host;
       this.port = port;
-
    }
 
    /**

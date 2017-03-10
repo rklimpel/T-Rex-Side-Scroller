@@ -61,7 +61,7 @@ public class GameController {
             update();
          }
       };
-      updateTimer.scheduleAtFixedRate(task, 0, 8);
+      updateTimer.scheduleAtFixedRate(task, 0, 7);
 
       nextWalkingImg = 12;
    }
@@ -86,7 +86,7 @@ public class GameController {
       for (int i = 0; i < listeningViews.size(); i++) {
 
          if(listeningViews.get(i).getViewID()==R.viewIdGameLighthouse){
-            if(updateCounter % 4 == 0){
+            if(updateCounter % 5 == 0){
                listeningViews.get(i).Update();
             }
          }else{
