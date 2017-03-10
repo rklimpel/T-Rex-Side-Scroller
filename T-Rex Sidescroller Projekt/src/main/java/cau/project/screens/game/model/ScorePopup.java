@@ -1,12 +1,10 @@
 package main.java.cau.project.screens.game.model;
 
-import main.java.cau.project.R;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by ricoklimpel on 10.03.17.
+ * Small Popup Labels appearing over an Obstacle and show points the player got
  */
 public class ScorePopup extends GameObject{
 

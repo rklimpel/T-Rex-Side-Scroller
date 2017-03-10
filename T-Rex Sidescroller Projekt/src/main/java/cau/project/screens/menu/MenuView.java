@@ -49,7 +49,10 @@ public class MenuView extends View {
 
       Main.setLighthouseService(lighthouseService);
 
-      checkLighthouseConnection();
+      timer = new Timer();
+
+      //checkLighthouseConnection();
+      lighthouseConnected = lighthouseService.connect();
 
       Platform.runLater(new Runnable() {
          @Override
@@ -98,7 +101,7 @@ public class MenuView extends View {
 
    private void checkLighthouseConnection(){
 
-      timer = new Timer();
+
       TimerTask task = new TimerTask() {
          public void run() {
 
