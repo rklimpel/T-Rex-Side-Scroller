@@ -1,7 +1,7 @@
 package main.java.cau.project.screens.game.model;
 
 /**
- * Created by ricoklimpel on 03.03.17.
+ *class for setting the ground
  */
 public class Ground extends GameObject {
 

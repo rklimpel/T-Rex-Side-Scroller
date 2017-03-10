@@ -4,7 +4,10 @@ package main.java.cau.project.screens.game.model;
 import javafx.scene.paint.Color;
 import main.java.cau.project.R;
 
-
+/**
+ * superclass for every kind of gameobject(obstacle,platform,player,powerup and ground)
+ * here the collision is checked and the movement to left is done
+ */
 public class GameObject {
 
    public int width;
@@ -33,6 +36,11 @@ public class GameObject {
    public int paneWidth;
    public int paneHeight;
 
+   /**
+    * the collision engine of the game
+    * @param clasher
+    * @return
+    */
    public Boolean checkCollision(GameObject clasher) {
 
       //Check Callers left side is inside clasher
@@ -61,6 +69,9 @@ public class GameObject {
               && clasher.getY() <= this.getY() + this.getHeight())));
    }
 
+   /**
+    * moving the obstacles to the left
+    */
    public void moveLeft() {
       x -= 1;
    }

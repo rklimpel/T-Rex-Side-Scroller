@@ -2,6 +2,9 @@ package main.java.cau.project.screens.game.model;
 
 import main.java.cau.project.R;
 
+/**
+ * class for he obstacle, here the type of the obstacle is set
+ */
 public class Obstacle extends GameObject {
 
    int defaultHeight;
@@ -9,6 +12,13 @@ public class Obstacle extends GameObject {
    int yOffset;
    int type;
 
+   /**
+    * constructor for an obstacle where size ad type are set
+    * @param type type of the obstacle
+    * @param paneWidth width of the current pane
+    * @param paneHeight height of the current pane
+    * @param yOffset
+    */
    public Obstacle(int type, int paneWidth, int paneHeight, int yOffset) {
 
       this.paneWidth = paneWidth;
@@ -21,7 +31,8 @@ public class Obstacle extends GameObject {
    }
 
    /**
-    * Set Height and Width
+    * setting the type of the obstacle, therefor the values from the lvl-data are
+    * decoded and its value loaded from the R-class
     *
     * @param type
     */

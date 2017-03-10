@@ -4,7 +4,11 @@ import main.java.cau.project.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
+/**
+ * class for the player-object, the actions which the player perfomrs
+ * are calculated in this class.
+ * As well as its size and color.
+ */
 public class Player extends GameObject {
 
    //Rotation value of the player (0-360)
@@ -49,6 +53,13 @@ public class Player extends GameObject {
 
    double jumpSpeed;
 
+   /**
+    * constructor for the player, here the default position and color are set.
+    * The size is loaded from the R-class
+    * @param paneWidth width of the current pane
+    * @param paneHeight height of the current pane
+    * @param gameModel
+    */
    public Player(int paneWidth, int paneHeight, GameModel gameModel) {
 
       this.gameModel = gameModel;
@@ -81,7 +92,15 @@ public class Player extends GameObject {
    }
 
    /**
-    * calculates the new Y values for the jumping ployer
+    * main jump method for the game.
+    * In this method the y-values while the player is jumping are calculated.
+    * Therefor is the formula for a vertical throw was taken. The position is
+    * calculated by the past time. This time is shown by a new timer which is reseted
+    * after every jump.
+    * Additionally is checked if the player is crouching then the jumpheight
+    * is not as high as in normal running and if the player is running on a plattform.
+    * In this case the lower y-value is used. If player rotation is activated this calculation
+    * is made here as either.
     */
    public void jump(final double jumpSpeedValue) {
 
@@ -96,16 +115,16 @@ public class Player extends GameObject {
          jumpSpeed = R.playerJumpSpeed;
       }
 
-      //System.out.print("Jump!");
-
       //Calculations for Player Rotation:
       jumpAllTime = (jumpSpeed / gravitation) * 2;
       rotationPerTick = (360 / jumpAllTime / 10) * playerJumpRotation;
 
+      //the new timer for the calculation of the jump
       timer_jump = new Timer();
       TimerTask task = new TimerTask() {
          public void run() {
 
+            //checking if player is on a platform
             if(platform != null && !platform.playerOnPlatform){
                landingOffset = 0;
             }else if(platform!=null && platform.playerOnPlatform){
@@ -161,7 +180,9 @@ public class Player extends GameObject {
    }
 
    /**
-    * Set Player to Crouching
+    * Method for the crouching-action.
+    * Here the height of the player is reduced by a given factor and
+    * the new offset for jumping is calculated
     */
    public void crouch() {
 
