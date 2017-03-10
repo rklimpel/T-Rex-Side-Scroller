@@ -4,22 +4,27 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import main.java.cau.project.R;
 import main.java.cau.project.screens.end.EndView;
+import main.java.cau.project.services.loader.ImageLoader;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- *
+ * Manages to Connection between the Game and the Lighthouse Network class
  */
 public class LighthouseService {
 
    LighthouseNetwork lighthouseNetwork;
    Color[][] lastPixels;
    Random rand = new Random();
+   ImageLoader imageLoader = new ImageLoader();
 
-
+   /**
+    * creates a new Lighthouse Network Instance with Real Ligthhouse or Mock Lighthouse Data
+    */
    public LighthouseService() {
       if(R.realLighthouse){
          lighthouseNetwork = new LighthouseNetwork(R.username,R.password);
@@ -28,6 +33,11 @@ public class LighthouseService {
       }
    }
 
+   /**
+    * trys to connect to the lighthouse
+    *
+    * @return connection established = true else false
+    */
    public Boolean connect(){
       try {
          lighthouseNetwork.connect();
@@ -38,6 +48,12 @@ public class LighthouseService {
    }
 
 
+   /**
+    * Send a Color Array to the Ligthouse
+    *
+    * @param pixels
+    * @return
+    */
    public Boolean sendPixelsToLighthouse(Color[][] pixels){
 
       lastPixels = pixels;
@@ -52,8 +68,13 @@ public class LighthouseService {
 
    }
 
+
+   /**
+    * Lighthouse End is Displays the Lighthouse specific Gameover Screen on the Lighthouse
+    */
    int x = 0;
    int y = 0;
+   int img = 1;
 
    public void lighthouseEnd(EndView endview){
 
@@ -69,7 +90,7 @@ public class LighthouseService {
       TimerTask task = new TimerTask() {
          public void run() {
 
-            color[y][x] = Color.rgb(Helper.randInt(0,255),Helper.randInt(0,255),Helper.randInt(0,255));
+            /*color[y][x] = Color.rgb(Helper.randInt(0,255),Helper.randInt(0,255),Helper.randInt(0,255));
 
             x+=1;
 
@@ -92,10 +113,54 @@ public class LighthouseService {
                System.out.println("Lighthouse Endview Done");
                endview.continueAllowed = true;
                timer.purge();
+            }*/
+
+            String stylePackage = "mexiko";
+
+            URL urlWalking1 = this.getClass().getResource(
+                    "/main/res/assets/"+stylePackage+"/smileygrin.jpg");
+            URL urlWalking2 = this.getClass().getResource(
+                    "/main/res/assets/"+stylePackage+"/smileysmile.jpg");
+            URL urlWalking3 = this.getClass().getResource(
+                    "/main/res/assets/"+stylePackage+"/smileytoungue.jpg");
+
+            Image image = null;
+            try {
+
+               switch (img){
+                  case 1:
+                     image = new Image(urlWalking1.openStream(),
+                             R.lighthouseWidth, R.lighthouseHeight, false, false);
+                     break;
+                  case 2:
+                     image = new Image(urlWalking2.openStream(),
+                             R.lighthouseWidth, R.lighthouseHeight, false, false);
+                     break;
+                  case 3:
+                     image = new Image(urlWalking3.openStream(),
+                             R.lighthouseWidth, R.lighthouseHeight, false, false);
+                     break;
+               }
+
+            } catch (IOException e) {
+               e.printStackTrace();
+            }
+
+            try {
+               lighthouseNetwork.send(convertLighthouseImage(image));
+            } catch (IOException e) {
+               e.printStackTrace();
+            }
+
+            img +=1;
+            if(img>3){
+               timer.purge();
+               endview.continueAllowed=true;
+               img = 3;
             }
          }
       };
-      timer.scheduleAtFixedRate(task, 0, 10);
+      timer.scheduleAtFixedRate(task, 200, 400);
 
       x = 0;
       y = 0;
@@ -103,6 +168,14 @@ public class LighthouseService {
    }
 
 
+   /**
+    *
+    * Does what the Method names says. Converts a Color Array to a Byte Array.
+    * Thats what the Lighthouse needs.
+    *
+    * @param pixelColors
+    * @return
+    */
    public byte[] convertToByteArray(Color[][] pixelColors) {
 
       byte[] returnBytes = new byte[1176];
@@ -141,16 +214,24 @@ public class LighthouseService {
    }
 
 
-   public static byte[] convertLighthouseImage() {
-
-      Image image = new Image("file:src/main/res/assets/mexiko/player_mexiko.png",
-              R.lighthouseWidth, R.lighthouseHeight, false, true);
+   /**
+    * Converts an Image to a byte array so we can Display it on the Lighthouse
+    *
+    * @param image
+    * @return
+    */
+   public static byte[] convertLighthouseImage(Image image) {
 
       Color[][] pixelColors = new Color[R.lighthouseHeight][R.lighthouseWidth];
 
       for (int i = 0; i < pixelColors.length; i++) {
          for (int j = 0; j < pixelColors[0].length; j++) {
-            pixelColors[i][j] = image.getPixelReader().getColor(j, i);
+            try{
+               pixelColors[i][j] = image.getPixelReader().getColor(j, i);
+            }catch (Exception e){
+               System.out.println(e);
+            }
+
          }
       }
 
