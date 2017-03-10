@@ -105,6 +105,10 @@ public class R {
    //Ground Height
    public static final int groundSize = 1;
 
+
+   //Set Game Start Speed, lower is faster, 1 is normal
+   public static double gamespeed = 1.0;
+   
    /**
     * Helper Consants
     **/
@@ -131,7 +135,7 @@ public class R {
    public static final String levelsPath = "/main/res/leveldata/";
 
    //Put all Lvl Files that should be loaded in this String Array. Lvl Loader will do the rest....
-   public static String[] levelFiles = {lvl_easy,lvl_medium};
+   public static String[] levelFiles = {lvl_easy,lvl_medium,lvl_hard};
    //public static String[] levelFiles = {lvl_easy,lvl_medium,lvl_hard};
    //public static String[] levelFiles = {lvl_lighthouse};
 

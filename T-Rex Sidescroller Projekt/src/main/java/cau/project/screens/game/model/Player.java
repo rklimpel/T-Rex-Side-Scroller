@@ -176,7 +176,7 @@ public class Player extends GameObject {
             }
          }
       };
-      timer_jump.scheduleAtFixedRate(task, 0, jumpTimerDelay);
+      timer_jump.scheduleAtFixedRate(task, 0, (long)(jumpTimerDelay*R.gamespeed));
    }
 
    /**

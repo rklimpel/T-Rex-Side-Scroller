@@ -90,6 +90,7 @@ public class GameModel {
    //500 is the value for the first background object. then the random int will be used
    private int nextBackground = 500;
 
+
    /**
     * Creates a new GameModel Instance
     * saves GameController to class variable
@@ -200,7 +201,7 @@ public class GameModel {
             GameTick();
          }
       };
-      gameTimer.scheduleAtFixedRate(task, gameTimerOffset, gameTimerDelay);
+      gameTimer.scheduleAtFixedRate(task, gameTimerOffset, (long)(gameTimerDelay*R.gamespeed));
       gameTimerEnabled = true;
    }
 
@@ -404,7 +405,7 @@ public class GameModel {
 
                //If player collides with the powerup give him 5 points
                //and remove the powerup from the powerup list
-               score += 5;
+               increaseScore(5);
                powerups.remove(i);
 
                System.out.println("Got that Powerup!");
@@ -473,7 +474,7 @@ public class GameModel {
    private void checkScore() {
       for (int i = 0; i < obstacles.size(); i++) {
          if (obstacles.get(i).getX() + obstacles.get(i).getWidth() == player.getX()) {
-            score += 1;
+            increaseScore(1);
          }
       }
    }
@@ -581,8 +582,9 @@ public class GameModel {
       }
    }
 
-
-
+   private void increaseScore(int value){
+      score += value;
+   }
 
    public int getScore() {
       return score;
