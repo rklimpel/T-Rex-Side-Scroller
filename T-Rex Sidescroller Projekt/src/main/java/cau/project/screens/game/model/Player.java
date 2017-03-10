@@ -179,6 +179,84 @@ public class Player extends GameObject {
       timer_jump.scheduleAtFixedRate(task, 0, (long)(jumpTimerDelay*R.gamespeed));
    }
 
+   public void fall(int platformFallingFrom){
+
+      isJumpingDown = true;
+
+      jumpSpeed = 0;
+
+      //the new timer for the calculation of the jump
+      timer_jump = new Timer();
+      TimerTask task = new TimerTask() {
+         public void run() {
+
+            //checking if player is on a platform
+            if(platform != null && !platform.playerOnPlatform){
+               landingOffset = 0;
+            }else if(platform!=null && platform.playerOnPlatform){
+               landingOffset = platform.getPlatformOffset();
+            }
+
+            nextPlatformOffset = 0;
+
+            if(platform == null){
+               landingOffset = 0;
+            }
+
+            //If Player reaches Bottom again end the jump prozess
+            if (y >= defaultY - landingOffset && isJumping) {
+
+               setY(defaultY - landingOffset);
+
+               stopJumpTimer();
+
+               jumpTime = 0;
+               rotation = 0;
+
+               if(platform == null){
+                  platformOffset=0;
+               }
+
+            }
+
+            //Else calculate the new Players y coordinate
+            else {
+
+               jumpTime += 0.1;
+
+               isJumping = true;
+
+               //Calculate the new y value for the player (senkrechter Wurf)
+               setY(paneHeight - (int) ((jumpSpeed * jumpTime - (gravitation / 2) * Math.pow(jumpTime, 2))
+                       + defaultHeight + 1 + platformOffset));
+
+
+            }
+
+            //Check for all platforms:
+            for (int j = 0; j < gameModel.getPlatforms().size(); j++) {
+
+               //If the player is inside the bounds of an platform and the platform is lower than the
+               //platform he fall of
+               if (gameModel.getPlatforms().get(j).checkOnPlatform(player)
+                       &&gameModel.getPlatforms().get(j).getPlatformOffset()<=gameModel.getPlatforms().get(platformFallingFrom).getPlatformOffset()) {
+
+                  //Tell the player about his next platform
+                  player.setPlatformOffset((paneHeight - player.groundLvl) - gameModel.getPlatforms().get(j).getY());
+                  player.setPlatform(gameModel.getPlatforms().get(j));
+
+                  //Set player position to next platform (hard) not smooth argl
+                  player.setY(player.defaultY - player.platformOffset);
+
+                  //Tell this platform about the player on it
+                  gameModel.getPlatforms().get(j).playerOnPlatform = true;
+               }
+            }
+         }
+      };
+      timer_jump.scheduleAtFixedRate(task, 0, (long)(jumpTimerDelay*R.gamespeed));
+   }
+
    /**
     * Method for the crouching-action.
     * Here the height of the player is reduced by a given factor and

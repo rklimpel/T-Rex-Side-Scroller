@@ -348,30 +348,10 @@ public class GameModel {
 
                //Removes the platform offset from player class
                player.setPlatform(null);
-               player.setPlatformOffset(0);
 
                //Hard! reset of the player to the ground. Not really smooth. should be changed
-               player.setY(player.defaultY);
+               player.fall(i);
 
-               //Check for all platforms:
-               for (int j = 0; j < platforms.size(); j++) {
-
-                  //If the player is inside the bounds of an platform and the platform is lower than the
-                  //platform he fall of
-                  if (platforms.get(j).checkOverPlatform(player)
-                          &&platforms.get(j).getPlatformOffset()<=platforms.get(i).getPlatformOffset()) {
-
-                     //Tell the player about his next platform
-                     player.setPlatformOffset((paneHeight - player.groundLvl) - platforms.get(j).getY());
-                     player.setPlatform(platforms.get(j));
-
-                     //Set player position to next platform (hard) not smooth argl
-                     player.setY(player.defaultY - player.platformOffset);
-
-                     //Tell this platform about the player on it
-                     platforms.get(j).playerOnPlatform = true;
-                  }
-               }
             }
          }
 
