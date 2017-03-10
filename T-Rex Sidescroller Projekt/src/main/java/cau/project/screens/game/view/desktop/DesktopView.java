@@ -503,13 +503,13 @@ public class DesktopView extends GameView {
          @Override
          public void run() {
 
-            lbl_hints.setText("Press Space to Jump \n Press Strg to crouch ");
+            lbl_hints.setText("Press Space to Jump \n Press Strg to crouch \n Press Shift to Trickjump ");
             lbl_hints.setFont(customFontLoader.load(R.fontPixel, 80));
 
             FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
             float btn_hintsWidth = fontLoader.computeStringWidth(lbl_hints.getText(), lbl_hints.getFont());
 
-            lbl_hints.setLayoutX((pane.getWidth() / 2) - btn_hintsWidth / 2 / 2);
+            lbl_hints.setLayoutX((pane.getWidth() / 2) - btn_hintsWidth / 2 / 3);
             lbl_hints.setLayoutY(pane.getHeight() / 2);
 
             pane.getChildren().addAll(lbl_hints);
