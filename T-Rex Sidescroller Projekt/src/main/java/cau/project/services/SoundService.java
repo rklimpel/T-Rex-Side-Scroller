@@ -8,7 +8,7 @@ import java.net.URL;
 
 
 /**
- * Created by ricoklimpel on 04.03.17.
+ *
  */
 public class SoundService {
 
@@ -18,6 +18,7 @@ public class SoundService {
    Media mediaGameOpenining;
    Media mediaGameLoop;
    Media mediaGameover;
+   Media mediaTrickjump;
 
    MediaPlayer playerJump;
    MediaPlayer playerCrouchDown;
@@ -25,7 +26,7 @@ public class SoundService {
    MediaPlayer playerGameOpening;
    MediaPlayer playerGameLoop;
    MediaPlayer playerGameover;
-
+   MediaPlayer playerTrickjump;
 
    public SoundService() {
 
@@ -51,6 +52,9 @@ public class SoundService {
          url = this.getClass().getResource("/main/res/sounds/gameover.wav");
          mediaGameover = new Media(url.toURI().toString());
 
+         url = this.getClass().getResource("/main/res/sounds/Trickjump.wav");
+         mediaTrickjump = new Media(url.toURI().toString());
+
       }catch (URISyntaxException e) {
          e.printStackTrace();
       }
@@ -61,6 +65,7 @@ public class SoundService {
       playerGameOpening = new MediaPlayer(mediaGameOpenining);
       playerGameLoop = new MediaPlayer(mediaGameLoop);
       playerGameover = new MediaPlayer(mediaGameover);
+      playerTrickjump = new MediaPlayer(mediaTrickjump);
 
       playerJump.setVolume(1.0);
       playerCrouchDown.setVolume(0.2);
@@ -165,4 +170,18 @@ public class SoundService {
    }
 
 
+
+   public void playerTrickjump() {
+
+      Thread threadCrouchUp = new Thread(new Runnable() {
+         @Override
+         public void run() {
+            playerTrickjump.stop();
+            playerTrickjump.seek(Duration.ZERO);
+            playerTrickjump.play();
+         }
+      });
+
+      threadCrouchUp.start();
+   }
 }
