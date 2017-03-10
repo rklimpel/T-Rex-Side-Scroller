@@ -239,6 +239,8 @@ public class DesktopView extends GameView {
     */
    private void drawImageObstacles() {
 
+      DropShadow dropShadow = new DropShadow(3,Color.BLACK);
+
       for (int i = 0; i < controller.gameModel.getObstacles().size(); i++) {
 
          ImageView iv_Obstacle = new ImageView();
@@ -265,6 +267,8 @@ public class DesktopView extends GameView {
                  controller.getObstacles().get(i).getY());
          iv_Obstacle.setFitHeight(controller.getObstacles().get(i).getHeight());
          iv_Obstacle.setFitWidth(controller.getObstacles().get(i).getWidth());
+
+         iv_Obstacle.setEffect(dropShadow);
 
          pane.getChildren().addAll(iv_Obstacle);
       }
@@ -295,6 +299,8 @@ public class DesktopView extends GameView {
     * add player Image to pane
     */
    private void drawImagePlayer() {
+
+      DropShadow dropShadow = new DropShadow(7,Color.BLACK);
 
       if (controller.getPlayer().getCrouching()) {
 
@@ -329,6 +335,8 @@ public class DesktopView extends GameView {
       iV_player.setFitWidth(controller.getPlayer().getWidth());
       iV_player.setFitHeight(controller.getPlayer().getHeight());
       iV_player.relocate(controller.getPlayer().getX(), controller.getPlayer().getY());
+
+      iV_player.setEffect(dropShadow);
 
       pane.getChildren().addAll(iV_player);
 
@@ -377,6 +385,9 @@ public class DesktopView extends GameView {
          circle.setStroke(Color.rgb(255,0,0,0.4));
          circle.setStrokeWidth(2);
 
+         DropShadow dropShadow = new DropShadow(2,Color.BLACK);
+         circle.setEffect(dropShadow);
+
          pane.getChildren().add(circle);
       }
 
@@ -411,7 +422,7 @@ public class DesktopView extends GameView {
          imageView.setFitWidth(controller.getPlatforms().get(i).getWidth());
          imageView.setFitHeight(controller.getPlatforms().get(i).getHeight());
 
-         DropShadow ds = new DropShadow( 4, Color.BROWN);
+         DropShadow ds = new DropShadow( 3, Color.BROWN);
 
          imageView.setEffect(ds);
 
@@ -456,6 +467,10 @@ public class DesktopView extends GameView {
 
       label.setLayoutX((pane.getWidth() / 2) - labelWidth / 2);
       label.setLayoutY(pane.getHeight() / 7);
+
+      DropShadow dropShadow = new DropShadow(2,Color.BLACK);
+
+      label.setEffect(dropShadow);
 
       pane.getChildren().add(label);
    }
