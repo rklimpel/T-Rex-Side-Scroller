@@ -39,6 +39,8 @@ public class LighthouseNetwork {
    public LighthouseNetwork(String user, String password) {
       this.user = user;
       this.password = password;
+      this.hostname = "localhost";
+      this.port = 8000;
    }
 
    /**
@@ -52,8 +54,7 @@ public class LighthouseNetwork {
    public LighthouseNetwork(String host, int port) {
       this.hostname = host;
       this.port = port;
-      this.hostname = "localhost";
-      this.port = 8000;
+
    }
 
    /**
