@@ -270,4 +270,8 @@ public class GameController {
    public ArrayList<BackgroundObject> getBackgroundObjects(){
       return gameModel.getBackgroundObjects() ;
    }
+
+   public ArrayList<ScorePopup> getScorePopups(){
+      return gameModel.getScorePopups();
+   }
 }

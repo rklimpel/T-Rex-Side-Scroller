@@ -92,6 +92,8 @@ public class GameModel {
 
    public Boolean trickJumpFail = false;
 
+   private ArrayList<ScorePopup> scorePopups = new ArrayList<>();
+
 
    /**
     * Creates a new GameModel Instance
@@ -245,6 +247,9 @@ public class GameModel {
 
       checkObstacles();
 
+      for (int i = 0; i < scorePopups.size(); i++) {
+         scorePopups.get(i).setX(scorePopups.get(i).getX()-1);
+      }
 
       nextBackground -= 1;
       //create new background object if nextBackground value = 0
@@ -388,9 +393,17 @@ public class GameModel {
                //If player collides with the powerup give him 5 points
                //and remove the powerup from the powerup list
                increaseScore(5);
+
+
+               ScorePopup scorePopup = new ScorePopup(powerups.get(i).getY()-10,
+                       (powerups.get(i).getX()+powerups.get(i).getWidth()/2),
+                       5,false,GameModel.this);
+
+               scorePopups.add(scorePopup);
+
+
                powerups.remove(i);
 
-               System.out.println("Got that Powerup!");
             }
          }
 
@@ -456,7 +469,20 @@ public class GameModel {
    private void checkScore() {
       for (int i = 0; i < obstacles.size(); i++) {
          if (obstacles.get(i).getX() + obstacles.get(i).getWidth() == player.getX()) {
-            increaseScore(1);
+
+            if(player.getTrickJumpOn()){
+               increaseScore(2);
+               ScorePopup scorePopup = new ScorePopup(obstacles.get(i).getY()-30,
+                       obstacles.get(i).getX()+(obstacles.get(i).getWidth()/2),
+                       2,true,this);
+               scorePopups.add(scorePopup);
+            }else{
+               increaseScore(1);
+               ScorePopup scorePopup = new ScorePopup(obstacles.get(i).getY()-30,
+                       obstacles.get(i).getX()+(obstacles.get(i).getWidth()/2),
+                       1,false,this);
+               scorePopups.add(scorePopup);
+            }
          }
       }
    }
@@ -610,5 +636,9 @@ public class GameModel {
 
    public GameController getGameController() {
       return gameController;
+   }
+
+   public ArrayList<ScorePopup> getScorePopups() {
+      return scorePopups;
    }
 }

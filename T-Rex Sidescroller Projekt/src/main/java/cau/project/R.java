@@ -192,7 +192,7 @@ public class R {
    public static final String username = "14";
    public static final String password = "7WK0-2X3G-EQ7K-G3D7";
 
-   public static final int lighthouseBottomOffset = -1;
+   public static final int lighthouseBottomOffset = 2;
 
 
    /**

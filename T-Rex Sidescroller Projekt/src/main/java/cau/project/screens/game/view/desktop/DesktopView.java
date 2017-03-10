@@ -129,6 +129,7 @@ public class DesktopView extends GameView {
 
             pane.getChildren().clear();
 
+
             if (gameObjectsAsImages) {
 
                drawBackgroundImages();
@@ -166,6 +167,8 @@ public class DesktopView extends GameView {
             //Add Score Label to Pane
             drawScoreLabel();
 
+            drawScorePopups();
+
             if (controller.gameModel.gameOver && controller.gameModel.trickJumpFail) {
 
                Label label = new Label();
@@ -191,6 +194,21 @@ public class DesktopView extends GameView {
 
          }
       });
+   }
+
+   private void drawScorePopups() {
+
+      for (int i = 0; i < controller.getScorePopups().size(); i++) {
+         Label label = new Label();
+         label.setLayoutX(controller.getScorePopups().get(i).getX());
+         label.setLayoutY(controller.getScorePopups().get(i).getY());
+         label.setText(controller.getScorePopups().get(i).getText());
+         label.setFont(new Font("Arial",25));
+         label.setOpacity(controller.getScorePopups().get(i).getOpacity());
+
+         pane.getChildren().add(label);
+      }
+
    }
 
    private void drawSun() {

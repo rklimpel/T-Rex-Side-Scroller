@@ -78,7 +78,7 @@ public class Player extends GameObject {
       width = defaultWidth;
       height = defaultHeight;
 
-      x = paneWidth / 8;
+      x = paneWidth / 5;
       y = paneHeight - defaultHeight;
 
       defaultY = y;
