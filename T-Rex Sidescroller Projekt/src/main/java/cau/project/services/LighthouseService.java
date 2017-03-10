@@ -118,9 +118,10 @@ public class LighthouseService {
             String stylePackage = "mexiko";
 
             URL urlWalking1 = this.getClass().getResource(
-                    "/main/res/assets/"+stylePackage+"/smileygrin.jpg");
+                    "/main/res/assets/"+stylePackage+"/smileytoungue.jpg");
+
             URL urlWalking2 = this.getClass().getResource(
-                    "/main/res/assets/"+stylePackage+"/smileysmile.jpg");
+                    "/main/res/assets/"+stylePackage+"/background.png");
             URL urlWalking3 = this.getClass().getResource(
                     "/main/res/assets/"+stylePackage+"/smileytoungue.jpg");
 
@@ -153,10 +154,10 @@ public class LighthouseService {
             }
 
             img +=1;
-            if(img>3){
+            if(img>1){
 
                endview.continueAllowed=true;
-               img = 3;
+               img = 1;
                timer.cancel();
                timer.purge();
             }
