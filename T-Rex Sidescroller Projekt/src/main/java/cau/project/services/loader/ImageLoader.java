@@ -27,6 +27,7 @@ public class ImageLoader {
    private Image img_background = null;
    private Image img_backgroundMenu = null;
    private Image img_backgroundT = null;
+   private Image img_sun = null;
 
 
    String stylePackage = "mexiko";
@@ -68,6 +69,8 @@ public class ImageLoader {
 
          URL urlBackgroundT = this.getClass().getResource("/main/res/assets/mexiko/backgroundT.png");
 
+         URL urlSun = this.getClass().getResource("/main/res/assets/mexiko/sonne.png");
+
          img_player = new Image(urlPlayer.openStream());
          img_playerCrouched = new Image(urlPlayerCrouched.openStream());
          img_obstacle = new Image(urlObstacle.openStream());
@@ -85,6 +88,7 @@ public class ImageLoader {
          img_background = new Image(urlBackground.openStream(),800,400,false,false);
          img_backgroundMenu = new Image(urlBackground.openStream(),300,300,false,false);
          img_backgroundT = new Image(urlBackgroundT.openStream(),800,400,false,false);
+         img_sun = new Image(urlSun.openStream(),800,400,false,false);
 
       } catch (Exception e) {
          System.out.println(e);
@@ -157,5 +161,9 @@ public class ImageLoader {
 
    public Image getImg_backgroundT() {
       return img_backgroundT;
+   }
+
+   public Image getImg_sun() {
+      return img_sun;
    }
 }

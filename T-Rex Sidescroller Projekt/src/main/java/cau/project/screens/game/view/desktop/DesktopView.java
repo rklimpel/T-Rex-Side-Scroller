@@ -6,7 +6,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.effect.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -21,8 +20,7 @@ import main.java.cau.project.services.listeners.MouseListener;
 import main.java.cau.project.services.loader.CustomFontLoader;
 import main.java.cau.project.services.loader.ImageLoader;
 
-import java.io.IOException;
-import java.net.URL;
+import java.util.ArrayList;
 
 
 public class DesktopView extends GameView {
@@ -48,7 +46,11 @@ public class DesktopView extends GameView {
    private int paneWidth;
    private int paneHeight;
 
+   private double sunOpacity = 0;
+
    int playerWalkImage = 1;
+
+   private ArrayList<ImageView> backgroundImages = new ArrayList<>();
 
    /**
     * Deskotp View Constructor
@@ -68,6 +70,8 @@ public class DesktopView extends GameView {
          Main.setMainView(this);
       }
 
+
+
       Platform.runLater(new Runnable() {
          @Override
          public void run() {
@@ -81,12 +85,7 @@ public class DesktopView extends GameView {
             }
 
             if(gameObjectsAsImages){
-
-               BackgroundImage myBI= new BackgroundImage(imageLoader.getImg_backgroundT(),
-                       BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                       BackgroundSize.DEFAULT);
-
-               background.setBackground(new Background(myBI));
+               initBackgroundImages();
             }
 
             DesktopView.super.setController(paneWidth, paneHeight);
@@ -105,6 +104,19 @@ public class DesktopView extends GameView {
       showHints();
    }
 
+   private void initBackgroundImages() {
+      for (int i = 0; i < 2; i++) {
+         ImageView imageView = new ImageView();
+         imageView.setImage(imageLoader.getImg_background());
+         imageView.setFitWidth(paneWidth);
+         imageView.setFitHeight(paneHeight);
+         imageView.setX(0+(i*paneWidth));
+         imageView.setY(0);
+         backgroundImages.add(imageView);
+         pane.getChildren().add(imageView);
+      }
+   }
+
    /**
     * Is called on GameModel Data changes
     * Creates a new "Frame" / Scene and creates all game components new
@@ -118,6 +130,10 @@ public class DesktopView extends GameView {
             pane.getChildren().clear();
 
             if (gameObjectsAsImages) {
+
+               drawBackgroundImages();
+
+               drawSun();
 
                drawBackgroundObjects();
 
@@ -158,6 +174,32 @@ public class DesktopView extends GameView {
 
          }
       });
+   }
+
+   private void drawSun() {
+      if(sunOpacity != 1){
+         sunOpacity += 0.001;
+      }
+      ImageView imageView = new ImageView();
+      imageView.setImage(imageLoader.getImg_sun());
+      imageView.relocate(0,0);
+      imageView.setFitHeight(paneHeight);
+      imageView.setFitWidth(paneWidth);
+      imageView.setOpacity(sunOpacity);
+      pane.getChildren().add(imageView);
+   }
+
+   private void drawBackgroundImages(){
+      for (int i = 0; i < backgroundImages.size(); i++) {
+
+         backgroundImages.get(i).setX(backgroundImages.get(i).getX()-0.2);
+
+         if(backgroundImages.get(i).getX()+paneWidth<=0){
+            backgroundImages.get(i).setX(paneWidth);
+         }
+
+         pane.getChildren().add(backgroundImages.get(i));
+      }
    }
 
    private void drawBackgroundObjects() {
