@@ -190,6 +190,7 @@ public class R {
 
 
    /**
+    * Spltiscreen
     */
    public static boolean lighthouseSelected=false;
 }
